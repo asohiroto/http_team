@@ -1,18 +1,24 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
-    private float speed = 0.1f;
+    [SerializeField]private float speed = 0.1f;
+    [SerializeField]private float dashSpeed;
+    private bool onDash;
+
+
     float dirX;
     float dirY;
-    float xLimit = 8.5f;
-    float yLimit = 4.7f;
+    [SerializeField]float xLimit = 8.5f;
+    [SerializeField]float yLimit = 4.7f;
     Vector3 currentPos;
 
 
     void Start()
     {
         currentPos = transform.position;
+        onDash = false;
     }
 
     void FixedUpdate()
@@ -59,5 +65,13 @@ public class PlayerController : MonoBehaviour
 
         
 
+    }
+
+    void Dash()
+    {
+        if (Keyboard.current.spaceKey.wasPressedThisFrame)
+        {
+
+        }
     }
 }

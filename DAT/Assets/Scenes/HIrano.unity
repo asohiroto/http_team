@@ -129,7 +129,6 @@ GameObject:
   m_Component:
   - component: {fileID: 215612179}
   - component: {fileID: 215612178}
-  - component: {fileID: 215612177}
   - component: {fileID: 215612180}
   m_Layer: 0
   m_Name: Enemy
@@ -138,30 +137,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &215612177
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 215612176}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4ebdcf5537ffc4a4b806569111e8b38d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::EnemyController
-  findDist: 0
-  loseDist: 0
-  e_moveSpeed: 0
-  attackDist: 0
-  attackSec: 0
-  distRate: 64
-  isFindPlayer: 0
-  playerDist: 0
-  ePos: {x: 0, y: 0}
-  playerPos: {x: 0, y: 0}
-  dist: 0
-  player: {fileID: 2030124397}
 --- !u!212 &215612178
 SpriteRenderer:
   serializedVersion: 2
@@ -365,7 +340,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2030124401}
   - component: {fileID: 2030124400}
-  - component: {fileID: 2030124398}
   - component: {fileID: 2030124399}
   m_Layer: 0
   m_Name: Player
@@ -374,21 +348,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &2030124398
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2030124397}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 092b844c473703c4e9d23959750b31ee, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlayerController
-  pInput: {x: 0, y: 0}
-  p_moveSpeed: 1
-  pPos: {x: 0, y: 0}
 --- !u!50 &2030124399
 Rigidbody2D:
   serializedVersion: 5

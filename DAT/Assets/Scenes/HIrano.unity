@@ -130,6 +130,7 @@ GameObject:
   - component: {fileID: 215612179}
   - component: {fileID: 215612178}
   - component: {fileID: 215612180}
+  - component: {fileID: 215612181}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -238,6 +239,29 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &215612181
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 215612176}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ebdcf5537ffc4a4b806569111e8b38d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyController
+  findDist: 0.3
+  loseDist: 0.4
+  e_moveSpeed: 0.5
+  attackDist: 0.1
+  attackSec: 0
+  distRate: 10
+  isFindPlayer: 0
+  ePos: {x: 0, y: 0}
+  playerPos: {x: 0, y: 0}
+  playerDist: 0
+  playerObject: {fileID: 2030124397}
 --- !u!1 &1505953545
 GameObject:
   m_ObjectHideFlags: 0
@@ -341,6 +365,7 @@ GameObject:
   - component: {fileID: 2030124401}
   - component: {fileID: 2030124400}
   - component: {fileID: 2030124399}
+  - component: {fileID: 2030124402}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -449,6 +474,21 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2030124402
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2030124397}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 092b844c473703c4e9d23959750b31ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::h_PlayerController
+  pInput: {x: 0, y: 0}
+  p_moveSpeed: 1
+  pPos: {x: 0, y: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

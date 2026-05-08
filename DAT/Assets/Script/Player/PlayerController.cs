@@ -1,10 +1,11 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
     [SerializeField]private float speed = 0.1f;
-    [SerializeField]private float dashSpeed;
+    [SerializeField]private float dashMulti = 5.0f;
     private bool onDash;
 
 
@@ -13,6 +14,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField]float xLimit = 8.5f;
     [SerializeField]float yLimit = 4.7f;
     Vector3 currentPos;
+    Vector3 moveDir;
 
 
     void Start()
@@ -24,6 +26,7 @@ public class PlayerController : MonoBehaviour
     void FixedUpdate()
     {
         Move();
+        Dash();
     }
 
     void Move()
@@ -31,7 +34,7 @@ public class PlayerController : MonoBehaviour
         dirX = Input.GetAxis("Horizontal");
         dirY = Input.GetAxis("Vertical");
 
-        Vector3 moveDir = new Vector3(dirX, dirY, 0);
+        moveDir = new Vector3(dirX, dirY, 0);
 
         // 画面内制限
         if (transform.position.x >= xLimit)
@@ -69,9 +72,12 @@ public class PlayerController : MonoBehaviour
 
     void Dash()
     {
+
         if (Keyboard.current.spaceKey.wasPressedThisFrame)
         {
-
+            Debug.Log("space");
+            currentPos += moveDir * dashMulti * speed;
+            onDash = true;
         }
     }
 }

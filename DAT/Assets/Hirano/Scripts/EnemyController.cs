@@ -23,7 +23,7 @@ public class EnemyController : MonoBehaviour
     public bool isFindPlayer = false;
     [SerializeField] private Vector2 ePos = new Vector2(0, 0);      // Enemy(このオブジェクト)の座標
     [SerializeField] private Vector2 playerPos = new Vector2(0, 0); // Playerの座標
-    [SerializeField] private float playerDist = 0f;                       // PlayerとEnemyの距離
+    [SerializeField] private float playerDist = 0f;                 // PlayerとEnemyの距離
 
     [Header("Config")]
     [SerializeField] private GameObject playerObject;
@@ -38,7 +38,7 @@ public class EnemyController : MonoBehaviour
         playerDist = findDist + 1;   // 0で開始すると値が代入されるまでの間に動いてしまうため
 
         // 見失う距離が発見距離よりも短い場合、見失う距離を発見距離と同じ大きさにします。
-        if (loseDist != 0f && loseDist < findDist)  loseDist = findDist;
+        if (loseDist != 0f && loseDist < findDist || findDist == 0)  loseDist = findDist;
     }
 
     // Update is called once per frame
@@ -56,7 +56,7 @@ public class EnemyController : MonoBehaviour
     {
         playerPos = playerObject.transform.position;
         ePos = transform.position;
-        playerDist = Vector2.Distance(ePos, playerPos) / distRate;
+        playerDist = Vector2.Distance(ePos, playerPos) * distRate;
     }
 
     void LookPlayer()

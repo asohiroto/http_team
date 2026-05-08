@@ -2,7 +2,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerController : MonoBehaviour
+public class h_PlayerController : MonoBehaviour
 {
     public Vector2 pInput = new Vector2(0, 0);
 

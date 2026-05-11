@@ -1,0 +1,18 @@
+using UnityEngine;
+
+public class Coin : MonoBehaviour
+{
+    // 接触した時に呼ばれる関数
+    private void OnTriggerEnter(Collider other)
+    {
+        // 接触した相手のタグが "Player" だった場合
+        if (other.CompareTag("Player"))
+        {
+            // コインを消す
+            Destroy(gameObject);
+
+            // (任意) ここにスコア加算や音を鳴らす処理を追加できます
+            Debug.Log("コインをゲットしました！");
+        }
+    }
+}

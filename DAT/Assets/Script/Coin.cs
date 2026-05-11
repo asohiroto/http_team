@@ -1,17 +1,19 @@
 using UnityEngine;
 
-public class Coin : MonoBehaviour
+public class Coin2D : MonoBehaviour
 {
-    // 接触したときに呼ばれる関数
-    private void OnTriggerEnter(Collider other)
+    // 2Dのトリガー判定
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        // 接触した相手のタグが "Player" かどうかを確認
+        // 1. まず何かが触れたら名前を出す（最優先デバッグ）
+        Debug.Log("2D接触検知！ 相手の名前: " + other.name);
+
+        // 2. タグが Player かどうか判定
         if (other.CompareTag("Player"))
         {
-            // コイン獲得時の処理（ここにスコア加算などを書く）
-            Debug.Log("コインを獲得しました！");
+            Debug.Log("プレイヤーがコインをゲットしました！");
 
-            // このオブジェクト（コイン）を削除
+            // コインを消す
             Destroy(gameObject);
         }
     }

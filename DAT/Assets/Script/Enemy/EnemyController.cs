@@ -5,9 +5,17 @@ using UnityEngine;
 
 public class EnemyController : MonoBehaviour
 {
+
+    // 敵の判別名(仮)
+    /*
+        弱い敵、近距離 WeakMeleeEnemy 
+        弱い敵、遠距離 WeakRengedEnemy
+    */
+
+
     [Header("Behavior")]
     [SerializeField] private float findDist = 0f;       // player発見距離
-    [SerializeField] private float loseDist = 0f;       // player追跡可能距離
+    [SerializeField] private float loseDist = 0f;       // player追跡可能距離(見失う距離)
     [SerializeField] private float e_moveSpeed = 0f;    // 移動速度
     [SerializeField] private float attackDist = 0f;     // 攻撃可能な距離
     [SerializeField] private float attackSec = 0f;      // 攻撃のクールダウン
@@ -16,8 +24,7 @@ public class EnemyController : MonoBehaviour
 
 
     // 仮の変数
-    // 座標が１増えるごとの割り
-    public float distRate = 100;
+    public float distRate = 100;                        // 座標が１増えるごとの割り
 
     [Header("State")]
     public bool isFindPlayer = false;

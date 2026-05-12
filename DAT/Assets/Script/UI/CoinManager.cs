@@ -1,0 +1,41 @@
+using UnityEngine;
+using TMPro;
+
+public class CoinManager : MonoBehaviour
+{
+    public static CoinManager instance;
+
+    [Header("UI設定")]
+    [SerializeField] private TextMeshProUGUI moneyText; // ここにTMPをドラッグ&ドロップ
+    [SerializeField] private string unit = "G";      // 単位をインスペクターから変更可能に
+
+    private int currentMoney = 0; // 所持金
+
+    private void Awake()
+    {
+        if (instance == null) { instance = this; }
+    }
+
+    private void Start()
+    {
+        UpdateMoneyUI();
+    }
+
+    // お金を追加する関数（コインから呼ばれる）
+    public void AddMoney(int amount)
+    {
+        currentMoney += amount;
+        UpdateMoneyUI();
+    }
+
+    // 表示を更新する
+    private void UpdateMoneyUI()
+    {
+        if (moneyText != null)
+        {
+            // 「所持金：100円」の形式で表示
+            // これなら四角にならないはず
+            moneyText.text = $"Money: {currentMoney} G";
+        }
+    }
+}

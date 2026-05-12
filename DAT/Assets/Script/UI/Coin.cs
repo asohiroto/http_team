@@ -2,18 +2,19 @@ using UnityEngine;
 
 public class Coin2D : MonoBehaviour
 {
-    // 2Dのトリガー判定
+    [SerializeField] private int amount = 100; // このコイン1枚の価値
+
     private void OnTriggerEnter2D(Collider2D other)
     {
-        // 1. まず何かが触れたら名前を出す（最優先デバッグ）
-        Debug.Log("接触検知！ 相手の名前: " + other.name);
-
-        // 2. タグが Player かどうか判定
         if (other.CompareTag("Player"))
         {
-            Debug.Log("プレイヤーがコインをゲットしました！");
+            if (CoinManager.instance != null)
+            {
+                // マネージャーにお金を加算してもらう
+                CoinManager.instance.AddMoney(amount);
+            }
 
-            // コインを消す
+            Debug.Log($"{amount}円！");
             Destroy(gameObject);
         }
     }

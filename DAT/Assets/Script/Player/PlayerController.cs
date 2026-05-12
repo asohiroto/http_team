@@ -17,18 +17,29 @@ public class PlayerController : MonoBehaviour
     Vector3 moveDir;
     Rigidbody2D rb;
 
+    float dashCd;
+    float dashCdTimer;
+
+    
+
 
     void Start()
     {
         currentPos = transform.position;
         onDash = false;
         rb = GetComponent<Rigidbody2D>();
+        
     }
 
     void FixedUpdate()
     {
+        dashCdTimer -= Time.deltaTime;
         Move();
-        Dash();
+        if (Keyboard.current.spaceKey.isPressed)
+        {
+            Debug.Log("space");
+            Dash();
+        }
     }
 
     void Move()
@@ -64,24 +75,23 @@ public class PlayerController : MonoBehaviour
         {
             moveDir.Normalize();
         }
-        if(onDash == false)
-        {
-            currentPos += moveDir * speed;
-        }
+            //currentPos += moveDir * speed;
         
         transform.position = currentPos;
     }
 
     void Dash()
     {
-        if (Keyboard.current.spaceKey.isPressed)
+        if (dashCdTimer > 0)
         {
-            if(onDash == false)
-            {
-                Debug.Log("space");
-                
-                onDash = true;
-            }
+            return;
         }
+        else
+        {
+            dashCdTimer = dashCd;
+        }
+
+        onDash = true;
+        
     }
 }

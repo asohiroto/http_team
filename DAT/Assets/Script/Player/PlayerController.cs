@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
@@ -5,7 +6,8 @@ using UnityEngine.InputSystem;
 public class PlayerController : MonoBehaviour
 {
     [SerializeField]private float speed = 0.1f;
-    [SerializeField] private float dashSpeed = 1000.0f;
+    [SerializeField]private float defaultSpeed = 0.1f;
+    [SerializeField] private float dashSpeed;
     private bool onDash;
 
 
@@ -17,8 +19,10 @@ public class PlayerController : MonoBehaviour
     Vector3 moveDir;
     Rigidbody2D rb;
 
-    float dashCd;
-    float dashCdTimer;
+    float dashCd = 0.4f;
+    float dashCdTimer = 0f;
+    [SerializeField]float dashTime = 0.1f;
+    Vector3 dashDir;
 
     
 
@@ -33,13 +37,9 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate()
     {
-        dashCdTimer -= Time.deltaTime;
         Move();
-        if (Keyboard.current.spaceKey.isPressed)
-        {
-            Debug.Log("space");
-            Dash();
-        }
+        Debug.Log(dashDir);
+        
     }
 
     void Move()
@@ -49,49 +49,46 @@ public class PlayerController : MonoBehaviour
 
         moveDir = new Vector3(dirX, dirY, 0);
 
+        if (onDash)
+        {
+            currentPos += dashDir * dashSpeed;
+        }
+        else
+        {
+            currentPos += moveDir * speed;
+        }
+        transform.position = currentPos;
+        
         // 画面内制限
-        if (transform.position.x >= xLimit)
-        {
-            currentPos.x = xLimit;
-        }
-
-        if (transform.position.x <= -xLimit)
-        {
-            currentPos.x = -xLimit;
-        }
-
-        if (transform.position.y >= yLimit)
-        {
-            currentPos.y = yLimit;
-        }
-
-        if (transform.position.y <= -yLimit)
-        {
-            currentPos.y = -yLimit;
-        }
-
+        currentPos.x = Mathf.Clamp(currentPos.x, -xLimit, xLimit);
+        currentPos.y = Mathf.Clamp(currentPos.y, -yLimit, yLimit);
+        
         // 正規化
         if (moveDir.magnitude >= 1)
         {
             moveDir.Normalize();
         }
-            //currentPos += moveDir * speed;
+
+        // ダッシュ
+        dashCdTimer -= Time.deltaTime;
+        if (Keyboard.current.spaceKey.isPressed)
+        {
+            if(dashCdTimer <= 0)
+            {
+                StartCoroutine(Dash());
+                dashCdTimer = dashCd;
+            }
+        }
         
-        transform.position = currentPos;
     }
 
-    void Dash()
-    {
-        if (dashCdTimer > 0)
-        {
-            return;
-        }
-        else
-        {
-            dashCdTimer = dashCd;
-        }
 
+    // ダッシュ処理の関数
+    IEnumerator Dash()
+    {
         onDash = true;
-        
+        dashDir = moveDir;
+        yield return new WaitForSeconds(dashTime);
+        onDash = false;
     }
 }

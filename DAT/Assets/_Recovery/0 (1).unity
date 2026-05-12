@@ -229,7 +229,6 @@ MonoBehaviour:
   dashSpeed: 0.5
   xLimit: 8.5
   yLimit: 4.7
-  dashTime: 0.1
 --- !u!50 &1721966147
 Rigidbody2D:
   serializedVersion: 5

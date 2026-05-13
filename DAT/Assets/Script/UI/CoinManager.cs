@@ -34,7 +34,6 @@ public class CoinManager : MonoBehaviour
         if (moneyText != null)
         {
             // 「所持金：100円」の形式で表示
-            // これなら四角にならないはず
             moneyText.text = $"Money: {currentMoney} G";
         }
     }

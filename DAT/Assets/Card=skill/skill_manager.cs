@@ -3,7 +3,7 @@ using UnityEngine.InputSystem;
 
 public class skill_manager : MonoBehaviour
 {
-    public heal_manager 
+    //public  heal_manager;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()

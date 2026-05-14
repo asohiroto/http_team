@@ -3,20 +3,26 @@ using UnityEngine.InputSystem;
 
 public class skill_manager : MonoBehaviour
 {
-    //public  heal_manager;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    heal_manager heal; 
+    enhance_manager enhance;
     void Start()
     {
-        
+        heal = GetComponent<heal_manager>();
+        enhance = GetComponent<enhance_manager>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Keyboard.current.zKey.wasPressedThisFrame)
+        if (Keyboard.current.zKey.wasPressedThisFrame) // ｚを押してヒールする
         {
+            heal.Heal();
 
+        }
+        if(Keyboard.current.xKey.wasPressedThisFrame) // ｘをおすと攻撃力アップ
+        {
+            enhance.Enhance();
         }
     }
 }

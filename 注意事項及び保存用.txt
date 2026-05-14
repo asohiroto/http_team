@@ -1,0 +1,133 @@
+「DAT_res」のファイルは緊急時用のファイルです
+消す前にチームメンバー全員に確認を取ってください
+
+以下は保存用にどうぞ
+
+麻生：
+using UnityEngine;
+using UnityEngine.InputSystem;
+
+public class player_manager_kari : MonoBehaviour
+{
+    [SerializeField] public int maxHp; // 最大HP
+    public int hp; // 現在のHP
+
+    [SerializeField] public int firstPower; // 通常時の攻撃力
+    public int power; // 現在の攻撃力
+    void Start()
+    {
+        Application.targetFrameRate = 60;
+
+        hp = maxHp; // ゲーム開始時に最大HPに設定
+        firstPower = power; // ゲーム開始時に通常攻撃力に設定
+    }
+
+    void Update()
+    {
+        if(Keyboard.current.spaceKey.wasPressedThisFrame)
+        {
+            hp -= 15;
+            Debug.Log("Now HP :" + hp);
+        }
+    }
+}
+
+using UnityEngine;
+using UnityEngine.InputSystem;
+
+public class skill_manager : MonoBehaviour
+{
+
+    heal_manager heal; 
+    enhance_manager enhance;
+    player_manager_kari player;
+    [SerializeField] int effectTime; // 強化の効果時間
+    [SerializeField] int heal_amount; // 回復量
+
+    int time = 0; // 時間カウンタ
+    int enhanceFlag = 0; // 攻撃力強化のフラグ
+
+    void Start()
+    {
+        heal = GetComponent<heal_manager>();
+        enhance = GetComponent<enhance_manager>();
+        player = GameObject.Find("Square").GetComponent<player_manager_kari>();
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        time++;
+
+        if (player.hp <= player.maxHp - heal_amount) // 体力の減少量が回復量よりも大きければ、回復量分だけ回復
+        {
+            if (Keyboard.current.zKey.wasPressedThisFrame)
+            {
+                heal.Heal(heal_amount);
+
+            }
+        }
+        else // 体力の減少量が回復量よりも少なければ、体力の最大値になるように回復
+        {
+            if (Keyboard.current.zKey.wasPressedThisFrame)
+                heal.Heal(player.maxHp - player.hp);
+        }
+
+
+
+        if(Keyboard.current.xKey.wasPressedThisFrame) // xをおすと攻撃力アップ
+        {
+            enhance.Enhance();
+            time = 0;
+            enhanceFlag = 1; // フラグ立て
+        }
+
+        if(time > effectTime * 60 && enhanceFlag == 1) // 強化から２秒経過かつ、フラグが立っていればリセット
+        {
+            enhance.Enhance_reset();
+            enhanceFlag = 0; // フラグ下げ
+
+        }
+    }
+}
+
+
+using System;
+using UnityEngine;
+
+public class enhance_manager : MonoBehaviour
+{
+    player_manager_kari player; // Hpを呼び出し
+
+    void Start()
+    {
+        player = GameObject.Find("Square").GetComponent<player_manager_kari>(); // 捜すやつ
+
+    }
+
+
+    public void Enhance() // プレイヤーの攻撃力を20増加する
+    {
+        player.power += 20;
+        Debug.Log("Power : " + player.power);
+
+    }
+
+    public void Enhance_reset() // プレイヤーの攻撃力をリセットする
+    {
+        player.power = player.firstPower;
+        Debug.Log("Power : " + player.power);
+    }
+
+    void Update()
+    {
+
+    }
+
+}
+
+福田：
+
+寺尾：
+
+平野：

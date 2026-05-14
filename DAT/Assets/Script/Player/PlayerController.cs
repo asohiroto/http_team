@@ -2,6 +2,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
+using UnityEngine.Rendering.VirtualTexturing;
 
 public class PlayerController : MonoBehaviour
 {
@@ -24,29 +25,51 @@ public class PlayerController : MonoBehaviour
     [SerializeField]float dashTime = 0.1f;
     Vector3 dashDir;
 
-    
-
+    GameObject attackObj;
+    [SerializeField] float attackTime = 0.5f;
 
     void Start()
     {
         currentPos = transform.position;
         onDash = false;
         rb = GetComponent<Rigidbody2D>();
-        
+        attackObj = transform.GetChild(0).gameObject; // プレイヤーの一番上にある子オブジェクトを取得
+        attackObj.SetActive(false);
     }
 
     void FixedUpdate()
     {
         Move();
-        Debug.Log(dashDir);
-        
+        InputManager();
     }
 
-    void Move()
+    void InputManager()
     {
+        // 移動
         dirX = Input.GetAxisRaw("Horizontal");
         dirY = Input.GetAxisRaw("Vertical");
 
+        // ダッシュ
+        dashCdTimer -= Time.deltaTime;
+        if (Keyboard.current.spaceKey.isPressed)
+        {
+            if (dashCdTimer <= 0)
+            {
+                StartCoroutine(Dash());
+                dashCdTimer = dashCd;
+            }
+        }
+
+        // アタック
+        if(Mouse.current.leftButton.isPressed)
+        {
+            StartCoroutine(Attack());
+        }
+    }
+
+    // 移動処理(WASDのみ)
+    void Move()
+    {
         moveDir = new Vector3(dirX, dirY, 0);
 
         if (onDash)
@@ -68,18 +91,6 @@ public class PlayerController : MonoBehaviour
         {
             moveDir.Normalize();
         }
-
-        // ダッシュ
-        dashCdTimer -= Time.deltaTime;
-        if (Keyboard.current.spaceKey.isPressed)
-        {
-            if(dashCdTimer <= 0)
-            {
-                StartCoroutine(Dash());
-                dashCdTimer = dashCd;
-            }
-        }
-        
     }
 
 
@@ -90,5 +101,13 @@ public class PlayerController : MonoBehaviour
         dashDir = moveDir;
         yield return new WaitForSeconds(dashTime);
         onDash = false;
+    }
+
+    // アタック処理
+    IEnumerator Attack()
+    {
+        attackObj.SetActive(true);
+        yield return new WaitForSeconds(attackTime);
+        attackObj.SetActive(false);
     }
 }

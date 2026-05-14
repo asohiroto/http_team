@@ -51,9 +51,9 @@ public class EnemyController : MonoBehaviour
 
         // 必ず一番最後に処理
         // HPが0のとき、スポーンさせない <- これいるか？
-        EnemyDamaged(20);
-        EnemyDamaged(50);
-        EnemyDamaged(50);
+        EnemyDamaged(20, 0);   // 被ダメージテスト
+        EnemyDamaged(50, 0);
+        EnemyDamaged(50, 0);
     }
 
     // Update is called once per frame
@@ -67,7 +67,7 @@ public class EnemyController : MonoBehaviour
         LookPlayer();
     }
 
-    public void EnemyDamaged(float dmg)
+    public void EnemyDamaged(float dmg, float dist)
     {
         // HPをdmg分減らす
         eHp -= dmg;

@@ -1,19 +1,26 @@
 using System;
 using UnityEngine;
 
-public class enhance_manager : MonoBehaviour
+public class heal_manager : MonoBehaviour
 {
+    player_manager_kari player; // Hpを呼び出し
 
-    [SerializeField] public int player_Hp = 100;
-
-    public void Heal()
+    void Start()
     {
-        player_Hp += 20;
+        player = GameObject.Find("Square").GetComponent<player_manager_kari>(); // 捜すやつ
+
+    }
+
+
+    public void Heal() // プレイヤーのHPを20増加する
+    {
+        player.Hp += 20;
+        Debug.Log("Hp: " + player.Hp);
+
     }
 
     void Update()
     {
-        Debug.Log(player_Hp);
     }
 
 }

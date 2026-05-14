@@ -15,8 +15,14 @@ public class enhance_manager : MonoBehaviour
     public void Enhance() // プレイヤーの攻撃力を20増加する
     {
         player.power += 20;
-        Debug.Log("Attack:"+ player.power); 
+        Debug.Log("Power : " + player.power);
 
+    }
+
+    public void Enhance_reset() // プレイヤーの攻撃力をリセットする
+    {
+        player.power = player.firstPower;
+        Debug.Log("Power : " + player.power);
     }
 
     void Update()

@@ -149,7 +149,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ffa621e7bdd43c6468deb5ed2292efb1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::player_manager_kari
-  Hp: 100
+  maxHp: 100
+  hp: 0
+  firstPower: 100
   power: 100
 --- !u!212 &415766680
 SpriteRenderer:
@@ -733,6 +735,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9367e1b94f492d84bae0ce933f800fb2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::skill_manager
+  effectTime: 2
+  heal_amount: 20
 --- !u!114 &1133045976
 MonoBehaviour:
   m_ObjectHideFlags: 0

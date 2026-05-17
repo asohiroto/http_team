@@ -4,128 +4,6 @@
 以下は保存用にどうぞ
 
 麻生：
-using UnityEngine;
-using UnityEngine.InputSystem;
-
-public class player_manager_kari : MonoBehaviour
-{
-    [SerializeField] public int maxHp; // 最大HP
-    public int hp; // 現在のHP
-
-    [SerializeField] public int firstPower; // 通常時の攻撃力
-    public int power; // 現在の攻撃力
-    void Start()
-    {
-        Application.targetFrameRate = 60;
-
-        hp = maxHp; // ゲーム開始時に最大HPに設定
-        firstPower = power; // ゲーム開始時に通常攻撃力に設定
-    }
-
-    void Update()
-    {
-        if(Keyboard.current.spaceKey.wasPressedThisFrame)
-        {
-            hp -= 15;
-            Debug.Log("Now HP :" + hp);
-        }
-    }
-}
-
-using UnityEngine;
-using UnityEngine.InputSystem;
-
-public class skill_manager : MonoBehaviour
-{
-
-    heal_manager heal; 
-    enhance_manager enhance;
-    player_manager_kari player;
-    [SerializeField] int effectTime; // 強化の効果時間
-    [SerializeField] int heal_amount; // 回復量
-
-    int time = 0; // 時間カウンタ
-    int enhanceFlag = 0; // 攻撃力強化のフラグ
-
-    void Start()
-    {
-        heal = GetComponent<heal_manager>();
-        enhance = GetComponent<enhance_manager>();
-        player = GameObject.Find("Square").GetComponent<player_manager_kari>();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        time++;
-
-        if (player.hp <= player.maxHp - heal_amount) // 体力の減少量が回復量よりも大きければ、回復量分だけ回復
-        {
-            if (Keyboard.current.zKey.wasPressedThisFrame)
-            {
-                heal.Heal(heal_amount);
-
-            }
-        }
-        else // 体力の減少量が回復量よりも少なければ、体力の最大値になるように回復
-        {
-            if (Keyboard.current.zKey.wasPressedThisFrame)
-                heal.Heal(player.maxHp - player.hp);
-        }
-
-
-
-        if(Keyboard.current.xKey.wasPressedThisFrame) // xをおすと攻撃力アップ
-        {
-            enhance.Enhance();
-            time = 0;
-            enhanceFlag = 1; // フラグ立て
-        }
-
-        if(time > effectTime * 60 && enhanceFlag == 1) // 強化から２秒経過かつ、フラグが立っていればリセット
-        {
-            enhance.Enhance_reset();
-            enhanceFlag = 0; // フラグ下げ
-
-        }
-    }
-}
-
-
-using System;
-using UnityEngine;
-
-public class enhance_manager : MonoBehaviour
-{
-    player_manager_kari player; // Hpを呼び出し
-
-    void Start()
-    {
-        player = GameObject.Find("Square").GetComponent<player_manager_kari>(); // 捜すやつ
-
-    }
-
-
-    public void Enhance() // プレイヤーの攻撃力を20増加する
-    {
-        player.power += 20;
-        Debug.Log("Power : " + player.power);
-
-    }
-
-    public void Enhance_reset() // プレイヤーの攻撃力をリセットする
-    {
-        player.power = player.firstPower;
-        Debug.Log("Power : " + player.power);
-    }
-
-    void Update()
-    {
-
-    }
-
-}
-
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -142,6 +20,8 @@ public class HandManager : MonoBehaviour
     Vector2 cursorPos;
 
     int cardId = 0; // 生成するカードのID
+    public int[] cardUseId = new int[4]; // 配列に保存されているカードIDを保存する配列
+    public int cardUse = 0; // 現在カーソルが指している手札の番号を保存
 
     GameObject cursorInstance; // 生成したカーソルを保持する変数
 
@@ -155,6 +35,8 @@ public class HandManager : MonoBehaviour
             cardId = Random.Range(0, 4);
 
             Instantiate(CardPrefab[cardId], deckCardTrans[i]); // 初期手札の生成
+
+            cardUseId[i] = cardId;
         }
 
         cursorInstance = Instantiate(cursorPrefab, cursorPos, Quaternion.identity); // 初期カーソルの生成(位置のみ参照)
@@ -166,15 +48,33 @@ public class HandManager : MonoBehaviour
         int nextCardId = Random.Range(0, 4);
 
         // 上部の数字キーによって破棄するカードを決定、カーソルを移動
-        if (Keyboard.current.digit1Key.wasPressedThisFrame) MoveCursor(0);
-        if (Keyboard.current.digit2Key.wasPressedThisFrame) MoveCursor(1);
-        if (Keyboard.current.digit3Key.wasPressedThisFrame) MoveCursor(2);
-        if (Keyboard.current.digit4Key.wasPressedThisFrame) MoveCursor(3);
+        if (Keyboard.current.digit1Key.wasPressedThisFrame)
+        {
+            MoveCursor(0);
+            cardUse = 0;
+        }
+
+        if (Keyboard.current.digit2Key.wasPressedThisFrame) 
+        { 
+            MoveCursor(1);
+            cardUse = 1;
+        }
+        if (Keyboard.current.digit3Key.wasPressedThisFrame)
+        {
+            MoveCursor(2);
+            cardUse = 2;
+        }
+        if(Keyboard.current.digit4Key.wasPressedThisFrame) 
+        { 
+            MoveCursor(3);
+            cardUse = 3;
+        }
 
 
         if (Keyboard.current.wKey.wasPressedThisFrame)
         {
-            Card_Change(discardInd, nextCardId);
+            Card_Change(nextCardId, discardInd);
+            cardUseId[discardInd] = nextCardId;
 
         }
     }
@@ -182,16 +82,113 @@ public class HandManager : MonoBehaviour
     void MoveCursor(int index)
     {
         discardInd = index;
-        // カーソルの位置を選択した場所へ移動させる
-        cursorInstance.transform.position = (Vector2)deckCardTrans[index].position + new Vector2(0.8f, -1.0f);
+        cursorInstance.transform.position = (Vector2)deckCardTrans[index].position + new Vector2(0.8f, -1.0f); // カーソルの位置を選択した場所へ移動させる
     }
 
-    void Card_Change(int chan, int ran) // 特定のカードを捨て、新たにランダムなカードを生成する
+    void Card_Change(int ran, int chan) // 特定のカードを捨て、新たにランダムなカードを生成する
     {
         Destroy(deckCardTrans[chan].GetChild(0).gameObject); // カードを捨てる処理
         Instantiate(CardPrefab[ran], deckCardTrans[chan]); // カードを作る処理
     }
 }
+
+using UnityEngine;
+using UnityEngine.InputSystem;
+
+public class skill_manager : MonoBehaviour
+{
+
+    heal_manager heal;
+    enhance_manager enhance;
+    player_manager_kari player;
+    HandManager hand;
+
+    [SerializeField] int effectTime; // 強化の効果時間
+    [SerializeField] int heal_amount; // 回復量
+
+    int time = 0; // 時間カウンタ
+    int enhanceFlag = 0; // 攻撃力強化のフラグ
+
+    void Start()
+    {
+        heal = GetComponent<heal_manager>();
+        enhance = GetComponent<enhance_manager>();
+        hand = GameObject.Find("HandManager").GetComponent<HandManager>();
+        player = GameObject.Find("Square").GetComponent<player_manager_kari>();
+
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        time++;
+
+        if (Keyboard.current.fKey.wasPressedThisFrame)
+        {
+            switch (hand.cardUseId[hand.cardUse]) // カーソル位置に応じて発動分岐
+            {
+                case 0: // 強化発動
+                    if (enhanceFlag == 0)
+                    {
+                        enhance.Enhance();
+                        time = 0;
+                        enhanceFlag = 1; // フラグ立て
+                    }
+
+                    Debug.Log(hand.cardUseId[hand.cardUse]);
+
+                    Debug.Log("選択中　1");
+
+                    break;
+
+                case 1: // 回復発動
+                    
+                    if (player.hp <= player.maxHp - heal_amount) // 体力の減少量が回復量よりも大きければ、回復量分だけ回復
+                    {
+                        heal.Heal(heal_amount);
+
+
+                    }
+                    else // 体力の減少量が回復量よりも少なければ、体力の最大値になるように回復
+                    {
+                        heal.Heal(player.maxHp - player.hp);
+                    }
+
+                    Debug.Log("選択中　2");
+                    Debug.Log(hand.cardUseId[hand.cardUse]);
+
+                    break;
+
+                case 2:
+
+                    Debug.Log("選択中　3");
+                    Debug.Log(hand.cardUseId[hand.cardUse]);
+
+                    break;
+
+                case 3:
+
+                    Debug.Log("選択中　4");
+                    Debug.Log(hand.cardUseId[hand.cardUse]);
+
+                    break;
+
+                default:
+                    break;
+
+            }
+
+        }
+
+        if (time > effectTime * 60 && enhanceFlag == 1) // 強化から２秒経過かつ、フラグが立っていればリセット
+        {
+            enhance.Enhance_reset();
+            enhanceFlag = 0; // フラグ下げ
+
+        }
+    }
+}
+
 福田：
 
 寺尾：

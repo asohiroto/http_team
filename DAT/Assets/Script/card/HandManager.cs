@@ -14,6 +14,8 @@ public class HandManager : MonoBehaviour
     Vector2 cursorPos;
 
     int cardId = 0; // 生成するカードのID
+    public int[] cardUseId = new int[4]; // 配列に保存されているカードIDを保存する配列
+    public int cardUse = 0; // 現在カーソルが指している手札の番号を保存
 
     GameObject cursorInstance; // 生成したカーソルを保持する変数
 
@@ -27,6 +29,8 @@ public class HandManager : MonoBehaviour
             cardId = Random.Range(0, 4);
 
             Instantiate(CardPrefab[cardId], deckCardTrans[i]); // 初期手札の生成
+
+            cardUseId[i] = cardId;
         }
 
         cursorInstance = Instantiate(cursorPrefab, cursorPos, Quaternion.identity); // 初期カーソルの生成(位置のみ参照)
@@ -38,15 +42,33 @@ public class HandManager : MonoBehaviour
         int nextCardId = Random.Range(0, 4);
 
         // 上部の数字キーによって破棄するカードを決定、カーソルを移動
-        if (Keyboard.current.digit1Key.wasPressedThisFrame) MoveCursor(0);
-        if (Keyboard.current.digit2Key.wasPressedThisFrame) MoveCursor(1);
-        if (Keyboard.current.digit3Key.wasPressedThisFrame) MoveCursor(2);
-        if (Keyboard.current.digit4Key.wasPressedThisFrame) MoveCursor(3);
+        if (Keyboard.current.digit1Key.wasPressedThisFrame)
+        {
+            MoveCursor(0);
+            cardUse = 0;
+        }
+
+        if (Keyboard.current.digit2Key.wasPressedThisFrame) 
+        { 
+            MoveCursor(1);
+            cardUse = 1;
+        }
+        if (Keyboard.current.digit3Key.wasPressedThisFrame)
+        {
+            MoveCursor(2);
+            cardUse = 2;
+        }
+        if(Keyboard.current.digit4Key.wasPressedThisFrame) 
+        { 
+            MoveCursor(3);
+            cardUse = 3;
+        }
 
 
         if (Keyboard.current.wKey.wasPressedThisFrame)
         {
-            Card_Change(discardInd, nextCardId);
+            Card_Change(nextCardId, discardInd);
+            cardUseId[discardInd] = nextCardId;
 
         }
     }
@@ -54,11 +76,10 @@ public class HandManager : MonoBehaviour
     void MoveCursor(int index)
     {
         discardInd = index;
-        // カーソルの位置を選択した場所へ移動させる
-        cursorInstance.transform.position = (Vector2)deckCardTrans[index].position + new Vector2(0.8f, -1.0f);
+        cursorInstance.transform.position = (Vector2)deckCardTrans[index].position + new Vector2(0.8f, -1.0f); // カーソルの位置を選択した場所へ移動させる
     }
 
-    void Card_Change(int chan, int ran) // 特定のカードを捨て、新たにランダムなカードを生成する
+    void Card_Change(int ran, int chan) // 特定のカードを捨て、新たにランダムなカードを生成する
     {
         Destroy(deckCardTrans[chan].GetChild(0).gameObject); // カードを捨てる処理
         Instantiate(CardPrefab[ran], deckCardTrans[chan]); // カードを作る処理

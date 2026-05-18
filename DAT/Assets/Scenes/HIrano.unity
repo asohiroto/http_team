@@ -252,12 +252,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ebdcf5537ffc4a4b806569111e8b38d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyController
+  eHp: 100
   findDist: 0.3
   loseDist: 0.4
-  e_moveSpeed: 0.5
-  attackDist: 0.1
+  e_moveSpeed: 1
+  attackDist: 0.2
   attackSec: 0
-  distRate: 0.1
+  distRate: 100
   isFindPlayer: 0
   ePos: {x: 0, y: 0}
   playerPos: {x: 0, y: 0}
@@ -341,9 +342,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController
   speed: 0.1
+  defaultSpeed: 0.1
   dashSpeed: 1000
   xLimit: 8.5
   yLimit: 4.7
+  dashTime: 0.1
+  attackTime: 0.5
 --- !u!212 &889639628
 SpriteRenderer:
   serializedVersion: 2

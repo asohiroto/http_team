@@ -8,9 +8,8 @@ public class PlayerController : MonoBehaviour
 {
     [SerializeField]private float speed = 0.1f;
     [SerializeField]private float defaultSpeed = 0.1f;
-    [SerializeField] private float dashSpeed;
+    [SerializeField] private float dashSpeed = 0.5f;
     private bool onDash;
-
 
     float dirX;
     float dirY;
@@ -20,18 +19,23 @@ public class PlayerController : MonoBehaviour
     Vector3 moveDir;
     Rigidbody2D rb;
 
-    float dashCd = 0.4f;
+    float dashCd = 0.3f;
     float dashCdTimer = 0f;
     [SerializeField]float dashTime = 0.1f;
     Vector3 dashDir;
 
     GameObject attackObj;
     [SerializeField] float attackTime = 0.5f;
+    float attackCd = 0.5f;
+    float attackCdTimer;
+
+    public int playerHP = 100;
 
     void Start()
     {
         currentPos = transform.position;
         onDash = false;
+        attackCdTimer = 0f;
         rb = GetComponent<Rigidbody2D>();
         attackObj = transform.GetChild(0).gameObject; // プレイヤーの一番上にある子オブジェクトを取得
         attackObj.SetActive(false);
@@ -56,14 +60,19 @@ public class PlayerController : MonoBehaviour
             if (dashCdTimer <= 0)
             {
                 StartCoroutine(Dash());
-                dashCdTimer = dashCd;
+                dashCdTimer = dashCd + dashTime;
             }
         }
 
         // アタック
-        if(Mouse.current.leftButton.isPressed)
+        attackCdTimer -= Time.deltaTime;
+        if (Mouse.current.leftButton.isPressed)
         {
-            StartCoroutine(Attack());
+            if (attackCdTimer <= 0)
+            {
+                StartCoroutine(Attack());
+                attackCdTimer = attackCd + attackTime;
+            }
         }
     }
 
@@ -85,12 +94,12 @@ public class PlayerController : MonoBehaviour
         // プレイヤーの向き
         if(dirX > 0)
         {
-            transform.localScale = new Vector3(1f, 1f, 1);
+            transform.rotation = Quaternion.Euler(0, 0, 0);
         }
-        if (dirX < 0)
+        else if (dirX < 0)
         {
-            transform.localScale = new Vector3(-1f, 1f, 1);
-        }
+            transform.rotation = Quaternion.Euler(0, 180, 0);
+        } // プレハブに変えます！
 
         // 画面内制限
         currentPos.x = Mathf.Clamp(currentPos.x, -xLimit, xLimit);

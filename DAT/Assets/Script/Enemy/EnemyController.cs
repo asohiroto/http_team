@@ -16,17 +16,17 @@ public class EnemyController : MonoBehaviour
 
 
     [Header("Behavior")]
-    [SerializeField] private float findDist = 0f;       // player発見距離
-    [SerializeField] private float loseDist = 0f;       // player追跡可能距離(見失う距離)
-    [SerializeField] private float e_moveSpeed = 0f;    // 移動速度
-    [SerializeField] private float attackDist = 0f;     // 攻撃可能な距離
+    [SerializeField] private float findDist = 0.3f;       // player発見距離
+    [SerializeField] private float loseDist = 0.4f;       // player追跡可能距離(見失う距離)
+    [SerializeField] private float e_moveSpeed = 1f;    // 移動速度
+    [SerializeField] private float attackDist = 0.2f;     // 攻撃可能な距離
     [SerializeField] private float attackSec = 0f;      // 攻撃のクールダウン
 
 
 
 
     // 仮の変数
-    public float distRate = 100f;                        // 座標が１増えるごとの割り
+    public float distRate = 0.1f;                        // 座標が１増えるごとの割り
 
     [Header("State")]
     public bool isFindPlayer = false;
@@ -51,9 +51,9 @@ public class EnemyController : MonoBehaviour
 
         // 必ず一番最後に処理
         // HPが0のとき、スポーンさせない <- これいるか？
-        EnemyDamaged(20, 0);   // 被ダメージテスト
-        EnemyDamaged(50, 0);
-        EnemyDamaged(50, 0);
+        EnemyDamaged(20);   // 被ダメージテスト
+        EnemyDamaged(50);
+        EnemyDamaged(50);
     }
 
     // Update is called once per frame
@@ -67,7 +67,7 @@ public class EnemyController : MonoBehaviour
         LookPlayer();
     }
 
-    public void EnemyDamaged(float dmg, float dist)
+    public void EnemyDamaged(float dmg)
     {
         // HPをdmg分減らす
         eHp -= dmg;
@@ -101,20 +101,32 @@ public class EnemyController : MonoBehaviour
             // loseDistが0 and distがloseDistより大きいなら移動停止
             if (loseDist != 0f && loseDist < playerDist) return;
 
-            // 攻撃可能な距離で止まる
-            if (attackDist > playerDist) return;
+            // 攻撃可能な距離の半分で止まる
+            if (attackDist / 2 > playerDist) return;
 
             isFindPlayer = true;
-            chasePlayer();
+            ChasePlayer();
         }
         // 発見状態からloseDistの外に出るまで
-        else if (isFindPlayer && findDist <= playerDist && loseDist > playerDist) chasePlayer();
-        else isFindPlayer = false;
+        else if (isFindPlayer && findDist <= playerDist && loseDist > playerDist)
+        {
+            ChasePlayer();
+        }
+        else
+        {
+            isFindPlayer = false;
+        }
     }
-
-    void chasePlayer()
+    void ChasePlayer()
     {
         transform.position = Vector2.MoveTowards(transform.position, new Vector2(playerPos.x, playerPos.y), e_moveSpeed * Time.deltaTime);
+    }
+
+    void AttackPlayer()
+    {
+        if (attackDist < playerDist) return;
+
+
     }
 
     // いらないかも？
@@ -126,7 +138,7 @@ public class EnemyController : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             // ダメージ処理を呼ぶ
-            Debug.Log("Damaged!");
+            //Debug.Log("Damaged!");
         }
     }
 

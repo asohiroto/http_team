@@ -1,4 +1,5 @@
 using System;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class heal_manager : MonoBehaviour
@@ -12,10 +13,10 @@ public class heal_manager : MonoBehaviour
     }
 
 
-    public void Heal() // プレイヤーのHPを20増加する
+    public void Heal(int heal_amount) // プレイヤーのhpをheal_amount分だけ増加する
     {
-        player.Hp += 20;
-        Debug.Log("Hp: " + player.Hp);
+        player.hp += heal_amount;
+        Debug.Log("Hp: " + player.hp);
 
     }
 

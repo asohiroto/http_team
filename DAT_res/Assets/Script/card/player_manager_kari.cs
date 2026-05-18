@@ -3,19 +3,25 @@ using UnityEngine.InputSystem;
 
 public class player_manager_kari : MonoBehaviour
 {
-    [SerializeField] public int Hp = 100;
-    [SerializeField] public int power = 100;
+    [SerializeField] public int maxHp; // 最大HP
+    public int hp; // 現在のHP
+
+    [SerializeField] public int firstPower; // 通常時の攻撃力
+    public int power; // 現在の攻撃力
     void Start()
     {
-        
+        Application.targetFrameRate = 60;
+
+        hp = maxHp; // ゲーム開始時に最大HPに設定
+        firstPower = power; // ゲーム開始時に通常攻撃力に設定
     }
 
     void Update()
     {
         if(Keyboard.current.spaceKey.wasPressedThisFrame)
         {
-            Hp -= 10;
-            Debug.Log(Hp);
+            hp -= 15;
+            Debug.Log("Now HP :" + hp);
         }
     }
 }

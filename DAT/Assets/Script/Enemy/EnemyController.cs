@@ -26,7 +26,7 @@ public class EnemyController : MonoBehaviour
 
 
     // 仮の変数
-    public float distRate = 100f;                        // 座標が１増えるごとの割り
+    public float distRate = 0.1f;                        // 座標が１増えるごとの割り
 
     [Header("State")]
     public bool isFindPlayer = false;

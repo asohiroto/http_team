@@ -258,7 +258,7 @@ MonoBehaviour:
   e_moveSpeed: 1
   attackDist: 0.2
   attackSec: 0
-  distRate: 100
+  distRate: 0.1
   isFindPlayer: 0
   ePos: {x: 0, y: 0}
   playerPos: {x: 0, y: 0}

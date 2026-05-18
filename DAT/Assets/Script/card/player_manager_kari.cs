@@ -18,7 +18,7 @@ public class player_manager_kari : MonoBehaviour
 
     void Update()
     {
-        if(Keyboard.current.spaceKey.wasPressedThisFrame)
+        if(Keyboard.current.spaceKey.wasPressedThisFrame) // 【テスト用】HPを減らして動作を確認
         {
             hp -= 15;
             Debug.Log("Now HP :" + hp);

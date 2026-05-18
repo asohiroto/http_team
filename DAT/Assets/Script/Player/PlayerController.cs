@@ -81,7 +81,17 @@ public class PlayerController : MonoBehaviour
             currentPos += moveDir * speed;
         }
         transform.position = currentPos;
-        
+
+        // プレイヤーの向き
+        if(dirX > 0)
+        {
+            transform.localScale = new Vector3(1f, 1f, 1);
+        }
+        if (dirX < 0)
+        {
+            transform.localScale = new Vector3(-1f, 1f, 1);
+        }
+
         // 画面内制限
         currentPos.x = Mathf.Clamp(currentPos.x, -xLimit, xLimit);
         currentPos.y = Mathf.Clamp(currentPos.y, -yLimit, yLimit);

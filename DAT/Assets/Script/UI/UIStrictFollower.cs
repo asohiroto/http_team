@@ -1,40 +1,38 @@
 using UnityEngine;
 
-public class UIFollowerFix : MonoBehaviour
+public class UIstrictFollower : MonoBehaviour
 {
-    [SerializeField] private Transform target; // プレイヤーのTransform
-    [SerializeField] private Vector3 offset;    // プレイヤーからのズレ（最初は X:0, Y:-50, Z:0 くらいがおすすめ）
+    // インスペクターからプレイヤー（Player）をドラッグ＆ドロップする
+    [SerializeField] private Transform targetPlayer;
 
-    private Camera mainCamera;
-    private RectTransform rectTransform;
+    // プレイヤーの足元にずらすための値（インスペクターで調整可能。例: Yを -1.5 にする）
+    [SerializeField] private Vector3 positionOffset = new Vector3(0f, -1.5f, 0f);
 
-    void Start()
+    void Awake()
     {
-        mainCamera = Camera.main;
-        rectTransform = GetComponent<RectTransform>();
-
-        // 【重要】ゲーム開始時に強制的にオブジェクトとコンポーネントを有効化
+        // 起動した瞬間、何があっても強制的に「表示（オン）」状態にする
         gameObject.SetActive(true);
-        if (rectTransform != null)
-        {
-            // 画面のどこにでも動けるようにアンカーを真ん中に固定
-            rectTransform.anchorMin = new Vector2(0.5f, 0.5f);
-            rectTransform.anchorMax = new Vector2(0.5f, 0.5f);
-        }
     }
 
+    // すべての処理（プレイヤーの移動や土台のエラーなど）が終わった後に位置を確定させる
     void LateUpdate()
     {
-        if (target == null || rectTransform == null || mainCamera == null) return;
+        // ターゲット（プレイヤー）がセットされていない、または消えている場合は何もしない
+        if (targetPlayer == null) return;
 
-        // 1. プレイヤーのワールド座標を取得
-        Vector3 playerWorldPos = target.position;
+        // 【バグ対策】もし勝手に非表示（オフ）にされても、毎フレーム強制的にオンに戻す
+        if (!gameObject.activeSelf)
+        {
+            gameObject.SetActive(true);
+        }
 
-        // 2. プレイヤーの座標を、画面上のスクリーン座標（ピクセル単位）に変換
-        Vector2 screenPoint = mainCamera.WorldToScreenPoint(playerWorldPos);
+        // プレイヤーの現在位置に、ずらしたい分のオフセットを足す
+        Vector3 targetPosition = targetPlayer.position + positionOffset;
 
-        // 3. UIの RectTransform.position に直接代入する（これが一番ズレない）
-        // オフセット（Y: -50 など）を足して、プレイヤーの足元にずらす
-        rectTransform.position = new Vector3(screenPoint.x + offset.x, screenPoint.y + offset.y, 0f);
+        // Z軸は0（2Dゲームの標準位置）に固定し、カメラの裏に隠れるのを防ぐ
+        targetPosition.z = 0f;
+
+        // 自分の位置をプレイヤーの位置に強制同期
+        transform.position = targetPosition;
     }
 }

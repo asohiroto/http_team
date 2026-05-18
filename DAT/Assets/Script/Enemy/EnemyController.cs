@@ -1,32 +1,20 @@
-using Unity.VisualScripting;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyController : MonoBehaviour
 {
-
-    // 敵の判別名(仮)
-    /*
-        弱い敵、近距離 WeakMeleeEnemy 
-        弱い敵、遠距離 WeakRengedEnemy
-    */
     [Header("Enemy")]
     [SerializeField] private float eHp = 100f;
 
 
     [Header("Behavior")]
-    [SerializeField] private float findDist = 0.3f;       // player発見距離
-    [SerializeField] private float loseDist = 0.4f;       // player追跡可能距離(見失う距離)
+    [SerializeField] private float findDist = 3f;     // player発見距離
+    [SerializeField] private float loseDist = 4f;     // player追跡可能距離(見失う距離)
     [SerializeField] private float e_moveSpeed = 1f;    // 移動速度
-    [SerializeField] private float attackDist = 0.2f;     // 攻撃可能な距離
+    [SerializeField] private float attackDist = 2f;   // 攻撃可能な距離
     [SerializeField] private float attackSec = 0f;      // 攻撃のクールダウン
 
-
-
-
-    // 仮の変数
-    public float distRate = 0.1f;                        // 座標が１増えるごとの割り
 
     [Header("State")]
     public bool isFindPlayer = false;
@@ -35,35 +23,29 @@ public class EnemyController : MonoBehaviour
     [SerializeField] private float playerDist = 0f;                 // PlayerとEnemyの距離
 
     [Header("Config")]
-    [SerializeField] private GameObject playerObject;
-
-    private Rigidbody2D rb;
+    [SerializeField] private Transform player;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        rb = GetComponent<Rigidbody2D>();
-
         playerDist = findDist + 1;   // 0で開始すると値が代入されるまでの間に動いてしまうため
 
         // 見失う距離が発見距離よりも短い場合、見失う距離を発見距離と同じ大きさにします。
         if (loseDist != 0f && loseDist < findDist || findDist == 0)  loseDist = findDist;
 
-        // 必ず一番最後に処理
-        // HPが0のとき、スポーンさせない <- これいるか？
-        EnemyDamaged(20);   // 被ダメージテスト
-        EnemyDamaged(50);
-        EnemyDamaged(50);
+
+        // HPが0のとき、スポーンさせない <- これいる？　検討中    // 必ず一番最後に処理
     }
 
     // Update is called once per frame
     void Update()
     {
-        CheckDist();
+        
     }
 
     private void FixedUpdate()
     {
+        CheckDist();
         LookPlayer();
     }
 
@@ -83,14 +65,15 @@ public class EnemyController : MonoBehaviour
         if (eHp <= 0)
         {
             Debug.Log("HPが0になった" + this.gameObject.name);
+            // 以降の処理は後で追加
         }
     }
 
     void CheckDist()
     {
-        playerPos = playerObject.transform.position;
+        playerPos = player.transform.position;
         ePos = transform.position;
-        playerDist = Vector2.Distance(ePos, playerPos) * distRate;
+        playerDist = Vector2.Distance(ePos, playerPos);
     }
 
     void LookPlayer()
@@ -121,25 +104,4 @@ public class EnemyController : MonoBehaviour
     {
         transform.position = Vector2.MoveTowards(transform.position, new Vector2(playerPos.x, playerPos.y), e_moveSpeed * Time.deltaTime);
     }
-
-    void AttackPlayer()
-    {
-        if (attackDist < playerDist) return;
-
-
-    }
-
-    // いらないかも？
-    void OnTriggerEnter2D(Collider2D other)
-    {
-        Debug.Log("オブジェクト名：" + other.gameObject.name + " タグ：" + other.gameObject.tag);
-
-        // 衝突した相手がプレイヤーのタグか確認
-        if (other.CompareTag("Player"))
-        {
-            // ダメージ処理を呼ぶ
-            //Debug.Log("Damaged!");
-        }
-    }
-
 }

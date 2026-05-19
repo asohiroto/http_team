@@ -9,21 +9,28 @@ public class EnemyController : MonoBehaviour
 
 
     [Header("Behavior")]
-    [SerializeField] private float findDist = 3f;     // player発見距離
-    [SerializeField] private float loseDist = 4f;     // player追跡可能距離(見失う距離)
-    [SerializeField] private float e_moveSpeed = 1f;    // 移動速度
-    [SerializeField] private float attackDist = 2f;   // 攻撃可能な距離
-    [SerializeField] private float attackSec = 0f;      // 攻撃のクールダウン
+    [SerializeField] private float findDist = 3f;    // player発見距離
+    [SerializeField] private float loseDist = 4f;    // player追跡可能距離(見失う距離)
+    [SerializeField] private float e_moveSpeed = 1f; // 移動速度
+    [SerializeField] private float stopDist = 1f;    // 停止位置
+    [SerializeField] private float attackDist = 2f;  // 攻撃可能な距離
+    [SerializeField] private float attackSec = 0f;   // 攻撃のクールダウン
 
 
     [Header("State")]
-    public bool isFindPlayer = false;
     [SerializeField] private Vector2 ePos = new Vector2(0, 0);      // Enemy(このオブジェクト)の座標
     [SerializeField] private Vector2 playerPos = new Vector2(0, 0); // Playerの座標
     [SerializeField] private float playerDist = 0f;                 // PlayerとEnemyの距離
+    public bool isFindPlayer = false;
+    [SerializeField] private bool canAttack = false;
+
 
     [Header("Config")]
     [SerializeField] private Transform player;
+
+    public bool CanAttack => canAttack;     // 攻撃可能か　読み取り専用
+
+    
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -85,7 +92,7 @@ public class EnemyController : MonoBehaviour
             if (loseDist != 0f && loseDist < playerDist) return;
 
             // 攻撃可能な距離の半分で止まる
-            if (attackDist / 2 > playerDist) return;
+            if (stopDist > playerDist) return;
 
             isFindPlayer = true;
             ChasePlayer();
@@ -99,6 +106,12 @@ public class EnemyController : MonoBehaviour
         {
             isFindPlayer = false;
         }
+
+        if (stopDist < playerDist)
+        {
+            canAttack = true;
+        }
+        else canAttack = false;
     }
     void ChasePlayer()
     {

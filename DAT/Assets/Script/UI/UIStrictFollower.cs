@@ -1,38 +1,18 @@
 using UnityEngine;
-
-public class UIstrictFollower : MonoBehaviour
+public class UIFollowTarget : MonoBehaviour
 {
-    // インスペクターからプレイヤー（Player）をドラッグ＆ドロップする
-    [SerializeField] private Transform targetPlayer;
+    public Transform target; // プレイヤー
+    public Vector3 offset = new Vector3(0, 2.0f, 0); // 頭上の高さ
+    private RectTransform rectTransform;
+    private Camera mainCamera;
 
-    // プレイヤーの足元にずらすための値（インスペクターで調整可能。例: Yを -1.5 にする）
-    [SerializeField] private Vector3 positionOffset = new Vector3(0f, -1.5f, 0f);
-
-    void Awake()
-    {
-        // 起動した瞬間、何があっても強制的に「表示（オン）」状態にする
-        gameObject.SetActive(true);
-    }
-
-    // すべての処理（プレイヤーの移動や土台のエラーなど）が終わった後に位置を確定させる
+    void Start() { rectTransform = GetComponent<RectTransform>(); mainCamera = Camera.main; }
     void LateUpdate()
     {
-        // ターゲット（プレイヤー）がセットされていない、または消えている場合は何もしない
-        if (targetPlayer == null) return;
-
-        // 【バグ対策】もし勝手に非表示（オフ）にされても、毎フレーム強制的にオンに戻す
-        if (!gameObject.activeSelf)
-        {
-            gameObject.SetActive(true);
-        }
-
-        // プレイヤーの現在位置に、ずらしたい分のオフセットを足す
-        Vector3 targetPosition = targetPlayer.position + positionOffset;
-
-        // Z軸は0（2Dゲームの標準位置）に固定し、カメラの裏に隠れるのを防ぐ
-        targetPosition.z = 0f;
-
-        // 自分の位置をプレイヤーの位置に強制同期
-        transform.position = targetPosition;
+        if (target == null || mainCamera == null) return;
+        Vector3 screenPos = mainCamera.WorldToScreenPoint(target.position + offset);
+        if (screenPos.z < 0) { rectTransform.gameObject.SetActive(false); return; }
+        else { rectTransform.gameObject.SetActive(true); }
+        rectTransform.position = screenPos;
     }
 }

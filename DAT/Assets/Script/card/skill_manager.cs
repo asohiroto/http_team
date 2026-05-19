@@ -29,7 +29,7 @@ public class skill_manager : MonoBehaviour
     {
         time++;
 
-        if (Keyboard.current.fKey.wasPressedThisFrame)
+        if (Mouse.current.rightButton.wasPressedThisFrame)
         {
             switch (hand.cardUseId[hand.cardUse]) // カーソル位置に応じて発動分岐
             {

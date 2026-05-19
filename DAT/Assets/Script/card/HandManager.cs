@@ -21,8 +21,8 @@ public class HandManager : MonoBehaviour
 
     void Start()
     {
-        cursorPos.x = deckCardTrans[0].position.x + 0.8f;
-        cursorPos.y = deckCardTrans[0].position.y - 1.0f;
+        /*cursorPos.x = deckCardTrans[0].position.x + 0.8f;
+        cursorPos.y = deckCardTrans[0].position.y - 1.0f;*/
 
         for (int i = 0; i < 4; i++) // それぞれの手札の位置にランダムなカードを生成
         {
@@ -33,7 +33,7 @@ public class HandManager : MonoBehaviour
             cardUseId[i] = cardId;
         }
 
-        cursorInstance = Instantiate(cursorPrefab, cursorPos, Quaternion.identity); // 初期カーソルの生成(位置のみ参照)
+        //cursorInstance = Instantiate(cursorPrefab, cursorPos, Quaternion.identity); // 初期カーソルの生成(位置のみ参照)
     }
 
     // Update is called once per frame

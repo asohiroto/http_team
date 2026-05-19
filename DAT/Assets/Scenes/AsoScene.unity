@@ -897,7 +897,7 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_VertexColorAlwaysGammaSpace: 0
-  m_AdditionalShaderChannelsFlag: 0
+  m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
   m_SortingOrder: 0
@@ -1086,10 +1086,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HandManager
   CardPrefab:
-  - {fileID: 5598295723908347764, guid: da7cbaf30a9fd7f4f8919da270f30ffb, type: 3}
-  - {fileID: 2063237587531502311, guid: bc2123df936fc88408006e95c38142fd, type: 3}
-  - {fileID: 2840686583348518954, guid: fbd0f5f0c26c1184a81bac998132a84a, type: 3}
-  - {fileID: 4392661254053611900, guid: d4c65d5681a57b949b58e691ee9f7982, type: 3}
+  - {fileID: 7658330321974320766, guid: 9ed9e078dd663094d9a1a3f1c15b0ee4, type: 3}
+  - {fileID: 5657519691800101273, guid: d9b1ac7829678bf4497b097a5013f39f, type: 3}
+  - {fileID: 6882976967852742939, guid: 369f08c463d0cfb4ead5bfbd034d5b25, type: 3}
+  - {fileID: 1438595595036919603, guid: 6cda70d58b0d06c45bc64210a25a81c7, type: 3}
   deckCardTrans:
   - {fileID: 1067738063}
   - {fileID: 2003891432}

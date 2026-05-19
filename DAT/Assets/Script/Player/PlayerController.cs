@@ -6,6 +6,7 @@ using UnityEngine.Rendering.VirtualTexturing;
 
 public class PlayerController : MonoBehaviour
 {
+    // 移動に使う変数
     [SerializeField]private float speed = 0.1f;
     [SerializeField]private float defaultSpeed = 0.1f;
     [SerializeField] private float dashSpeed = 0.5f;
@@ -19,15 +20,23 @@ public class PlayerController : MonoBehaviour
     Vector3 moveDir;
     Rigidbody2D rb;
 
+    // ダッシュに使う変数
     float dashCd = 0.3f;
     float dashCdTimer = 0f;
     [SerializeField]float dashTime = 0.1f;
     Vector3 dashDir;
 
-    GameObject attackObj;
+    // アタックに使う変数
+    [SerializeField] GameObject attackObj;
     [SerializeField] float attackTime = 0.5f;
-    float attackCd = 0.5f;
+    [SerializeField]float attackCd = 0.5f;
     float attackCdTimer;
+    Vector3 attackDir;
+
+    GameObject[] attackTarget;
+    GameObject closeTarget;
+    float closeDist = 1000;
+    float attackDist = 2.0f;
 
     public int playerHP = 100;
 
@@ -37,8 +46,7 @@ public class PlayerController : MonoBehaviour
         onDash = false;
         attackCdTimer = 0f;
         rb = GetComponent<Rigidbody2D>();
-        attackObj = transform.GetChild(0).gameObject; // プレイヤーの一番上にある子オブジェクトを取得
-        attackObj.SetActive(false);
+        attackTarget = GameObject.FindGameObjectsWithTag("Enemy");
     }
 
     void FixedUpdate()
@@ -65,8 +73,9 @@ public class PlayerController : MonoBehaviour
         }
 
         // アタック
+
         attackCdTimer -= Time.deltaTime;
-        if (Mouse.current.leftButton.isPressed)
+        if (closeDist <= attackDist)
         {
             if (attackCdTimer <= 0)
             {
@@ -92,6 +101,7 @@ public class PlayerController : MonoBehaviour
         transform.position = currentPos;
 
         // プレイヤーの向き
+        // アタックしている間はその向きを向くようにする（これから実装する）
         if(dirX > 0)
         {
             transform.rotation = Quaternion.Euler(0, 0, 0);
@@ -125,8 +135,16 @@ public class PlayerController : MonoBehaviour
     // アタック処理
     IEnumerator Attack()
     {
-        attackObj.SetActive(true);
+        GameObject obj = Instantiate(attackObj, this.transform);
+        obj.transform.position = transform.position;
+
         yield return new WaitForSeconds(attackTime);
-        attackObj.SetActive(false);
+        Destroy(obj);
+    }
+
+    public void Damaged(int enemyAttack)
+    {
+        playerHP -= enemyAttack;
+        Debug.Log("Player残りHP：" + enemyAttack);
     }
 }

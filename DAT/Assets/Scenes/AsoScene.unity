@@ -737,9 +737,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1133045974}
-  - component: {fileID: 1133045973}
   - component: {fileID: 1133045975}
-  - component: {fileID: 1133045976}
   m_Layer: 0
   m_Name: CardManager
   m_TagString: Untagged
@@ -747,18 +745,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1133045973
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1133045972}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fa3d1bb34debc8543ae9913c3542bc6b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::heal_manager
 --- !u!4 &1133045974
 Transform:
   m_ObjectHideFlags: 0
@@ -786,20 +772,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9367e1b94f492d84bae0ce933f800fb2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::skill_manager
-  effectTime: 2
-  heal_amount: 20
---- !u!114 &1133045976
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1133045972}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 228dc30586b60714c8d707abdda13253, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::enhance_manager
+  healAmount: 20
+  enhanceAmount: 20
+  enhanceTime: 2
 --- !u!1 &1670599058
 GameObject:
   m_ObjectHideFlags: 0
@@ -1085,20 +1060,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94db6d51f1cd9cd42be5be4c854f6e5c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HandManager
-  CardPrefab:
-  - {fileID: 7658330321974320766, guid: 9ed9e078dd663094d9a1a3f1c15b0ee4, type: 3}
-  - {fileID: 5657519691800101273, guid: d9b1ac7829678bf4497b097a5013f39f, type: 3}
-  - {fileID: 6882976967852742939, guid: 369f08c463d0cfb4ead5bfbd034d5b25, type: 3}
-  - {fileID: 1438595595036919603, guid: 6cda70d58b0d06c45bc64210a25a81c7, type: 3}
+  cardPrefab:
+  - {fileID: 7406486630995092652, guid: 9ed9e078dd663094d9a1a3f1c15b0ee4, type: 3}
+  - {fileID: 5763137888559084960, guid: b2cc8fb615b58e14a85d56382f0cf06b, type: 3}
+  - {fileID: 5585788700737824934, guid: a6ddeddbc3acf2a47b9a23b4d0dbc371, type: 3}
+  - {fileID: 8004957121014659405, guid: 6cda70d58b0d06c45bc64210a25a81c7, type: 3}
   deckCardTrans:
   - {fileID: 1067738063}
   - {fileID: 2003891432}
   - {fileID: 2128992578}
   - {fileID: 530083447}
-  discardInd: 1
-  cursorPrefab: {fileID: 6920399734760689171, guid: 1ef226121f6b58d4aab246965a9d4c32, type: 3}
   cardUseId: 00000000000000000000000000000000
-  cardUse: 0
 --- !u!4 &2045648454
 Transform:
   m_ObjectHideFlags: 0
@@ -1199,5 +1171,5 @@ SceneRoots:
   - {fileID: 1670599059}
   - {fileID: 2045648454}
   - {fileID: 415766681}
-  - {fileID: 1133045974}
   - {fileID: 1002437478}
+  - {fileID: 1133045974}

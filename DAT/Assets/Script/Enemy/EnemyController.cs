@@ -33,7 +33,7 @@ public class EnemyController : MonoBehaviour
 
     public bool CanTakeDamage => playerDist < takeDamageDist;
 
-    
+    Component attack;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -43,6 +43,7 @@ public class EnemyController : MonoBehaviour
         // 見失う距離が発見距離よりも短い場合、見失う距離を発見距離と同じ大きさにします。
         if (loseDist < findDist)  loseDist = findDist;
 
+        attack = GetComponent<EnemyAttack>();
 
         // HPが0のとき、スポーンさせない <- これいる？　検討中    // 必ず一番最後に処理
     }

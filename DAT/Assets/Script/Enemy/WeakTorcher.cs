@@ -1,8 +1,9 @@
+using System.Collections;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.InputSystem.XR;
 
-public class WeakTorch : MonoBehaviour
+public class WeakTorcher : MonoBehaviour
 {
     [SerializeField] private float attackPower = 30f;   // 攻撃力
     [SerializeField] private float attackSec = 0.5f;    // 攻撃のクールダウン
@@ -33,15 +34,15 @@ public class WeakTorch : MonoBehaviour
 
     private void FixedUpdate()
     {
-        Attack();
+        CheckAttack();
         Animation();
     }
 
-    private void Attack()
+    private void CheckAttack()
     {
         if (controller.CanAttack)
         {
-            isAttack = true;
+            StartCoroutine(Attack());
         }
     }
 
@@ -69,5 +70,14 @@ public class WeakTorch : MonoBehaviour
 
         this.spr.sprite = idleSpr[timer / 5 % count];
         timer++;
-    }       
+    }
+    IEnumerator Attack()
+    {
+        float tmp = Random.Range(0, 15) / 10;
+        yield return new WaitForSeconds(tmp);
+        isAttack = true;
+
+        yield return new WaitForSeconds(attackSec);
+        isAttack = false;
+    }
 }

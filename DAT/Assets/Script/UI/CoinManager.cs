@@ -35,6 +35,11 @@ public class CoinManager : MonoBehaviour
 
     public void ReduceMoney(int amount)
     {
+        if(currentMoney < amount)
+        {
+            Debug.Log("購入できませんでした");
+            return;
+        }
         currentMoney -= amount;
         UpdateMoneyUI();
     }

@@ -7,7 +7,6 @@ public class EnemyController : MonoBehaviour
     [Header("Enemy")]
     [SerializeField] private float eHp = 100f;
 
-
     [Header("Behavior")]
     [SerializeField] private float findDist = 3f;    // player発見距離
     [SerializeField] private float loseDist = 4f;    // player追跡可能距離(見失う距離)
@@ -15,8 +14,6 @@ public class EnemyController : MonoBehaviour
     [SerializeField] private float e_moveSpeed = 1f; // 移動速度
     [SerializeField] private float stopDist = 1f;    // 停止位置
     [SerializeField] private float attackDist = 2f;  // 攻撃可能な距離
-    [SerializeField] private float attackSec = 0f;   // 攻撃のクールダウン
-
 
     [Header("State")]
     [SerializeField] private Vector2 ePos = new Vector2(0, 0);      // Enemy(このオブジェクト)の座標
@@ -27,11 +24,14 @@ public class EnemyController : MonoBehaviour
     [SerializeField] private bool isChasePlayer = false;
     [SerializeField] private bool canAttack = false;
 
-
     [Header("Config")]
+    [SerializeField] private float takeDamageDist = 1f;
     [SerializeField] private Transform player;
 
     public bool CanAttack => canAttack;     // 攻撃可能か　読み取り専用
+    public float Distance => playerDist;
+
+    public bool CanTakeDamage => playerDist < takeDamageDist;
 
     
 
@@ -85,6 +85,7 @@ public class EnemyController : MonoBehaviour
         playerPos = player.transform.position;
         ePos = transform.position;
         playerDist = Vector2.Distance(ePos, playerPos);
+        //playerDist = (playerPos - ePos).magnitude;
     }
 
     void LookPlayer()

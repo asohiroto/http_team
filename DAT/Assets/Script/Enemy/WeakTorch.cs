@@ -4,6 +4,9 @@ using UnityEngine.InputSystem.XR;
 
 public class WeakTorch : MonoBehaviour
 {
+    [SerializeField] private float attackPower = 30f;   // 攻撃力
+    [SerializeField] private float attackSec = 0.5f;    // 攻撃のクールダウン
+
     [SerializeField] private Sprite[] idleSpr;          // 待機時
     [SerializeField] private Sprite[] moveSpr;          // 移動時
     [SerializeField] private Sprite[] horAttackSpr;     // 横方向の攻撃
@@ -14,6 +17,8 @@ public class WeakTorch : MonoBehaviour
 
     private bool isMove = false;
     [SerializeField] private bool isAttack = false;
+
+    public float AttackDamage => attackPower;
 
     SpriteRenderer spr;
     EnemyController controller;
@@ -64,18 +69,5 @@ public class WeakTorch : MonoBehaviour
 
         this.spr.sprite = idleSpr[timer / 5 % count];
         timer++;
-    }
-
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-        if (isAttack)
-        {
-            if (other.CompareTag("Player"))
-            {
-                Debug.Log("attack!");
-                GameObject playerObj = other.gameObject;
-
-            }
-        }
-    }
+    }       
 }

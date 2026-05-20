@@ -38,7 +38,7 @@ public class skill_manager : MonoBehaviour
     }
 
 
-    public void Slash(int idx) // 強斬り
+    public void Slash(int ind) // 強斬り
     {
         hand.DisCard(ind);
     }

@@ -49,7 +49,7 @@ public class PlayerHealth : MonoBehaviour
 
     private void Die()
     {
-        Debug.Log("プレイヤーは倒れた！");
+        Debug.Log("死亡");
        
     }
 }

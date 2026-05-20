@@ -27,7 +27,7 @@ public class HandManager : MonoBehaviour
 
             newCard =Instantiate(cardPrefab[cardId], deckCardTrans[i]); // 初期手札の生成
 
-            ButtonListener(cardId, newCard);
+            ButtonListener(cardId, newCard, i);
 
             cardUseId[i] = cardId;
         }
@@ -38,62 +38,54 @@ public class HandManager : MonoBehaviour
     {
         int nextCardId = Random.Range(0, 4);
 
-        // 上部の数字キーによって破棄するカードを決定、カーソルを移動
+        // 【仮】上部の数字キーによって生成する場所を決定、あらたにカードをランダムで生成
         if (Keyboard.current.digit1Key.wasPressedThisFrame)
         {
-            DisCard(0);
-
             newCard = CardGenerate(nextCardId, 0);
             cardUseId[0] = nextCardId;
 
-            ButtonListener(nextCardId, newCard);
+            ButtonListener(nextCardId, newCard, 0);
         }
 
         if (Keyboard.current.digit2Key.wasPressedThisFrame)
         {
-            DisCard(1);
-
             newCard = CardGenerate(nextCardId, 1);
             cardUseId[1] = nextCardId;
 
-            ButtonListener(nextCardId, newCard);
+            ButtonListener(nextCardId, newCard, 1);
 
         }
         if (Keyboard.current.digit3Key.wasPressedThisFrame)
         {
-            DisCard(2);
-
             newCard = CardGenerate(nextCardId, 2);
             cardUseId[2] = nextCardId;
 
-            ButtonListener(nextCardId, newCard);
+            ButtonListener(nextCardId, newCard, 2);
 
         }
         if (Keyboard.current.digit4Key.wasPressedThisFrame)
         {
-            DisCard(3);
-
             newCard = CardGenerate(nextCardId, 3);
             cardUseId[3] = nextCardId;
 
-            ButtonListener(nextCardId, newCard);
+            ButtonListener(nextCardId, newCard, 3);
         }
 
     }
 
-    GameObject CardGenerate(int ran, int chan) // 特定のカードを捨て、新たにランダムなカードを生成する
+    GameObject CardGenerate(int ran, int chan) // 新たにランダムなカードを生成する
     {
         GameObject genCard =Instantiate(cardPrefab[ran], deckCardTrans[chan]); // カードを作る処理
 
         return genCard;
     }
 
-    void DisCard(int chan)
+    public void DisCard(int chan) // 手札を捨てる
     {
         Destroy(deckCardTrans[chan].GetChild(0).gameObject);
     }
 
-    void ButtonListener(int Ind, GameObject targetCard)
+    void ButtonListener(int ind, GameObject targetCard, int index) // ボタンの入力を検知する
     {
 
         Button btn = targetCard.GetComponentInChildren<Button>();
@@ -101,29 +93,29 @@ public class HandManager : MonoBehaviour
         // ボタンコンポーネントがついていなかった場合の安全装置
         if (btn == null) return;
 
-        switch (Ind) 
+        switch (ind) 
         {
             case 0:
 
-                btn.onClick.AddListener(skill.Enhance);
+                btn.onClick.AddListener(() => skill.Enhance(index)); // ボタンの入力を検知するリスナーを付与
 
                 break;
 
             case 1:
 
-                btn.onClick.AddListener(skill.Heal);
+                btn.onClick.AddListener(() => skill.Heal(index));
 
                 break;
 
             case 2:
 
-                btn.onClick.AddListener(skill.Slash);
+                btn.onClick.AddListener(() => skill.Slash(index));
 
                 break;
 
             case 3:
 
-                btn.onClick.AddListener(skill.FireBall);
+                btn.onClick.AddListener(() => skill.FireBall(index));
 
                 break;
         }

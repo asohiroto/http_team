@@ -45,6 +45,12 @@ public class PlayerController : MonoBehaviour
     public int playerHP = 100;
     public bool canAttack;
 
+    // アニメーションに使う変数
+    SpriteRenderer spriteRenderer;
+    [SerializeField] Sprite[] upSprite; // 上向き
+    [SerializeField] Sprite[] downSprite; // 下向き
+    [SerializeField] Sprite[] leftSprite; // 左向き
+    private int animIdx = 0;
 
     void Start()
     {
@@ -52,6 +58,7 @@ public class PlayerController : MonoBehaviour
         onDash = false;
         attackCdTimer = 0f;
         rb = GetComponent<Rigidbody2D>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     void FixedUpdate()
@@ -109,14 +116,30 @@ public class PlayerController : MonoBehaviour
         transform.position = currentPos;
 
         // プレイヤーの向き
-        // アタックしている間はその向きを向くようにする（これから実装する）
+        // アタックしている間はその向きを向くようになる
+        // x方向の向きを変更
         if(dirX > 0 && !onAttack)
         {
+            spriteRenderer.sprite = leftSprite[animIdx];
             transform.rotation = Quaternion.Euler(0, 0, 0);
         }
         else if (dirX < 0 && !onAttack)
         {
+            spriteRenderer.sprite = leftSprite[animIdx];
             transform.rotation = Quaternion.Euler(0, 180, 0);
+        }
+
+        // y方向の向きを変更
+        if(dirX == 0 && !onAttack)
+        {
+            if(dirY > 0)
+            {
+                spriteRenderer.sprite = upSprite[animIdx];
+            }
+            else if(dirY < 0)
+            {
+                spriteRenderer.sprite = downSprite[animIdx];
+            }
         }
 
         // 画面内制限

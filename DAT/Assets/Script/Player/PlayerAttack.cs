@@ -27,7 +27,7 @@ public class PlayerAttack : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D col)
     {
-        if (col.CompareTag("Enemy")) 
+        if (col.CompareTag("Enemy"))
         {
             enemyObj = col.gameObject;
             eneController = enemyObj.GetComponent<EnemyController>();

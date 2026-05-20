@@ -301,15 +301,18 @@ MonoBehaviour:
   eHp: 100
   findDist: 3
   loseDist: 4
+  alwaysFindPlayer: 0
   e_moveSpeed: 1
   stopDist: 1
   attackDist: 2
-  attackSec: 0
   ePos: {x: 0, y: 0}
   playerPos: {x: 0, y: 0}
   playerDist: 0
   isFindPlayer: 0
+  isLostPlayer: 0
+  isChasePlayer: 0
   canAttack: 0
+  takeDamageDist: 1
   player: {fileID: 1721966145}
 --- !u!1 &1305627009
 GameObject:
@@ -346,15 +349,18 @@ MonoBehaviour:
   eHp: 100
   findDist: 3
   loseDist: 4
+  alwaysFindPlayer: 0
   e_moveSpeed: 1
   stopDist: 1
   attackDist: 2
-  attackSec: 0
   ePos: {x: 0, y: 0}
   playerPos: {x: 0, y: 0}
   playerDist: 0
   isFindPlayer: 0
+  isLostPlayer: 0
+  isChasePlayer: 0
   canAttack: 0
+  takeDamageDist: 1
   player: {fileID: 1721966145}
 --- !u!61 &1305627011
 BoxCollider2D:
@@ -590,7 +596,7 @@ Transform:
   m_GameObject: {fileID: 1721966143}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.69, y: -1.93, z: 0}
+  m_LocalPosition: {x: -1.24, y: -2.82, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -618,6 +624,13 @@ MonoBehaviour:
   attackTime: 0.5
   attackCd: 0.5
   playerHP: 0
+  canAttack: 0
+  upSprite:
+  - {fileID: -3057998330571279762, guid: bf29f581365379b489ef412b503d3e39, type: 3}
+  downSprite:
+  - {fileID: 5737398224882651483, guid: bf29f581365379b489ef412b503d3e39, type: 3}
+  leftSprite:
+  - {fileID: 5013799040997709749, guid: bf29f581365379b489ef412b503d3e39, type: 3}
 --- !u!50 &1721966147
 Rigidbody2D:
   serializedVersion: 5

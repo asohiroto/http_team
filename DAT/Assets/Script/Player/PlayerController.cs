@@ -43,6 +43,8 @@ public class PlayerController : MonoBehaviour
     float attackDist = 2.0f;
 
     public int playerHP = 100;
+    public bool canAttack;
+
 
     void Start()
     {

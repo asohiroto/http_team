@@ -302,12 +302,14 @@ MonoBehaviour:
   findDist: 3
   loseDist: 4
   e_moveSpeed: 1
+  stopDist: 1
   attackDist: 2
   attackSec: 0
-  isFindPlayer: 0
   ePos: {x: 0, y: 0}
   playerPos: {x: 0, y: 0}
   playerDist: 0
+  isFindPlayer: 0
+  canAttack: 0
   player: {fileID: 1721966145}
 --- !u!1 &1305627009
 GameObject:
@@ -345,12 +347,14 @@ MonoBehaviour:
   findDist: 3
   loseDist: 4
   e_moveSpeed: 1
+  stopDist: 1
   attackDist: 2
   attackSec: 0
-  isFindPlayer: 0
   ePos: {x: 0, y: 0}
   playerPos: {x: 0, y: 0}
   playerDist: 0
+  isFindPlayer: 0
+  canAttack: 0
   player: {fileID: 1721966145}
 --- !u!61 &1305627011
 BoxCollider2D:
@@ -612,6 +616,7 @@ MonoBehaviour:
   dashTime: 0.1
   attackObj: {fileID: 132122364930665669, guid: 428bde71b707b3b49a63a27c01b204d2, type: 3}
   attackTime: 0.5
+  attackCd: 0.5
   playerHP: 0
 --- !u!50 &1721966147
 Rigidbody2D:

@@ -20,6 +20,8 @@ public class PlayerController : MonoBehaviour
     Vector3 moveDir;
     Rigidbody2D rb;
 
+    Vector3 lastDir = new Vector3(1, 0, 0);
+
     // ダッシュに使う変数
     float dashCd = 0.3f;
     float dashCdTimer = 0f;
@@ -28,10 +30,12 @@ public class PlayerController : MonoBehaviour
 
     // アタックに使う変数
     [SerializeField] GameObject attackObj;
-    [SerializeField] float attackTime = 0.5f;
+    [SerializeField] float attackTime = 2.0f;
     [SerializeField]float attackCd = 0.5f;
     float attackCdTimer;
     Vector3 attackDir;
+    float defaultFXRot = -90; // 攻撃エフェクトの方向補正
+    bool onAttack = false;
 
     GameObject[] attackTarget;
     GameObject closeTarget;
@@ -39,6 +43,8 @@ public class PlayerController : MonoBehaviour
     float attackDist = 2.0f;
 
     public int playerHP = 100;
+    public bool canAttack;
+
 
     void Start()
     {
@@ -46,7 +52,6 @@ public class PlayerController : MonoBehaviour
         onDash = false;
         attackCdTimer = 0f;
         rb = GetComponent<Rigidbody2D>();
-        attackTarget = GameObject.FindGameObjectsWithTag("Enemy");
     }
 
     void FixedUpdate()
@@ -75,20 +80,23 @@ public class PlayerController : MonoBehaviour
         // アタック
 
         attackCdTimer -= Time.deltaTime;
-        if (closeDist <= attackDist)
+        if (attackCdTimer <= 0)
         {
-            if (attackCdTimer <= 0)
-            {
-                StartCoroutine(Attack());
-                attackCdTimer = attackCd + attackTime;
-            }
+            StartCoroutine(Attack());
+            attackCdTimer = attackCd + attackTime;
         }
+        
     }
 
     // 移動処理(WASDのみ)
     void Move()
     {
         moveDir = new Vector3(dirX, dirY, 0);
+
+        if((moveDir.x != 0 || moveDir.y != 0) && !onAttack)
+        {
+            lastDir = moveDir;
+        }
 
         if (onDash)
         {
@@ -102,14 +110,14 @@ public class PlayerController : MonoBehaviour
 
         // プレイヤーの向き
         // アタックしている間はその向きを向くようにする（これから実装する）
-        if(dirX > 0)
+        if(dirX > 0 && !onAttack)
         {
             transform.rotation = Quaternion.Euler(0, 0, 0);
         }
-        else if (dirX < 0)
+        else if (dirX < 0 && !onAttack)
         {
             transform.rotation = Quaternion.Euler(0, 180, 0);
-        } // プレハブに変えます！
+        }
 
         // 画面内制限
         currentPos.x = Mathf.Clamp(currentPos.x, -xLimit, xLimit);
@@ -127,7 +135,7 @@ public class PlayerController : MonoBehaviour
     IEnumerator Dash()
     {
         onDash = true;
-        dashDir = moveDir;
+        dashDir = lastDir;
         yield return new WaitForSeconds(dashTime);
         onDash = false;
     }
@@ -135,11 +143,45 @@ public class PlayerController : MonoBehaviour
     // アタック処理
     IEnumerator Attack()
     {
+        float flipX = 0;
+        float rotZ = 0;
+        onAttack = true;
+        attackDir = lastDir;
+
         GameObject obj = Instantiate(attackObj, this.transform);
-        obj.transform.position = transform.position;
+        obj.transform.position = transform.position + attackDir * 0.5f;
+        
+        // 斬撃の方向を決定
+        if(attackDir.x > 0)
+        {
+            flipX = 0;
+        }
+        else if(attackDir.x < 0)
+        {
+            flipX = 180;
+        }
+
+        if (attackDir.x == 0)
+        {
+            // 真上・真下（左右の入力がないとき）
+            if (attackDir.y > 0) rotZ = 90 + defaultFXRot;
+            else if (attackDir.y < 0) rotZ = -90 + defaultFXRot;
+            else rotZ = 0 + defaultFXRot; // 入力なし（真横など）
+        }
+        else
+        {
+            // 斜め入力（左右の入力があるとき）
+            if (attackDir.y > 0) rotZ = 45 + defaultFXRot;
+            else if (attackDir.y < 0) rotZ = -45 + defaultFXRot;
+            else rotZ = 0 + defaultFXRot; // 真横
+        }
+
+        obj.transform.rotation = Quaternion.Euler(0, flipX, rotZ);
 
         yield return new WaitForSeconds(attackTime);
+
         Destroy(obj);
+        onAttack = false;
     }
 
     public void Damaged(int enemyAttack)

@@ -13,7 +13,7 @@ public class WeakTorch : MonoBehaviour
     [SerializeField] private int timer;
 
     private bool isMove = false;
-    private bool isAttack = false;
+    [SerializeField] private bool isAttack = false;
 
     SpriteRenderer spr;
     EnemyController controller;

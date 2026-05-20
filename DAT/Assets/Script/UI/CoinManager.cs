@@ -6,8 +6,8 @@ public class CoinManager : MonoBehaviour
     public static CoinManager instance;
 
     [Header("UI設定")]
-    [SerializeField] private TextMeshProUGUI moneyText; // ここにTMPをドラッグ&ドロップ
-    [SerializeField] private string unit = "G";      // 単位をインスペクターから変更可能に
+    [SerializeField] private TextMeshProUGUI moneyText; 
+    [SerializeField] private string unit = "G";      
 
 
     private int currentMoney = 0; // 所持金
@@ -33,7 +33,7 @@ public class CoinManager : MonoBehaviour
 
     }
 
-    public void ReduceMoney(int amount)
+    public void ReduceMoney(int amount)　//　所持金マイナス防止
     {
         if(currentMoney < amount)
         {

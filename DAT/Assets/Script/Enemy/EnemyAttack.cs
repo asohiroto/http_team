@@ -3,12 +3,28 @@ using UnityEngine;
 public class EnemyAttack : MonoBehaviour
 {
     PlayerController playerCtrl;
+    GameObject objParent;
+    Component  enemyCtrl;
+    private int attackPower = 0;
 
+    //private float attackPower => ;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        GameObject objParent = transform.parent.gameObject;
-        GameObject enemy = objParent.GetComponent<GameObject>();
+        objParent = transform.parent.gameObject;
+        Debug.Log(objParent);
+        enemyCtrl = objParent.GetComponent<EnemyController>();
+        Debug.Log(enemyCtrl);
+    }
+
+    private void FixedUpdate()
+    {
+        
+    }
+
+    public void AttackDamage(int dmg)
+    {
+        attackPower = dmg;
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -18,7 +34,7 @@ public class EnemyAttack : MonoBehaviour
             Debug.Log("attack!");
             GameObject playerObj = other.gameObject;
             playerCtrl = playerObj.GetComponent<PlayerController>();
-            playerCtrl.Damaged(10);
+            playerCtrl.Damaged(attackPower);
         }
     }
 }

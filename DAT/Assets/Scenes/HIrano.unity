@@ -211,8 +211,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 4, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
-  m_Children:
-  - {fileID: 1891258937}
+  m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!50 &215612180
@@ -261,15 +260,21 @@ MonoBehaviour:
   e_moveSpeed: 1
   stopDist: 1
   attackDist: 2
+  attackPower: 30
+  attackSec: 1
   ePos: {x: 0, y: 0}
   playerPos: {x: 0, y: 0}
+  nowDir: {x: 0, y: 0}
   playerDist: 0
   isFindPlayer: 0
   isLostPlayer: 0
   isChasePlayer: 0
   canAttack: 0
+  isStop: 0
+  IsAttack: 0
   takeDamageDist: 1
   player: {fileID: 889639629}
+  attackCol: {fileID: 1675109570440110942, guid: eba50ab512d771843972f73eaed76870, type: 3}
 --- !u!61 &215612182
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -328,8 +333,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 753e5b8ec90c37443b5ffd2f41abd9ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WeakArcher
-  attackPower: 30
-  attackSec: 0
+  dirX: 0
+  dirY: 0
+  isLookRight: 1
+  lookDir: 0
+  lookPos: {x: 0, y: 0, z: 0}
   idleSpr:
   - {fileID: -4230181108591323607, guid: 9001e956a2356c2409e4d7ed91e03382, type: 3}
   - {fileID: 1276301746398581189, guid: 9001e956a2356c2409e4d7ed91e03382, type: 3}
@@ -338,9 +346,34 @@ MonoBehaviour:
   - {fileID: -7369122931189845133, guid: 9001e956a2356c2409e4d7ed91e03382, type: 3}
   - {fileID: 914313290774012156, guid: 9001e956a2356c2409e4d7ed91e03382, type: 3}
   - {fileID: -7114989445226215597, guid: 9001e956a2356c2409e4d7ed91e03382, type: 3}
-  moveSpr: []
-  horAttackSpr: []
-  verAttackSpr: []
+  moveSpr:
+  - {fileID: 7099923657110077353, guid: 9001e956a2356c2409e4d7ed91e03382, type: 3}
+  - {fileID: -1649346297522608045, guid: 9001e956a2356c2409e4d7ed91e03382, type: 3}
+  - {fileID: -7044588005900942876, guid: 9001e956a2356c2409e4d7ed91e03382, type: 3}
+  - {fileID: -7250923013278643159, guid: 9001e956a2356c2409e4d7ed91e03382, type: 3}
+  - {fileID: -759784588031407353, guid: 9001e956a2356c2409e4d7ed91e03382, type: 3}
+  - {fileID: -462455619930006344, guid: 9001e956a2356c2409e4d7ed91e03382, type: 3}
+  horAttackSpr:
+  - {fileID: -4045980632669398402, guid: 9001e956a2356c2409e4d7ed91e03382, type: 3}
+  - {fileID: 2400894962720278677, guid: 9001e956a2356c2409e4d7ed91e03382, type: 3}
+  - {fileID: 3118926007335269732, guid: 9001e956a2356c2409e4d7ed91e03382, type: 3}
+  - {fileID: 9113646813091510599, guid: 9001e956a2356c2409e4d7ed91e03382, type: 3}
+  - {fileID: 6248227852262120436, guid: 9001e956a2356c2409e4d7ed91e03382, type: 3}
+  - {fileID: 6084245027050260555, guid: 9001e956a2356c2409e4d7ed91e03382, type: 3}
+  upperAttackSpr:
+  - {fileID: -2997398667913583680, guid: 9001e956a2356c2409e4d7ed91e03382, type: 3}
+  - {fileID: -5878108617965649021, guid: 9001e956a2356c2409e4d7ed91e03382, type: 3}
+  - {fileID: 4362545556120400592, guid: 9001e956a2356c2409e4d7ed91e03382, type: 3}
+  - {fileID: 5867112988911455960, guid: 9001e956a2356c2409e4d7ed91e03382, type: 3}
+  - {fileID: -2701350933335208944, guid: 9001e956a2356c2409e4d7ed91e03382, type: 3}
+  - {fileID: -6788512504216807580, guid: 9001e956a2356c2409e4d7ed91e03382, type: 3}
+  lowerAttackSpr:
+  - {fileID: -6152072047719948750, guid: 9001e956a2356c2409e4d7ed91e03382, type: 3}
+  - {fileID: -7947289817204367736, guid: 9001e956a2356c2409e4d7ed91e03382, type: 3}
+  - {fileID: 6443348011037700053, guid: 9001e956a2356c2409e4d7ed91e03382, type: 3}
+  - {fileID: -4146183439964304651, guid: 9001e956a2356c2409e4d7ed91e03382, type: 3}
+  - {fileID: 9055524857887277902, guid: 9001e956a2356c2409e4d7ed91e03382, type: 3}
+  - {fileID: 8493538717480454915, guid: 9001e956a2356c2409e4d7ed91e03382, type: 3}
   timer: 0
   isAttack: 0
 --- !u!1 &889639626
@@ -380,11 +413,17 @@ MonoBehaviour:
   xLimit: 8.5
   yLimit: 4.7
   dashTime: 0.1
-  attackObj: {fileID: 0}
+  attackObj: {fileID: 1551545945}
   attackTime: 0.5
   attackCd: 0.5
   playerHP: 100
   canAttack: 0
+  upSprite:
+  - {fileID: 8493538717480454915, guid: 9001e956a2356c2409e4d7ed91e03382, type: 3}
+  downSprite:
+  - {fileID: 8493538717480454915, guid: 9001e956a2356c2409e4d7ed91e03382, type: 3}
+  leftSprite:
+  - {fileID: 8493538717480454915, guid: 9001e956a2356c2409e4d7ed91e03382, type: 3}
 --- !u!212 &889639628
 SpriteRenderer:
   serializedVersion: 2
@@ -456,7 +495,8 @@ Transform:
   m_LocalPosition: {x: -2.23, y: -1.92, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
-  m_Children: []
+  m_Children:
+  - {fileID: 1551545946}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &889639630
@@ -642,7 +682,7 @@ MonoBehaviour:
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
   m_Version: 2
---- !u!1 &1891258936
+--- !u!1 &1551545945
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -650,37 +690,37 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 1891258937}
-  - component: {fileID: 1891258938}
+  - component: {fileID: 1551545946}
+  - component: {fileID: 1551545947}
   m_Layer: 0
-  m_Name: AttackCol
+  m_Name: attackObj
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &1891258937
+--- !u!4 &1551545946
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1891258936}
+  m_GameObject: {fileID: 1551545945}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.5, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 215612179}
+  m_Father: {fileID: 889639629}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!61 &1891258938
+--- !u!61 &1551545947
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1891258936}
+  m_GameObject: {fileID: 1551545945}
   m_Enabled: 1
   serializedVersion: 3
   m_Density: 1
@@ -704,7 +744,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0

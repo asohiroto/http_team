@@ -81,19 +81,19 @@ public class HandManager : MonoBehaviour
 
     }
 
-    GameObject CardGenerate(int ran, int chan) // 特定のカードを捨て、新たにランダムなカードを生成する
+    GameObject CardGenerate(int ran, int chan) // 新たにランダムなカードを生成する
     {
         GameObject genCard =Instantiate(cardPrefab[ran], deckCardTrans[chan]); // カードを作る処理
 
         return genCard;
     }
 
-    void DisCard(int chan)
+    public void DisCard(int chan) // 手札を捨てる
     {
         Destroy(deckCardTrans[chan].GetChild(0).gameObject);
     }
 
-    void ButtonListener(int Ind, GameObject targetCard)
+    void ButtonListener(int Ind, GameObject targetCard) // ボタンの入力を検知する
     {
 
         Button btn = targetCard.GetComponentInChildren<Button>();
@@ -105,7 +105,7 @@ public class HandManager : MonoBehaviour
         {
             case 0:
 
-                btn.onClick.AddListener(skill.Enhance);
+                btn.onClick.AddListener(skill.Enhance); // ボタンの入力を検知するリスナーを付与
 
                 break;
 

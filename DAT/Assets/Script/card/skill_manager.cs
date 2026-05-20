@@ -5,6 +5,7 @@ using UnityEngine.UI;
 public class skill_manager : MonoBehaviour
 {
     player_manager_kari player;
+    HandManager hand;
 
     [SerializeField] int healAmount;
     [SerializeField] int enhanceAmount;
@@ -16,6 +17,7 @@ public class skill_manager : MonoBehaviour
     void Start()
     {
         player = GameObject.Find("Square").GetComponent<player_manager_kari>();
+        hand = GameObject.Find("HandManager").GetComponent<HandManager>();
         
     }
 

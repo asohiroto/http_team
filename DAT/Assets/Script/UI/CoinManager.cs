@@ -9,6 +9,7 @@ public class CoinManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI moneyText; // ここにTMPをドラッグ&ドロップ
     [SerializeField] private string unit = "G";      // 単位をインスペクターから変更可能に
 
+
     private int currentMoney = 0; // 所持金
 
     private void Awake()
@@ -21,10 +22,25 @@ public class CoinManager : MonoBehaviour
         UpdateMoneyUI();
     }
 
+
+
     // お金を追加する関数（コインから呼ばれる）
     public void AddMoney(int amount)
     {
+
         currentMoney += amount;
+        UpdateMoneyUI();
+
+    }
+
+    public void ReduceMoney(int amount)
+    {
+        if(currentMoney < amount)
+        {
+            Debug.Log("購入できませんでした");
+            return;
+        }
+        currentMoney -= amount;
         UpdateMoneyUI();
     }
 
@@ -34,7 +50,7 @@ public class CoinManager : MonoBehaviour
         if (moneyText != null)
         {
             // 「所持金：100円」の形式で表示
-            moneyText.text = $"Money: {currentMoney} G";
+            moneyText.text = $"Money: {currentMoney} ";
         }
     }
 }

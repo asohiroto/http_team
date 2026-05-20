@@ -134,7 +134,7 @@ GameObject:
   - component: {fileID: 215612180}
   - component: {fileID: 215612182}
   m_Layer: 0
-  m_Name: WeakTorch
+  m_Name: WeakTorcher
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -384,6 +384,7 @@ MonoBehaviour:
   attackTime: 0.5
   attackCd: 0.5
   playerHP: 100
+  canAttack: 0
 --- !u!212 &889639628
 SpriteRenderer:
   serializedVersion: 2

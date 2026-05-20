@@ -922,6 +922,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Circle (102)
       objectReference: {fileID: 0}
+    - target: {fileID: 8013689859521678677, guid: ebe8d812ec3019f4cb039ab37cdcdf12, type: 3}
+      propertyPath: m_Color.g
+      value: 0.67133105
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -978,6 +982,10 @@ PrefabInstance:
     - target: {fileID: 7339750056887380402, guid: ebe8d812ec3019f4cb039ab37cdcdf12, type: 3}
       propertyPath: m_Name
       value: Circle (101)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8013689859521678677, guid: ebe8d812ec3019f4cb039ab37cdcdf12, type: 3}
+      propertyPath: m_Color.g
+      value: 0.7531516
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1113,7 +1121,6 @@ MonoBehaviour:
   e_moveSpeed: 1
   stopDist: 1
   attackDist: 2
-  attackSec: 0
   ePos: {x: 0, y: 0}
   playerPos: {x: 0, y: 0}
   playerDist: 0
@@ -1121,6 +1128,7 @@ MonoBehaviour:
   isLostPlayer: 0
   isChasePlayer: 0
   canAttack: 0
+  takeDamageDist: 1
   player: {fileID: 431211157}
 --- !u!212 &1421815598
 SpriteRenderer:
@@ -1680,6 +1688,18 @@ PrefabInstance:
     - target: {fileID: 7339750056887380402, guid: ebe8d812ec3019f4cb039ab37cdcdf12, type: 3}
       propertyPath: m_Name
       value: Circle (100)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8013689859521678677, guid: ebe8d812ec3019f4cb039ab37cdcdf12, type: 3}
+      propertyPath: m_Color.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8013689859521678677, guid: ebe8d812ec3019f4cb039ab37cdcdf12, type: 3}
+      propertyPath: m_Color.g
+      value: 0.716258
+      objectReference: {fileID: 0}
+    - target: {fileID: 8013689859521678677, guid: ebe8d812ec3019f4cb039ab37cdcdf12, type: 3}
+      propertyPath: m_Color.r
+      value: 0.972549
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

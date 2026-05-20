@@ -24,7 +24,7 @@ public class CoinManager : MonoBehaviour
 
 
 
-    // お金を追加する関数（コインから呼ばれる）
+    // 所持金増加
     public void AddMoney(int amount)
     {
 
@@ -44,7 +44,7 @@ public class CoinManager : MonoBehaviour
         UpdateMoneyUI();
     }
 
-    // 表示を更新する
+    // 所持金表示更新
     private void UpdateMoneyUI()
     {
         if (moneyText != null)

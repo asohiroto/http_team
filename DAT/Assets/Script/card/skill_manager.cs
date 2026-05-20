@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
+using System.Threading.Tasks;
 
 public class skill_manager : MonoBehaviour
 {
@@ -12,13 +13,13 @@ public class skill_manager : MonoBehaviour
     [SerializeField] int enhanceTime; // 効果時間
     int time = 0;
     int enhanceFlag = 0;
-    
+
 
     void Start()
     {
         player = GameObject.Find("Square").GetComponent<player_manager_kari>();
         hand = GameObject.Find("HandManager").GetComponent<HandManager>();
-        
+
     }
 
     // Update is called once per frame
@@ -26,7 +27,7 @@ public class skill_manager : MonoBehaviour
     {
         time++;
 
-        if(enhanceFlag == 1 && time > enhanceTime * 60) // 効果時間経過後、攻撃力を最初の状態に戻す
+        if (enhanceFlag == 1 && time > enhanceTime * 60) // 効果時間経過後、攻撃力を最初の状態に戻す
         {
             player.power = player.firstPower;
             Debug.Log("Power : " + player.power);
@@ -43,32 +44,72 @@ public class skill_manager : MonoBehaviour
         hand.DisCard(ind);
     }
 
-    public void Heal(int ind) // 回復
+    public async void Heal(int ind) // 回復
     {
-        if(player.hp > player.maxHp - healAmount) // 回復して最大HPを超える場合は、最大HPまで回復
+        int waitFrames = 0;
+
+        while (!Mouse.current.rightButton.wasPressedThisFrame && waitFrames < 120)
         {
-            player.hp = player.maxHp;
+            waitFrames++;
+
+            await Task.Yield();
+        }
+
+
+        if (Mouse.current.rightButton.wasPressedThisFrame)
+        {
+            if (player.hp > player.maxHp - healAmount) // 回復して最大HPを超える場合は、最大HPまで回復
+            {
+                player.hp = player.maxHp;
+            }
+            else
+            {
+                player.hp += healAmount;
+            }
+
+            hand.DisCard(ind);
+
+            Debug.Log(player.hp);
         }
         else
         {
-            player.hp += healAmount;
+            Debug.Log("スキップしたよ");
         }
 
-        hand.DisCard(ind);
-
-        Debug.Log(player.hp);
     }
 
-    public void Enhance(int ind) // 強化
+    public async Task Enhance(int ind) // 強化
     {
-        player.power += enhanceAmount;
+        int waitTimer = 0;
 
-        enhanceFlag = 1;
-        time = 0;
+        while (!Mouse.current.rightButton.wasPressedThisFrame && waitTimer < 120)
+        {
+            waitTimer++;
 
-        hand.DisCard(ind);
+            await Task.Yield();
+        }
 
-        Debug.Log(player.power);
+        if (Mouse.current.rightButton.wasPressedThisFrame)
+        {
+            if (enhanceFlag == 0)
+            {
+                player.power += enhanceAmount;
+
+                enhanceFlag = 1;
+                time = 0;
+
+                hand.DisCard(ind);
+
+            }
+
+            Debug.Log("power = "+ player.power);
+
+        }
+        else
+        {
+            Debug.Log("スキップしたよ");
+        }
+
     }
 
     public void FireBall(int ind) // 火の玉を飛ばす

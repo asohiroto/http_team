@@ -305,15 +305,21 @@ MonoBehaviour:
   e_moveSpeed: 1
   stopDist: 1
   attackDist: 2
+  attackPower: 30
+  attackSec: 1
   ePos: {x: 0, y: 0}
   playerPos: {x: 0, y: 0}
+  nowDir: {x: 0, y: 0}
   playerDist: 0
   isFindPlayer: 0
   isLostPlayer: 0
   isChasePlayer: 0
   canAttack: 0
+  isStop: 0
+  IsAttack: 0
   takeDamageDist: 1
   player: {fileID: 1721966145}
+  attackCol: {fileID: 0}
 --- !u!1 &1305627009
 GameObject:
   m_ObjectHideFlags: 0
@@ -353,15 +359,21 @@ MonoBehaviour:
   e_moveSpeed: 1
   stopDist: 1
   attackDist: 2
+  attackPower: 30
+  attackSec: 1
   ePos: {x: 0, y: 0}
   playerPos: {x: 0, y: 0}
+  nowDir: {x: 0, y: 0}
   playerDist: 0
   isFindPlayer: 0
   isLostPlayer: 0
   isChasePlayer: 0
   canAttack: 0
+  isStop: 0
+  IsAttack: 0
   takeDamageDist: 1
   player: {fileID: 1721966145}
+  attackCol: {fileID: 0}
 --- !u!61 &1305627011
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -623,7 +635,7 @@ MonoBehaviour:
   attackObj: {fileID: 132122364930665669, guid: 428bde71b707b3b49a63a27c01b204d2, type: 3}
   attackTime: 0.5
   attackCd: 0.5
-  playerHP: 0
+  playerHP: 100
   canAttack: 0
   upSprite:
   - {fileID: -3057998330571279762, guid: bf29f581365379b489ef412b503d3e39, type: 3}

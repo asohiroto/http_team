@@ -65,6 +65,11 @@ public class PlayerController : MonoBehaviour
     {
         Move();
         InputManager();
+
+        if(playerHP <= 0)
+        {
+            Destroy(gameObject);
+        }
     }
 
     void InputManager()

@@ -904,6 +904,7 @@ MonoBehaviour:
   attackDist: 2
   attackPower: 30
   attackSec: 1
+  attackCd: 1.4
   ePos: {x: 0, y: 0}
   playerPos: {x: 0, y: 0}
   nowDir: {x: 0, y: 0}
@@ -1545,7 +1546,6 @@ SceneRoots:
   - {fileID: 4627422}
   - {fileID: 5851709496818846733}
   - {fileID: 1915156634}
-  - {fileID: 331700297}
   - {fileID: 1962685673}
   - {fileID: 1421815599}
   - {fileID: 797732820796956076}
@@ -1555,3 +1555,4 @@ SceneRoots:
   - {fileID: 8051992357534921131}
   - {fileID: 2001363934}
   - {fileID: 870552921}
+  - {fileID: 331700297}

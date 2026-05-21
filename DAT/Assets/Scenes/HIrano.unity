@@ -165,11 +165,11 @@ MonoBehaviour:
   maxPlayerHP: 100
   canAttack: 0
   upSprite:
-  - {fileID: 8493538717480454915, guid: 9001e956a2356c2409e4d7ed91e03382, type: 3}
+  - {fileID: 1448252480329919801, guid: bf29f581365379b489ef412b503d3e39, type: 3}
   downSprite:
-  - {fileID: 8493538717480454915, guid: 9001e956a2356c2409e4d7ed91e03382, type: 3}
+  - {fileID: 1448252480329919801, guid: bf29f581365379b489ef412b503d3e39, type: 3}
   leftSprite:
-  - {fileID: 8493538717480454915, guid: 9001e956a2356c2409e4d7ed91e03382, type: 3}
+  - {fileID: 1448252480329919801, guid: bf29f581365379b489ef412b503d3e39, type: 3}
 --- !u!212 &889639628
 SpriteRenderer:
   serializedVersion: 2
@@ -219,7 +219,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
+  m_Sprite: {fileID: 1448252480329919801, guid: bf29f581365379b489ef412b503d3e39, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -283,7 +283,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 1.92, y: 1.92}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -653,17 +653,21 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 889639629}
+    - target: {fileID: 3519663904491937797, guid: 2d1c3b6a0eb65ed4695648845d0b7a03, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -4230181108591323607, guid: 9001e956a2356c2409e4d7ed91e03382, type: 3}
     - target: {fileID: 5217337587667751154, guid: 2d1c3b6a0eb65ed4695648845d0b7a03, type: 3}
       propertyPath: m_Name
       value: WeakTorcherr
       objectReference: {fileID: 0}
     - target: {fileID: 6229083390875600753, guid: 2d1c3b6a0eb65ed4695648845d0b7a03, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.36507
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6229083390875600753, guid: 2d1c3b6a0eb65ed4695648845d0b7a03, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.10467
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6229083390875600753, guid: 2d1c3b6a0eb65ed4695648845d0b7a03, type: 3}
       propertyPath: m_LocalPosition.z
@@ -695,6 +699,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6229083390875600753, guid: 2d1c3b6a0eb65ed4695648845d0b7a03, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6229083390875600753, guid: 2d1c3b6a0eb65ed4695648845d0b7a03, type: 3}
+      propertyPath: m_ConstrainProportionsScale
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

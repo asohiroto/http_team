@@ -13,6 +13,8 @@ public class PlayerAttack : MonoBehaviour
     int idx = 0;
     SpriteRenderer spriteRenderer;
 
+    int attackDamage;
+
     // アタックエフェクトのアニメーションと当たり判定の管理------------------
 
     void Start()
@@ -22,11 +24,12 @@ public class PlayerAttack : MonoBehaviour
         playerController = playerObj.GetComponent<PlayerController>();
         
         StartCoroutine(AttackAnim());
+        
     }
 
     void Update()
     {
-        
+        attackDamage = playerController.attackDamage;
     }
 
     void OnTriggerEnter2D(Collider2D col)
@@ -35,8 +38,7 @@ public class PlayerAttack : MonoBehaviour
         {
             enemyObj = col.gameObject;
             eneController = enemyObj.GetComponent<EnemyController>();
-            //eneController.EnemyDamaged(playerObj.attackDamage);
-            // 途中ーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー
+            eneController.EnemyDamaged(attackDamage);
         }
     }
 

@@ -64,6 +64,7 @@ public class PlayerController : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
         playerHP = maxPlayerHP;
         attackDamage = defaultAttackDamage;
+        Application.targetFrameRate = 60;
     }
 
     void FixedUpdate()

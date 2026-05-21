@@ -203,13 +203,17 @@ public class WeakTorcher : MonoBehaviour
         isAttack = true;
         isAttackAnime = true;
         enemyCtrl.IsAttack = true;
-        GameObject obj = Instantiate(enemyCtrl.AttackCol, this.transform);
+        float attackTime = enemyCtrl.AttackSec / 2;     // 攻撃のアニメーションと合わせるため
+        yield return new WaitForSeconds(attackTime);
+
+        GameObject obj = Instantiate(enemyCtrl.AttackCol, this.transform);      // プレハブ呼び出し
         obj.transform.position = enemyCtrl.AttackDist * 0.5f * lookPos + enemyCtrl.transform.position;     // 攻撃距離に合わせる
 
         EnemyAttack attack = obj.GetComponent<EnemyAttack>();
+
         attack.AttackDamage(enemyCtrl.AttackPower);         // マジでキモイ　今すぐに消したい
 
-        yield return new WaitForSeconds(enemyCtrl.AttackSec);
+        yield return new WaitForSeconds(attackTime);
         Destroy(obj);
         isAttackAnime = false;
 

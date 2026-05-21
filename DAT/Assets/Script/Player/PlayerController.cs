@@ -33,6 +33,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float attackTime = 2.0f;
     [SerializeField]float attackCd = 0.5f;
     float attackCdTimer;
+    public int defaultAttackDamage = 5;
+    public int attackDamage = 5;
     Vector3 attackDir;
     float defaultFXRot = -90; // 攻撃エフェクトの方向補正
     bool onAttack = false;
@@ -43,6 +45,7 @@ public class PlayerController : MonoBehaviour
     float attackDist = 2.0f;
 
     public int playerHP = 100;
+    public int maxPlayerHP = 100;
     public bool canAttack;
 
     // アニメーションに使う変数
@@ -59,6 +62,8 @@ public class PlayerController : MonoBehaviour
         attackCdTimer = 0f;
         rb = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        playerHP = maxPlayerHP;
+        attackDamage = defaultAttackDamage;
     }
 
     void FixedUpdate()

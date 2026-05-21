@@ -4,8 +4,9 @@ using UnityEngine;
 public class PlayerAttack : MonoBehaviour
 {
     EnemyController eneController;
-    int attackDamage = 1;
+    PlayerController playerController;
     GameObject enemyObj;
+    GameObject playerObj;
 
     [SerializeField] Sprite[] attackSprite;
     float animTime = 0.05f;
@@ -17,6 +18,9 @@ public class PlayerAttack : MonoBehaviour
     void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
+        playerObj = GameObject.Find("Player");
+        playerController = playerObj.GetComponent<PlayerController>();
+        
         StartCoroutine(AttackAnim());
     }
 
@@ -31,7 +35,8 @@ public class PlayerAttack : MonoBehaviour
         {
             enemyObj = col.gameObject;
             eneController = enemyObj.GetComponent<EnemyController>();
-            eneController.EnemyDamaged(attackDamage);
+            //eneController.EnemyDamaged(playerObj.attackDamage);
+            // 途中ーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー
         }
     }
 

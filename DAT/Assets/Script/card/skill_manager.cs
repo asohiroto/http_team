@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 public class skill_manager : MonoBehaviour
 {
-    player_manager_kari player;
+    PlayerController player;
     HandManager hand;
 
     [SerializeField] int healAmount; // 回復量
@@ -17,7 +17,7 @@ public class skill_manager : MonoBehaviour
 
     void Start()
     {
-        player = GameObject.Find("Square").GetComponent<player_manager_kari>();
+        player = GameObject.Find("Player").GetComponent<PlayerController>();
         hand = GameObject.Find("HandManager").GetComponent<HandManager>();
 
     }
@@ -29,8 +29,8 @@ public class skill_manager : MonoBehaviour
 
         if (enhanceFlag == 1 && time > enhanceTime * 60) // 効果時間経過後、攻撃力を最初の状態に戻す
         {
-            player.power = player.firstPower;
-            Debug.Log("Power : " + player.power);
+            player.attackDamage = player.defaultAttackDamage;
+            Debug.Log("Power : " + player.attackDamage);
 
             enhanceFlag = 0;
         }
@@ -58,18 +58,18 @@ public class skill_manager : MonoBehaviour
 
         if (Mouse.current.rightButton.wasPressedThisFrame)
         {
-            if (player.hp > player.maxHp - healAmount) // 回復して最大HPを超える場合は、最大HPまで回復
+            if (player.playerHP > player.maxPlayerHP - healAmount) // 回復して最大HPを超える場合は、最大HPまで回復
             {
-                player.hp = player.maxHp;
+                player.playerHP = player.maxPlayerHP;
             }
             else
             {
-                player.hp += healAmount;
+                player.playerHP += healAmount;
             }
 
             hand.DisCard(ind);
 
-            Debug.Log(player.hp);
+            Debug.Log(player.playerHP);
         }
         else
         {
@@ -93,7 +93,7 @@ public class skill_manager : MonoBehaviour
         {
             if (enhanceFlag == 0)
             {
-                player.power += enhanceAmount;
+                player.attackDamage += enhanceAmount;
 
                 enhanceFlag = 1;
                 time = 0;
@@ -102,7 +102,7 @@ public class skill_manager : MonoBehaviour
 
             }
 
-            Debug.Log("power = "+ player.power);
+            Debug.Log("power = "+ player.attackDamage);
 
         }
         else

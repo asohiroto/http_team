@@ -17,11 +17,6 @@ public class EnemyAttack : MonoBehaviour
         Debug.Log(enemyCtrl);
     }
 
-    private void FixedUpdate()
-    {
-        
-    }
-
     public void AttackDamage(int dmg)
     {
         attackPower = dmg;

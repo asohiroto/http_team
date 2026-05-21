@@ -211,8 +211,6 @@ public class WeakTorcher : MonoBehaviour
 
         EnemyAttack attack = obj.GetComponent<EnemyAttack>();
 
-        attack.AttackDamage(enemyCtrl.AttackPower);         // マジでキモイ　今すぐに消したい
-
         yield return new WaitForSeconds(attackTime);
         Destroy(obj);
         isAttackAnime = false;

@@ -4,7 +4,7 @@ public class EnemyAttack : MonoBehaviour
 {
     PlayerController playerCtrl;
     GameObject objParent;
-    Component  enemyCtrl;
+    EnemyController enemyCtrl;
     private int attackPower = 0;
 
     //private float attackPower => ;
@@ -29,7 +29,7 @@ public class EnemyAttack : MonoBehaviour
             Debug.Log("attack!");
             GameObject playerObj = other.gameObject;
             playerCtrl = playerObj.GetComponent<PlayerController>();
-            playerCtrl.Damaged(attackPower);
+            playerCtrl.Damaged(enemyCtrl.AttackPower);
         }
     }
 }

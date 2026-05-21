@@ -1,0 +1,11 @@
+#include <stdio.h>
+
+void welcome(void)
+{
+    printf("ñ`åØÇÃê¢äEÇ÷ÅAÇÊÇ§Ç±ÇªÅI");
+}
+
+int main(void)
+{
+    welcome();
+}

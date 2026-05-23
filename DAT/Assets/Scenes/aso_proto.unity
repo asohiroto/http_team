@@ -1755,6 +1755,8 @@ MonoBehaviour:
   enhanceAmount: 2
   enhanceTime: 2
   waitTime: 2
+  discardInd1: -1
+  discardInd2: -1
 --- !u!4 &1942110015
 Transform:
   m_ObjectHideFlags: 0

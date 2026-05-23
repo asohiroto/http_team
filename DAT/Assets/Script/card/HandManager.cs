@@ -12,7 +12,7 @@ public class HandManager : MonoBehaviour
     [SerializeField] public Transform[] deckCardTrans; // カードの生成場所
 
     int cardId = 0; // 生成するカードのID
-    public int[] cardUseId = new int[4]; // 配列に保存されているカードIDを保存する配列
+    public int[] cardUseId = new int[10]; // 配列に保存されているカードIDを保存する配列
 
     skill_manager skill;
 
@@ -63,10 +63,16 @@ public class HandManager : MonoBehaviour
 
     }
 
-
     public void DisCard(int chan) // 手札を捨てる
     {
-        Destroy(deckCardTrans[chan].GetChild(0).gameObject);
+        if (deckCardTrans[chan].childCount < 0)
+        {
+            Debug.Log("破壊対象が存在しません");
+        }
+        else
+        {
+            Destroy(deckCardTrans[chan].GetChild(0).gameObject);
+        }
     }
 
     public void ButtonListener(int id, GameObject targetCard, int index) // ボタンの入力を検知する
@@ -99,6 +105,18 @@ public class HandManager : MonoBehaviour
             case 3:
 
                 btn.onClick.AddListener(async () => await skill.FireBall(index));
+
+                break;
+
+            case 4:
+
+                btn.onClick.AddListener(async () => await skill.FireSlash(index));
+
+                break;
+
+            case 5:
+
+                btn.onClick.AddListener(async () => await skill.HyperMode(index));
 
                 break;
         }

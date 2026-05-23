@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 using System.Threading.Tasks;
+using Unity.VisualScripting;
 
 public class skill_manager : MonoBehaviour
 {
@@ -16,6 +17,9 @@ public class skill_manager : MonoBehaviour
 
     int time = 0;
     int enhanceFlag = 0; // 強化状態の判定
+
+    public int discardInd1 = -1;
+    public int discardInd2 = -1;
 
     void Start()
     {
@@ -90,20 +94,30 @@ public class skill_manager : MonoBehaviour
         {
             int craftResult = craft.CraftItems(craft.material1, cardID);
 
-            for (int i = 0; i < 4; i++)
-            {
-                if (hand.deckCardTrans[i].childCount == 0)
-                {
-                    GameObject obj = hand.CardGenerate(craftResult, i);
-                    hand.ButtonListener(craftResult, obj, i);
+            discardInd2 = ind;
+            craft.craftFrag = 0;
 
-                    break;
-                }
+            if (craftResult < 0)
+            {
+                return;
             }
+
+            hand.DisCard(discardInd1);
+            hand.DisCard(discardInd2);
+
+            if (discardInd1 > discardInd2)
+            {
+                discardInd1 = discardInd2;
+            }
+
+            GameObject obj = hand.CardGenerate(craftResult, discardInd1);
+            hand.ButtonListener(craftResult, obj, discardInd1);
         }
 
         if (craft.craftFrag == 1) // クラフト待機状態なら、IDを保存
         {
+            discardInd1 = ind;
+
             craft.SettingMaterial1(cardID);
         }
     }
@@ -149,20 +163,30 @@ public class skill_manager : MonoBehaviour
         {
             int craftResult = craft.CraftItems(craft.material1, cardID);
 
-            for (int i = 0; i < 4; i++)
-            {
-                if (hand.deckCardTrans[i].childCount == 0)
-                {
-                    GameObject obj = hand.CardGenerate(craftResult, i);
-                    hand.ButtonListener(craftResult, obj, i);
+            discardInd2 = ind;
+            craft.craftFrag = 0;
 
-                    break;
-                }
+            if (craftResult < 0)
+            {
+                return;
             }
+
+            hand.DisCard(discardInd1);
+            hand.DisCard(discardInd2);
+
+            if (discardInd1 > discardInd2)
+            {
+                discardInd1 = discardInd2;
+            }
+
+            GameObject obj = hand.CardGenerate(craftResult, discardInd1);
+            hand.ButtonListener(craftResult, obj, discardInd1);
         }
 
         if (craft.craftFrag == 1)
         {
+            discardInd1 = ind;
+
             craft.SettingMaterial1(cardID);
         }
     }
@@ -190,26 +214,34 @@ public class skill_manager : MonoBehaviour
         {
             int craftResult = craft.CraftItems(craft.material1, cardID);
 
-            for (int i = 0; i < 4; i++)
-            {
-                if (hand.deckCardTrans[i].childCount == 0)
-                {
-                    GameObject obj = hand.CardGenerate(craftResult, i);
-                    hand.ButtonListener(craftResult, obj, i);
+            discardInd2 = ind;
+            craft.craftFrag = 0;
 
-                    break;
-                }
+            if (craftResult < 0)
+            {
+                return;
             }
+
+            hand.DisCard(discardInd1);
+            hand.DisCard(discardInd2);
+
+            if (discardInd1 > discardInd2)
+            {
+                discardInd1 = discardInd2;
+            }
+
+            GameObject obj = hand.CardGenerate(craftResult, discardInd1);
+            hand.ButtonListener(craftResult, obj, discardInd1);
         }
 
         if (craft.craftFrag == 1)
         {
+            discardInd1 = ind;
             craft.SettingMaterial1(cardID);
 
 
         }
     }
-
 
     public async Task FireBall(int ind) // 火の玉を飛ばす ID->3
     {
@@ -234,20 +266,129 @@ public class skill_manager : MonoBehaviour
         {
             int craftResult = craft.CraftItems(craft.material1, cardID);
 
-            for (int i = 0; i < 4; i++)
-            {
-                if (hand.deckCardTrans[i].childCount == 0)
-                {
-                    GameObject obj = hand.CardGenerate(craftResult, i);
-                    hand.ButtonListener(craftResult, obj, i);
+            discardInd2 = ind;
+            craft.craftFrag = 0;
 
-                    break;
-                }
+            if (craftResult < 0)
+            {
+                return;
             }
+
+            hand.DisCard(discardInd1);
+            hand.DisCard(discardInd2);
+
+            if (discardInd1 > discardInd2)
+            {
+                discardInd1 = discardInd2;
+            }
+
+            GameObject obj = hand.CardGenerate(craftResult, discardInd1);
+            hand.ButtonListener(craftResult, obj, discardInd1);
         }
 
         if (craft.craftFrag == 1)
         {
+            discardInd1 = ind;
+            craft.SettingMaterial1(3);
+        }
+    }
+
+    public async Task FireSlash(int ind) // 炎斬り　ID->4
+    {
+        int cardID = 4;
+
+        if (craft.craftFrag == 0)
+        {
+            int waitTimer = 0;
+
+            while (!Mouse.current.rightButton.wasPressedThisFrame && waitTimer < 60 * waitTime)
+            {
+                waitTimer++;
+
+                await Task.Yield();
+            }
+
+
+            hand.DisCard(ind);
+        }
+
+        if (craft.craftFrag == 2)
+        {
+            int craftResult = craft.CraftItems(craft.material1, cardID);
+
+            discardInd2 = ind;
+            craft.craftFrag = 0;
+
+            if (craftResult < 0)
+            {
+                return;
+            }
+
+            hand.DisCard(discardInd1);
+            hand.DisCard(discardInd2);
+
+            if (discardInd1 > discardInd2)
+            {
+                discardInd1 = discardInd2;
+            }
+
+            GameObject obj = hand.CardGenerate(craftResult, discardInd1);
+            hand.ButtonListener(craftResult, obj, discardInd1);
+        }
+
+        if (craft.craftFrag == 1)
+        {
+            discardInd1 = ind;
+            craft.SettingMaterial1(3);
+        }
+    }
+
+    public async Task HyperMode(int ind) // 超強化　ID->5
+    {
+        int cardID = 5;
+
+        if (craft.craftFrag == 0)
+        {
+            int waitTimer = 0;
+
+            while (!Mouse.current.rightButton.wasPressedThisFrame && waitTimer < 60 * waitTime)
+            {
+                waitTimer++;
+
+                await Task.Yield();
+            }
+
+
+            hand.DisCard(ind);
+        }
+
+        if (craft.craftFrag == 2)
+        {
+            int craftResult = craft.CraftItems(craft.material1, cardID);
+
+            discardInd2 = ind;
+            craft.craftFrag = 0;
+
+            if (craftResult < 0)
+            {
+                return;
+            }
+
+            hand.DisCard(discardInd1);
+            hand.DisCard(discardInd2);
+
+            if (discardInd1 > discardInd2)
+            {
+                discardInd1 = discardInd2;
+            }
+
+            GameObject obj = hand.CardGenerate(craftResult, discardInd1);
+            hand.ButtonListener(craftResult, obj, discardInd1);
+        }
+
+        if (craft.craftFrag == 1)
+        {
+            discardInd1 = ind;
             craft.SettingMaterial1(3);
         }
     }

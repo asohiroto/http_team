@@ -58,6 +58,8 @@ public class CraftManager : MonoBehaviour
     public void CraftFragManager() // 状態をクラフト中に設定
     {
         craftFrag = 1;
+
+        Debug.Log("クラフト待機状態");
     }
 
     public void SettingMaterial1(int cardID) // 素材１の設定
@@ -65,5 +67,7 @@ public class CraftManager : MonoBehaviour
         material1 = cardID;
 
         craftFrag = 2; // 状態を選択待機中に設定
+
+        Debug.Log("素材２選択待機状態");
     }
 }

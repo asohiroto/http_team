@@ -81,25 +81,25 @@ public class HandManager : MonoBehaviour
         {
             case 0:
 
-                btn.onClick.AddListener(() => skill.Enhance(index)); // ボタンの入力を検知するリスナーを付与
+                btn.onClick.AddListener(async () => await skill.Enhance(index)); // ボタンの入力を検知するリスナーを付与
 
                 break;
 
             case 1:
 
-                btn.onClick.AddListener(() => skill.Heal(index));
+                btn.onClick.AddListener(async () => await skill.Heal(index));
 
                 break;
 
             case 2:
 
-                btn.onClick.AddListener(() => skill.Slash(index));
+                btn.onClick.AddListener(async () => await skill.Slash(index));
 
                 break;
 
             case 3:
 
-                btn.onClick.AddListener(() => skill.FireBall(index));
+                btn.onClick.AddListener(async() => await skill.FireBall(index));
 
                 break;
         }

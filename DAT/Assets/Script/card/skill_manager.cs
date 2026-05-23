@@ -11,6 +11,8 @@ public class skill_manager : MonoBehaviour
     [SerializeField] int healAmount; // 回復量
     [SerializeField] int enhanceAmount; // 強化量
     [SerializeField] int enhanceTime; // 効果時間
+    [SerializeField] int waitTime; // 使用待機時間
+
     int time = 0;
     int enhanceFlag = 0;
 
@@ -35,20 +37,35 @@ public class skill_manager : MonoBehaviour
             enhanceFlag = 0;
         }
 
+        if(Keyboard.current.pKey.wasPressedThisFrame) // 【テスト用】　pを押すと体力を減らす
+        {
+            player.playerHP -= 15;
+            Debug.Log("playerHP : " + player.playerHP);
+        }
 
     }
 
 
-    public void Slash(int ind) // 強斬り
+    public async Task Slash(int ind) // 強斬り
     {
+        int waitTimer = 0;
+
+        while (!Mouse.current.rightButton.wasPressedThisFrame && waitTimer < 60 * waitTime)
+        {
+            waitTimer++;
+
+            await Task.Yield();
+        }
+
+
         hand.DisCard(ind);
     }
 
-    public async void Heal(int ind) // 回復
+    public async Task Heal(int ind) // 回復
     {
         int waitFrames = 0;
 
-        while (!Mouse.current.rightButton.wasPressedThisFrame && waitFrames < 120)
+        while (!Mouse.current.rightButton.wasPressedThisFrame && waitFrames < 60 * waitTime) // waitTime秒分だけ左クリックの入力を待つ
         {
             waitFrames++;
 
@@ -78,11 +95,11 @@ public class skill_manager : MonoBehaviour
 
     }
 
-    public async Task Enhance(int ind) // 強化
+    public async Task Enhance(int ind) // 攻撃力強化
     {
         int waitTimer = 0;
 
-        while (!Mouse.current.rightButton.wasPressedThisFrame && waitTimer < 120)
+        while (!Mouse.current.rightButton.wasPressedThisFrame && waitTimer < 60 * waitTime)
         {
             waitTimer++;
 
@@ -91,18 +108,22 @@ public class skill_manager : MonoBehaviour
 
         if (Mouse.current.rightButton.wasPressedThisFrame)
         {
-            if (enhanceFlag == 0)
+            if (enhanceFlag == 0) // 非強化状態なら使用可能
             {
                 player.attackDamage += enhanceAmount;
 
                 enhanceFlag = 1;
                 time = 0;
 
+
+                Debug.Log("power = " + player.attackDamage);
+
                 hand.DisCard(ind);
-
+            } 
+            else
+            {
+                Debug.Log("同名強化は重ね掛けできないよ？");
             }
-
-            Debug.Log("power = "+ player.attackDamage);
 
         }
         else
@@ -112,8 +133,18 @@ public class skill_manager : MonoBehaviour
 
     }
 
-    public void FireBall(int ind) // 火の玉を飛ばす
+    public async Task FireBall(int ind) // 火の玉を飛ばす
     {
+        int waitTimer = 0;
+
+        while (!Mouse.current.rightButton.wasPressedThisFrame && waitTimer < 60 * waitTime)
+        {
+            waitTimer++;
+
+            await Task.Yield();
+        }
+
+
         hand.DisCard(ind);
     }
 

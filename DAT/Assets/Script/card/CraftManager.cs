@@ -5,6 +5,9 @@ public class CraftManager : MonoBehaviour
 {
     [SerializeField] private List<CraftRecipe> recipeList; // レシピのリストUnityの画面上にを作成
 
+    public int craftFrag = 0; // カード選択の状態を管理
+    public int material1; // 素材１
+
     private Dictionary<int, int> recipeDictionary = new Dictionary<int, int>(); // レシピを収めるレシピ本を作成
 
     void Start()
@@ -18,6 +21,8 @@ public class CraftManager : MonoBehaviour
                 recipeDictionary.Add(key, recipe.result); // 索引を登録
             }
         }
+
+        material1 = 0;
     }
 
     private int CreateRecipeKey(int item1, int item2) // レシピの索引用の鍵を作成
@@ -32,7 +37,7 @@ public class CraftManager : MonoBehaviour
         }
     }
 
-    public int CombineItems(int input1, int input2) // 鍵とレシピをもとに合成、カードの配列内の位置を示す数値を返す
+    public int CraftItems(int input1, int input2) // 鍵とレシピをもとに合成、カードの配列内の位置を示す数値を返す
     {
         int searchKey = CreateRecipeKey(input1, input2);
 
@@ -40,7 +45,25 @@ public class CraftManager : MonoBehaviour
         {
             return craftResult;
         }
+        else
+        {
+            Debug.Log("なにかが違うようだ……？");
+
+            craftFrag = 0;
+        }
 
         return -1;
+    }
+
+    public void CraftFragManager() // 状態をクラフト中に設定
+    {
+        craftFrag = 1;
+    }
+
+    public void SettingMaterial1(int cardID) // 素材１の設定
+    {
+        material1 = cardID;
+
+        craftFrag = 2; // 状態を選択待機中に設定
     }
 }

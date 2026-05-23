@@ -7,6 +7,7 @@ public class skill_manager : MonoBehaviour
 {
     PlayerController player;
     HandManager hand;
+    CraftManager craft;
 
     [SerializeField] int healAmount; // 回復量
     [SerializeField] int enhanceAmount; // 強化量
@@ -14,13 +15,13 @@ public class skill_manager : MonoBehaviour
     [SerializeField] int waitTime; // 使用待機時間
 
     int time = 0;
-    int enhanceFlag = 0;
-
+    int enhanceFlag = 0; // 強化状態の判定
 
     void Start()
     {
         player = GameObject.Find("Player").GetComponent<PlayerController>();
         hand = GameObject.Find("HandManager").GetComponent<HandManager>();
+        craft = GameObject.Find("CraftManager").GetComponent<CraftManager>();
 
     }
 
@@ -37,7 +38,7 @@ public class skill_manager : MonoBehaviour
             enhanceFlag = 0;
         }
 
-        if(Keyboard.current.pKey.wasPressedThisFrame) // 【テスト用】　pを押すと体力を減らす
+        if (Keyboard.current.pKey.wasPressedThisFrame) // 【テスト用】　pを押すと体力を減らす
         {
             player.playerHP -= 15;
             Debug.Log("playerHP : " + player.playerHP);
@@ -45,109 +46,210 @@ public class skill_manager : MonoBehaviour
 
     }
 
-
-    public async Task Slash(int ind) // 強斬り
+    public async Task Enhance(int ind) // 攻撃力強化 ID->0
     {
-        int waitTimer = 0;
+        int cardID = 0;
 
-        while (!Mouse.current.rightButton.wasPressedThisFrame && waitTimer < 60 * waitTime)
+        if (craft.craftFrag == 0)
         {
-            waitTimer++;
+            int waitTimer = 0;
 
-            await Task.Yield();
-        }
-
-
-        hand.DisCard(ind);
-    }
-
-    public async Task Heal(int ind) // 回復
-    {
-        int waitFrames = 0;
-
-        while (!Mouse.current.rightButton.wasPressedThisFrame && waitFrames < 60 * waitTime) // waitTime秒分だけ左クリックの入力を待つ
-        {
-            waitFrames++;
-
-            await Task.Yield();
-        }
-
-
-        if (Mouse.current.rightButton.wasPressedThisFrame)
-        {
-            if (player.playerHP > player.maxPlayerHP - healAmount) // 回復して最大HPを超える場合は、最大HPまで回復
+            while (!Mouse.current.rightButton.wasPressedThisFrame && waitTimer < 60 * waitTime) // waitTime秒分だけ左クリックの入力を待つ
             {
-                player.playerHP = player.maxPlayerHP;
+                waitTimer++;
+
+                await Task.Yield();
+            }
+
+            if (Mouse.current.rightButton.wasPressedThisFrame)
+            {
+                if (enhanceFlag == 0) // 非強化状態なら使用可能
+                {
+                    player.attackDamage += enhanceAmount;
+
+                    enhanceFlag = 1;
+                    time = 0;
+
+
+                    Debug.Log("power = " + player.attackDamage);
+
+                    hand.DisCard(ind);
+                }
+                else
+                {
+                    Debug.Log("同名の強化は重ね掛けできないよ？");
+                }
             }
             else
             {
-                player.playerHP += healAmount;
+                Debug.Log("スキップしたよ");
             }
-
-            hand.DisCard(ind);
-
-            Debug.Log(player.playerHP);
         }
-        else
+
+        if (craft.craftFrag == 2) // 素材２選択待機状態なら、カードを生成
         {
-            Debug.Log("スキップしたよ");
+            int craftResult = craft.CraftItems(craft.material1, cardID);
+
+            for (int i = 0; i < 4; i++)
+            {
+                if (hand.deckCardTrans[i].childCount == 0)
+                {
+                    GameObject obj = hand.CardGenerate(craftResult, i);
+                    hand.ButtonListener(craftResult, obj, i);
+
+                    break;
+                }
+            }
         }
 
+        if (craft.craftFrag == 1) // クラフト待機状態なら、IDを保存
+        {
+            craft.SettingMaterial1(cardID);
+        }
     }
 
-    public async Task Enhance(int ind) // 攻撃力強化
+    public async Task Heal(int ind) // 回復 ID->1
     {
-        int waitTimer = 0;
+        int cardID = 1;
 
-        while (!Mouse.current.rightButton.wasPressedThisFrame && waitTimer < 60 * waitTime)
+        if (craft.craftFrag == 0)
         {
-            waitTimer++;
+            int waitFrames = 0;
 
-            await Task.Yield();
-        }
-
-        if (Mouse.current.rightButton.wasPressedThisFrame)
-        {
-            if (enhanceFlag == 0) // 非強化状態なら使用可能
+            while (!Mouse.current.rightButton.wasPressedThisFrame && waitFrames < 60 * waitTime)
             {
-                player.attackDamage += enhanceAmount;
+                waitFrames++;
 
-                enhanceFlag = 1;
-                time = 0;
+                await Task.Yield();
+            }
 
 
-                Debug.Log("power = " + player.attackDamage);
+            if (Mouse.current.rightButton.wasPressedThisFrame)
+            {
+                if (player.playerHP > player.maxPlayerHP - healAmount) // 回復して最大HPを超える場合は、最大HPまで回復
+                {
+                    player.playerHP = player.maxPlayerHP;
+                }
+                else
+                {
+                    player.playerHP += healAmount;
+                }
 
                 hand.DisCard(ind);
-            } 
+
+                Debug.Log(player.playerHP);
+            }
             else
             {
-                Debug.Log("同名強化は重ね掛けできないよ？");
+                Debug.Log("スキップしたよ");
+            }
+        }
+
+        if (craft.craftFrag == 2)
+        {
+            int craftResult = craft.CraftItems(craft.material1, cardID);
+
+            for (int i = 0; i < 4; i++)
+            {
+                if (hand.deckCardTrans[i].childCount == 0)
+                {
+                    GameObject obj = hand.CardGenerate(craftResult, i);
+                    hand.ButtonListener(craftResult, obj, i);
+
+                    break;
+                }
+            }
+        }
+
+        if (craft.craftFrag == 1)
+        {
+            craft.SettingMaterial1(cardID);
+        }
+    }
+
+    public async Task Slash(int ind) // 強斬り ID->2
+    {
+        int cardID = 2;
+
+        if (craft.craftFrag == 0)
+        {
+            int waitTimer = 0;
+
+            while (!Mouse.current.rightButton.wasPressedThisFrame && waitTimer < 60 * waitTime)
+            {
+                waitTimer++;
+
+                await Task.Yield();
             }
 
-        }
-        else
-        {
-            Debug.Log("スキップしたよ");
+
+            hand.DisCard(ind);
         }
 
+        if (craft.craftFrag == 2)
+        {
+            int craftResult = craft.CraftItems(craft.material1, cardID);
+
+            for (int i = 0; i < 4; i++)
+            {
+                if (hand.deckCardTrans[i].childCount == 0)
+                {
+                    GameObject obj = hand.CardGenerate(craftResult, i);
+                    hand.ButtonListener(craftResult, obj, i);
+
+                    break;
+                }
+            }
+        }
+
+        if (craft.craftFrag == 1)
+        {
+            craft.SettingMaterial1(cardID);
+
+
+        }
     }
 
-    public async Task FireBall(int ind) // 火の玉を飛ばす
+
+    public async Task FireBall(int ind) // 火の玉を飛ばす ID->3
     {
-        int waitTimer = 0;
+        int cardID = 3;
 
-        while (!Mouse.current.rightButton.wasPressedThisFrame && waitTimer < 60 * waitTime)
+        if (craft.craftFrag == 0)
         {
-            waitTimer++;
+            int waitTimer = 0;
 
-            await Task.Yield();
+            while (!Mouse.current.rightButton.wasPressedThisFrame && waitTimer < 60 * waitTime)
+            {
+                waitTimer++;
+
+                await Task.Yield();
+            }
+
+
+            hand.DisCard(ind);
         }
 
+        if (craft.craftFrag == 2)
+        {
+            int craftResult = craft.CraftItems(craft.material1, cardID);
 
-        hand.DisCard(ind);
+            for (int i = 0; i < 4; i++)
+            {
+                if (hand.deckCardTrans[i].childCount == 0)
+                {
+                    GameObject obj = hand.CardGenerate(craftResult, i);
+                    hand.ButtonListener(craftResult, obj, i);
+
+                    break;
+                }
+            }
+        }
+
+        if (craft.craftFrag == 1)
+        {
+            craft.SettingMaterial1(3);
+        }
     }
-
-
 }
 

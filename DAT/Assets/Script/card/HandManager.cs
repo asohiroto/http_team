@@ -8,8 +8,8 @@ using UnityEngine.XR;
 public class HandManager : MonoBehaviour
 {
 
-    [SerializeField] GameObject[] cardPrefab; // 生成するカード
-    [SerializeField] Transform[] deckCardTrans; // カードの生成場所
+    [SerializeField] public GameObject[] cardPrefab; // 生成するカード
+    [SerializeField] public Transform[] deckCardTrans; // カードの生成場所
 
     int cardId = 0; // 生成するカードのID
     public int[] cardUseId = new int[4]; // 配列に保存されているカードIDを保存する配列
@@ -40,7 +40,7 @@ public class HandManager : MonoBehaviour
 
     }
 
-    GameObject CardGenerate(int ran, int chan) // 新たにランダムなカードを生成する
+    public GameObject CardGenerate(int ran, int chan) // 新たにランダムなカードを生成する
     {
         GameObject genCard = Instantiate(cardPrefab[ran], deckCardTrans[chan]); // カードを作る処理
         return genCard;
@@ -50,9 +50,9 @@ public class HandManager : MonoBehaviour
     {
         int cardRandomId = Random.Range(0, 4);
 
-        for(int i = 0; i < 4; i++)
+        for (int i = 0; i < 4; i++)
         {
-            if(deckCardTrans[i].childCount == 0)
+            if (deckCardTrans[i].childCount == 0)
             {
                 GameObject obj = CardGenerate(cardRandomId, i);
                 ButtonListener(cardRandomId, obj, i);
@@ -69,13 +69,12 @@ public class HandManager : MonoBehaviour
         Destroy(deckCardTrans[chan].GetChild(0).gameObject);
     }
 
-    void ButtonListener(int id, GameObject targetCard, int index) // ボタンの入力を検知する
+    public void ButtonListener(int id, GameObject targetCard, int index) // ボタンの入力を検知する
     {
 
         Button btn = targetCard.GetComponentInChildren<Button>();
 
-        // ボタンコンポーネントがついていなかった場合の安全装置
-        if (btn == null) return;
+        if (btn == null) return; // ボタンコンポーネントがついていなかった場合の安全装置
 
         switch (id)
         {
@@ -99,7 +98,7 @@ public class HandManager : MonoBehaviour
 
             case 3:
 
-                btn.onClick.AddListener(async() => await skill.FireBall(index));
+                btn.onClick.AddListener(async () => await skill.FireBall(index));
 
                 break;
         }

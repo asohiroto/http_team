@@ -71,6 +71,7 @@ public class EnemyController : MonoBehaviour
         ChasePlayer();
     }
 
+    // EnemyDamaged
     public void EnemyDamaged(int dmg)
     {
         // HPをdmg分減らす

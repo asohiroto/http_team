@@ -1,0 +1,109 @@
+Quick Outline のスクリプト設定
+
+① まずInspectorで確認
+ハイライトしたいカードのPrefabに Outline コンポーネントを追加 しておきます。
+カードのPrefab を選択
+  → Inspector
+  → 「Add Component」
+  → 「Outline」を検索して追加
+  → 初期状態は enabled のチェックを外しておく
+
+② skill_manager.cs に追加するコード
+csharp// skill_manager.cs の上部に追加（他のusingと並べる）
+using UnityEngine;
+
+public class skill_manager : MonoBehaviour
+{
+    PlayerController player;
+    HandManager hand;
+    CraftManager craft;
+
+    // --- 既存のコードはそのまま ---
+
+    // ↓ これを追加
+    public void SetHighlight(int index, bool isOn)
+    {
+        // スロットが空なら何もしない
+        if (hand.deckCardTrans[index].childCount == 0) return;
+
+        GameObject card = hand.deckCardTrans[index].GetChild(0).gameObject;
+
+        Outline outline = card.GetComponent<Outline>();
+
+        // Outlineコンポーネントがなければ自動追加
+        if (outline == null)
+        {
+            outline = card.AddComponent<Outline>();
+            outline.OutlineMode = Outline.Mode.OutlineAll;
+            outline.OutlineColor = Color.yellow;
+            outline.OutlineWidth = 5f;
+        }
+
+        outline.enabled = isOn;
+    }
+
+③ クラフト処理部分に組み込む
+各スキルメソッド（Enhance・Heal・Slash・FireBall）の craftFrag の処理を以下のように修正します。
+csharp// craftFrag == 1 のとき（素材1を選んだとき）→ ハイライトON
+if (craft.craftFrag == 1)
+{
+    discardInd1 = ind;
+    SetHighlight(ind, true); // ← 追加：選んだカードを光らせる
+    craft.SettingMaterial1(cardID);
+}
+csharp// craftFrag == 2 のとき（素材2を選んで合成するとき）→ ハイライトOFF
+if (craft.craftFrag == 2)
+{
+    SetHighlight(discardInd1, false); // ← 追加：ハイライトを消す
+
+    int craftResult = craft.CraftItems(craft.material1, cardID);
+
+    craft.craftFrag = 0; // 必ずリセット
+
+    if (craftResult < 0)
+    {
+        Debug.LogWarning("レシピが存在しません");
+        return;
+    }
+
+    discardInd2 = ind;
+
+    hand.DisCard(discardInd1);
+    hand.DisCard(discardInd2);
+
+    GameObject obj = hand.CardGenerate(craftResult, discardInd1);
+    hand.ButtonListener(craftResult, obj, discardInd1);
+}
+
+④ クラフトキャンセル時の処理も追加（任意）
+クラフトモードをキャンセルする場合もハイライトを消す必要があります。
+csharp// CraftManager.cs に追加
+public void CancelCraft()
+{
+    craftFrag = 0;
+    Debug.Log("クラフトキャンセル");
+}
+csharp// skill_manager.cs にキャンセル処理を追加
+public void OnCancelCraft()
+{
+    if (discardInd1 >= 0)
+    {
+        SetHighlight(discardInd1, false); // ハイライトを消す
+        discardInd1 = -1;
+    }
+    craft.CancelCraft();
+}
+
+動作の流れ
+クラフトボタン押す
+  └─ craftFrag = 1
+
+カードAをクリック（素材1）
+  └─ カードAが黄色くハイライト ✨
+  └─ craftFrag = 2
+
+カードBをクリック（素材2）
+  └─ ハイライト消える
+  └─ 2枚破壊 → 合成カード生成
+  └─ craftFrag = 0
+これで素材として選んだカードが光るようになります！

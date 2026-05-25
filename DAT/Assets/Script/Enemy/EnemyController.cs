@@ -2,6 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum EnemyState
+{
+    Idle,
+    Move,
+    Attack,
+}
+
 public class EnemyController : MonoBehaviour
 {
     [Header("Enemy")]
@@ -130,5 +137,45 @@ public class EnemyController : MonoBehaviour
         // 追跡状態じゃないなら返す
         if (!isChasePlayer) return;
         transform.position = Vector2.MoveTowards(transform.position, new Vector2(playerPos.x, playerPos.y), e_moveSpeed * Time.deltaTime);
+    }
+
+    private void OnDrawGizmos()
+    {
+        // セグメント数
+        int seg = 32;
+        float r;
+
+        if (isChasePlayer)
+        {
+            Gizmos.color = Color.red;
+            r = loseDist;
+        }
+        else
+        {
+            Gizmos.color = Color.yellow;
+            r = findDist;
+        }
+
+        List<Vector3> vertices = new();
+
+        for (int i = 0; i < seg; i++)
+        {
+            float angle = Mathf.PI * 2f * i / seg;
+
+            float x = Mathf.Cos(angle) * r;
+            float y = Mathf.Sin(angle) * r;
+            
+            Vector3 a = new Vector3(x, y, 0);
+            Vector3 b = new Vector3(ePos.x, ePos.y, 0);
+
+            Vector3 pos = a + b;
+
+            vertices.Add(pos);
+        }
+
+        foreach (var v in vertices)
+        {
+            Gizmos.DrawSphere(v, 0.05f);
+        }
     }
 }

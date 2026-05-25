@@ -104,6 +104,7 @@ public class WeakTorcher : MonoBehaviour
     }
     private void LookHor()
     {
+        if (!isMove) return;
         if (isLookRight)
         {
             transform.rotation = Quaternion.Euler(0, 0, 0);

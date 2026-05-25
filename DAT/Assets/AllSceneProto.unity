@@ -1996,7 +1996,8 @@ MonoBehaviour:
   defaultSpeed: 0.1
   dashSpeed: 0.5
   xLimit: 8.5
-  yLimit: 4.7
+  yMaxLimit: 4.7
+  yMinLimit: -1.6
   dashTime: 0.1
   attackObj: {fileID: 132122364930665669, guid: 428bde71b707b3b49a63a27c01b204d2, type: 3}
   attackTime: 0.5
@@ -2297,7 +2298,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::skill_manager
   healAmount: 20
   enhanceAmount: 2
-  enhanceTime: 2
+  hyperDamageAmount: 4
+  hyperSpeedAmount: 0.2
+  enhanceTimer: 2
+  hyperTimer: 3
   waitTime: 2
   discardInd1: -1
   discardInd2: -1

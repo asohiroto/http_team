@@ -15,7 +15,7 @@ public class skill_manager : MonoBehaviour
     [SerializeField] int healAmount; // 回復量
     [SerializeField] int enhanceAmount; // エンハンス強化量
     [SerializeField] int hyperDamageAmount; // ハイパーモード攻撃力強化量
-    [SerializeField] int hyperSpeedAmount; // ハイパーモード素早さ強化量
+    [SerializeField] float hyperSpeedAmount; // ハイパーモード素早さ強化量
     [SerializeField] int enhanceTimer; // エンハンス効果時間
     [SerializeField] int hyperTimer; // ハイパー効果時間
     [SerializeField] int waitTime; // 使用待機時間
@@ -24,8 +24,6 @@ public class skill_manager : MonoBehaviour
     int hyperCount = 0; // ハイパーモードの効果時間カウンタ
     int enhanceFlag = 0; // エンハンス強化状態の判定
     int hyperFlag = 0; // ハイパーモード強化状態の判定
-
-    int defaultSpeed = 0;
 
     public int discardInd1 = -1;
     public int discardInd2 = -1;
@@ -55,10 +53,12 @@ public class skill_manager : MonoBehaviour
         if (hyperFlag == 1 && hyperCount > hyperTimer * 60)
         {
             player.attackDamage = player.defaultAttackDamage;
-            player.speed = defaultSpeed;
+            player.speed = player.defaultSpeed;
 
             Debug.Log("Power : " + player.attackDamage);
             Debug.Log("Speed : " + player.speed);
+
+            hyperFlag = 0;
         }
 
         if (Keyboard.current.pKey.wasPressedThisFrame) // 【テスト用】　pを押すと体力を減らす

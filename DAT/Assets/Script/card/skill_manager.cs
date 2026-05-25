@@ -235,20 +235,7 @@ public class skill_manager : MonoBehaviour
                 {
                     Debug.Log("同名の強化は重ね掛けできないよ？");
                 }
-
-                if (craft.craftFrag == 0)
-        {
-            int waitTimer = 0;
-
-            while (!Mouse.current.rightButton.wasPressedThisFrame && waitTimer < 60 * waitTime)
-            {
-                waitTimer++;
-
-                await Task.Yield();
             }
-
-
-            hand.DisCard(ind);
         }
 
         CraftMethod(cardID, ind);
@@ -287,5 +274,7 @@ public class skill_manager : MonoBehaviour
         }
     }
 
+
 }
+
 

@@ -1,8 +1,10 @@
+using System.Threading.Tasks;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
-using System.Threading.Tasks;
-using Unity.VisualScripting;
+using UnityEngine.XR;
+using static UnityEngine.InputManagerEntry;
 
 public class skill_manager : MonoBehaviour
 {
@@ -11,12 +13,19 @@ public class skill_manager : MonoBehaviour
     CraftManager craft;
 
     [SerializeField] int healAmount; // 回復量
-    [SerializeField] int enhanceAmount; // 強化量
-    [SerializeField] int enhanceTime; // 効果時間
+    [SerializeField] int enhanceAmount; // エンハンス強化量
+    [SerializeField] int hyperDamageAmount; // ハイパーモード攻撃力強化量
+    [SerializeField] int hyperSpeedAmount; // ハイパーモード素早さ強化量
+    [SerializeField] int enhanceTimer; // エンハンス効果時間
+    [SerializeField] int hyperTimer; // ハイパー効果時間
     [SerializeField] int waitTime; // 使用待機時間
 
-    int time = 0;
-    int enhanceFlag = 0; // 強化状態の判定
+    int enhanceCount = 0; // エンハンスの効果時間カウンタ
+    int hyperCount = 0; // ハイパーモードの効果時間カウンタ
+    int enhanceFlag = 0; // エンハンス強化状態の判定
+    int hyperFlag = 0; // ハイパーモード強化状態の判定
+
+    int defaultSpeed = 0;
 
     public int discardInd1 = -1;
     public int discardInd2 = -1;
@@ -32,14 +41,24 @@ public class skill_manager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        time++;
+        enhanceCount++;
+        hyperCount++;
 
-        if (enhanceFlag == 1 && time > enhanceTime * 60) // 効果時間経過後、攻撃力を最初の状態に戻す
+        if (enhanceFlag == 1 && enhanceCount > enhanceTimer * 60) // 効果時間経過後、攻撃力を最初の状態に戻す
         {
             player.attackDamage = player.defaultAttackDamage;
             Debug.Log("Power : " + player.attackDamage);
 
             enhanceFlag = 0;
+        }
+
+        if (hyperFlag == 1 && hyperCount > hyperTimer * 60)
+        {
+            player.attackDamage = player.defaultAttackDamage;
+            player.speed = defaultSpeed;
+
+            Debug.Log("Power : " + player.attackDamage);
+            Debug.Log("Speed : " + player.speed);
         }
 
         if (Keyboard.current.pKey.wasPressedThisFrame) // 【テスト用】　pを押すと体力を減らす
@@ -72,7 +91,7 @@ public class skill_manager : MonoBehaviour
                     player.attackDamage += enhanceAmount;
 
                     enhanceFlag = 1;
-                    time = 0;
+                    enhanceCount = 0;
 
 
                     Debug.Log("power = " + player.attackDamage);
@@ -90,36 +109,7 @@ public class skill_manager : MonoBehaviour
             }
         }
 
-        if (craft.craftFrag == 2) // 素材２選択待機状態なら、カードを生成
-        {
-            int craftResult = craft.CraftItems(craft.material1, cardID);
-
-            discardInd2 = ind;
-            craft.craftFrag = 0;
-
-            if (craftResult < 0)
-            {
-                return;
-            }
-
-            hand.DisCard(discardInd1);
-            hand.DisCard(discardInd2);
-
-            if (discardInd1 > discardInd2)
-            {
-                discardInd1 = discardInd2;
-            }
-
-            GameObject obj = hand.CardGenerate(craftResult, discardInd1);
-            hand.ButtonListener(craftResult, obj, discardInd1);
-        }
-
-        if (craft.craftFrag == 1) // クラフト待機状態なら、IDを保存
-        {
-            discardInd1 = ind;
-
-            craft.SettingMaterial1(cardID);
-        }
+        CraftMethod(cardID, ind);
     }
 
     public async Task Heal(int ind) // 回復 ID->1
@@ -159,36 +149,7 @@ public class skill_manager : MonoBehaviour
             }
         }
 
-        if (craft.craftFrag == 2)
-        {
-            int craftResult = craft.CraftItems(craft.material1, cardID);
-
-            discardInd2 = ind;
-            craft.craftFrag = 0;
-
-            if (craftResult < 0)
-            {
-                return;
-            }
-
-            hand.DisCard(discardInd1);
-            hand.DisCard(discardInd2);
-
-            if (discardInd1 > discardInd2)
-            {
-                discardInd1 = discardInd2;
-            }
-
-            GameObject obj = hand.CardGenerate(craftResult, discardInd1);
-            hand.ButtonListener(craftResult, obj, discardInd1);
-        }
-
-        if (craft.craftFrag == 1)
-        {
-            discardInd1 = ind;
-
-            craft.SettingMaterial1(cardID);
-        }
+        CraftMethod(cardID, ind);
     }
 
     public async Task Slash(int ind) // 強斬り ID->2
@@ -210,37 +171,7 @@ public class skill_manager : MonoBehaviour
             hand.DisCard(ind);
         }
 
-        if (craft.craftFrag == 2)
-        {
-            int craftResult = craft.CraftItems(craft.material1, cardID);
-
-            discardInd2 = ind;
-            craft.craftFrag = 0;
-
-            if (craftResult < 0)
-            {
-                return;
-            }
-
-            hand.DisCard(discardInd1);
-            hand.DisCard(discardInd2);
-
-            if (discardInd1 > discardInd2)
-            {
-                discardInd1 = discardInd2;
-            }
-
-            GameObject obj = hand.CardGenerate(craftResult, discardInd1);
-            hand.ButtonListener(craftResult, obj, discardInd1);
-        }
-
-        if (craft.craftFrag == 1)
-        {
-            discardInd1 = ind;
-            craft.SettingMaterial1(cardID);
-
-
-        }
+        CraftMethod(cardID, ind);
     }
 
     public async Task FireBall(int ind) // 火の玉を飛ばす ID->3
@@ -262,35 +193,7 @@ public class skill_manager : MonoBehaviour
             hand.DisCard(ind);
         }
 
-        if (craft.craftFrag == 2)
-        {
-            int craftResult = craft.CraftItems(craft.material1, cardID);
-
-            discardInd2 = ind;
-            craft.craftFrag = 0;
-
-            if (craftResult < 0)
-            {
-                return;
-            }
-
-            hand.DisCard(discardInd1);
-            hand.DisCard(discardInd2);
-
-            if (discardInd1 > discardInd2)
-            {
-                discardInd1 = discardInd2;
-            }
-
-            GameObject obj = hand.CardGenerate(craftResult, discardInd1);
-            hand.ButtonListener(craftResult, obj, discardInd1);
-        }
-
-        if (craft.craftFrag == 1)
-        {
-            discardInd1 = ind;
-            craft.SettingMaterial1(3);
-        }
+        CraftMethod(cardID, ind);
     }
 
     public async Task FireSlash(int ind) // 炎斬り　ID->4
@@ -312,35 +215,7 @@ public class skill_manager : MonoBehaviour
             hand.DisCard(ind);
         }
 
-        if (craft.craftFrag == 2)
-        {
-            int craftResult = craft.CraftItems(craft.material1, cardID);
-
-            discardInd2 = ind;
-            craft.craftFrag = 0;
-
-            if (craftResult < 0)
-            {
-                return;
-            }
-
-            hand.DisCard(discardInd1);
-            hand.DisCard(discardInd2);
-
-            if (discardInd1 > discardInd2)
-            {
-                discardInd1 = discardInd2;
-            }
-
-            GameObject obj = hand.CardGenerate(craftResult, discardInd1);
-            hand.ButtonListener(craftResult, obj, discardInd1);
-        }
-
-        if (craft.craftFrag == 1)
-        {
-            discardInd1 = ind;
-            craft.SettingMaterial1(3);
-        }
+        CraftMethod(cardID, ind);
     }
 
     public async Task HyperMode(int ind) // 超強化　ID->5
@@ -351,20 +226,43 @@ public class skill_manager : MonoBehaviour
         {
             int waitTimer = 0;
 
-            while (!Mouse.current.rightButton.wasPressedThisFrame && waitTimer < 60 * waitTime)
+            while (!Mouse.current.rightButton.wasPressedThisFrame && waitTimer < 60 * waitTime) // waitTime秒分だけ左クリックの入力を待つ
             {
                 waitTimer++;
 
                 await Task.Yield();
             }
 
+            if (Mouse.current.rightButton.wasPressedThisFrame)
+            {
+                if (hyperFlag == 0) // 非強化状態なら使用可能
+                {
+                    player.attackDamage += hyperDamageAmount;
+                    player.speed += hyperSpeedAmount;
 
-            hand.DisCard(ind);
+                    hyperFlag = 1;
+                    hyperCount = 0;
+
+
+                    Debug.Log("power = " + player.attackDamage);
+
+                    hand.DisCard(ind);
+                }
+                else
+                {
+                    Debug.Log("同名の強化は重ね掛けできないよ？");
+                }
+            }
         }
 
-        if (craft.craftFrag == 2)
+        CraftMethod(cardID, ind);
+    }
+
+    void CraftMethod(int id, int ind) // カード合成の関数
+    {
+        if (craft.craftFrag == 2) // 保存されたIDを呼び出し、素材となったカードを破壊し、空いたスペースにカードを合成
         {
-            int craftResult = craft.CraftItems(craft.material1, cardID);
+            int craftResult = craft.CraftItems(craft.material1, id);
 
             discardInd2 = ind;
             craft.craftFrag = 0;
@@ -386,11 +284,14 @@ public class skill_manager : MonoBehaviour
             hand.ButtonListener(craftResult, obj, discardInd1);
         }
 
-        if (craft.craftFrag == 1)
+        if (craft.craftFrag == 1) // 場所とIDを保存する
         {
             discardInd1 = ind;
-            craft.SettingMaterial1(3);
+            craft.SettingMaterial1(id);
         }
     }
+
+
 }
+
 

@@ -50,6 +50,6 @@ public class PlayerAttack : MonoBehaviour
 
             yield return new WaitForSeconds(animTime);
         }
-        
+        Destroy(gameObject);
     }
 }

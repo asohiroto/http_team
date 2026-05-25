@@ -1807,7 +1807,7 @@ SpriteRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: 1448252480329919801, guid: bf29f581365379b489ef412b503d3e39, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.9528302, g: 0.9528302, b: 0.9528302, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -1856,9 +1856,9 @@ MonoBehaviour:
   attackCd: 1
   defaultAttackDamage: 5
   attackDamage: 5
+  canAttack: 0
   playerHP: 100
   maxPlayerHP: 100
-  canAttack: 0
   upSprite:
   - {fileID: -3057998330571279762, guid: bf29f581365379b489ef412b503d3e39, type: 3}
   downSprite:
@@ -2163,7 +2163,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::skill_manager
   healAmount: 20
   enhanceAmount: 2
-  enhanceTime: 2
+  hyperDamageAmount: 0
+  hyperSpeedAmount: 0
+  enhanceTimer: 0
+  hyperTimer: 0
   waitTime: 2
   discardInd1: -1
   discardInd2: -1
@@ -2192,6 +2195,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1945456625}
   - component: {fileID: 1945456626}
+  - component: {fileID: 1945456627}
   m_Layer: 0
   m_Name: AttackReach
   m_TagString: Untagged
@@ -2249,7 +2253,19 @@ CircleCollider2D:
   m_CompositeOperation: 0
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
-  m_Radius: 2
+  m_Radius: 1.5
+--- !u!114 &1945456627
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1945456624}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb4f83f9d1c854a4cb22563b96dd246a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerAttackReach
 --- !u!224 &1964648985 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 7253484781739197279, guid: 196aa60c426a356418cdbddac337afeb, type: 3}
@@ -2273,7 +2289,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &2090698265
 MonoBehaviour:
   m_ObjectHideFlags: 0

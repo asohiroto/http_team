@@ -4,10 +4,14 @@ public class PlayerAttackReach : MonoBehaviour
 {
     GameObject enemyObj;
     int enemyCount;
+    GameObject playerObj;
+    PlayerController playerController;
 
     void Start()
     {
         enemyCount = 0;
+        playerObj = transform.parent.gameObject;
+        playerController = playerObj.GetComponent<PlayerController>();
     }
 
     // Update is called once per frame
@@ -20,7 +24,11 @@ public class PlayerAttackReach : MonoBehaviour
     {
         if (col.CompareTag("Enemy"))
         {
-            
+            playerController.canAttack = true;
+        }
+        else
+        {
+            playerController.canAttack = false;
         }
     }
 }

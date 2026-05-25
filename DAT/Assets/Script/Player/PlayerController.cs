@@ -6,57 +6,56 @@ using UnityEngine.Rendering.VirtualTexturing;
 
 public class PlayerController : MonoBehaviour
 {
-    // 移動に使う変数
-    [SerializeField]public float speed = 0.1f;
-    [SerializeField]public float defaultSpeed = 0.1f;
-    [SerializeField] private float dashSpeed = 0.5f;
-    private bool onDash;
+    // 移動に使う変数-----------------------------------------------------------------
+    [SerializeField]public float speed = 0.1f; // プレイヤーのスピード
+    [SerializeField]public float defaultSpeed = 0.1f; // プレイヤーのデフォルトスピード
+    [SerializeField] private float dashSpeed = 0.5f; // プレイヤーのダッシュスピード
+    private bool onDash; // ダッシュ中かどうか
 
-    float dirX;
-    float dirY;
-    [SerializeField]float xLimit = 8.5f;
-    [SerializeField]float yMaxLimit = 4.7f;
-    [SerializeField] float yMinLimit = -1.6f;
-    Vector3 currentPos;
-    Vector3 moveDir;
-    Rigidbody2D rb;
+    float dirX; // プレイヤーのX軸方向 (-1, 0, 1)のどれか
+    float dirY; // プレイヤーのy軸方向(-1, 0, 1)のどれか
+    [SerializeField]float xLimit = 8.5f; // x軸の移動制限
+    [SerializeField]float yMaxLimit = 4.7f; // y軸の移動制限
+    [SerializeField] float yMinLimit = -1.6f; // y軸の移動制限
+    Vector3 currentPos; // プレイヤーの現在のポジション
+    Vector3 moveDir; // 入力の向きを代入
 
-    Vector3 lastDir = new Vector3(1, 0, 0);
+    Vector3 lastDir = new Vector3(1, 0, 0); // プレイヤーが前のフレームで入力した方向
 
-    // ダッシュに使う変数
-    float dashCd = 0.3f;
-    float dashCdTimer = 0f;
-    [SerializeField]float dashTime = 0.1f;
-    Vector3 dashDir;
+    // ダッシュに使う変数---------------------------------------------------------------
+    float dashCd = 0.3f; // ダッシュのクールダウン
+    float dashCdTimer = 0f; // クールダウンを実際にカウントする変数
+    [SerializeField]float dashTime = 0.1f; // ダッシュの継続時間
+    Vector3 dashDir; // ダッシュする方向
 
-    // アタックに使う変数
-    [SerializeField] GameObject attackObj;
-    [SerializeField] float attackTime = 1.0f;
-    [SerializeField]float attackCd = 1.0f;
-    float attackCdTimer;
-    public int defaultAttackDamage = 5;
-    public int attackDamage = 5;
-    Vector3 attackDir;
+    // アタックに使う変数---------------------------------------------------------------
+    [SerializeField] GameObject attackObj; // アタックのエフェクトと当たり判定を持つオブジェクトを代入
+    [SerializeField] float attackTime = 1.0f; // アタック中の時間
+    [SerializeField]float attackCd = 1.0f; // アタックのクールダウン
+    float attackCdTimer; // クールダウンを実際にカウントする変数
+    public int defaultAttackDamage = 5; // デフォルトのアタックダメージ
+    public int attackDamage = 5; // アタックダメージ
+    Vector3 attackDir; // アタックする方向
     float defaultFXRot = -90; // 攻撃エフェクトの方向補正
-    bool onAttack = false;
+    bool onAttack = false; // アタックしているかどうか
+    public bool canAttack = false; // アタックする範囲内に敵がいるかどうかを判定する変数 
 
-    public int playerHP = 100;
-    public int maxPlayerHP = 100;
-    public bool canAttack = false;
+    public int playerHP = 100; // プレイヤーのHP
+    public int maxPlayerHP = 100; // プレイヤーの最大HP
+    
 
-    // アニメーションに使う変数
+    // アニメーションに使う変数------------------------------------------------------------
     SpriteRenderer spriteRenderer;
-    [SerializeField] Sprite[] upSprite; // 上向き
-    [SerializeField] Sprite[] downSprite; // 下向き
-    [SerializeField] Sprite[] leftSprite; // 左向き
-    private int animIdx = 0;
+    [SerializeField] Sprite[] upSprite; // 上向きのアニメーションを代入
+    [SerializeField] Sprite[] downSprite; // 下向きのアニメーションを代入
+    [SerializeField] Sprite[] leftSprite; // 左向きのアニメーションを代入
+    private int animIdx = 0; // アニメーションのコマ数を数える変数
 
     void Start()
     {
         currentPos = transform.position;
         onDash = false;
         attackCdTimer = 0f;
-        rb = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         playerHP = maxPlayerHP;
         attackDamage = defaultAttackDamage;
@@ -73,7 +72,9 @@ public class PlayerController : MonoBehaviour
             Destroy(gameObject);
         }
     }
-
+/// <summary>
+/// 入力の受け付け、ダッシュやアタックのクールダウンを数える関数
+/// </summary>
     void InputManager()
     {
         // 移動
@@ -92,7 +93,7 @@ public class PlayerController : MonoBehaviour
         }
 
         // アタック
-
+        // プレイヤーの攻撃可能範囲に入っていてかつクールダウン中でなければ攻撃する
         attackCdTimer -= Time.deltaTime;
         if (attackCdTimer <= 0 && canAttack)
         {
@@ -102,7 +103,9 @@ public class PlayerController : MonoBehaviour
         
     }
 
-    // 移動処理(WASDのみ)
+    /// <summary>
+    /// プレイヤーの向きと移動を処理する関数
+    /// </summary>
     void Move()
     {
         moveDir = new Vector3(dirX, dirY, 0);
@@ -161,7 +164,9 @@ public class PlayerController : MonoBehaviour
     }
 
 
-    // ダッシュ処理の関数
+    /// <summary>
+    /// プレイヤーのダッシュ処理の関数
+    /// </summary>
     IEnumerator Dash()
     {
         onDash = true;
@@ -170,7 +175,9 @@ public class PlayerController : MonoBehaviour
         onDash = false;
     }
 
-    // アタック処理
+    /// <summary>
+    /// プレイヤーのアタック処理の関数
+    /// </summary>
     IEnumerator Attack()
     {
         float flipX = 0;
@@ -218,6 +225,10 @@ public class PlayerController : MonoBehaviour
         onAttack = false;
     }
 
+    /// <summary>
+    /// プレイヤーがダメージを受けたときの関数
+    /// </summary>
+    /// <param name="enemyAttack"></param>
     public void Damaged(int enemyAttack)
     {
         playerHP -= enemyAttack;

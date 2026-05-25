@@ -7,7 +7,7 @@ using UnityEngine.Rendering.VirtualTexturing;
 public class PlayerController : MonoBehaviour
 {
     // 移動に使う変数
-    [SerializeField]private float speed = 0.1f;
+    [SerializeField]public float speed = 0.1f;
     [SerializeField]private float defaultSpeed = 0.1f;
     [SerializeField] private float dashSpeed = 0.5f;
     private bool onDash;
@@ -15,7 +15,8 @@ public class PlayerController : MonoBehaviour
     float dirX;
     float dirY;
     [SerializeField]float xLimit = 8.5f;
-    [SerializeField]float yLimit = 4.7f;
+    [SerializeField]float yMaxLimit = 4.7f;
+    [SerializeField] float yMinLimit = -1.6f;
     Vector3 currentPos;
     Vector3 moveDir;
     Rigidbody2D rb;
@@ -30,8 +31,8 @@ public class PlayerController : MonoBehaviour
 
     // アタックに使う変数
     [SerializeField] GameObject attackObj;
-    [SerializeField] float attackTime = 2.0f;
-    [SerializeField]float attackCd = 0.5f;
+    [SerializeField] float attackTime = 1.0f;
+    [SerializeField]float attackCd = 1.0f;
     float attackCdTimer;
     public int defaultAttackDamage = 5;
     public int attackDamage = 5;
@@ -155,7 +156,7 @@ public class PlayerController : MonoBehaviour
 
         // 画面内制限
         currentPos.x = Mathf.Clamp(currentPos.x, -xLimit, xLimit);
-        currentPos.y = Mathf.Clamp(currentPos.y, -yLimit, yLimit);
+        currentPos.y = Mathf.Clamp(currentPos.y, yMinLimit, yMaxLimit);
         
         // 正規化
         if (moveDir.magnitude >= 1)
@@ -179,11 +180,11 @@ public class PlayerController : MonoBehaviour
     {
         float flipX = 0;
         float rotZ = 0;
-        onAttack = true;
+        //onAttack = true;
         attackDir = lastDir;
 
-        GameObject obj = Instantiate(attackObj, this.transform);
-        obj.transform.position = transform.position + attackDir * 0.5f;
+        GameObject obj = Instantiate(attackObj, transform);
+        obj.transform.position = transform.position + attackDir * 0.50f;
         
         // 斬撃の方向を決定
         if(attackDir.x > 0)
@@ -212,13 +213,17 @@ public class PlayerController : MonoBehaviour
 
         obj.transform.rotation = Quaternion.Euler(0, flipX, rotZ);
 
+        yield return new WaitForSeconds(0.2f);
+
+        onAttack = true;
+
         yield return new WaitForSeconds(attackTime);
 
-        Destroy(obj);
+        //Destroy(obj);
         onAttack = false;
     }
 
-    public void Damaged(int enemyAttack)
+    public void EnemyDamaged(int enemyAttack)
     {
         playerHP -= enemyAttack;
         Debug.Log("Player残りHP：" + enemyAttack);

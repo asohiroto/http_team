@@ -8,7 +8,7 @@ public class PlayerController : MonoBehaviour
 {
     // 移動に使う変数
     [SerializeField]public float speed = 0.1f;
-    [SerializeField]private float defaultSpeed = 0.1f;
+    [SerializeField]public float defaultSpeed = 0.1f;
     [SerializeField] private float dashSpeed = 0.5f;
     private bool onDash;
 
@@ -213,7 +213,7 @@ public class PlayerController : MonoBehaviour
 
         obj.transform.rotation = Quaternion.Euler(0, flipX, rotZ);
 
-        yield return new WaitForSeconds(0.2f);
+        yield return new WaitForSeconds(0.2f); // アタック方向の固定を少し遅らせる
 
         onAttack = true;
 

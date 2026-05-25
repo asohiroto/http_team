@@ -40,14 +40,9 @@ public class PlayerController : MonoBehaviour
     float defaultFXRot = -90; // 攻撃エフェクトの方向補正
     bool onAttack = false;
 
-    GameObject[] attackTarget;
-    GameObject closeTarget;
-    float closeDist = 1000;
-    float attackDist = 2.0f;
-
     public int playerHP = 100;
     public int maxPlayerHP = 100;
-    public bool canAttack;
+    public bool canAttack = false;
 
     // アニメーションに使う変数
     SpriteRenderer spriteRenderer;
@@ -99,7 +94,7 @@ public class PlayerController : MonoBehaviour
         // アタック
 
         attackCdTimer -= Time.deltaTime;
-        if (attackCdTimer <= 0)
+        if (attackCdTimer <= 0 && canAttack)
         {
             StartCoroutine(Attack());
             attackCdTimer = attackCd + attackTime;
@@ -213,7 +208,7 @@ public class PlayerController : MonoBehaviour
 
         obj.transform.rotation = Quaternion.Euler(0, flipX, rotZ);
 
-        yield return new WaitForSeconds(0.2f); // アタック方向の固定を少し遅らせる
+        yield return new WaitForSeconds(0.1f); // アタック方向の固定を少し遅らせる
 
         onAttack = true;
 

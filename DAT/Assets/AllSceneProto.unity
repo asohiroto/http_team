@@ -826,8 +826,6 @@ RectTransform:
   - {fileID: 1342554890}
   - {fileID: 1710573130}
   - {fileID: 1242071336}
-  - {fileID: 816242360}
-  - {fileID: 732638450}
   - {fileID: 1964648985}
   - {fileID: 1472674293}
   - {fileID: 769125397}
@@ -882,7 +880,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 627710345}
+    m_TransformParent: {fileID: 1342554890}
     m_Modifications:
     - target: {fileID: 1774909673193625856, guid: 0e45a51481337954e93e2451e891ff2d, type: 3}
       propertyPath: m_text
@@ -970,11 +968,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8028677732098824711, guid: 0e45a51481337954e93e2451e891ff2d, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 164.6642
+      value: -5.6999817
       objectReference: {fileID: 0}
     - target: {fileID: 8028677732098824711, guid: 0e45a51481337954e93e2451e891ff2d, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 1.481102
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 8028677732098824711, guid: 0e45a51481337954e93e2451e891ff2d, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -1386,12 +1384,13 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 816242360}
   m_Father: {fileID: 627710345}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 170, y: -110}
+  m_AnchoredPosition: {x: 170.99998, y: -110}
   m_SizeDelta: {x: 300, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &953328181
@@ -1788,7 +1787,8 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 732638450}
   m_Father: {fileID: 627710345}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -1896,7 +1896,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 627710345}
+    m_TransformParent: {fileID: 953328180}
     m_Modifications:
     - target: {fileID: 57121871761971506, guid: 0e45a51481337954e93e2451e891ff2d, type: 3}
       propertyPath: m_CullTransparentMesh
@@ -1988,11 +1988,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8028677732098824711, guid: 0e45a51481337954e93e2451e891ff2d, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 164.66
+      value: -0.99998474
       objectReference: {fileID: 0}
     - target: {fileID: 8028677732098824711, guid: 0e45a51481337954e93e2451e891ff2d, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -107.39642
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8028677732098824711, guid: 0e45a51481337954e93e2451e891ff2d, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -2362,9 +2362,9 @@ MonoBehaviour:
   attackCd: 0.5
   defaultAttackDamage: 5
   attackDamage: 5
+  canAttack: 0
   playerHP: 100
   maxPlayerHP: 100
-  canAttack: 0
   upSprite:
   - {fileID: -3057998330571279762, guid: bf29f581365379b489ef412b503d3e39, type: 3}
   downSprite:

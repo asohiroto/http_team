@@ -37,6 +37,7 @@ public class EnemyController : MonoBehaviour
     [SerializeField] private bool canAttack = false;
     [SerializeField] private bool isStop = false;
     public bool IsAttack = false;   // いい方法が思いつかなかったので
+    private bool playing = false;
 
     [Header("Config")]
     [SerializeField] private float takeDamageDist = 1f; // Player からの攻撃をくらう距離
@@ -67,6 +68,8 @@ public class EnemyController : MonoBehaviour
         if (loseDist < findDist)  loseDist = findDist;
 
         attack = GetComponent<EnemyAttack>();
+
+        playing = true;
 
         // HPが0のとき、スポーンさせない <- これいる？　検討中    // 必ず一番最後に処理
     }
@@ -143,14 +146,18 @@ public class EnemyController : MonoBehaviour
     {
         // セグメント数
         int seg = 32;
-        float r;
+        float r = 0;
 
-        if (isChasePlayer)
+        if (!playing)
+        {
+            r = 0;
+        }
+        else if (isChasePlayer || canAttack)
         {
             Gizmos.color = Color.red;
             r = loseDist;
         }
-        else
+        else if (!isChasePlayer)
         {
             Gizmos.color = Color.yellow;
             r = findDist;

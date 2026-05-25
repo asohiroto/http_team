@@ -50,7 +50,7 @@ public class CoinManager : MonoBehaviour
         if (moneyText != null)
         {
             // 「所持金：100円」の形式で表示
-            moneyText.text = $"Money: {currentMoney} ";
+            moneyText.text = $"{currentMoney} ";
         }
     }
 }

@@ -13,13 +13,17 @@ public class skill_manager : MonoBehaviour
     CraftManager craft;
 
     [SerializeField] int healAmount; // 回復量
-    [SerializeField] int enhanceAmount; // 強化量
-    [SerializeField] int enhanceTime; // 効果時間
+    [SerializeField] int enhanceAmount; // エンハンス強化量
+    [SerializeField] int hyperDamageAmount; // ハイパーモード攻撃力強化量
+    [SerializeField] float hyperSpeedAmount; // ハイパーモード素早さ強化量
+    [SerializeField] int enhanceTimer; // エンハンス効果時間
+    [SerializeField] int hyperTimer; // ハイパー効果時間
     [SerializeField] int waitTime; // 使用待機時間
 
-    int time = 0;
-    int enhanceFlag = 0; // 強化状態の判定
-    int hyperFlag = 0;
+    int enhanceCount = 0; // エンハンスの効果時間カウンタ
+    int hyperCount = 0; // ハイパーモードの効果時間カウンタ
+    int enhanceFlag = 0; // エンハンス強化状態の判定
+    int hyperFlag = 0; // ハイパーモード強化状態の判定
 
     public int discardInd1 = -1;
     public int discardInd2 = -1;
@@ -35,14 +39,26 @@ public class skill_manager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        time++;
+        enhanceCount++;
+        hyperCount++;
 
-        if (enhanceFlag == 1 && time > enhanceTime * 60) // 効果時間経過後、攻撃力を最初の状態に戻す
+        if (enhanceFlag == 1 && enhanceCount > enhanceTimer * 60) // 効果時間経過後、攻撃力を最初の状態に戻す
         {
             player.attackDamage = player.defaultAttackDamage;
             Debug.Log("Power : " + player.attackDamage);
 
             enhanceFlag = 0;
+        }
+
+        if (hyperFlag == 1 && hyperCount > hyperTimer * 60)
+        {
+            player.attackDamage = player.defaultAttackDamage;
+            player.speed = player.defaultSpeed;
+
+            Debug.Log("Power : " + player.attackDamage);
+            Debug.Log("Speed : " + player.speed);
+
+            hyperFlag = 0;
         }
 
         if (Keyboard.current.pKey.wasPressedThisFrame) // 【テスト用】　pを押すと体力を減らす
@@ -75,7 +91,7 @@ public class skill_manager : MonoBehaviour
                     player.attackDamage += enhanceAmount;
 
                     enhanceFlag = 1;
-                    time = 0;
+                    enhanceCount = 0;
 
 
                     Debug.Log("power = " + player.attackDamage);
@@ -221,10 +237,11 @@ public class skill_manager : MonoBehaviour
             {
                 if (hyperFlag == 0) // 非強化状態なら使用可能
                 {
-                    player.attackDamage += enhanceAmount;
+                    player.attackDamage += hyperDamageAmount;
+                    player.speed += hyperSpeedAmount;
 
-                    enhanceFlag = 1;
-                    time = 0;
+                    hyperFlag = 1;
+                    hyperCount = 0;
 
 
                     Debug.Log("power = " + player.attackDamage);

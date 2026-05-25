@@ -223,7 +223,7 @@ public class PlayerController : MonoBehaviour
         onAttack = false;
     }
 
-    public void EnemyDamaged(int enemyAttack)
+    public void Damaged(int enemyAttack)
     {
         playerHP -= enemyAttack;
         Debug.Log("Player残りHP：" + enemyAttack);

@@ -15,12 +15,17 @@ public class HandManager : MonoBehaviour
     public int[] cardUseId = new int[10]; // 配列に保存されているカードIDを保存する配列
 
     skill_manager skill;
-
     GameObject newCard;
+    CraftManager craft;
+
+    public bool[] isCardPressed;
 
     void Start()
     {
         skill = GameObject.Find("SkillManager").GetComponent<skill_manager>();
+        craft = GetComponent<CraftManager>();
+
+        isCardPressed = new bool[deckCardTrans.Length];
 
         for (int i = 0; i < 4; i++) // それぞれの手札の位置にランダムなカードを生成
         {
@@ -82,42 +87,54 @@ public class HandManager : MonoBehaviour
 
         if (btn == null) return; // ボタンコンポーネントがついていなかった場合の安全装置
 
+        ButtonPointerUpListener pointerUp = btn.gameObject.AddComponent<ButtonPointerUpListener>();
+
+        pointerUp.onPointerDown.AddListener(() => isCardPressed[index] = true);
+        pointerUp.onPointerUp.AddListener(() => isCardPressed[index] = false);
+
+
         switch (id)
         {
             case 0:
 
-                btn.onClick.AddListener(async () => await skill.Enhance(index)); // ボタンの入力を検知するリスナーを付与
-
+                pointerUp.onPointerClick.AddListener(async () => await skill.Enhance(index)); // ボタンの入力を検知するリスナーを付与
+                pointerUp.onPointerDown.AddListener(() => skill.CraftMethod(id, index));
+                //pointerUp.onPointerUp.AddListener(() => skill.CraftMethod(id, index));
                 break;
 
             case 1:
 
-                btn.onClick.AddListener(async () => await skill.Heal(index));
-
+                pointerUp.onPointerClick.AddListener(async () => await skill.Heal(index));
+                pointerUp.onPointerDown.AddListener(() => skill.CraftMethod(id, index));
+                //pointerUp.onPointerUp.AddListener(() => skill.CraftMethod(id, index));
                 break;
 
             case 2:
 
-                btn.onClick.AddListener(async () => await skill.Slash(index));
-
+                pointerUp.onPointerClick.AddListener(async () => await skill.Slash(index));
+                pointerUp.onPointerDown.AddListener(() => skill.CraftMethod(id, index));
+                //pointerUp.onPointerUp.AddListener(() => skill.CraftMethod(id, index));
                 break;
 
             case 3:
 
-                btn.onClick.AddListener(async () => await skill.FireBall(index));
-
+                pointerUp.onPointerClick.AddListener(async () => await skill.FireBall(index));
+                pointerUp.onPointerDown.AddListener(() => skill.CraftMethod(id, index));
+                //pointerUp.onPointerUp.AddListener(() => skill.CraftMethod(id, index));
                 break;
 
             case 4:
 
-                btn.onClick.AddListener(async () => await skill.FireSlash(index));
-
+                pointerUp.onPointerClick.AddListener(async () => await skill.FireSlash(index));
+                pointerUp.onPointerDown.AddListener(() => skill.CraftMethod(id, index));
+                //pointerUp.onPointerUp.AddListener(() => skill.CraftMethod(id, index));
                 break;
 
             case 5:
 
-                btn.onClick.AddListener(async () => await skill.HyperMode(index));
-
+                pointerUp.onPointerClick.AddListener(async () => await skill.HyperMode(index));
+                pointerUp.onPointerDown.AddListener(() => skill.CraftMethod(id, index));
+                //pointerUp.onPointerUp.AddListener(() => skill.CraftMethod(id, index));
                 break;
         }
 

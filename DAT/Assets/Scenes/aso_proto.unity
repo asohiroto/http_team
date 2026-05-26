@@ -859,6 +859,7 @@ MonoBehaviour:
   - {fileID: 832775507}
   - {fileID: 555665968}
   cardUseId: 000000000000000000000000000000000000000000000000
+  isCardPressed: 
 --- !u!4 &1219670158
 Transform:
   m_ObjectHideFlags: 0
@@ -1475,9 +1476,9 @@ MonoBehaviour:
   attackCd: 0.5
   defaultAttackDamage: 5
   attackDamage: 5
+  canAttack: 0
   playerHP: 100
   maxPlayerHP: 100
-  canAttack: 0
   upSprite:
   - {fileID: -3057998330571279762, guid: bf29f581365379b489ef412b503d3e39, type: 3}
   downSprite:

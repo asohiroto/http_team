@@ -12,8 +12,9 @@ GameObject:
   - component: {fileID: 8174375618894445782}
   - component: {fileID: 6169774236300055037}
   - component: {fileID: 6572715008614484294}
+  - component: {fileID: -5278446529632359023}
   m_Layer: 5
-  m_Name: Enhance00
+  m_Name: enhance00
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -132,3 +133,15 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &-5278446529632359023
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7406486630995092652}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1484e924cd3e3fe4f9039e780dc892f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DraggableCard

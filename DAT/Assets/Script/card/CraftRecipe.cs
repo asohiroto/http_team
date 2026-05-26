@@ -1,8 +1,7 @@
 using UnityEngine;
 using System;
 
-[Serializable]
-public class CraftRecipe
+[Serializable]public class CraftRecipe
 {
     public int materialA; // 合成するカード１
     public int materialB; // 合成するカード２

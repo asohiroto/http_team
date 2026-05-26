@@ -12,7 +12,6 @@ public class HandManager : MonoBehaviour
     [SerializeField] public Transform[] deckCardTrans; // カードの生成場所
 
     int cardId = 0; // 生成するカードのID
-    public int[] cardUseId = new int[10]; // 配列に保存されているカードIDを保存する配列
 
     skill_manager skill;
     GameObject newCard;
@@ -34,8 +33,14 @@ public class HandManager : MonoBehaviour
             newCard = Instantiate(cardPrefab[cardId], deckCardTrans[i]); // 初期手札の生成
 
             ButtonListener(cardId, newCard, i);
+            DraggableCard dc = newCard.GetComponent<DraggableCard>();
 
-            cardUseId[i] = cardId;
+            if(dc != null )
+            {
+                dc.cardIndex = i;
+                dc.cardId = cardId;
+            }
+
         }
     }
 
@@ -48,6 +53,13 @@ public class HandManager : MonoBehaviour
     public GameObject CardGenerate(int ran, int chan) // 新たにランダムなカードを生成する
     {
         GameObject genCard = Instantiate(cardPrefab[ran], deckCardTrans[chan]); // カードを作る処理
+        DraggableCard dc = genCard.GetComponentInChildren<DraggableCard>();
+
+        if(dc != null)
+        {
+            dc.cardIndex = chan;
+            dc.cardId = ran;
+        }
         return genCard;
     }
 
@@ -70,7 +82,7 @@ public class HandManager : MonoBehaviour
 
     public void DisCard(int chan) // 手札を捨てる
     {
-        if (deckCardTrans[chan].childCount < 0)
+        if (deckCardTrans[chan].childCount <= 0)
         {
             Debug.Log("破壊対象が存在しません");
         }

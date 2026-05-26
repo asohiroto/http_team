@@ -167,8 +167,55 @@ public class skill_manager : MonoBehaviour
                 await Task.Yield();
             }
 
+            if (Mouse.current.rightButton.wasPressedThisFrame)
+            {
+                // publicにしたもの
+                // attackDir lastDir strongAttackObj defaultFXRot onAttack attackTime
 
-            hand.DisCard(ind);
+                float flipX = 0;
+                float rotZ = 0;
+                //onAttack = true;
+                player.attackDir = player.lastDir;
+
+                GameObject obj = Instantiate(player.strongAttackObj, transform);
+                obj.transform.position = transform.position + player.attackDir * 0.50f;
+
+                // 斬撃の方向を決定
+                if (player.attackDir.x > 0)
+                {
+                    flipX = 0;
+                }
+                else if (player.attackDir.x < 0)
+                {
+                    flipX = 180;
+                }
+
+                if (player.attackDir.x == 0)
+                {
+                    // 真上・真下（左右の入力がないとき）
+                    if (player.attackDir.y > 0) rotZ = 90 + player.defaultFXRot;
+                    else if (player.attackDir.y < 0) rotZ = -90 + player.defaultFXRot;
+                    else rotZ = 0 + player.defaultFXRot; // 入力なし（真横など）
+                }
+                else
+                {
+                    // 斜め入力（左右の入力があるとき）
+                    if (player.attackDir.y > 0) rotZ = 45 + player.defaultFXRot;
+                    else if (player.attackDir.y < 0) rotZ = -45 + player.defaultFXRot;
+                    else rotZ = 0 + player.defaultFXRot; // 真横
+                }
+
+                obj.transform.rotation = Quaternion.Euler(0, flipX, rotZ);
+
+                await Task.Delay((int)(0.1f * 1000));
+
+                player.onAttack = true;
+
+                await Task.Delay((int)(player.attackTime * 1000));
+
+                player.onAttack = false;
+                hand.DisCard(ind);
+            }
         }
 
         CraftMethod(cardID, ind);
@@ -189,8 +236,10 @@ public class skill_manager : MonoBehaviour
                 await Task.Yield();
             }
 
-
-            hand.DisCard(ind);
+            if (Mouse.current.rightButton.wasPressedThisFrame)
+            {
+                hand.DisCard(ind);
+            }
         }
 
         CraftMethod(cardID, ind);
@@ -210,9 +259,10 @@ public class skill_manager : MonoBehaviour
 
                 await Task.Yield();
             }
-
-
-            hand.DisCard(ind);
+            if (Mouse.current.rightButton.wasPressedThisFrame)
+            {
+                hand.DisCard(ind);
+            }
         }
 
         CraftMethod(cardID, ind);
@@ -283,8 +333,7 @@ public class skill_manager : MonoBehaviour
             GameObject obj = hand.CardGenerate(craftResult, discardInd1);
             hand.ButtonListener(craftResult, obj, discardInd1);
         }
-
-        if (craft.craftFrag == 1) // 場所とIDを保存する
+        else if (craft.craftFrag == 1) // 場所とIDを保存する
         {
             discardInd1 = ind;
             craft.SettingMaterial1(id);

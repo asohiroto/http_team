@@ -858,7 +858,6 @@ MonoBehaviour:
   - {fileID: 1604061362}
   - {fileID: 832775507}
   - {fileID: 555665968}
-  cardUseId: 000000000000000000000000000000000000000000000000
   isCardPressed: 
 --- !u!4 &1219670158
 Transform:
@@ -1470,15 +1469,21 @@ MonoBehaviour:
   xLimit: 8.5
   yMaxLimit: 4.7
   yMinLimit: -1.6
+  lastDir: {x: 1, y: 0, z: 0}
   dashTime: 0.1
   attackObj: {fileID: 132122364930665669, guid: 428bde71b707b3b49a63a27c01b204d2, type: 3}
+  strongAttackObj: {fileID: 132122364930665669, guid: 9d0fa2fe56967ff4790f505ff03d0108, type: 3}
   attackTime: 0.5
   attackCd: 0.5
   defaultAttackDamage: 5
   attackDamage: 5
+  attackDir: {x: 0, y: 0, z: 0}
+  defaultFXRot: -90
+  onAttack: 0
   canAttack: 0
   playerHP: 100
   maxPlayerHP: 100
+  canDie: 1
   upSprite:
   - {fileID: -3057998330571279762, guid: bf29f581365379b489ef412b503d3e39, type: 3}
   downSprite:

@@ -1,25 +1,34 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using UnityEngine.XR;
 
-public class DraggableCard : MonoBehaviour, IBeginDragHandler, IEndDragHandler,IDragHandler
+public class DraggableCard : MonoBehaviour, IBeginDragHandler, IEndDragHandler,IDragHandler, IDropHandler
 {
     private Canvas canvas;
     private CanvasGroup canvasGroup;
     private GameObject ghostImage;
 
+    public int cardIndex;
+    public int cardId;
+
     CraftManager craft;
+    HandManager hand;
 
     void Awake()
     {
         canvas = GetComponentInParent<Canvas>();
         canvasGroup = gameObject.AddComponent<CanvasGroup>();
-        craft = GameObject.Find("CraftManager").GetComponentInParent<CraftManager>();
+
+        craft = GameObject.Find("CraftManager").GetComponent<CraftManager>();
+        hand = GameObject.Find("HandManager").GetComponent<HandManager>();
     }
 
     public void OnBeginDrag(PointerEventData eventData)
     {
         if (craft.craftFrag == 0) return;
+
+        canvasGroup.blocksRaycasts = false;
 
         if (ghostImage != null) Destroy(ghostImage);
 
@@ -52,6 +61,33 @@ public class DraggableCard : MonoBehaviour, IBeginDragHandler, IEndDragHandler,I
             out Vector2 localPoint
             );
         ghostRect.localPosition = localPoint;
+    }
+
+    public void OnDrop(PointerEventData eventData)
+    {
+        if (craft.craftFrag == 0) return;
+
+        DraggableCard dragged = eventData.pointerDrag?.GetComponent<DraggableCard>();
+        DraggableCard target = transform.GetComponentInChildren<DraggableCard>();
+
+        if (dragged == null || dragged == this) return;
+
+        int craftResult = craft.CraftItems(dragged.cardId, target.cardId);
+        if (craftResult < 0) return;
+
+        int fromIndex = dragged.cardIndex;
+        int toIndex = this.cardIndex;
+
+        Destroy(dragged.ghostImage);
+
+        hand.DisCard(fromIndex);
+        hand.DisCard(toIndex);
+
+        int spawnIndex = Mathf.Min(fromIndex, toIndex);
+        GameObject obj = hand.CardGenerate(craftResult, spawnIndex);
+        hand.ButtonListener(craftResult, obj, spawnIndex);
+
+        craft.craftFrag = 0;
     }
 
     public void OnEndDrag(PointerEventData eventData)

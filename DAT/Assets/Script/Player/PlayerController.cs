@@ -7,45 +7,45 @@ using UnityEngine.Rendering.VirtualTexturing;
 public class PlayerController : MonoBehaviour
 {
     // 移動に使う変数-----------------------------------------------------------------
-    [SerializeField]public float speed = 0.1f; // プレイヤーのスピード
-    [SerializeField]public float defaultSpeed = 0.1f; // プレイヤーのデフォルトスピード
+    [SerializeField] public float speed = 0.1f; // プレイヤーのスピード
+    [SerializeField] public float defaultSpeed = 0.1f; // プレイヤーのデフォルトスピード
     [SerializeField] private float dashSpeed = 0.5f; // プレイヤーのダッシュスピード
     private bool onDash; // ダッシュ中かどうか
 
     float dirX; // プレイヤーのX軸方向 (-1, 0, 1)のどれか
     float dirY; // プレイヤーのy軸方向(-1, 0, 1)のどれか
-    [SerializeField]float xLimit = 8.5f; // x軸の移動制限
-    [SerializeField]float yMaxLimit = 4.7f; // y軸の移動制限
+    [SerializeField] float xLimit = 8.5f; // x軸の移動制限
+    [SerializeField] float yMaxLimit = 4.7f; // y軸の移動制限
     [SerializeField] float yMinLimit = -1.6f; // y軸の移動制限
     Vector3 currentPos; // プレイヤーの現在のポジション
     Vector3 moveDir; // 入力の向きを代入
 
-    Vector3 lastDir = new Vector3(1, 0, 0); // プレイヤーが前のフレームで入力した方向
+    public Vector3 lastDir = new Vector3(1, 0, 0); // プレイヤーが前のフレームで入力した方向
 
     // ダッシュに使う変数---------------------------------------------------------------
     float dashCd = 0.3f; // ダッシュのクールダウン
     float dashCdTimer = 0f; // クールダウンを実際にカウントする変数
-    [SerializeField]float dashTime = 0.1f; // ダッシュの継続時間
+    [SerializeField] float dashTime = 0.1f; // ダッシュの継続時間
     Vector3 dashDir; // ダッシュする方向
 
     // アタックに使う変数---------------------------------------------------------------
     [SerializeField] GameObject attackObj; // アタックのエフェクトと当たり判定を持つオブジェクトを代入
-    [SerializeField] GameObject strongAttackObj;
-    [SerializeField] float attackTime = 1.0f; // アタック中の時間
-    [SerializeField]float attackCd = 1.0f; // アタックのクールダウン
+    [SerializeField] public GameObject strongAttackObj;
+    [SerializeField] public float attackTime = 1.0f; // アタック中の時間
+    [SerializeField] float attackCd = 1.0f; // アタックのクールダウン
     float attackCdTimer; // クールダウンを実際にカウントする変数
     public int defaultAttackDamage = 5; // デフォルトのアタックダメージ
     public int attackDamage = 5; // アタックダメージ
-    Vector3 attackDir; // アタックする方向
-    float defaultFXRot = -90; // 攻撃エフェクトの方向補正
-    bool onAttack = false; // アタックしているかどうか
+    public Vector3 attackDir; // アタックする方向
+    public float defaultFXRot = -90; // 攻撃エフェクトの方向補正
+    public bool onAttack = false; // アタックしているかどうか
     public bool canAttack = false; // アタックする範囲内に敵がいるかどうかを判定する変数 
 
     // プレイヤーのステータス-------------------------------------------------------------
     public int playerHP = 100; // プレイヤーのHP
     public int maxPlayerHP = 100; // プレイヤーの最大HP
-    [SerializeField]bool canDie = true;
-    
+    [SerializeField] bool canDie = true;
+
 
     // アニメーションに使う変数------------------------------------------------------------
     SpriteRenderer spriteRenderer;
@@ -71,14 +71,14 @@ public class PlayerController : MonoBehaviour
         InputManager();
         CheckDie();
 
-        if(playerHP <= 0)
+        if (playerHP <= 0)
         {
             Destroy(gameObject);
         }
     }
-/// <summary>
-/// 入力の受け付け、ダッシュやアタックのクールダウンを数える関数
-/// </summary>
+    /// <summary>
+    /// 入力の受け付け、ダッシュやアタックのクールダウンを数える関数
+    /// </summary>
     void InputManager()
     {
         // 移動
@@ -106,11 +106,11 @@ public class PlayerController : MonoBehaviour
         }
 
         // 強いアタック（デバック用）
-        if(Input.GetKey(KeyCode.F))
+        /*if(Input.GetKey(KeyCode.F))
         {
             StartCoroutine(StrongAttack());
-        }
-        
+        }*/
+
     }
 
     /// <summary>
@@ -120,7 +120,7 @@ public class PlayerController : MonoBehaviour
     {
         moveDir = new Vector3(dirX, dirY, 0);
 
-        if((moveDir.x != 0 || moveDir.y != 0) && !onAttack)
+        if ((moveDir.x != 0 || moveDir.y != 0) && !onAttack)
         {
             lastDir = moveDir;
         }
@@ -138,7 +138,7 @@ public class PlayerController : MonoBehaviour
         // プレイヤーの向き
         // アタックしている間はその向きを向くようになる
         // x方向の向きを変更
-        if(dirX > 0 && !onAttack)
+        if (dirX > 0 && !onAttack)
         {
             spriteRenderer.sprite = leftSprite[animIdx];
             transform.rotation = Quaternion.Euler(0, 0, 0);
@@ -150,13 +150,13 @@ public class PlayerController : MonoBehaviour
         }
 
         // y方向の向きを変更
-        if(dirX == 0 && !onAttack)
+        if (dirX == 0 && !onAttack)
         {
-            if(dirY > 0)
+            if (dirY > 0)
             {
                 spriteRenderer.sprite = upSprite[animIdx];
             }
-            else if(dirY < 0)
+            else if (dirY < 0)
             {
                 spriteRenderer.sprite = downSprite[animIdx];
             }
@@ -165,7 +165,7 @@ public class PlayerController : MonoBehaviour
         // 画面内制限
         currentPos.x = Mathf.Clamp(currentPos.x, -xLimit, xLimit);
         currentPos.y = Mathf.Clamp(currentPos.y, yMinLimit, yMaxLimit);
-        
+
         // 正規化
         if (moveDir.magnitude >= 1)
         {
@@ -197,13 +197,13 @@ public class PlayerController : MonoBehaviour
 
         GameObject obj = Instantiate(attackObj, transform);
         obj.transform.position = transform.position + attackDir * 0.50f;
-        
+
         // 斬撃の方向を決定
-        if(attackDir.x > 0)
+        if (attackDir.x > 0)
         {
             flipX = 0;
         }
-        else if(attackDir.x < 0)
+        else if (attackDir.x < 0)
         {
             flipX = 180;
         }
@@ -235,7 +235,7 @@ public class PlayerController : MonoBehaviour
         onAttack = false;
     }
 
-    public IEnumerator StrongAttack() // 強斬り用の関数
+    /*public IEnumerator StrongAttack() // 強斬り用の関数
     {
         float flipX = 0;
         float rotZ = 0;
@@ -279,7 +279,7 @@ public class PlayerController : MonoBehaviour
         yield return new WaitForSeconds(attackTime);
 
         onAttack = false;
-    }
+    }*/
 
     /// <summary>
     /// プレイヤーがダメージを受けたときの関数
@@ -296,7 +296,7 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     void CheckDie()
     {
-        if(playerHP <= 0 && canDie)
+        if (playerHP <= 0 && canDie)
         {
             Destroy(gameObject);
         }

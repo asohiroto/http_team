@@ -13,7 +13,7 @@ public class HandManager : MonoBehaviour
 
     int cardId = 0; // 生成するカードのID
 
-    skill_manager skill;
+    SkillManager skill;
     GameObject newCard;
     CraftManager craft;
 
@@ -21,7 +21,7 @@ public class HandManager : MonoBehaviour
 
     void Start()
     {
-        skill = GameObject.Find("SkillManager").GetComponent<skill_manager>();
+        skill = GameObject.Find("SkillManager").GetComponent<SkillManager>();
         craft = GetComponent<CraftManager>();
 
         isCardPressed = new bool[deckCardTrans.Length];

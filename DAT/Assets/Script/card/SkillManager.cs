@@ -6,7 +6,7 @@ using UnityEngine.UI;
 using UnityEngine.XR;
 using static UnityEngine.InputManagerEntry;
 
-public class skill_manager : MonoBehaviour
+public class SkillManager : MonoBehaviour
 {
     PlayerController player;
     HandManager hand;
@@ -172,6 +172,8 @@ public class skill_manager : MonoBehaviour
                 // publicにしたもの
                 // attackDir lastDir strongAttackObj defaultFXRot onAttack attackTime
 
+                Debug.Log("slash!");
+
                 float flipX = 0;
                 float rotZ = 0;
                 //onAttack = true;
@@ -325,13 +327,10 @@ public class skill_manager : MonoBehaviour
             hand.DisCard(discardInd1);
             hand.DisCard(discardInd2);
 
-            if (discardInd1 > discardInd2)
-            {
-                discardInd1 = discardInd2;
-            }
+            int spawnIndex = Mathf.Min(discardInd1, discardInd2);
 
-            GameObject obj = hand.CardGenerate(craftResult, discardInd1);
-            hand.ButtonListener(craftResult, obj, discardInd1);
+            GameObject obj = hand.CardGenerate(craftResult, spawnIndex);
+            hand.ButtonListener(craftResult, obj, spawnIndex);
         }
         else if (craft.craftFrag == 1) // 場所とIDを保存する
         {

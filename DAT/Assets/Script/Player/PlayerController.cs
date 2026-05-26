@@ -235,7 +235,7 @@ public class PlayerController : MonoBehaviour
         onAttack = false;
     }
 
-    public IEnumerator StrongAttack()
+    public IEnumerator StrongAttack() // 強斬り用の関数
     {
         float flipX = 0;
         float rotZ = 0;
@@ -277,6 +277,8 @@ public class PlayerController : MonoBehaviour
         onAttack = true;
 
         yield return new WaitForSeconds(attackTime);
+
+        onAttack = false;
     }
 
     /// <summary>

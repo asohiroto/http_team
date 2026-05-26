@@ -84,10 +84,10 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Sprite: {fileID: -8694665474056538844, guid: 29556e07e017ecc4780a4c6c39a77cd1, type: 3}
+  m_Sprite: {fileID: 2395074565377422663, guid: 17b1c0ad2dc324d4ab85de5718b6575f, type: 3}
   m_Color: {r: 0.9, g: 0.9, b: 0.9, a: 1}
   m_FlipX: 0
-  m_FlipY: 0
+  m_FlipY: 1
   m_DrawMode: 0
   m_Size: {x: 1.28, y: 1.28}
   m_AdaptiveModeThreshold: 0.5
@@ -128,7 +128,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: -0.009388477, y: 0.3623948}
+  m_Offset: {x: 0, y: 0.2}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -138,7 +138,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 0.9211369, y: 0.32778585}
+  m_Size: {x: 1.2, y: 1}
   m_EdgeRadius: 0
 --- !u!50 &2029232647305722363
 Rigidbody2D:
@@ -180,12 +180,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerAttack
   attackSprite:
-  - {fileID: -8694665474056538844, guid: 29556e07e017ecc4780a4c6c39a77cd1, type: 3}
-  - {fileID: 1811271559610029934, guid: 29556e07e017ecc4780a4c6c39a77cd1, type: 3}
-  - {fileID: 7754473855975003660, guid: 29556e07e017ecc4780a4c6c39a77cd1, type: 3}
-  - {fileID: -6873499858083315907, guid: 29556e07e017ecc4780a4c6c39a77cd1, type: 3}
-  - {fileID: -6339025367837069065, guid: 29556e07e017ecc4780a4c6c39a77cd1, type: 3}
-  - {fileID: 5786633606010686373, guid: 29556e07e017ecc4780a4c6c39a77cd1, type: 3}
-  - {fileID: 2866870010324683555, guid: 29556e07e017ecc4780a4c6c39a77cd1, type: 3}
-  - {fileID: 5070624081523285575, guid: 29556e07e017ecc4780a4c6c39a77cd1, type: 3}
-  - {fileID: -242721548646073282, guid: 29556e07e017ecc4780a4c6c39a77cd1, type: 3}
+  - {fileID: 2395074565377422663, guid: 17b1c0ad2dc324d4ab85de5718b6575f, type: 3}
+  - {fileID: 3446733471723892229, guid: 17b1c0ad2dc324d4ab85de5718b6575f, type: 3}
+  - {fileID: 3601750260408532293, guid: 17b1c0ad2dc324d4ab85de5718b6575f, type: 3}
+  - {fileID: 1489578318031288224, guid: 17b1c0ad2dc324d4ab85de5718b6575f, type: 3}
+  - {fileID: -6182533840853419118, guid: 17b1c0ad2dc324d4ab85de5718b6575f, type: 3}
+  - {fileID: -701126997251728781, guid: 17b1c0ad2dc324d4ab85de5718b6575f, type: 3}
+  - {fileID: 6745886743408634475, guid: 17b1c0ad2dc324d4ab85de5718b6575f, type: 3}

@@ -12,8 +12,9 @@ GameObject:
   - component: {fileID: 6911283068380364916}
   - component: {fileID: 9128027959756465577}
   - component: {fileID: 4043340452990180271}
+  - component: {fileID: -2302618919679383396}
   m_Layer: 5
-  m_Name: FireBall03
+  m_Name: fireball03
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -132,3 +133,15 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &-2302618919679383396
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8004957121014659405}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1484e924cd3e3fe4f9039e780dc892f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DraggableCard

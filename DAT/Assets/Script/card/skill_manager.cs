@@ -258,7 +258,7 @@ public class skill_manager : MonoBehaviour
         CraftMethod(cardID, ind);
     }
 
-    void CraftMethod(int id, int ind) // カード合成の関数
+    public void CraftMethod(int id, int ind) // カード合成の関数
     {
         if (craft.craftFrag == 2) // 保存されたIDを呼び出し、素材となったカードを破壊し、空いたスペースにカードを合成
         {
@@ -290,8 +290,6 @@ public class skill_manager : MonoBehaviour
             craft.SettingMaterial1(id);
         }
     }
-
-
 }
 
 

@@ -1859,6 +1859,7 @@ MonoBehaviour:
   canAttack: 0
   playerHP: 100
   maxPlayerHP: 100
+  canDie: 1
   upSprite:
   - {fileID: -3057998330571279762, guid: bf29f581365379b489ef412b503d3e39, type: 3}
   downSprite:
@@ -2289,7 +2290,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &2090698265
 MonoBehaviour:
   m_ObjectHideFlags: 0

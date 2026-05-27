@@ -12,37 +12,61 @@ public class SkillManager : MonoBehaviour
     HandManager hand;
     CraftManager craft;
 
-    [SerializeField] int healAmount; // 回復量
-    [SerializeField] int enhanceAmount; // エンハンス強化量
-    [SerializeField] int hyperDamageAmount; // ハイパーモード攻撃力強化量
+    [SerializeField] int healAmount;         // 回復量
+    [SerializeField] int enhanceTime;        // エンハンス効果時間
+    [SerializeField] int hyperTime;          // ハイパー効果時間
+    [SerializeField] int fbCooldownTime;     // ファイアーボール使用可能間隔
+    [SerializeField] int waitTime;           // 使用待機時間
+    [SerializeField] int enhanceAmount;      // エンハンス強化量
+    [SerializeField] int hyperDamageAmount;  // ハイパーモード攻撃力強化量
+
     [SerializeField] float hyperSpeedAmount; // ハイパーモード素早さ強化量
-    [SerializeField] int enhanceTimer; // エンハンス効果時間
-    [SerializeField] int hyperTimer; // ハイパー効果時間
-    [SerializeField] int waitTime; // 使用待機時間
+    [SerializeField] float fbSpeed;          // ファイアーボールで生成したオブジェクトの速度
 
-    int enhanceCount = 0; // エンハンスの効果時間カウンタ
-    int hyperCount = 0; // ハイパーモードの効果時間カウンタ
-    int enhanceFlag = 0; // エンハンス強化状態の判定
-    int hyperFlag = 0; // ハイパーモード強化状態の判定
+    int enhanceCount = 0;                    // エンハンスの効果時間カウンタ
+    int hyperCount = 0;                      // ハイパーモードの効果時間カウンタ
+    int fbCount = 0;                         // ファイアーボールの効果時間カウンタ
+    int enhanceFlag = 0;                     // エンハンス強化状態の判定
+    int hyperFlag = 0;                       // ハイパーモード強化状態の判定
+    int fbFlag = 0;                          // ファイアーボール状態の判定
+    int fbEffectFlag = 0;                    // ファイアーボールが画面内に存在するか
 
-    public int discardInd1 = -1;
-    public int discardInd2 = -1;
+    public int discardInd1 = -1;             // 捨てるカードの住所その１
+    public int discardInd2 = -1;             //                   その２
+
+    Vector3 mousePosScreen = new Vector3();  // スクリーン座標系でのマウスの位置
+    Vector3 mousePosWorld = new Vector3();   // ワールド座標系でのマウスの位置
+
+    Vector2 fbMousePos = new Vector2();      // ファイアーボール実行時点でのマウスの位置
+    Vector2 destPosFb = new Vector2();       // ファイアーボールの目的地ベクトル
+
+    [SerializeField] GameObject fireBall;    // ファイアーボールで生成するオブジェクト
+    [SerializeField] GameObject fireBallHit; // ファイアーボールの当たり判定兼エフェクト
+    GameObject fireBallPreFab;               // 生成したファイアーボール
+    GameObject fireBallHitCheckPreFab;       // 生成したファイアーボールの当たり判定
 
     void Start()
     {
         player = GameObject.Find("Player").GetComponent<PlayerController>();
         hand = GameObject.Find("HandManager").GetComponent<HandManager>();
         craft = GameObject.Find("CraftManager").GetComponent<CraftManager>();
-
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         enhanceCount++;
         hyperCount++;
+        fbCount++;
 
-        if (enhanceFlag == 1 && enhanceCount > enhanceTimer * 60) // 効果時間経過後、攻撃力を最初の状態に戻す
+        // 各座標を入力
+        mousePosScreen.x = Mouse.current.position.x.ReadValue();
+        mousePosScreen.y = Mouse.current.position.y.ReadValue();
+        mousePosScreen.z = -Camera.main.transform.position.z;
+
+        mousePosWorld = Camera.main.ScreenToWorldPoint(mousePosScreen);　// 座標系の変換
+
+        if (enhanceFlag == 1 && enhanceCount > enhanceTime * 60) // エンハンスの強化解除
         {
             player.attackDamage = player.defaultAttackDamage;
             Debug.Log("Power : " + player.attackDamage);
@@ -50,7 +74,7 @@ public class SkillManager : MonoBehaviour
             enhanceFlag = 0;
         }
 
-        if (hyperFlag == 1 && hyperCount > hyperTimer * 60)
+        if (hyperFlag == 1 && hyperCount > hyperTime * 60) // ハイパーモードの効果解除
         {
             player.attackDamage = player.defaultAttackDamage;
             player.speed = player.defaultSpeed;
@@ -59,6 +83,46 @@ public class SkillManager : MonoBehaviour
             Debug.Log("Speed : " + player.speed);
 
             hyperFlag = 0;
+        }
+
+        if (fbFlag == 1)
+        {
+            fireBallPreFab.transform.Translate(destPosFb * fbSpeed); // ファイアーボール自身を目的地に向かってすすませる
+
+            float dist = Vector2.Distance(fireBallPreFab.transform.position, fbMousePos);
+
+            Debug.Log(dist);
+
+            if (dist < 0.3f)
+            {
+                fireBallHitCheckPreFab = Instantiate(fireBallHit);
+                fireBallHitCheckPreFab.transform.position = fireBallPreFab.transform.position;
+                fireBallHitCheckPreFab.name = ("FireBallHitCheck");
+
+
+                Destroy(fireBallPreFab);
+
+                fbCount = 0;
+
+                fbEffectFlag = 1;
+                fbFlag = 0;
+            }
+            else if(dist > 20.0f)
+            {
+                Destroy(fireBallPreFab);
+
+                fbCount = 0;
+
+                fbEffectFlag = 1;
+                fbFlag = 0;
+            }
+        }
+
+        if (fbEffectFlag == 1 && fbCount > fbCooldownTime * 60)
+        {
+            Destroy(fireBallHitCheckPreFab);
+
+            fbEffectFlag = 0;
         }
 
         if (Keyboard.current.pKey.wasPressedThisFrame) // 【テスト用】　pを押すと体力を減らす
@@ -209,6 +273,8 @@ public class SkillManager : MonoBehaviour
 
                 obj.transform.rotation = Quaternion.Euler(0, flipX, rotZ);
 
+                hand.DisCard(ind);
+
                 await Task.Delay((int)(0.1f * 1000));
 
                 player.onAttack = true;
@@ -216,7 +282,6 @@ public class SkillManager : MonoBehaviour
                 await Task.Delay((int)(player.attackTime * 1000));
 
                 player.onAttack = false;
-                hand.DisCard(ind);
             }
         }
 
@@ -230,6 +295,7 @@ public class SkillManager : MonoBehaviour
         if (craft.craftFrag == 0)
         {
             int waitTimer = 0;
+            float distX, distY;
 
             while (!Mouse.current.rightButton.wasPressedThisFrame && waitTimer < 60 * waitTime)
             {
@@ -240,7 +306,32 @@ public class SkillManager : MonoBehaviour
 
             if (Mouse.current.rightButton.wasPressedThisFrame)
             {
-                hand.DisCard(ind);
+                if (fbEffectFlag == 0)
+                {
+                    fbMousePos = new Vector2(mousePosWorld.x, mousePosWorld.y);
+
+                    distX = fbMousePos.x - player.currentPos.x;
+                    distY = fbMousePos.y - player.currentPos.y;
+
+                    // マウスがさしたポイントへの単位ベクトルを作成
+                    destPosFb = new Vector2(distX, distY);
+                    destPosFb.Normalize();
+
+                    // オブジェクトを作成する
+                    GameObject obj = Instantiate(fireBall);
+                    obj.transform.position = player.currentPos;
+                    obj.transform.name = ("FireBall");
+
+                    fireBallPreFab = obj;
+
+                    fbFlag = 1; // フラグを立てる
+
+                    hand.DisCard(ind);
+                }
+                else
+                {
+                    Debug.Log("魔術回路冷却中");
+                }
             }
         }
 

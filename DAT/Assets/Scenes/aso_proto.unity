@@ -1469,6 +1469,7 @@ MonoBehaviour:
   xLimit: 8.5
   yMaxLimit: 4.7
   yMinLimit: -1.6
+  currentPos: {x: 0, y: 0, z: 0}
   lastDir: {x: 1, y: 0, z: 0}
   dashTime: 0.1
   attackObj: {fileID: 132122364930665669, guid: 428bde71b707b3b49a63a27c01b204d2, type: 3}
@@ -1759,14 +1760,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::skill_manager
   healAmount: 20
+  enhanceTime: 2
+  hyperTime: 2
+  fbCooldownTime: 2
+  waitTime: 2
   enhanceAmount: 2
   hyperDamageAmount: 3
   hyperSpeedAmount: 1
-  enhanceTimer: 2
-  hyperTimer: 2
-  waitTime: 2
+  fbSpeed: 0.5
   discardInd1: -1
   discardInd2: -1
+  fireBall: {fileID: 6676543517733875803, guid: c1f2ad0cd1675dd44b70842ea6e4c916, type: 3}
+  fireBallHit: {fileID: 6676543517733875803, guid: c1f2ad0cd1675dd44b70842ea6e4c916, type: 3}
 --- !u!4 &1942110015
 Transform:
   m_ObjectHideFlags: 0

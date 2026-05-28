@@ -17,7 +17,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float xLimit = 8.5f; // x軸の移動制限
     [SerializeField] float yMaxLimit = 4.7f; // y軸の移動制限
     [SerializeField] float yMinLimit = -1.6f; // y軸の移動制限
-    Vector3 currentPos; // プレイヤーの現在のポジション
+    public Vector3 currentPos; // プレイヤーの現在のポジション
     Vector3 moveDir; // 入力の向きを代入
 
     public Vector3 lastDir = new Vector3(1, 0, 0); // プレイヤーが前のフレームで入力した方向

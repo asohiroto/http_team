@@ -40,7 +40,7 @@ public class DraggableCard : MonoBehaviour, IBeginDragHandler, IEndDragHandler, 
         ghostImage.transform.SetAsLastSibling();
 
         RectTransform ghostRect = ghostImage.AddComponent<RectTransform>();
-        ghostRect.sizeDelta = GetComponent<RectTransform>().sizeDelta;
+        ghostRect.sizeDelta = GetComponent<RectTransform>().sizeDelta * 0.5f;
 
         Image ghostImg = ghostImage.AddComponent<Image>();
         ghostImg.sprite = originalImage.sprite;

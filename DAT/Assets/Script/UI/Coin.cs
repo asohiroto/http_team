@@ -1,8 +1,8 @@
 using UnityEngine;
 
-public class Coin2D : MonoBehaviour
+public class Coin : MonoBehaviour
 {
-    [SerializeField] private int amount = 100; // このコイン1枚の価値
+    [SerializeField] private int amount = 100; // コイン1枚の価値
 
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -15,7 +15,7 @@ public class Coin2D : MonoBehaviour
             }
 
             Debug.Log($"{amount}円！");
-            Destroy(gameObject);
+            Destroy(gameObject);    //コインを取ったらお金オブジェクトを削除
         }
     }
 }

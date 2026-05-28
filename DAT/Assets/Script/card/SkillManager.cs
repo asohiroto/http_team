@@ -19,6 +19,7 @@ public class SkillManager : MonoBehaviour
     [SerializeField] int waitTime;           // 使用待機時間
     [SerializeField] int enhanceAmount;      // エンハンス強化量
     [SerializeField] int hyperDamageAmount;  // ハイパーモード攻撃力強化量
+    [SerializeField] int curseAmount;       // カースHP減少量
 
     [SerializeField] float hyperSpeedAmount; // ハイパーモード素早さ強化量
     [SerializeField] float fbSpeed;          // ファイアーボールで生成したオブジェクトの速度
@@ -113,7 +114,7 @@ public class SkillManager : MonoBehaviour
                 fbEffectFlag = 1;
                 fbFlag = 0;
             }
-            else if(dist > 20.0f)
+            else if (dist > 20.0f)
             {
                 Destroy(fireBallPreFab);
 
@@ -203,13 +204,19 @@ public class SkillManager : MonoBehaviour
                 if (player.playerHP > player.maxPlayerHP - healAmount) // 回復して最大HPを超える場合は、最大HPまで回復
                 {
                     player.playerHP = player.maxPlayerHP;
+
+                    hand.DisCard(ind);
+                }
+                else if (player.playerHP == player.maxPlayerHP)
+                {
+                    Debug.Log("元気すぎやしないかい？");
                 }
                 else
                 {
                     player.playerHP += healAmount;
-                }
 
-                hand.DisCard(ind);
+                    hand.DisCard(ind);
+                }
 
                 Debug.Log(player.playerHP);
             }
@@ -306,7 +313,6 @@ public class SkillManager : MonoBehaviour
 
         CraftMethod(cardID, ind);
     }
-
 
     public async Task FireBall(int ind) // 火の玉を飛ばす ID->3
     {
@@ -434,6 +440,32 @@ public class SkillManager : MonoBehaviour
         }
 
         CraftMethod(cardID, ind);
+    }
+
+    public async Task Curse(int ind) // カース　ID->6
+    {
+        int cardID = 6;
+
+        if (craft.craftFrag == 0)
+        {
+            int waitTimer = 0;
+
+            while (!Mouse.current.rightButton.wasPressedThisFrame && waitTimer < 60 * waitTime) // waitTime秒分だけ左クリックの入力を待つ
+            {
+                waitTimer++;
+
+                await Task.Yield();
+            }
+
+            if (Mouse.current.rightButton.wasPressedThisFrame)
+            {
+                player.playerHP -= curseAmount;
+
+                hand.DisCard(ind);
+            }
+        }
+        CraftMethod(cardID, ind);
+
     }
 
     public void CraftMethod(int id, int ind) // カード合成の関数

@@ -11,28 +11,38 @@ public class HandManager : MonoBehaviour
     [SerializeField] public GameObject[] cardPrefab; // 生成するカード
     [SerializeField] public Transform[] deckCardTrans; // カードの生成場所
 
+    [SerializeField] int cardDrawFee; // カードを引く代金
+    [SerializeField] int cardDrawFeeBase; // カードを引く代金
+
+    [SerializeField] float cardDrawFeeMagnif; // カード購入代金倍率
+
     int cardId = 0; // 生成するカードのID
+    int cardDrawCount = 0; // これまでにカードを引いた回数
+    int[] cardIdStart = { 0, 1, 2, 3, 6 };
 
     SkillManager skill;
     GameObject newCard;
-    CraftManager craft;
+    // CraftManager craft;
+    CoinManager coinManager;
+
 
     public bool[] isCardPressed;
 
     void Start()
     {
         skill = GameObject.Find("SkillManager").GetComponent<SkillManager>();
-        craft = GetComponent<CraftManager>();
+        // craft = GetComponent<CraftManager>();
+        coinManager = GameObject.Find("CoinManager").GetComponent<CoinManager>();
 
         isCardPressed = new bool[deckCardTrans.Length];
 
         for (int i = 0; i < 4; i++) // それぞれの手札の位置にランダムなカードを生成
         {
-            cardId = Random.Range(0, 4);
+            cardId = Random.Range(0, 5);
 
-            newCard = Instantiate(cardPrefab[cardId], deckCardTrans[i]); // 初期手札の生成
+            newCard = Instantiate(cardPrefab[cardIdStart[cardId]], deckCardTrans[i]); // 初期手札の生成
 
-            ButtonListener(cardId, newCard, i);
+            ButtonListener(cardIdStart[cardId], newCard, i);
             DraggableCard dc = newCard.GetComponent<DraggableCard>();
 
             if(dc != null )
@@ -47,7 +57,10 @@ public class HandManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        if(Keyboard.current.mKey.wasPressedThisFrame)
+        {
+            coinManager.currentMoney += 100;
+        }
     }
 
     public GameObject CardGenerate(int ran, int chan) // 新たにランダムなカードを生成する
@@ -65,15 +78,26 @@ public class HandManager : MonoBehaviour
 
     public void CardDraw()
     {
-        int cardRandomId = Random.Range(0, 4);
+        int cardRandomId = Random.Range(0, 5);
 
         for (int i = 0; i < 4; i++)
         {
             if (deckCardTrans[i].childCount == 0)
             {
-                GameObject obj = CardGenerate(cardRandomId, i);
-                ButtonListener(cardRandomId, obj, i);
+                if (coinManager.currentMoney - cardDrawFee > 0)
+                {
+                    cardDrawCount++;
+                    cardDrawFee = (int)(cardDrawFee + cardDrawFeeBase * (1.0f + cardDrawFeeMagnif * cardDrawCount)); // カードの購入代金を倍率に回数をかけたものとする
 
+                    GameObject obj = CardGenerate(cardIdStart[cardRandomId], i);
+                    ButtonListener(cardIdStart[cardRandomId], obj, i);
+
+                    coinManager.currentMoney -= cardDrawFee;
+                }
+                else
+                {
+                    Debug.Log("財布が少しばかり軽過ぎるようだ……");
+                }
                 break;
             }
         }
@@ -131,6 +155,10 @@ public class HandManager : MonoBehaviour
             case 5:
 
                 btn.onClick.AddListener(async () => await skill.HyperMode(index));
+                break;
+
+            case 6:
+                btn.onClick.AddListener(async () => await skill.Curse(index));
                 break;
         }
 

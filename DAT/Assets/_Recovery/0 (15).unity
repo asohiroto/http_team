@@ -152,6 +152,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CoinManager
   moneyText: {fileID: 1710573131}
   unit: G
+  currentMoney: 0
 --- !u!4 &125540097
 Transform:
   m_ObjectHideFlags: 0
@@ -1674,6 +1675,9 @@ MonoBehaviour:
   - {fileID: 1604061362}
   - {fileID: 832775507}
   - {fileID: 555665968}
+  cardDrawFee: 10
+  cardDrawFeeBase: 10
+  cardDrawFeeMagnif: 0.1
   isCardPressed: 
 --- !u!4 &1219670158
 Transform:

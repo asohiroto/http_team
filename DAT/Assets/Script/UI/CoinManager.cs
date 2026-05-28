@@ -10,7 +10,7 @@ public class CoinManager : MonoBehaviour
     [SerializeField] private string unit = "G";      
 
 
-    private int currentMoney = 0; // 所持金
+    public int currentMoney = 0; // 所持金
 
     private void Awake()
     {

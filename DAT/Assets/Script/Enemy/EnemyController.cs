@@ -41,7 +41,7 @@ public class EnemyController : MonoBehaviour
 
     [Header("Config")]
     [SerializeField] private float takeDamageDist = 1f; // Player からの攻撃をくらう距離
-    [SerializeField] private Transform player;          // Player オブジェクト
+    [SerializeField] private GameObject player;          // Player オブジェクト
     [SerializeField] GameObject attackCol;              // 攻撃の当たり判定(プレハブ)
 
 
@@ -67,6 +67,8 @@ public class EnemyController : MonoBehaviour
         // 見失う距離が発見距離よりも短い場合、見失う距離を発見距離と同じ大きさにします。
         if (loseDist < findDist)  loseDist = findDist;
 
+        player = GameObject.Find("Player");
+
         attack = GetComponent<EnemyAttack>();
 
         playing = true;
@@ -76,9 +78,12 @@ public class EnemyController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        CheckDist();
-        LookPlayer();
-        ChasePlayer();
+        if (player != null)
+        {
+            CheckDist();
+            LookPlayer();
+            ChasePlayer();
+        }
     }
 
     // EnemyDamaged
@@ -148,41 +153,40 @@ public class EnemyController : MonoBehaviour
         int seg = 32;
         float r = 0;
 
-        if (!playing)
+        if (playing && !alwaysFindPlayer)
         {
-            r = 0;
-        }
-        else if (isChasePlayer || canAttack)
-        {
-            Gizmos.color = Color.red;
-            r = loseDist;
-        }
-        else if (!isChasePlayer)
-        {
-            Gizmos.color = Color.yellow;
-            r = findDist;
-        }
+            if (isChasePlayer || canAttack)
+            {
+                Gizmos.color = Color.red;
+                r = loseDist;
+            }
+            else if (!isChasePlayer)
+            {
+                Gizmos.color = Color.yellow;
+                r = findDist;
+            }
 
-        List<Vector3> vertices = new();
+            List<Vector3> vertices = new();
 
-        for (int i = 0; i < seg; i++)
-        {
-            float angle = Mathf.PI * 2f * i / seg;
+            for (int i = 0; i < seg; i++)
+            {
+                float angle = Mathf.PI * 2f * i / seg;
 
-            float x = Mathf.Cos(angle) * r;
-            float y = Mathf.Sin(angle) * r;
-            
-            Vector3 a = new Vector3(x, y, 0);
-            Vector3 b = new Vector3(ePos.x, ePos.y, 0);
+                float x = Mathf.Cos(angle) * r;
+                float y = Mathf.Sin(angle) * r;
 
-            Vector3 pos = a + b;
+                Vector3 a = new Vector3(x, y, 0);
+                Vector3 b = new Vector3(ePos.x, ePos.y, 0);
 
-            vertices.Add(pos);
-        }
+                Vector3 pos = a + b;
 
-        foreach (var v in vertices)
-        {
-            Gizmos.DrawSphere(v, 0.05f);
+                vertices.Add(pos);
+            }
+
+            foreach (var v in vertices)
+            {
+                Gizmos.DrawSphere(v, 0.05f);
+            }
         }
     }
 }

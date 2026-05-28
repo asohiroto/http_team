@@ -45,6 +45,12 @@ public class SkillManager : MonoBehaviour
     GameObject fireBallPreFab;               // 生成したファイアーボール
     GameObject fireBallHitCheckPreFab;       // 生成したファイアーボールの当たり判定
 
+    // 福田げんきが追加
+    [SerializeField] GameObject[] slashTypePrefab; // 0に強斬り、1に火の強切りを入れる予定
+    PlayerAttack playerAttack;
+    int strongSlashDamage = 10; // 仮のアタックダメージ
+    int fireSlashDamage = 10; // 仮のファイヤースラッシュダメージ
+
     void Start()
     {
         player = GameObject.Find("Player").GetComponent<PlayerController>();
@@ -216,7 +222,7 @@ public class SkillManager : MonoBehaviour
         CraftMethod(cardID, ind);
     }
 
-    public async Task Slash(int ind) // 強斬り ID->2
+    public async Task Slash(int ind) // 強斬り ID->2 （福田）追加した引数は今日切りのエフェクトとダメージ
     {
         int cardID = 2;
 
@@ -233,7 +239,7 @@ public class SkillManager : MonoBehaviour
 
             if (Mouse.current.rightButton.wasPressedThisFrame)
             {
-                // publicにしたもの
+                /*// publicにしたもの
                 // attackDir lastDir strongAttackObj defaultFXRot onAttack attackTime
 
                 Debug.Log("slash!");
@@ -281,12 +287,26 @@ public class SkillManager : MonoBehaviour
 
                 await Task.Delay((int)(player.attackTime * 1000));
 
+                player.onAttack = false;*/
+                player.SlashTypeAndDir(slashTypePrefab[0]);　// 強切りを生成して使う方向を決定する
+                playerAttack = slashTypePrefab[0].GetComponent<PlayerAttack>();
+                playerAttack.attackDamage = player.attackDamage + strongSlashDamage; // 強切りのアタックダメージを代入
+
+                hand.DisCard(ind);
+
+                await Task.Delay((int)(0.1f * 1000)); // アタック方向の固定を少し遅らせる
+
+                player.onAttack = true;
+
+                await Task.Delay((int)(player.attackTime * 1000));
+
                 player.onAttack = false;
             }
         }
 
         CraftMethod(cardID, ind);
     }
+
 
     public async Task FireBall(int ind) // 火の玉を飛ばす ID->3
     {
@@ -354,7 +374,22 @@ public class SkillManager : MonoBehaviour
             }
             if (Mouse.current.rightButton.wasPressedThisFrame)
             {
-                hand.DisCard(ind);
+                if (Mouse.current.rightButton.wasPressedThisFrame)
+                {
+                    player.SlashTypeAndDir(slashTypePrefab[1]); // 強切りを生成して使う方向を決定する
+                    playerAttack = slashTypePrefab[1].GetComponent<PlayerAttack>();
+                    playerAttack.attackDamage = player.attackDamage + fireSlashDamage; // 火の強切りのアタックダメージを代入
+
+                    hand.DisCard(ind);
+
+                    await Task.Delay((int)(0.1f * 1000)); // アタック方向の固定を少し遅らせる
+
+                    player.onAttack = true;
+
+                    await Task.Delay((int)(player.attackTime * 1000));
+
+                    player.onAttack = false;
+                }
             }
         }
 

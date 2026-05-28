@@ -1065,6 +1065,66 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 832775506}
   m_CullTransparentMesh: 1
+--- !u!1 &885228355
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 885228357}
+  - component: {fileID: 885228356}
+  m_Layer: 0
+  m_Name: SkillManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &885228356
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 885228355}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9367e1b94f492d84bae0ce933f800fb2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::skill_manager
+  healAmount: 20
+  enhanceTime: 2
+  hyperTime: 2
+  fbCooldownTime: 2
+  waitTime: 2
+  enhanceAmount: 2
+  hyperDamageAmount: 3
+  hyperSpeedAmount: 1
+  fbSpeed: 0.5
+  discardInd1: -1
+  discardInd2: -1
+  fireBall: {fileID: 6676543517733875803, guid: c1f2ad0cd1675dd44b70842ea6e4c916, type: 3}
+  fireBallHit: {fileID: 6676543517733875803, guid: c1f2ad0cd1675dd44b70842ea6e4c916, type: 3}
+  slashTypePrefab:
+  - {fileID: 132122364930665669, guid: 9d0fa2fe56967ff4790f505ff03d0108, type: 3}
+  - {fileID: 132122364930665669, guid: 9d0fa2fe56967ff4790f505ff03d0108, type: 3}
+--- !u!4 &885228357
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 885228355}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.43482, y: -0.3291, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &943071129
 GameObject:
   m_ObjectHideFlags: 0
@@ -1352,7 +1412,6 @@ MonoBehaviour:
   - {fileID: 1604061362}
   - {fileID: 832775507}
   - {fileID: 555665968}
-  cardUseId: 000000000000000000000000000000000000000000000000
   isCardPressed: 
 --- !u!4 &1219670158
 Transform:
@@ -1948,6 +2007,8 @@ MonoBehaviour:
   xLimit: 8.5
   yMaxLimit: 4.7
   yMinLimit: -1.6
+  currentPos: {x: 0, y: 0, z: 0}
+  lastDir: {x: 1, y: 0, z: 0}
   dashTime: 0.1
   attackObj: {fileID: 132122364930665669, guid: 428bde71b707b3b49a63a27c01b204d2, type: 3}
   strongAttackObj: {fileID: 0}
@@ -1955,6 +2016,9 @@ MonoBehaviour:
   attackCd: 1
   defaultAttackDamage: 5
   attackDamage: 5
+  attackDir: {x: 0, y: 0, z: 0}
+  defaultFXRot: -90
+  onAttack: 0
   canAttack: 0
   playerHP: 100
   maxPlayerHP: 100
@@ -2232,59 +2296,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1928526411}
   m_CullTransparentMesh: 1
---- !u!1 &1942110013
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1942110015}
-  - component: {fileID: 1942110014}
-  m_Layer: 0
-  m_Name: SkillManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1942110014
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1942110013}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9367e1b94f492d84bae0ce933f800fb2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::skill_manager
-  healAmount: 20
-  enhanceAmount: 2
-  hyperDamageAmount: 0
-  hyperSpeedAmount: 0
-  enhanceTimer: 0
-  hyperTimer: 0
-  waitTime: 2
-  discardInd1: -1
-  discardInd2: -1
---- !u!4 &1942110015
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1942110013}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.43482, y: -0.3291, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1945456624
 GameObject:
   m_ObjectHideFlags: 0
@@ -2480,7 +2491,6 @@ SceneRoots:
   - {fileID: 1729439564}
   - {fileID: 1721966145}
   - {fileID: 1219670158}
-  - {fileID: 1942110015}
   - {fileID: 943071131}
   - {fileID: 631123011}
   - {fileID: 306456128}
@@ -2489,3 +2499,4 @@ SceneRoots:
   - {fileID: 1232757804}
   - {fileID: 968584017}
   - {fileID: 546500133}
+  - {fileID: 885228357}

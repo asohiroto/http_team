@@ -29,6 +29,7 @@ public class PlayerController : MonoBehaviour
     Vector3 dashDir; // ダッシュする方向
 
     // アタックに使う変数---------------------------------------------------------------
+    PlayerAttack playerAttack;
     [SerializeField] GameObject attackObj; // アタックのエフェクトと当たり判定を持つオブジェクトを代入
     [SerializeField] public GameObject strongAttackObj;
     [SerializeField] public float attackTime = 1.0f; // アタック中の時間
@@ -185,17 +186,14 @@ public class PlayerController : MonoBehaviour
         onDash = false;
     }
 
-    /// <summary>
-    /// プレイヤーのアタック処理の関数
-    /// </summary>
-    IEnumerator Attack()
+    public void SlashTypeAndDir(GameObject slashType)
     {
         float flipX = 0;
         float rotZ = 0;
         //onAttack = true;
         attackDir = lastDir;
 
-        GameObject obj = Instantiate(attackObj, transform);
+        GameObject obj = Instantiate(slashType, transform);
         obj.transform.position = transform.position + attackDir * 0.50f;
 
         // 斬撃の方向を決定
@@ -224,6 +222,14 @@ public class PlayerController : MonoBehaviour
         }
 
         obj.transform.rotation = Quaternion.Euler(0, flipX, rotZ);
+    }
+
+    /// <summary>
+    /// プレイヤーのアタック処理の関数
+    /// </summary>
+    IEnumerator Attack()
+    {
+        SlashTypeAndDir(attackObj);
 
         yield return new WaitForSeconds(0.1f); // アタック方向の固定を少し遅らせる
 
@@ -235,42 +241,13 @@ public class PlayerController : MonoBehaviour
         onAttack = false;
     }
 
-    /*public IEnumerator StrongAttack() // 強斬り用の関数
+
+
+    public IEnumerator StrongAttack(GameObject slashType, int slashDamage) // 強斬り用の関数
     {
-        float flipX = 0;
-        float rotZ = 0;
-        //onAttack = true;
-        attackDir = lastDir;
+        SlashTypeAndDir(slashType);
 
-        GameObject obj = Instantiate(strongAttackObj, transform);
-        obj.transform.position = transform.position + attackDir * 0.50f;
-
-        // 斬撃の方向を決定
-        if (attackDir.x > 0)
-        {
-            flipX = 0;
-        }
-        else if (attackDir.x < 0)
-        {
-            flipX = 180;
-        }
-
-        if (attackDir.x == 0)
-        {
-            // 真上・真下（左右の入力がないとき）
-            if (attackDir.y > 0) rotZ = 90 + defaultFXRot;
-            else if (attackDir.y < 0) rotZ = -90 + defaultFXRot;
-            else rotZ = 0 + defaultFXRot; // 入力なし（真横など）
-        }
-        else
-        {
-            // 斜め入力（左右の入力があるとき）
-            if (attackDir.y > 0) rotZ = 45 + defaultFXRot;
-            else if (attackDir.y < 0) rotZ = -45 + defaultFXRot;
-            else rotZ = 0 + defaultFXRot; // 真横
-        }
-
-        obj.transform.rotation = Quaternion.Euler(0, flipX, rotZ);
+        
 
         yield return new WaitForSeconds(0.1f); // アタック方向の固定を少し遅らせる
 
@@ -279,7 +256,7 @@ public class PlayerController : MonoBehaviour
         yield return new WaitForSeconds(attackTime);
 
         onAttack = false;
-    }*/
+    }
 
     /// <summary>
     /// プレイヤーがダメージを受けたときの関数

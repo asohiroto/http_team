@@ -13,7 +13,7 @@ public class PlayerAttack : MonoBehaviour
     int idx = 0;
     SpriteRenderer spriteRenderer;
 
-    int attackDamage;
+    public int attackDamage;
 
     // アタックエフェクトのアニメーションと当たり判定の管理------------------
 

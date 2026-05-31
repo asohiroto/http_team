@@ -18,19 +18,26 @@ public class HandManager : MonoBehaviour
 
     int cardId = 0; // 生成するカードのID
     int cardDrawCount = 0; // これまでにカードを引いた回数
-    int[] cardIdStart = { 0, 1, 2, 3, 6 };
+    int[] cardIdStart = { 0, 1, 2, 3, 6 }; // 初期手札にできるカードのID
 
-    SkillManager skill;
     GameObject newCard;
-    // CraftManager craft;
-    CoinManager coinManager;
 
+    CoinManager coinManager;
+    SkillManager skill;
 
     public bool[] isCardPressed;
 
     void Start()
     {
-        skill = GameObject.Find("SkillManager").GetComponent<SkillManager>();
+
+        GameObject[] cardObjs = GameObject.FindGameObjectsWithTag("Card");
+
+        foreach(GameObject obj in cardObjs) // スクリプトの取得
+        {
+            skill = obj.GetComponent<SkillManager>();
+            if (skill != null) break;
+        }
+
         // craft = GetComponent<CraftManager>();
         coinManager = GameObject.Find("CoinManager").GetComponent<CoinManager>();
 
@@ -48,7 +55,7 @@ public class HandManager : MonoBehaviour
             if(dc != null )
             {
                 dc.cardIndex = i;
-                dc.cardId = cardId;
+                dc.cardId = cardIdStart[cardId];
             }
 
         }
@@ -63,7 +70,7 @@ public class HandManager : MonoBehaviour
         }
     }
 
-    public GameObject CardGenerate(int ran, int chan) // 新たにランダムなカードを生成する
+    public GameObject CardGenerate(int ran, int chan) // 新たにカードを生成する
     {
         GameObject genCard = Instantiate(cardPrefab[ran], deckCardTrans[chan]); // カードを作る処理
         DraggableCard dc = genCard.GetComponentInChildren<DraggableCard>();
@@ -159,6 +166,10 @@ public class HandManager : MonoBehaviour
 
             case 6:
                 btn.onClick.AddListener(async () => await skill.Curse(index));
+                break;
+
+            case 7:
+                btn.onClick.AddListener(async () => await skill.CursedFlame(index));
                 break;
         }
 

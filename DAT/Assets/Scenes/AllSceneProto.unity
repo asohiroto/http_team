@@ -152,6 +152,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CoinManager
   moneyText: {fileID: 1710573131}
   unit: G
+  currentMoney: 0
 --- !u!4 &125540097
 Transform:
   m_ObjectHideFlags: 0
@@ -1317,7 +1318,7 @@ GameObject:
   - component: {fileID: 943071130}
   m_Layer: 0
   m_Name: CraftManager
-  m_TagString: Untagged
+  m_TagString: Card
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1341,6 +1342,9 @@ MonoBehaviour:
   - materialA: 0
     materialB: 1
     result: 5
+  - materialA: 3
+    materialB: 6
+    result: 7
   craftFrag: 0
   material1: 0
 --- !u!4 &943071131
@@ -1645,7 +1649,7 @@ GameObject:
   - component: {fileID: 1219670157}
   m_Layer: 0
   m_Name: HandManager
-  m_TagString: Untagged
+  m_TagString: Card
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1669,11 +1673,16 @@ MonoBehaviour:
   - {fileID: 8004957121014659405, guid: 6cda70d58b0d06c45bc64210a25a81c7, type: 3}
   - {fileID: 1544189515582143587, guid: 9800b7b1bc592ee4e9de7d2f23d4a1a9, type: 3}
   - {fileID: 2043265445299197516, guid: 58d0be559afd79143913115f924f86b0, type: 3}
+  - {fileID: 8939842006103904273, guid: e56d32cd72e7e16459c01f4841b31623, type: 3}
+  - {fileID: 4921229836753551308, guid: beba0ee43266ed44c883c92ae0694bd4, type: 3}
   deckCardTrans:
   - {fileID: 1928526412}
   - {fileID: 1604061362}
   - {fileID: 832775507}
   - {fileID: 555665968}
+  cardDrawFee: 10
+  cardDrawFeeBase: 10
+  cardDrawFeeMagnif: 1.1
   isCardPressed: 
 --- !u!4 &1219670158
 Transform:
@@ -2348,7 +2357,7 @@ GameObject:
   - component: {fileID: 1721966149}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2734,7 +2743,7 @@ GameObject:
   - component: {fileID: 1942110014}
   m_Layer: 0
   m_Name: SkillManager
-  m_TagString: Untagged
+  m_TagString: Card
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2755,15 +2764,20 @@ MonoBehaviour:
   enhanceTime: 2
   hyperTime: 2
   fbCooldownTime: 2
+  cfCooldownTime: 2
   waitTime: 2
   enhanceAmount: 2
   hyperDamageAmount: 4
+  curseAmount: 10
   hyperSpeedAmount: 0.2
   fbSpeed: 0.5
+  cfSpeed: 0.5
   discardInd1: -1
   discardInd2: -1
   fireBall: {fileID: 6676543517733875803, guid: c1f2ad0cd1675dd44b70842ea6e4c916, type: 3}
-  fireBallHit: {fileID: 6676543517733875803, guid: c1f2ad0cd1675dd44b70842ea6e4c916, type: 3}
+  cursedFlame: {fileID: 5380163840605547912, guid: 852e8346ed8d4bb41a49280de6fa1df8, type: 3}
+  fireBallPreFab: {fileID: 0}
+  cursedFlamePreFab: {fileID: 0}
   slashTypePrefab:
   - {fileID: 132122364930665669, guid: 9d0fa2fe56967ff4790f505ff03d0108, type: 3}
   - {fileID: 132122364930665669, guid: 9d0fa2fe56967ff4790f505ff03d0108, type: 3}

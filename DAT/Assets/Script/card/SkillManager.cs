@@ -12,39 +12,46 @@ public class SkillManager : MonoBehaviour
     HandManager hand;
     CraftManager craft;
 
-    [SerializeField] int healAmount;         // 回復量
-    [SerializeField] int enhanceTime;        // エンハンス効果時間
-    [SerializeField] int hyperTime;          // ハイパー効果時間
-    [SerializeField] int fbCooldownTime;     // ファイアーボール使用可能間隔
-    [SerializeField] int waitTime;           // 使用待機時間
-    [SerializeField] int enhanceAmount;      // エンハンス強化量
-    [SerializeField] int hyperDamageAmount;  // ハイパーモード攻撃力強化量
-    [SerializeField] int curseAmount;       // カースHP減少量
+    [SerializeField] int healAmount;            // 回復量
+    [SerializeField] int enhanceTime;           // エンハンス効果時間
+    [SerializeField] int hyperTime;             // ハイパー効果時間
+    [SerializeField] int fbCooldownTime;        // ファイアーボール使用可能間隔
+    [SerializeField] int cfCooldownTime;        // ファイアーボール使用可能間隔
+    [SerializeField] int waitTime;              // 使用待機時間
+    [SerializeField] int enhanceAmount;         // エンハンス強化量
+    [SerializeField] int hyperDamageAmount;     // ハイパーモード攻撃力強化量
+    [SerializeField] int curseAmount;           // カースHP減少量
 
-    [SerializeField] float hyperSpeedAmount; // ハイパーモード素早さ強化量
-    [SerializeField] float fbSpeed;          // ファイアーボールで生成したオブジェクトの速度
+    [SerializeField] float hyperSpeedAmount;    // ハイパーモード素早さ強化量
+    [SerializeField] float fbSpeed;             // ファイアーボールで生成したオブジェクトの速度
+    [SerializeField] float cfSpeed;             // カースドフレイムで生成したオブジェクトの速度
 
-    int enhanceCount = 0;                    // エンハンスの効果時間カウンタ
-    int hyperCount = 0;                      // ハイパーモードの効果時間カウンタ
-    int fbCount = 0;                         // ファイアーボールの効果時間カウンタ
-    int enhanceFlag = 0;                     // エンハンス強化状態の判定
-    int hyperFlag = 0;                       // ハイパーモード強化状態の判定
-    int fbFlag = 0;                          // ファイアーボール状態の判定
-    int fbEffectFlag = 0;                    // ファイアーボールが画面内に存在するか
+    int enhanceCount = 0;                       // エンハンスの効果時間カウンタ
+    int hyperCount = 0;                         // ハイパーモードの効果時間カウンタ
+    int fbCount = 0;                            // ファイアーボールの効果時間カウンタ
+    int cfCount = 0;                            // カースドフレイムの効果時間カウンタ
 
-    public int discardInd1 = -1;             // 捨てるカードの住所その１
-    public int discardInd2 = -1;             //                   その２
+    public int discardInd1 = -1;                // 捨てるカードの住所その１
+    public int discardInd2 = -1;                //                   その２
 
-    Vector3 mousePosScreen = new Vector3();  // スクリーン座標系でのマウスの位置
-    Vector3 mousePosWorld = new Vector3();   // ワールド座標系でのマウスの位置
+    Vector3 mousePosScreen = new Vector3();     // スクリーン座標系でのマウスの位置
+    Vector3 mousePosWorld = new Vector3();      // ワールド座標系でのマウスの位置
 
-    Vector2 fbMousePos = new Vector2();      // ファイアーボール実行時点でのマウスの位置
-    Vector2 destPosFb = new Vector2();       // ファイアーボールの目的地ベクトル
+    Vector2 fbMousePos = new Vector2();         // ファイアーボール実行時点でのマウスの位置
+    Vector2 destPosFb = new Vector2();          // ファイアーボールの目的地ベクトル
+    Vector2 cfMousePos = new Vector2();         // カースドフレア実行時点でのマウスの位置
+    Vector2 destPosCf = new Vector2();          // カースドフレイムの目的地ベクトル
 
-    [SerializeField] GameObject fireBall;    // ファイアーボールで生成するオブジェクト
-    [SerializeField] GameObject fireBallHit; // ファイアーボールの当たり判定兼エフェクト
-    GameObject fireBallPreFab;               // 生成したファイアーボール
-    GameObject fireBallHitCheckPreFab;       // 生成したファイアーボールの当たり判定
+    bool enhanceFlag = false;                   // エンハンスのフラグ
+    bool hyperFlag = false;                     // ハイパーモードのフラグ
+    bool fbFlag = false;                        // ファイアーボールのフラグ
+    bool cfFlag = false;                        // カースドフレイムのフラグ
+
+    [SerializeField] GameObject fireBall;       // ファイアーボールで生成するオブジェクト
+    [SerializeField] GameObject cursedFlame;    // カースドフレイムで生成するオブジェクト
+
+    public GameObject fireBallPreFab;                  // 生成したファイアーボール
+    public GameObject cursedFlamePreFab;               // 生成したカースドフレイム
 
     // 福田げんきが追加
     [SerializeField] GameObject[] slashTypePrefab; // 0に強斬り、1に火の強切りを入れる予定
@@ -54,9 +61,18 @@ public class SkillManager : MonoBehaviour
 
     void Start()
     {
+        GameObject[] objs = GameObject.FindGameObjectsWithTag("Card");
+
         player = GameObject.Find("Player").GetComponent<PlayerController>();
-        hand = GameObject.Find("HandManager").GetComponent<HandManager>();
-        craft = GameObject.Find("CraftManager").GetComponent<CraftManager>();
+
+        foreach (GameObject obj in objs) // それぞれ探す
+        {
+            if (hand == null) hand = obj.GetComponent<HandManager>();
+
+            if (craft == null) craft = obj.GetComponent<CraftManager>();
+
+            if (hand != null && craft != null) break;
+        }
     }
 
     // Update is called once per frame
@@ -65,6 +81,7 @@ public class SkillManager : MonoBehaviour
         enhanceCount++;
         hyperCount++;
         fbCount++;
+        cfCount++;
 
         // 各座標を入力
         mousePosScreen.x = Mouse.current.position.x.ReadValue();
@@ -73,64 +90,24 @@ public class SkillManager : MonoBehaviour
 
         mousePosWorld = Camera.main.ScreenToWorldPoint(mousePosScreen);　// 座標系の変換
 
-        if (enhanceFlag == 1 && enhanceCount > enhanceTime * 60) // エンハンスの強化解除
+        if (enhanceFlag && enhanceCount > enhanceTime * 60) // エンハンスの解除
         {
-            player.attackDamage = player.defaultAttackDamage;
-            Debug.Log("Power : " + player.attackDamage);
+            AttackCancell();
 
-            enhanceFlag = 0;
+            enhanceFlag = false;
         }
 
-        if (hyperFlag == 1 && hyperCount > hyperTime * 60) // ハイパーモードの効果解除
+        if (hyperFlag && hyperCount > hyperTime * 60) // ハイパーモードの解除
         {
-            player.attackDamage = player.defaultAttackDamage;
-            player.speed = player.defaultSpeed;
+            AttackCancell();
+            SpeedCancell();
 
-            Debug.Log("Power : " + player.attackDamage);
-            Debug.Log("Speed : " + player.speed);
-
-            hyperFlag = 0;
+            hyperFlag = false;
         }
 
-        if (fbFlag == 1)
-        {
-            fireBallPreFab.transform.Translate(destPosFb * fbSpeed); // ファイアーボール自身を目的地に向かってすすませる
+        if (fbFlag) BallMove(fireBallPreFab, destPosFb, fbSpeed, fbMousePos, fbCount, ref fbFlag); // ファイアーボール使用後の挙動
 
-            float dist = Vector2.Distance(fireBallPreFab.transform.position, fbMousePos);
-
-            Debug.Log(dist);
-
-            if (dist < 0.3f)
-            {
-                fireBallHitCheckPreFab = Instantiate(fireBallHit);
-                fireBallHitCheckPreFab.transform.position = fireBallPreFab.transform.position;
-                fireBallHitCheckPreFab.name = ("FireBallHitCheck");
-
-
-                Destroy(fireBallPreFab);
-
-                fbCount = 0;
-
-                fbEffectFlag = 1;
-                fbFlag = 0;
-            }
-            else if (dist > 20.0f)
-            {
-                Destroy(fireBallPreFab);
-
-                fbCount = 0;
-
-                fbEffectFlag = 1;
-                fbFlag = 0;
-            }
-        }
-
-        if (fbEffectFlag == 1 && fbCount > fbCooldownTime * 60)
-        {
-            Destroy(fireBallHitCheckPreFab);
-
-            fbEffectFlag = 0;
-        }
+        if (cfFlag) BallMove(cursedFlamePreFab, destPosCf, cfSpeed, cfMousePos, cfCount, ref cfFlag); // カースドフレイム使用後の挙動
 
         if (Keyboard.current.pKey.wasPressedThisFrame) // 【テスト用】　pを押すと体力を減らす
         {
@@ -157,11 +134,11 @@ public class SkillManager : MonoBehaviour
 
             if (Mouse.current.rightButton.wasPressedThisFrame)
             {
-                if (enhanceFlag == 0) // 非強化状態なら使用可能
+                if (!enhanceFlag) // 非強化状態なら使用可能
                 {
                     player.attackDamage += enhanceAmount;
 
-                    enhanceFlag = 1;
+                    enhanceFlag = true;
                     enhanceCount = 0;
 
 
@@ -229,7 +206,7 @@ public class SkillManager : MonoBehaviour
         CraftMethod(cardID, ind);
     }
 
-    public async Task Slash(int ind) // 強斬り ID->2 （福田）追加した引数は今日切りのエフェクトとダメージ
+    public async Task Slash(int ind) // 強斬り ID->2 （福田）追加した引数は強切りのエフェクトとダメージ
     {
         int cardID = 2;
 
@@ -332,7 +309,7 @@ public class SkillManager : MonoBehaviour
 
             if (Mouse.current.rightButton.wasPressedThisFrame)
             {
-                if (fbEffectFlag == 0)
+                if (!fbFlag)
                 {
                     fbMousePos = new Vector2(mousePosWorld.x, mousePosWorld.y);
 
@@ -350,7 +327,7 @@ public class SkillManager : MonoBehaviour
 
                     fireBallPreFab = obj;
 
-                    fbFlag = 1; // フラグを立てる
+                    fbFlag = true; // フラグを立てる
 
                     hand.DisCard(ind);
                 }
@@ -380,22 +357,21 @@ public class SkillManager : MonoBehaviour
             }
             if (Mouse.current.rightButton.wasPressedThisFrame)
             {
-                if (Mouse.current.rightButton.wasPressedThisFrame)
-                {
-                    player.SlashTypeAndDir(slashTypePrefab[1]); // 強切りを生成して使う方向を決定する
-                    playerAttack = slashTypePrefab[1].GetComponent<PlayerAttack>();
-                    playerAttack.attackDamage = player.attackDamage + fireSlashDamage; // 火の強切りのアタックダメージを代入
 
-                    hand.DisCard(ind);
+                player.SlashTypeAndDir(slashTypePrefab[1]); // 強切りを生成して使う方向を決定する
+                playerAttack = slashTypePrefab[1].GetComponent<PlayerAttack>();
+                playerAttack.attackDamage = player.attackDamage + fireSlashDamage; // 火の強切りのアタックダメージを代入
 
-                    await Task.Delay((int)(0.1f * 1000)); // アタック方向の固定を少し遅らせる
+                hand.DisCard(ind);
 
-                    player.onAttack = true;
+                await Task.Delay((int)(0.1f * 1000)); // アタック方向の固定を少し遅らせる
 
-                    await Task.Delay((int)(player.attackTime * 1000));
+                player.onAttack = true;
 
-                    player.onAttack = false;
-                }
+                await Task.Delay((int)(player.attackTime * 1000));
+
+                player.onAttack = false;
+
             }
         }
 
@@ -419,12 +395,12 @@ public class SkillManager : MonoBehaviour
 
             if (Mouse.current.rightButton.wasPressedThisFrame)
             {
-                if (hyperFlag == 0) // 非強化状態なら使用可能
+                if (!hyperFlag) // 非強化状態なら使用可能
                 {
                     player.attackDamage += hyperDamageAmount;
                     player.speed += hyperSpeedAmount;
 
-                    hyperFlag = 1;
+                    hyperFlag = true;
                     hyperCount = 0;
 
 
@@ -468,6 +444,59 @@ public class SkillManager : MonoBehaviour
 
     }
 
+    public async Task CursedFlame(int ind) // カースドフレイム　ID->7
+    {
+        int cardID = 7;
+
+        if (craft.craftFrag == 0)
+        {
+            int waitTimer = 0;
+            float distX, distY;
+
+            while (!Mouse.current.rightButton.wasPressedThisFrame && waitTimer < 60 * waitTime)
+            {
+                waitTimer++;
+
+                await Task.Yield();
+            }
+
+            if (Mouse.current.rightButton.wasPressedThisFrame)
+            {
+                if (!cfFlag)
+                {
+                    player.playerHP -= curseAmount * 2;
+
+                    cfMousePos = new Vector2(mousePosWorld.x, mousePosWorld.y);
+
+                    distX = cfMousePos.x - player.currentPos.x;
+                    distY = cfMousePos.y - player.currentPos.y;
+
+                    // マウスがさしたポイントへの単位ベクトルを作成
+                    destPosCf = new Vector2(distX, distY);
+                    destPosCf.Normalize();
+
+                    // オブジェクトを作成する
+                    GameObject obj = Instantiate(cursedFlame);
+                    obj.transform.position = player.currentPos;
+                    obj.transform.name = ("CursedFlame");
+
+                    cursedFlamePreFab = obj;
+
+                    cfFlag = true; // フラグを立てる
+
+                    hand.DisCard(ind);
+                }
+                else
+                {
+                    Debug.Log("魔術回路冷却中");
+                }
+            }
+        }
+
+        CraftMethod(cardID, ind);
+
+    }
+
     public void CraftMethod(int id, int ind) // カード合成の関数
     {
         if (craft.craftFrag == 2) // 保存されたIDを呼び出し、素材となったカードを破壊し、空いたスペースにカードを合成
@@ -494,6 +523,35 @@ public class SkillManager : MonoBehaviour
         {
             discardInd1 = ind;
             craft.SettingMaterial1(id);
+        }
+    }
+
+    void AttackCancell() // 攻撃力の初期化
+    {
+        player.attackDamage = player.defaultAttackDamage;
+        Debug.Log("Power : " + player.attackDamage);
+    }
+
+    void SpeedCancell() // 移動速度の初期化
+    {
+        player.speed = player.defaultSpeed;
+
+        Debug.Log("Speed : " + player.speed);
+    }
+
+    void BallMove(GameObject preFab, Vector2 dest, float speed, Vector2 mousePos, int count, ref bool flag) // ボール系の挙動
+    {
+        preFab.transform.Translate(dest * speed); // ファイアーボール自身を目的地に向かってすすませる
+
+        float dist = Vector2.Distance(preFab.transform.position, mousePos);
+
+        if (dist > 20.0f)
+        {
+            count = 0;
+            dist = 0f;
+            flag = false;
+
+            Destroy(preFab);
         }
     }
 }

@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 3879328213528649379}
   - component: {fileID: 9088539198591542619}
   m_Layer: 0
-  m_Name: WeakTorcherr
+  m_Name: old_WeakTorcher
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

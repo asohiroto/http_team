@@ -156,6 +156,7 @@ MonoBehaviour:
   xLimit: 8.5
   yMaxLimit: 4.7
   yMinLimit: -1.6
+  currentPos: {x: 0, y: 0, z: 0}
   lastDir: {x: 1, y: 0, z: 0}
   dashTime: 0.1
   attackObj: {fileID: 1551545945}
@@ -529,7 +530,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1951224555
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -543,7 +544,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemySpawner
   spawnIntervalSec: 1
-  WeakTorcher: {fileID: 5217337587667751154, guid: 2d1c3b6a0eb65ed4695648845d0b7a03, type: 3}
+  maxEnemy: 10
+  WeakTorcher: {fileID: 7648527138295263523}
+  dirX: 0
+  sponeX: 0
+  tempX: 0
+  sponeY: 0
 --- !u!4 &1951224556
 Transform:
   m_ObjectHideFlags: 0
@@ -559,6 +565,116 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &7648527138295263523 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4419746953452864637, guid: f6545e77c56c98841962ce3e926c813d, type: 3}
+  m_PrefabInstance: {fileID: 9116938085244013047}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &9116938085244013047
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2706354296108105491, guid: f6545e77c56c98841962ce3e926c813d, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2706354296108105491, guid: f6545e77c56c98841962ce3e926c813d, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2706354296108105491, guid: f6545e77c56c98841962ce3e926c813d, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2706354296108105491, guid: f6545e77c56c98841962ce3e926c813d, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2706354296108105491, guid: f6545e77c56c98841962ce3e926c813d, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2706354296108105491, guid: f6545e77c56c98841962ce3e926c813d, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2706354296108105491, guid: f6545e77c56c98841962ce3e926c813d, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2706354296108105491, guid: f6545e77c56c98841962ce3e926c813d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2706354296108105491, guid: f6545e77c56c98841962ce3e926c813d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2706354296108105491, guid: f6545e77c56c98841962ce3e926c813d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3875057953984697843, guid: f6545e77c56c98841962ce3e926c813d, type: 3}
+      propertyPath: animationDatas.Array.data[0].state
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3875057953984697843, guid: f6545e77c56c98841962ce3e926c813d, type: 3}
+      propertyPath: animationDatas.Array.data[1].state
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3875057953984697843, guid: f6545e77c56c98841962ce3e926c813d, type: 3}
+      propertyPath: animationDatas.Array.data[2].state
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3875057953984697843, guid: f6545e77c56c98841962ce3e926c813d, type: 3}
+      propertyPath: animationDatas.Array.data[3].state
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3875057953984697843, guid: f6545e77c56c98841962ce3e926c813d, type: 3}
+      propertyPath: animationDatas.Array.data[4].state
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3875057953984697843, guid: f6545e77c56c98841962ce3e926c813d, type: 3}
+      propertyPath: animationDatas.Array.data[0].frameRate
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 3875057953984697843, guid: f6545e77c56c98841962ce3e926c813d, type: 3}
+      propertyPath: animationDatas.Array.data[1].frameRate
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 3875057953984697843, guid: f6545e77c56c98841962ce3e926c813d, type: 3}
+      propertyPath: animationDatas.Array.data[2].frameRate
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 3875057953984697843, guid: f6545e77c56c98841962ce3e926c813d, type: 3}
+      propertyPath: animationDatas.Array.data[3].frameRate
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 3875057953984697843, guid: f6545e77c56c98841962ce3e926c813d, type: 3}
+      propertyPath: animationDatas.Array.data[4].frameRate
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 4419746953452864637, guid: f6545e77c56c98841962ce3e926c813d, type: 3}
+      propertyPath: m_Name
+      value: WeakTorcher
+      objectReference: {fileID: 0}
+    - target: {fileID: 9190601027444089525, guid: f6545e77c56c98841962ce3e926c813d, type: 3}
+      propertyPath: coinPrefab
+      value: 
+      objectReference: {fileID: 4876145872219913294, guid: 40446f423e254a642a122f7e36b0e8fa, type: 3}
+    - target: {fileID: 9190601027444089525, guid: f6545e77c56c98841962ce3e926c813d, type: 3}
+      propertyPath: alwaysFindPlayer
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: f6545e77c56c98841962ce3e926c813d, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -566,3 +682,4 @@ SceneRoots:
   - {fileID: 1505953548}
   - {fileID: 889639629}
   - {fileID: 1951224556}
+  - {fileID: 9116938085244013047}

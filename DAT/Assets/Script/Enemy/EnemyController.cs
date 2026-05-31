@@ -2,13 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum EnemyState
-{
-    Idle,
-    Move,
-    Attack,
-}
-
 public class EnemyController : MonoBehaviour
 {
     [Header("Enemy")]
@@ -30,19 +23,24 @@ public class EnemyController : MonoBehaviour
     [SerializeField] private Vector2 ePos = Vector2.zero;      // Enemy(このオブジェクト)の座標
     [SerializeField] private Vector2 playerPos = Vector2.zero; // Playerの座標
     [SerializeField] private Vector2 nowDir = Vector2.zero; // 現在の移動方向
+    [SerializeField] private Vector3 lookPos = Vector2.zero;    // 攻撃時に使用する
     [SerializeField] private float playerDist = 0f;                 // PlayerとEnemyの距離
     [SerializeField] private bool isFindPlayer = false;
     [SerializeField] private bool isLostPlayer = false;
     [SerializeField] private bool isChasePlayer = false;
     [SerializeField] private bool canAttack = false;
     [SerializeField] private bool isStop = false;
+    [SerializeField] private bool isLookRight = false;
     public bool IsAttack = false;   // いい方法が思いつかなかったので
     private bool playing = false;
 
     [Header("Config")]
     [SerializeField] private float takeDamageDist = 1f; // Player からの攻撃をくらう距離
-    [SerializeField] private GameObject player;          // Player オブジェクト
+    [SerializeField] private GameObject player;         // Player オブジェクト
+    [SerializeField] private GameObject coinPrefab;     // Coin オブジェクト
+    [SerializeField] private Transform coinParent;     // Coin のドロップ時の親オブジェクト
     [SerializeField] GameObject attackCol;              // 攻撃の当たり判定(プレハブ)
+    EnemyAnimation enemyAnim;
 
 
     public float AttackDist => attackDist;
@@ -51,10 +49,7 @@ public class EnemyController : MonoBehaviour
     public float AttackCd => attackCd;
     public Vector2 NowDir => nowDir;
     public bool CanAttack => canAttack;     // 攻撃可能か　読み取り専用
-    public bool IsStop => isStop;
     public bool IsMove => isChasePlayer;
-    public float Distance => playerDist;
-    public bool CanTakeDamage => playerDist < takeDamageDist;
     public GameObject AttackCol => attackCol;
 
     Component attack;
@@ -67,23 +62,28 @@ public class EnemyController : MonoBehaviour
         // 見失う距離が発見距離よりも短い場合、見失う距離を発見距離と同じ大きさにします。
         if (loseDist < findDist)  loseDist = findDist;
 
-        player = GameObject.Find("Player");
-
+        enemyAnim = GetComponent<EnemyAnimation>();
         attack = GetComponent<EnemyAttack>();
 
         playing = true;
+
+        if (player == null)
+        {
+            player = GameObject.FindWithTag("Player");
+        }
 
         // HPが0のとき、スポーンさせない <- これいる？　検討中    // 必ず一番最後に処理
     }
 
     private void FixedUpdate()
     {
-        if (player != null)
-        {
-            CheckDist();
-            LookPlayer();
-            ChasePlayer();
-        }
+        CheckDist();
+        LookPlayer();
+        CheckLookDir();
+        LookHor();
+        ChasePlayer();
+        Animation();
+        Attack();
     }
 
     // EnemyDamaged
@@ -104,10 +104,17 @@ public class EnemyController : MonoBehaviour
         {
             Debug.Log("HPが0になった" + this.gameObject.name);
             // 以降の処理は後で追加
-            Destroy(this.gameObject);
+
+            // コインのスポーンはできる
+            // スポーン位置がthis.transformの位置とズレている -> Prefabのミス
+            GameObject dropCoin = Instantiate(coinPrefab, this.transform);
+            // ドロップ時に他のオブジェクトの子オブジェクトにします
+            dropCoin.transform.SetParent(coinParent);
+            //Destroy(this.gameObject);
         }
     }
 
+    // Playerとの距離を取得
     void CheckDist()
     {
         playerPos = player.transform.position;
@@ -122,10 +129,12 @@ public class EnemyController : MonoBehaviour
 
     void LookPlayer()
     {
+        // これを列挙型にしたら楽じゃない？
+        // アニメーションの呼び出しもSwitch文でできそう
         isFindPlayer = findDist > playerDist;   // 発見距離内か
         isLostPlayer = loseDist < playerDist;   // 見失ったか
         canAttack = attackDist > playerDist;    // 攻撃範囲内か
-        isStop = stopDist > playerDist && IsAttack;         // 止まる距離、攻撃中か
+        isStop = stopDist > playerDist;         // 止まる距離、攻撃中か
 
         // 発見距離内なら移動開始
         if ((!isLostPlayer || alwaysFindPlayer) && !isStop)
@@ -133,6 +142,7 @@ public class EnemyController : MonoBehaviour
             if (isFindPlayer || alwaysFindPlayer)
             {
                 isChasePlayer = true;
+                EnemyDamaged(100);
             }
         }
         else
@@ -140,17 +150,110 @@ public class EnemyController : MonoBehaviour
             isChasePlayer = false;
         }
     }
+
+    void CheckLookDir()
+    {
+        float dirX = nowDir.x;
+        float dirY = nowDir.y;
+
+        // 絶対値を取った現在向いている方向
+        float ABSdirX = Mathf.Abs(nowDir.x);
+        float ABSdirY = Mathf.Abs(nowDir.y);
+
+        if (dirX > 0)   // 右向き
+        {
+            isLookRight = true;
+        }
+        else            // 左向き
+        {
+            isLookRight = false;
+        }
+
+        if (ABSdirY > ABSdirX)  // 上下方向
+        {
+            lookPos.x = 0;
+            if (dirY > 0)       // 上向き
+            {
+                lookPos.y = 1;
+            }
+            else if (dirY < 0)  // 下向き
+            {
+                lookPos.y = -1;
+            }
+            else
+            {
+                lookPos.y = 0;  // 横を向く
+            }
+        }
+        else                    // 左右方向
+        {
+            lookPos.y = 0;
+            if (dirX > 0)
+            {
+                lookPos.x = 1;  // 右向き
+            }
+            else if (dirX < 0)
+            {
+                lookPos.x = -1; // 左向き
+            }
+            else
+            {
+                lookPos.x = 0;
+            }
+        }
+    }
+
+    private void LookHor()
+    {
+        if (!isChasePlayer) return;
+        if (isLookRight)
+        {
+            transform.rotation = Quaternion.Euler(0, 0, 0);
+        }
+        else
+        {
+            transform.rotation = Quaternion.Euler(0, 180, 0);
+        }
+    }
+
     void ChasePlayer()
     {
         // 追跡状態じゃないなら返す
         if (!isChasePlayer) return;
-        transform.position = Vector2.MoveTowards(transform.position, new Vector2(playerPos.x, playerPos.y), e_moveSpeed * Time.deltaTime);
+        // 攻撃中なら返す
+        //if ()
+
+        transform.position = Vector2.MoveTowards(transform.position, new Vector2(playerPos.x, playerPos.y), e_moveSpeed * Time.fixedDeltaTime);
     }
 
+    void Animation()
+    {
+        if (canAttack) return;
+        if (!isChasePlayer)
+        {
+            enemyAnim.ChangeState(EnemyState.Idle);
+        }
+        if (isChasePlayer)
+        {
+            enemyAnim.ChangeState(EnemyState.Walk);
+        }
+    }
+    // Animationとひとまとめにしたい
+    void Attack()
+    {
+        if (!canAttack) return;
+        if (lookPos.y == 0) // 横向き
+        {
+            enemyAnim.ChangeState(EnemyState.SideAttack);
+        }
+    }
+
+
+    // デバッグ用処理
     private void OnDrawGizmos()
     {
         // セグメント数
-        int seg = 32;
+        int seg = 16;
         float r = 0;
 
         if (playing && !alwaysFindPlayer)

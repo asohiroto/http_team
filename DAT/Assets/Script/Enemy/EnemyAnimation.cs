@@ -81,8 +81,10 @@ public class EnemyAnimation : MonoBehaviour
                 }
                 else
                 {
+                    // 仮
                     enemyCtrl.FinishAnim();
                     enemyCtrl.IsAttackFalse();
+
                     ChangeState(EnemyAnimState.Idle);
                 }
             }

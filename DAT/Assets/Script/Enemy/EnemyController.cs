@@ -30,11 +30,12 @@ public class EnemyController : MonoBehaviour
     [SerializeField] private bool isChasePlayer = false;
     [SerializeField] private bool canAttack = false;
     [SerializeField] private bool isAttack = false;
-    [SerializeField] private bool isAttackColl = false;
+    [SerializeField] private bool isAttackCool = false;
     [SerializeField] private bool isStop = false;
     [SerializeField] private bool isLookRight = false;
     public bool IsAttack = false;   // いい方法が思いつかなかったので
     private bool playing = false;
+    [SerializeField] private float cdTimer = 0f;
 
     [Header("Config")]
     [SerializeField] private float takeDamageDist = 1f; // Player からの攻撃をくらう距離
@@ -91,6 +92,7 @@ public class EnemyController : MonoBehaviour
     {
         CheckDist();
         Attack();
+        AttackCool();
         ChangeAnimation();
         LookPlayer();
         CheckLookDir();
@@ -196,8 +198,10 @@ public class EnemyController : MonoBehaviour
         
         if (attackDist > playerDist)
         {
+            // 仮
             if (isAttack) return;
             isAttack = true;
+
             //currentMoveState = EnemyMoveState.Attack;
             if (lookPos.y == 0)         // 横向き
             {
@@ -229,7 +233,7 @@ public class EnemyController : MonoBehaviour
     public void IsAttackFalse()
     {
         isAttack = false;
-        isAttackColl = false;
+        isAttackCool = false;
     }
 
     void Attack()
@@ -237,8 +241,8 @@ public class EnemyController : MonoBehaviour
         // isAttackがfalseなら返す
         if (!isAttack) return;
         // クールダウン中なら返す
-        if (isAttackColl) return;
-        isAttackColl = true;
+        if (isAttackCool) return;
+        isAttackCool = true;
         obj = Instantiate(attackCol, this.transform);      // プレハブ呼び出し
         obj.transform.position = AttackDist * 0.5f * lookPos + transform.position;     // 攻撃距離に合わせる
 
@@ -253,6 +257,14 @@ public class EnemyController : MonoBehaviour
             Destroy(obj);
             currentMoveState = EnemyMoveState.AttackCool;
         }
+    }
+
+    // 攻撃のクールダウン処理
+    void AttackCool()
+    {
+        if (!isAttack) return;
+        cdTimer -= Time.deltaTime;
+
     }
 
     void CheckLookDir()

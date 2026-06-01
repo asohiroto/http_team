@@ -38,7 +38,7 @@ public class EnemyController : MonoBehaviour
     [SerializeField] private float takeDamageDist = 1f; // Player からの攻撃をくらう距離
     [SerializeField] private GameObject player;         // Player オブジェクト
     [SerializeField] private GameObject coinPrefab;     // Coin オブジェクト
-    [SerializeField] private Transform coinParent;     // Coin のドロップ時の親オブジェクト
+    [SerializeField] private GameObject coinParent;     // Coin のドロップ時の親オブジェクト
     [SerializeField] GameObject attackCol;              // 攻撃の当たり判定(プレハブ)
     EnemyAnimation enemyAnim;
 
@@ -70,6 +70,10 @@ public class EnemyController : MonoBehaviour
         if (player == null)
         {
             player = GameObject.FindWithTag("Player");
+        }
+        if (coinParent == null)
+        {
+            coinParent = GameObject.FindWithTag("DropItems");
         }
 
         // HPが0のとき、スポーンさせない <- これいる？　検討中    // 必ず一番最後に処理
@@ -109,8 +113,9 @@ public class EnemyController : MonoBehaviour
             // スポーン位置がthis.transformの位置とズレている -> Prefabのミス
             GameObject dropCoin = Instantiate(coinPrefab, this.transform);
             // ドロップ時に他のオブジェクトの子オブジェクトにします
-            dropCoin.transform.SetParent(coinParent);
-            //Destroy(this.gameObject);
+            dropCoin.transform.SetParent(coinParent.transform);
+            
+            Destroy(this.gameObject);
         }
     }
 
@@ -142,7 +147,6 @@ public class EnemyController : MonoBehaviour
             if (isFindPlayer || alwaysFindPlayer)
             {
                 isChasePlayer = true;
-                EnemyDamaged(100);
             }
         }
         else

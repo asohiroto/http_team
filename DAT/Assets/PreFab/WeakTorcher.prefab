@@ -107,7 +107,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ebdcf5537ffc4a4b806569111e8b38d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyController
-  eHp: 100
+  eHp: 10
   findDist: 4
   loseDist: 5
   alwaysFindPlayer: 1
@@ -131,6 +131,8 @@ MonoBehaviour:
   IsAttack: 0
   takeDamageDist: 1
   player: {fileID: 0}
+  coinPrefab: {fileID: 4876145872219913294, guid: 40446f423e254a642a122f7e36b0e8fa, type: 3}
+  coinParent: {fileID: 0}
   attackCol: {fileID: 1675109570440110942, guid: eba50ab512d771843972f73eaed76870, type: 3}
 --- !u!114 &3875057953984697843
 MonoBehaviour:
@@ -154,7 +156,7 @@ MonoBehaviour:
     - {fileID: -7369122931189845133, guid: 9001e956a2356c2409e4d7ed91e03382, type: 3}
     - {fileID: 914313290774012156, guid: 9001e956a2356c2409e4d7ed91e03382, type: 3}
     - {fileID: -7114989445226215597, guid: 9001e956a2356c2409e4d7ed91e03382, type: 3}
-    frameRate: 24
+    frameRate: 12
     isLoop: 1
   - state: 1
     sprites:
@@ -164,7 +166,7 @@ MonoBehaviour:
     - {fileID: -7250923013278643159, guid: 9001e956a2356c2409e4d7ed91e03382, type: 3}
     - {fileID: -759784588031407353, guid: 9001e956a2356c2409e4d7ed91e03382, type: 3}
     - {fileID: -462455619930006344, guid: 9001e956a2356c2409e4d7ed91e03382, type: 3}
-    frameRate: 24
+    frameRate: 12
     isLoop: 1
   - state: 2
     sprites:
@@ -174,7 +176,7 @@ MonoBehaviour:
     - {fileID: 9113646813091510599, guid: 9001e956a2356c2409e4d7ed91e03382, type: 3}
     - {fileID: 6248227852262120436, guid: 9001e956a2356c2409e4d7ed91e03382, type: 3}
     - {fileID: 6084245027050260555, guid: 9001e956a2356c2409e4d7ed91e03382, type: 3}
-    frameRate: 24
+    frameRate: 12
     isLoop: 0
   - state: 3
     sprites:
@@ -184,7 +186,7 @@ MonoBehaviour:
     - {fileID: 5867112988911455960, guid: 9001e956a2356c2409e4d7ed91e03382, type: 3}
     - {fileID: -2701350933335208944, guid: 9001e956a2356c2409e4d7ed91e03382, type: 3}
     - {fileID: -6788512504216807580, guid: 9001e956a2356c2409e4d7ed91e03382, type: 3}
-    frameRate: 24
+    frameRate: 12
     isLoop: 0
   - state: 4
     sprites:
@@ -194,9 +196,12 @@ MonoBehaviour:
     - {fileID: -4146183439964304651, guid: 9001e956a2356c2409e4d7ed91e03382, type: 3}
     - {fileID: 9055524857887277902, guid: 9001e956a2356c2409e4d7ed91e03382, type: 3}
     - {fileID: 8493538717480454915, guid: 9001e956a2356c2409e4d7ed91e03382, type: 3}
-    frameRate: 24
+    frameRate: 12
     isLoop: 0
+  currentState: 5
+  currentFrame: 0
   timer: 0
+  timePerFrame: 0
 --- !u!50 &4355061071210407241
 Rigidbody2D:
   serializedVersion: 5

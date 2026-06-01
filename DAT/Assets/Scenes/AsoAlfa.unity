@@ -2414,6 +2414,9 @@ MonoBehaviour:
   - materialA: 3
     materialB: 6
     result: 7
+  - materialA: 1
+    materialB: 1
+    result: 8
   craftFrag: 0
   material1: 0
 --- !u!4 &943071131
@@ -5988,7 +5991,7 @@ MonoBehaviour:
   curseAmount: 10
   absorbDamage: 10
   absorbHealAmount: 2
-  hyperSpeedAmount: 0.2
+  hyperSpeedAmount: 0.1
   fbSpeed: 0.5
   cfSpeed: 0.5
   discardInd1: -1

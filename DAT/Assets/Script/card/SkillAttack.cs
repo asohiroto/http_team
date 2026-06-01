@@ -39,8 +39,6 @@ public class SkillAttack : MonoBehaviour
             enemyObj = col.gameObject;
             eneController = enemyObj.GetComponent<EnemyController>();
             eneController.EnemyDamaged(attackDamage);
-
-            Destroy(gameObject);
         }
     }
 
@@ -51,6 +49,9 @@ public class SkillAttack : MonoBehaviour
             spriteRenderer.sprite = attackSprite[i];
 
             yield return new WaitForSeconds(animTime);
+
         }
+
+        Destroy(gameObject);
     }
 }

@@ -6,10 +6,14 @@ public class HPBarController : MonoBehaviour
     private float maxHP = 100f;
     private float currentHP;
 
-    void Start() { currentHP = maxHP; UpdateHPBar(); }
+    [SerializeField] GameObject playerObj;
+    PlayerController player;
+
+    void Start() { currentHP = player.maxPlayerHP; UpdateHPBar(); }
     public void TakeDamage(float damage)
     {
-        currentHP = Mathf.Clamp(currentHP - damage, 0, maxHP);
+        player = playerObj.GetComponent<PlayerController>();
+        currentHP = Mathf.Clamp(currentHP - damage, 0,player.maxPlayerHP);
         UpdateHPBar();
     }
     void UpdateHPBar() { if (hpBarFill != null) hpBarFill.fillAmount = currentHP / maxHP; }

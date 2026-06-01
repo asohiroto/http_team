@@ -3,7 +3,7 @@ using UnityEngine.UI;
 public class HPBarController : MonoBehaviour
 {
     public Image hpBarFill; 
-    private float maxHP = 100f;
+    //private float maxHP = 100f;
     private float currentHP;
 
     [SerializeField] GameObject playerObj;
@@ -16,6 +16,12 @@ public class HPBarController : MonoBehaviour
         currentHP = Mathf.Clamp(currentHP - damage, 0,player.maxPlayerHP);
         UpdateHPBar();
     }
-    void UpdateHPBar() { if (hpBarFill != null) hpBarFill.fillAmount = currentHP / maxHP; }
-    void Update() { if (Input.GetKeyDown(KeyCode.Space)) TakeDamage(10f); } // スペースキーでダメージ
+    void UpdateHPBar() 
+    { 
+        if (hpBarFill != null) hpBarFill.fillAmount = currentHP / player.maxPlayerHP; 
+    }
+    void Update() 
+    { 
+        if (Input.GetKeyDown(KeyCode.Space)) TakeDamage(10f); 
+    } // スペースキーでダメージ
 }

@@ -13,8 +13,6 @@ public class HandManager : MonoBehaviour
     [SerializeField] int cardDrawFee; // カードを引く代金
     [SerializeField] int cardDrawFeeBase; // カードを引く代金
 
-    [SerializeField] float cardDrawFeeMagnif; // カード購入代金倍率
-
     int cardId = 0; // 生成するカードのID
     int cardDrawCount = 0; // これまでにカードを引いた回数
     int[] cardIdStart = { 0, 1, 2, 3, 6 }; // 初期手札にできるカードのID
@@ -93,7 +91,7 @@ public class HandManager : MonoBehaviour
                 if (coinManager.currentMoney - cardDrawFee > 0)
                 {
                     cardDrawCount++;
-                    cardDrawFee = (int)(cardDrawFee + cardDrawFeeBase * (1.0f + cardDrawFeeMagnif * cardDrawCount)); // カードの購入代金を倍率に回数をかけたものとする
+                    cardDrawFee = (int)(cardDrawFee +  cardDrawCount); // カードの購入代金を倍率に回数をかけたものとする
 
                     GameObject obj = CardGenerate(cardIdStart[cardRandomId], i);
                     ButtonListener(cardIdStart[cardRandomId], obj, i);

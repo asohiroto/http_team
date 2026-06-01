@@ -120,8 +120,10 @@ public class PlayerController : MonoBehaviour
     void Move()
     {
         moveDir = new Vector3(dirX, dirY, 0);
+        // 正規化
+        moveDir.Normalize();
 
-        if ((moveDir.x != 0 || moveDir.y != 0) && !onAttack)
+        if ((moveDir.x != 0 || moveDir.y != 0) /*&& !onAttack*/)
         {
             lastDir = moveDir;
         }
@@ -167,11 +169,7 @@ public class PlayerController : MonoBehaviour
         currentPos.x = Mathf.Clamp(currentPos.x, -xLimit, xLimit);
         currentPos.y = Mathf.Clamp(currentPos.y, yMinLimit, yMaxLimit);
 
-        // 正規化
-        if (moveDir.magnitude >= 1)
-        {
-            moveDir.Normalize();
-        }
+        
     }
 
 

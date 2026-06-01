@@ -10,9 +10,13 @@ public class PlayerHealth : MonoBehaviour
 
     [SerializeField] private Image hpBarImage;
 
+    [SerializeField]GameObject playerObj;
+    PlayerController player;
+
     void Start()
     {
-        currentHp = maxHp;
+        player = playerObj.GetComponent<PlayerController>();
+        currentHp = player.maxPlayerHP;
         UpdateHpBar();
     }
 
@@ -43,7 +47,7 @@ public class PlayerHealth : MonoBehaviour
     {
         if (hpBarImage != null)
         {
-            hpBarImage.fillAmount = (float)currentHp / maxHp;
+            hpBarImage.fillAmount = (float)currentHp /player.maxPlayerHP;
         }
     }
 

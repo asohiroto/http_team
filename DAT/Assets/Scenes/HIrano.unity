@@ -299,6 +299,37 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!1 &946833344
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 946833345}
+  m_Layer: 0
+  m_Name: DropManager
+  m_TagString: DropItems
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &946833345
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 946833344}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1505953545
 GameObject:
   m_ObjectHideFlags: 0
@@ -619,26 +650,6 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3875057953984697843, guid: f6545e77c56c98841962ce3e926c813d, type: 3}
-      propertyPath: animationDatas.Array.data[0].state
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3875057953984697843, guid: f6545e77c56c98841962ce3e926c813d, type: 3}
-      propertyPath: animationDatas.Array.data[1].state
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3875057953984697843, guid: f6545e77c56c98841962ce3e926c813d, type: 3}
-      propertyPath: animationDatas.Array.data[2].state
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3875057953984697843, guid: f6545e77c56c98841962ce3e926c813d, type: 3}
-      propertyPath: animationDatas.Array.data[3].state
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 3875057953984697843, guid: f6545e77c56c98841962ce3e926c813d, type: 3}
-      propertyPath: animationDatas.Array.data[4].state
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 3875057953984697843, guid: f6545e77c56c98841962ce3e926c813d, type: 3}
       propertyPath: animationDatas.Array.data[0].frameRate
       value: 12
       objectReference: {fileID: 0}
@@ -663,6 +674,10 @@ PrefabInstance:
       value: WeakTorcher
       objectReference: {fileID: 0}
     - target: {fileID: 9190601027444089525, guid: f6545e77c56c98841962ce3e926c813d, type: 3}
+      propertyPath: coinParent
+      value: 
+      objectReference: {fileID: 946833344}
+    - target: {fileID: 9190601027444089525, guid: f6545e77c56c98841962ce3e926c813d, type: 3}
       propertyPath: coinPrefab
       value: 
       objectReference: {fileID: 4876145872219913294, guid: 40446f423e254a642a122f7e36b0e8fa, type: 3}
@@ -683,3 +698,4 @@ SceneRoots:
   - {fileID: 889639629}
   - {fileID: 1951224556}
   - {fileID: 9116938085244013047}
+  - {fileID: 946833345}

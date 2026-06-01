@@ -102,7 +102,7 @@ public class PlayerController : MonoBehaviour
         attackCdTimer -= Time.deltaTime;
         if (attackCdTimer <= 0 && canAttack)
         {
-            //StartCoroutine(Attack());
+            StartCoroutine(Attack());
             attackCdTimer = attackCd + attackTime;
         }
 

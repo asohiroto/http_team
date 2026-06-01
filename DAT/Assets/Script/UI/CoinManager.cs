@@ -39,7 +39,7 @@ public class CoinManager : MonoBehaviour
     }
 
     // 所持金表示更新
-    void UpdateMoneyUI()
+    public void UpdateMoneyUI()
     {
         if (moneyText != null)
         {

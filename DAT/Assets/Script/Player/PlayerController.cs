@@ -55,6 +55,10 @@ public class PlayerController : MonoBehaviour
     [SerializeField] Sprite[] leftSprite; // 左向きのアニメーションを代入
     private int animIdx = 0; // アニメーションのコマ数を数える変数
 
+
+    GameObject destroyObje; // 麻生が追加
+    GameObject normalAttack;
+
     void Start()
     {
         currentPos = transform.position;
@@ -177,7 +181,7 @@ public class PlayerController : MonoBehaviour
         onDash = false;
     }
 
-    public void SlashTypeAndDir(GameObject slashType)
+    public void SlashTypeAndDir(GameObject slashType,ref GameObject obje)
     {
         float flipX = 0;
         float rotZ = 0;
@@ -186,6 +190,7 @@ public class PlayerController : MonoBehaviour
 
         GameObject obj = Instantiate(slashType, transform);
         obj.transform.position = transform.position + attackDir * 0.50f;
+        obje = obj;
 
         // 斬撃の方向を決定
         if (attackDir.x > 0)
@@ -220,7 +225,7 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     IEnumerator Attack()
     {
-        SlashTypeAndDir(attackObj);
+        SlashTypeAndDir(attackObj,ref normalAttack);
 
         yield return new WaitForSeconds(0.1f); // アタック方向の固定を少し遅らせる
 
@@ -233,20 +238,20 @@ public class PlayerController : MonoBehaviour
 
 
 
-    public IEnumerator StrongAttack(GameObject slashType, int slashDamage) // 強斬り用の関数
-    {
-        SlashTypeAndDir(slashType);
+    //public IEnumerator StrongAttack(GameObject slashType, int slashDamage) // 強斬り用の関数
+    //{
+    //    SlashTypeAndDir(slashType);
 
         
 
-        yield return new WaitForSeconds(0.1f); // アタック方向の固定を少し遅らせる
+    //    yield return new WaitForSeconds(0.1f); // アタック方向の固定を少し遅らせる
 
-        onAttack = true;
+    //    onAttack = true;
 
-        yield return new WaitForSeconds(attackTime);
+    //    yield return new WaitForSeconds(attackTime);
 
-        onAttack = false;
-    }
+    //    onAttack = false;
+    //}
 
     /// <summary>
     /// プレイヤーがダメージを受けたときの関数

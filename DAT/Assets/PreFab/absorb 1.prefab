@@ -9,10 +9,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5388344716737765618}
-  - component: {fileID: 6515552925118031971}
   - component: {fileID: 2569633958656532111}
   - component: {fileID: -1466241430393557686}
   - component: {fileID: -3410448070413850128}
+  - component: {fileID: -2055508572729787572}
   m_Layer: 0
   m_Name: absorb 1
   m_TagString: Untagged
@@ -35,31 +35,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6515552925118031971
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5860723255738655983}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7fdf54cb80c95ef46955abf398690f38, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlayerAttack
-  attackSprite:
-  - {fileID: -8321102221490951993, guid: 7e001dbabc0e01544a989f1e73fe69a3, type: 3}
-  - {fileID: 7417498029127908629, guid: dd156c7abc357fe4aa874984cc028f93, type: 3}
-  - {fileID: 545875093725613961, guid: 8ad913a822a6cb948a2f45116aaf5f33, type: 3}
-  - {fileID: 3432582381386852895, guid: db93d82f7992f954f8da3d630a2bcfb9, type: 3}
-  - {fileID: 438895471204581479, guid: 295db4480cedb5849ab7c6da9b6e0c75, type: 3}
-  - {fileID: 8569003786385872269, guid: 048cf51d1ca913d4bbd65fc12a2d3b69, type: 3}
-  - {fileID: 194267116164964566, guid: 4fccb3799a4e36947b1ec9c82308259c, type: 3}
-  - {fileID: 8628015757821773985, guid: d82ef64a033a9b0468da37e23362950b, type: 3}
-  - {fileID: -8953931204883689621, guid: 9bdf1d949a4981141b9e64429304906a, type: 3}
-  - {fileID: -445189602233881614, guid: 7402c88c8d6959944a027b68d457963f, type: 3}
-  - {fileID: -4405548165813298403, guid: 77f1dc5fe263d9c4c9721ee2ecf5acdc, type: 3}
-  attackDamage: 15
 --- !u!61 &2569633958656532111
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -178,3 +153,26 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 0
   m_SpriteSortPoint: 0
+--- !u!114 &-2055508572729787572
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5860723255738655983}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 359733af8e8f3d848afe68b1178dcab8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SkillAttack
+  attackSprite:
+  - {fileID: 438895471204581479, guid: 3849313ac64a41d4da3686b66edde334, type: 3}
+  - {fileID: 3432582381386852895, guid: 00c17efbae67ceb429284b310efcc1ad, type: 3}
+  - {fileID: 545875093725613961, guid: aca95be5c18a91b479ebbb8173a24671, type: 3}
+  - {fileID: 7417498029127908629, guid: adcb4bc3f8561064b8e99f3dccf61be6, type: 3}
+  - {fileID: -8321102221490951993, guid: eec0e5766d7be8b42842dffb0753aef4, type: 3}
+  - {fileID: 1882757722001119989, guid: 7d25b0a8c05f2bf4395b06307d1427db, type: 3}
+  - {fileID: 8628015757821773985, guid: 8dfe8a8ad9b6c7d42adef24fd3bf1451, type: 3}
+  - {fileID: 194267116164964566, guid: 463aeb6123bec9945b0be67d130a643b, type: 3}
+  - {fileID: 4307378007268850688, guid: 17a9f2777cb359640bc51fd3caae11ef, type: 3}
+  attackDamage: 0

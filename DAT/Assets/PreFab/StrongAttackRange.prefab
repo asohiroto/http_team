@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4728880654698947219}
   - component: {fileID: 7998538562818885432}
   - component: {fileID: 2029232647305722363}
-  - component: {fileID: 1008905476510445648}
+  - component: {fileID: 7742962658103782497}
   m_Layer: 0
   m_Name: StrongAttackRange
   m_TagString: Untagged
@@ -167,7 +167,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &1008905476510445648
+--- !u!114 &7742962658103782497
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -176,9 +176,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 132122364930665669}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7fdf54cb80c95ef46955abf398690f38, type: 3}
+  m_Script: {fileID: 11500000, guid: 359733af8e8f3d848afe68b1178dcab8, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlayerAttack
+  m_EditorClassIdentifier: Assembly-CSharp::SkillAttack
   attackSprite:
   - {fileID: 2395074565377422663, guid: 17b1c0ad2dc324d4ab85de5718b6575f, type: 3}
   - {fileID: 3446733471723892229, guid: 17b1c0ad2dc324d4ab85de5718b6575f, type: 3}
@@ -187,3 +187,4 @@ MonoBehaviour:
   - {fileID: -6182533840853419118, guid: 17b1c0ad2dc324d4ab85de5718b6575f, type: 3}
   - {fileID: -701126997251728781, guid: 17b1c0ad2dc324d4ab85de5718b6575f, type: 3}
   - {fileID: 6745886743408634475, guid: 17b1c0ad2dc324d4ab85de5718b6575f, type: 3}
+  attackDamage: 15

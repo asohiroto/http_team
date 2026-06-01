@@ -11,6 +11,7 @@ public class SkillManager : MonoBehaviour
     PlayerController player;
     HandManager hand;
     CraftManager craft;
+    CoinManager coin;
 
     [SerializeField] int healAmount;            // ヒール回復量
     [SerializeField] int overHealAmount;        // オーバーヒール回復量
@@ -50,18 +51,22 @@ public class SkillManager : MonoBehaviour
     bool fbFlag = false;                        // ファイアーボールのフラグ
     bool cfFlag = false;                        // カースドフレイムのフラグ
     
-    public bool absorbFlag = false;                    // アブソーブのヒットフラグ
+    public bool absorbFlag = false;             // アブソーブのヒットフラグ
 
     [SerializeField] GameObject fireBall;       // ファイアーボールで生成するオブジェクト
     [SerializeField] GameObject cursedFlame;    // カースドフレイムで生成するオブジェクト
     [SerializeField] GameObject absorbPrefab;   // アブソーブで生成するオブジェクト
 
-    public GameObject fireBallPreFab;                  // 生成したファイアーボール
-    public GameObject cursedFlamePreFab;               // 生成したカースドフレイム
+    public GameObject fireBallPreFab;           // 生成したファイアーボール
+    public GameObject cursedFlamePreFab;        // 生成したカースドフレイム
+
+    GameObject slash;
+    GameObject fireSlash;
+    GameObject absorb;
 
     // 福田げんきが追加
     [SerializeField] GameObject[] slashTypePrefab; // 0に強斬り、1に火の強切りを入れる予定
-    PlayerAttack playerAttack;
+    SkillAttack skillAttack;
     int strongSlashDamage = 10; // 仮のアタックダメージ
     int fireSlashDamage = 10; // 仮のファイヤースラッシュダメージ
 
@@ -79,6 +84,8 @@ public class SkillManager : MonoBehaviour
 
             if (hand != null && craft != null) break;
         }
+
+        coin = GameObject.Find("CoinManager").GetComponent<CoinManager>();
     }
 
     // Update is called once per frame
@@ -131,15 +138,9 @@ public class SkillManager : MonoBehaviour
             }
 
             Debug.Log(player.playerHP);
+            coin.UpdateMoneyUI();
             absorbFlag = false;
         }
-
-        if (Keyboard.current.pKey.wasPressedThisFrame) // 【テスト用】　pを押すと体力を減らす
-        {
-            player.playerHP -= 15;
-            Debug.Log("playerHP : " + player.playerHP);
-        }
-
     }
 
     public async Task Enhance(int ind) // 攻撃力強化 ID->0
@@ -219,7 +220,7 @@ public class SkillManager : MonoBehaviour
 
                     hand.DisCard(ind);
                 }
-
+                coin.UpdateMoneyUI();
                 Debug.Log(player.playerHP);
             }
             else
@@ -248,9 +249,9 @@ public class SkillManager : MonoBehaviour
 
             if (Mouse.current.rightButton.wasPressedThisFrame)
             {
-                player.SlashTypeAndDir(slashTypePrefab[0]);　// 強切りを生成して使う方向を決定する
-                playerAttack = slashTypePrefab[0].GetComponent<PlayerAttack>();
-                playerAttack.attackDamage = player.attackDamage + strongSlashDamage; // 強切りのアタックダメージを代入
+                player.SlashTypeAndDir(slashTypePrefab[0],ref slash);　// 強切りを生成して使う方向を決定する
+                skillAttack = slashTypePrefab[0].GetComponent<SkillAttack>();
+                skillAttack.attackDamage = player.attackDamage + strongSlashDamage; // 強切りのアタックダメージを代入
 
                 hand.DisCard(ind);
 
@@ -261,6 +262,7 @@ public class SkillManager : MonoBehaviour
                 await Task.Delay((int)(player.attackTime * 1000));
 
                 player.onAttack = false;
+                Destroy(slash);
             }
         }
 
@@ -296,10 +298,13 @@ public class SkillManager : MonoBehaviour
                     destPosFb = new Vector2(distX, distY);
                     destPosFb.Normalize();
 
+                    float angle = Mathf.Atan2(destPosFb.y, destPosFb.x) * Mathf.Rad2Deg;
+
                     // オブジェクトを作成する
                     GameObject obj = Instantiate(fireBall);
                     obj.transform.position = player.currentPos;
                     obj.transform.name = ("FireBall");
+                    obj.transform.rotation = Quaternion.Euler(0, 0, angle);
 
                     fireBallPreFab = obj;
 
@@ -334,9 +339,9 @@ public class SkillManager : MonoBehaviour
             if (Mouse.current.rightButton.wasPressedThisFrame)
             {
 
-                player.SlashTypeAndDir(slashTypePrefab[1]); // 強切りを生成して使う方向を決定する
-                playerAttack = slashTypePrefab[1].GetComponent<PlayerAttack>();
-                playerAttack.attackDamage = player.attackDamage + fireSlashDamage; // 火の強切りのアタックダメージを代入
+                player.SlashTypeAndDir(slashTypePrefab[1],ref fireSlash); // 強切りを生成して使う方向を決定する
+                skillAttack = slashTypePrefab[1].GetComponent<SkillAttack>();
+                skillAttack.attackDamage = player.attackDamage + fireSlashDamage; // 火の強切りのアタックダメージを代入
 
                 hand.DisCard(ind);
 
@@ -347,7 +352,7 @@ public class SkillManager : MonoBehaviour
                 await Task.Delay((int)(player.attackTime * 1000));
 
                 player.onAttack = false;
-
+                Destroy(fireSlash);
             }
         }
 
@@ -524,9 +529,9 @@ public class SkillManager : MonoBehaviour
 
             if (Mouse.current.rightButton.wasPressedThisFrame)
             {
-                player.SlashTypeAndDir(absorbPrefab);　// アブソーブを生成して使う方向を決定する
-                playerAttack = absorbPrefab.GetComponent<PlayerAttack>();
-                playerAttack.attackDamage = player.attackDamage + absorbDamage; // アブソーブのアタックダメージを代入
+                player.SlashTypeAndDir(absorbPrefab,ref absorb);　// アブソーブを生成して使う方向を決定する
+                skillAttack = absorbPrefab.GetComponent<SkillAttack>();
+                skillAttack.attackDamage = player.attackDamage + absorbDamage; // アブソーブのアタックダメージを代入
 
                 hand.DisCard(ind);
 
@@ -537,6 +542,7 @@ public class SkillManager : MonoBehaviour
                 await Task.Delay((int)(player.attackTime * 1000));
 
                 player.onAttack = false;
+                Destroy(absorb);
             }
             else
             {
@@ -591,17 +597,26 @@ public class SkillManager : MonoBehaviour
 
     void BallMove(GameObject preFab, Vector2 dest, float speed, Vector2 mousePos, int count, ref bool flag) // ボール系の挙動
     {
-        preFab.transform.Translate(dest * speed); // ファイアーボール自身を目的地に向かってすすませる
+        if (preFab != null)
+        {
 
-        float dist = Vector2.Distance(preFab.transform.position, mousePos);
 
-        if (dist > 20.0f)
+            preFab.transform.Translate(dest * speed, Space.World); // ファイアーボール自身を目的地に向かってすすませる
+
+            float dist = Vector2.Distance(preFab.transform.position, mousePos);
+
+            if (dist > 20.0f)
+            {
+                count = 0;
+                dist = 0f;
+                flag = false;
+                Destroy(preFab);
+            }
+        }
+        else
         {
             count = 0;
-            dist = 0f;
             flag = false;
-
-            Destroy(preFab);
         }
     }
 }

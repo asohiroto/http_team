@@ -68,6 +68,7 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate()
     {
+        Debug.Log(canAttack);
         Move();
         InputManager();
         CheckDie();

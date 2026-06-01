@@ -1177,6 +1177,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 627710345}
     m_Modifications:
+    - target: {fileID: 1548524908151583129, guid: 2cfcd7ea27601954cafe1d33a9fdb3ca, type: 3}
+      propertyPath: m_FillAmount
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1548524908151583129, guid: 2cfcd7ea27601954cafe1d33a9fdb3ca, type: 3}
+      propertyPath: m_FillOrigin
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4365927686955088021, guid: 2cfcd7ea27601954cafe1d33a9fdb3ca, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -5589,8 +5597,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a44174293805c714d99cba66ae84fb28, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerHealth
-  maxHp: 100
-  spaceKeyDamage: 20
   hpBarImage: {fileID: 1242071339}
 --- !u!61 &1721966150
 BoxCollider2D:

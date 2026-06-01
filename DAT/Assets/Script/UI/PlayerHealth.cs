@@ -1,12 +1,10 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 public class PlayerHealth : MonoBehaviour
 {
-    [SerializeField] private int maxHp = 100;
-    private int currentHp;
-
-   
+    //private int currentHp;
 
     [SerializeField] private Image hpBarImage;
 
@@ -21,33 +19,37 @@ public class PlayerHealth : MonoBehaviour
             player = obj.GetComponent<PlayerController>();
             if (player != null) break;
         }
-        currentHp = player.maxPlayerHP;
-        UpdateHpBar();
+        //currentHp = player.maxPlayerHP;
     }
 
     void Update()
     {
-       
-    }
-
-    public void TakeDamage(int damage)
-    {
-        currentHp -= damage;　//現在のHPからダメージ分引く
-        currentHp = Mathf.Max(currentHp, 0);
+       if(Keyboard.current.nKey.wasPressedThisFrame)
+        {
+            player.playerHP -= 10;
+        }
 
         UpdateHpBar();
-
-        if (currentHp <= 0)
-        {
-            Die();
-        }
     }
+
+    //public void TakeDamage(int damage)
+    //{
+    //    currentHp -= damage;　//現在のHPからダメージ分引く
+    //    currentHp = Mathf.Max(currentHp, 0);
+
+    //    UpdateHpBar();
+
+    //    if (currentHp <= 0)
+    //    {
+    //        Die();
+    //    }
+    //}
 
     private void UpdateHpBar() //HPのUIを更新
     {
         if (hpBarImage != null)
         {
-            hpBarImage.fillAmount = (float)currentHp /player.maxPlayerHP;
+            hpBarImage.fillAmount = (float) player.playerHP / player.maxPlayerHP;
         }
     }
 

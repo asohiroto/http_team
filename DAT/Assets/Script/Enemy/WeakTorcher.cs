@@ -210,7 +210,7 @@ public class WeakTorcher : MonoBehaviour
         GameObject obj = Instantiate(enemyCtrl.AttackCol, this.transform);      // プレハブ呼び出し
         obj.transform.position = enemyCtrl.AttackDist * 0.5f * lookPos + enemyCtrl.transform.position;     // 攻撃距離に合わせる
 
-        EnemyAttack attack = obj.GetComponent<EnemyAttack>();
+        //EnemyAttack attack = obj.GetComponent<EnemyAttack>();
 
         yield return new WaitForSeconds(attackTime);
         Destroy(obj);

@@ -29,6 +29,8 @@ public class EnemyController : MonoBehaviour
     [SerializeField] private bool isLostPlayer = false;
     [SerializeField] private bool isChasePlayer = false;
     [SerializeField] private bool canAttack = false;
+    [SerializeField] private bool isAttack = false;
+    [SerializeField] private bool isAttackColl = false;
     [SerializeField] private bool isStop = false;
     [SerializeField] private bool isLookRight = false;
     public bool IsAttack = false;   // いい方法が思いつかなかったので
@@ -41,6 +43,12 @@ public class EnemyController : MonoBehaviour
     [SerializeField] private GameObject coinParent;     // Coin のドロップ時の親オブジェクト
     [SerializeField] GameObject attackCol;              // 攻撃の当たり判定(プレハブ)
     EnemyAnimation enemyAnim;
+    GameObject obj;
+
+    public enum EnemyMoveState { Idle, Walk, SideAttack, LowerAttack, UpperAttack, AttackCool }
+
+    [SerializeField]
+    private EnemyMoveState currentMoveState = EnemyMoveState.Idle;
 
 
     public float AttackDist => attackDist;
@@ -82,12 +90,14 @@ public class EnemyController : MonoBehaviour
     private void FixedUpdate()
     {
         CheckDist();
+        Attack();
+        ChangeAnimation();
         LookPlayer();
         CheckLookDir();
         LookHor();
         ChasePlayer();
-        Animation();
-        Attack();
+        //Animation();
+        //AttackAnim();
     }
 
     // EnemyDamaged
@@ -132,6 +142,36 @@ public class EnemyController : MonoBehaviour
         nowDir.Normalize();
     }
 
+    void ChangeAnimation()
+    {
+        switch (currentMoveState)
+        {
+            case EnemyMoveState.Idle:
+                enemyAnim.ChangeState(EnemyAnimState.Idle);
+                break;
+
+            case EnemyMoveState.Walk:
+                enemyAnim.ChangeState(EnemyAnimState.Walk);
+                break;
+
+            case EnemyMoveState.SideAttack:
+                
+                enemyAnim.ChangeState(EnemyAnimState.SideAttack);
+                break;
+
+            case EnemyMoveState.LowerAttack:
+                enemyAnim.ChangeState(EnemyAnimState.LowerAttack);
+                break;
+
+            case EnemyMoveState.UpperAttack:
+                enemyAnim.ChangeState(EnemyAnimState.UpperAttack);
+                break;
+
+            case EnemyMoveState.AttackCool:
+                break;
+        }
+    }
+
     void LookPlayer()
     {
         // これを列挙型にしたら楽じゃない？
@@ -152,6 +192,66 @@ public class EnemyController : MonoBehaviour
         else
         {
             isChasePlayer = false;
+        }
+        
+        if (attackDist > playerDist)
+        {
+            if (isAttack) return;
+            isAttack = true;
+            //currentMoveState = EnemyMoveState.Attack;
+            if (lookPos.y == 0)         // 横向き
+            {
+                currentMoveState = EnemyMoveState.SideAttack;
+            }
+            else if (lookPos.y == 1)     // 上向き
+            {
+                currentMoveState = EnemyMoveState.UpperAttack;
+            }
+            else if (lookPos.y == -1)    // 下向き
+            {
+                currentMoveState = EnemyMoveState.LowerAttack;
+            }
+        }
+        else if ((!isLostPlayer || alwaysFindPlayer) && !isStop)
+        {
+            if (isFindPlayer || alwaysFindPlayer)
+            {
+                currentMoveState = EnemyMoveState.Walk;
+            }
+        }
+        else
+        {
+            currentMoveState = EnemyMoveState.Idle;
+        }
+        
+    }
+
+    public void IsAttackFalse()
+    {
+        isAttack = false;
+        isAttackColl = false;
+    }
+
+    void Attack()
+    {
+        // isAttackがfalseなら返す
+        if (!isAttack) return;
+        // クールダウン中なら返す
+        if (isAttackColl) return;
+        isAttackColl = true;
+        obj = Instantiate(attackCol, this.transform);      // プレハブ呼び出し
+        obj.transform.position = AttackDist * 0.5f * lookPos + transform.position;     // 攻撃距離に合わせる
+
+    }
+
+    public void FinishAnim()
+    {
+        if (currentMoveState == EnemyMoveState.SideAttack
+            || currentMoveState == EnemyMoveState.LowerAttack
+            || currentMoveState == EnemyMoveState.UpperAttack)
+        {
+            Destroy(obj);
+            currentMoveState = EnemyMoveState.AttackCool;
         }
     }
 
@@ -184,10 +284,6 @@ public class EnemyController : MonoBehaviour
             {
                 lookPos.y = -1;
             }
-            else
-            {
-                lookPos.y = 0;  // 横を向く
-            }
         }
         else                    // 左右方向
         {
@@ -200,13 +296,10 @@ public class EnemyController : MonoBehaviour
             {
                 lookPos.x = -1; // 左向き
             }
-            else
-            {
-                lookPos.x = 0;
-            }
         }
     }
 
+    // 左右を向く
     private void LookHor()
     {
         if (!isChasePlayer) return;
@@ -224,8 +317,8 @@ public class EnemyController : MonoBehaviour
     {
         // 追跡状態じゃないなら返す
         if (!isChasePlayer) return;
-        // 攻撃中なら返す
-        //if ()
+        // 移動中ではないなら返す
+        if (currentMoveState != EnemyMoveState.Walk) return;
 
         transform.position = Vector2.MoveTowards(transform.position, new Vector2(playerPos.x, playerPos.y), e_moveSpeed * Time.fixedDeltaTime);
     }
@@ -235,20 +328,28 @@ public class EnemyController : MonoBehaviour
         if (canAttack) return;
         if (!isChasePlayer)
         {
-            enemyAnim.ChangeState(EnemyState.Idle);
+            enemyAnim.ChangeState(EnemyAnimState.Idle);
         }
         if (isChasePlayer)
         {
-            enemyAnim.ChangeState(EnemyState.Walk);
+            enemyAnim.ChangeState(EnemyAnimState.Walk);
         }
     }
     // Animationとひとまとめにしたい
-    void Attack()
+    void AttackAnim()
     {
         if (!canAttack) return;
-        if (lookPos.y == 0) // 横向き
+        if (lookPos.y == 0)         // 横向き
         {
-            enemyAnim.ChangeState(EnemyState.SideAttack);
+            enemyAnim.ChangeState(EnemyAnimState.SideAttack);
+        }
+        else if (lookPos.x == 1)     // 上向き
+        {
+            enemyAnim.ChangeState(EnemyAnimState.UpperAttack);
+        }
+        else if (lookPos.x == -1)    // 下向き
+        {
+            enemyAnim.ChangeState(EnemyAnimState.LowerAttack);
         }
     }
 

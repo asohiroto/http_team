@@ -6,13 +6,23 @@ public class HPBarController : MonoBehaviour
     //private float maxHP = 100f;
     private float currentHP;
 
-    [SerializeField] GameObject playerObj;
     PlayerController player;
 
-    void Start() { currentHP = player.maxPlayerHP; UpdateHPBar(); }
+    void Start() 
+    {
+        GameObject[] objs = GameObject.FindGameObjectsWithTag("Player");
+
+        foreach (GameObject obj in objs)
+        {
+            player = obj.GetComponent<PlayerController>();
+
+            if (player != null) break;
+        }
+
+        currentHP = player.maxPlayerHP; UpdateHPBar(); 
+    }
     public void TakeDamage(float damage)
     {
-        player = playerObj.GetComponent<PlayerController>();
         currentHP = Mathf.Clamp(currentHP - damage, 0,player.maxPlayerHP);
         UpdateHPBar();
     }

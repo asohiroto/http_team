@@ -10,12 +10,17 @@ public class PlayerHealth : MonoBehaviour
 
     [SerializeField] private Image hpBarImage;
 
-    [SerializeField]GameObject playerObj;
     PlayerController player;
 
     void Start()
     {
-        player = playerObj.GetComponent<PlayerController>();
+        GameObject[] objs = GameObject.FindGameObjectsWithTag("Player");
+
+        foreach (GameObject obj in objs)
+        {
+            player = obj.GetComponent<PlayerController>();
+            if (player != null) break;
+        }
         currentHp = player.maxPlayerHP;
         UpdateHpBar();
     }

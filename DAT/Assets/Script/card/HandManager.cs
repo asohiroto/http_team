@@ -96,7 +96,7 @@ public class HandManager : MonoBehaviour
                     GameObject obj = CardGenerate(cardIdStart[cardRandomId], i);
                     ButtonListener(cardIdStart[cardRandomId], obj, i);
 
-                    coinManager.currentMoney -= cardDrawFee;
+                    coinManager.ReduceMoney(cardDrawFee);
                 }
                 else
                 {

@@ -3,8 +3,6 @@ using TMPro;
 
 public class CoinManager : MonoBehaviour
 {
-    public static CoinManager instance;
-
     [Header("UI設定")]
     [SerializeField] private TextMeshProUGUI moneyText; 
     [SerializeField] private string unit = "G";      
@@ -12,11 +10,7 @@ public class CoinManager : MonoBehaviour
 
     public int currentMoney = 0; // 所持金
 
-    private void Awake()
-    {
-        if (instance == null) { instance = this; }
-    }
-
+    
     private void Start()
     {
         UpdateMoneyUI();
@@ -45,7 +39,7 @@ public class CoinManager : MonoBehaviour
     }
 
     // 所持金表示更新
-    private void UpdateMoneyUI()
+    void UpdateMoneyUI()
     {
         if (moneyText != null)
         {

@@ -6,6 +6,7 @@ public class HPBarController : MonoBehaviour
     //private float maxHP = 100f;
     private float currentHP;
 
+
     PlayerController player;
 
     void Start() 
@@ -30,8 +31,4 @@ public class HPBarController : MonoBehaviour
     { 
         if (hpBarFill != null) hpBarFill.fillAmount = currentHP / player.maxPlayerHP; 
     }
-    void Update() 
-    { 
-        if (Input.GetKeyDown(KeyCode.Space)) TakeDamage(10f); 
-    } // スペースキーでダメージ
 }

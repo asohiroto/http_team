@@ -6,7 +6,7 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField] private int maxHp = 100;
     private int currentHp;
 
-    [SerializeField] private int spaceKeyDamage = 20;  //スペースキーで受けるダメージ量
+   
 
     [SerializeField] private Image hpBarImage;
 
@@ -27,10 +27,7 @@ public class PlayerHealth : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            TakeDamage(spaceKeyDamage);
-        }
+       
     }
 
     public void TakeDamage(int damage)
@@ -39,8 +36,6 @@ public class PlayerHealth : MonoBehaviour
         currentHp = Mathf.Max(currentHp, 0);
 
         UpdateHpBar();
-
-        Debug.Log($"スペースキー入力！ {damage} ダメージ受けた！ 残りHP: {currentHp}");
 
         if (currentHp <= 0)
         {

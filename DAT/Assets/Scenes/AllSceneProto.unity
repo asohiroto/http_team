@@ -829,6 +829,10 @@ PrefabInstance:
       value: MoneyText
       objectReference: {fileID: 0}
     - target: {fileID: 9168832875436751772, guid: 3dd3c32791ff63443aee86f08b6d8f96, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9168832875436751772, guid: 3dd3c32791ff63443aee86f08b6d8f96, type: 3}
       propertyPath: m_fontSize
       value: 30
       objectReference: {fileID: 0}
@@ -5588,7 +5592,6 @@ MonoBehaviour:
   maxHp: 100
   spaceKeyDamage: 20
   hpBarImage: {fileID: 1242071339}
-  playerObj: {fileID: 0}
 --- !u!61 &1721966150
 BoxCollider2D:
   m_ObjectHideFlags: 0

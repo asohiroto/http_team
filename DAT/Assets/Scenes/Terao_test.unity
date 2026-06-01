@@ -756,9 +756,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerHealth
   maxHp: 100
-  spaceKeyDamage: 20
   hpBarImage: {fileID: 1814485213}
-  playerObj: {fileID: 561074275}
 --- !u!114 &561074277
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -772,7 +770,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HPBarController
   hpBarFill: {fileID: 0}
-  playerObj: {fileID: 0}
 --- !u!50 &561074278
 Rigidbody2D:
   serializedVersion: 5
@@ -1166,6 +1163,8 @@ MonoBehaviour:
   isLostPlayer: 0
   isChasePlayer: 0
   canAttack: 0
+  isAttack: 0
+  isAttackColl: 0
   isStop: 0
   isLookRight: 0
   IsAttack: 0
@@ -1174,6 +1173,7 @@ MonoBehaviour:
   coinPrefab: {fileID: 0}
   coinParent: {fileID: 0}
   attackCol: {fileID: 0}
+  currentMoveState: 0
 --- !u!212 &1421815598
 SpriteRenderer:
   serializedVersion: 2

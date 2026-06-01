@@ -7,7 +7,6 @@ using UnityEngine.XR;
 
 public class HandManager : MonoBehaviour
 {
-
     [SerializeField] public GameObject[] cardPrefab; // 生成するカード
     [SerializeField] public Transform[] deckCardTrans; // カードの生成場所
 

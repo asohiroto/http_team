@@ -38,7 +38,6 @@ public class EnemyController : MonoBehaviour
     [SerializeField] private float cdTimer = 0f;
 
     [Header("Config")]
-    [SerializeField] private float takeDamageDist = 1f; // Player からの攻撃をくらう距離
     [SerializeField] private GameObject player;         // Player オブジェクト
     [SerializeField] private GameObject coinPrefab;     // Coin オブジェクト
     [SerializeField] private GameObject coinParent;     // Coin のドロップ時の親オブジェクト

@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {
-    [SerializeField] private float spawnIntervalSec = 1.0f;
+    [SerializeField] private float spawnIntervalSec = 2.0f;
     [SerializeField] private int maxEnemy = 10;
+    [SerializeField] private int enemyCount = 0;
 
     [SerializeField] private GameObject WeakTorcher;
     // ほかの敵も追加していく
@@ -25,6 +26,8 @@ public class EnemySpawner : MonoBehaviour
 
         if (timer >= spawnIntervalSec)
         {
+            // 敵のスポーン上限
+            if (maxEnemy < enemyCount) return;
             timer = 0;
             dirX = Random.Range(-1, 2);
 
@@ -33,6 +36,8 @@ public class EnemySpawner : MonoBehaviour
             sponeY = Random.Range(6, 10);
 
             GameObject newObj = Instantiate(WeakTorcher, this.transform);
+
+            enemyCount++;
             // x座標 10～15 * (1 or -1)
             // 秒数 % 2 で 1, -1を出す
             // y座標 6～10

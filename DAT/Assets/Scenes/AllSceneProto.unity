@@ -6034,7 +6034,7 @@ GameObject:
   - component: {fileID: 2041828260}
   m_Layer: 0
   m_Name: EnemySpawner
-  m_TagString: Untagged
+  m_TagString: EnemySpawner
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6051,7 +6051,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4252b71bc0f0e94b95d9745dcc92951, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemySpawner
-  spawnIntervalSec: 1
+  spawnIntervalSec: 2
   maxEnemy: 10
   WeakTorcher: {fileID: 4419746953452864637, guid: f6545e77c56c98841962ce3e926c813d, type: 3}
   dirX: 0

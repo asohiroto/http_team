@@ -10,7 +10,6 @@ public class PlayerAttack : MonoBehaviour
 
     [SerializeField] Sprite[] attackSprite;
     float animTime = 0.05f;
-    int idx = 0;
     SpriteRenderer spriteRenderer;
 
     public int attackDamage;

@@ -105,13 +105,6 @@ public class PlayerController : MonoBehaviour
             StartCoroutine(Attack());
             attackCdTimer = attackCd + attackTime;
         }
-
-        // 強いアタック（デバック用）
-        /*if(Input.GetKey(KeyCode.F))
-        {
-            StartCoroutine(StrongAttack());
-        }*/
-
     }
 
     /// <summary>
@@ -235,7 +228,6 @@ public class PlayerController : MonoBehaviour
 
         yield return new WaitForSeconds(attackTime);
 
-        //Destroy(obj);
         onAttack = false;
     }
 

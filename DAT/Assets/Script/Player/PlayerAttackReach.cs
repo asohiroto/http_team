@@ -17,18 +17,27 @@ public class PlayerAttackReach : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if(enemyCount <= 0)
+        {
+            enemyCount = 0;
+            playerController.canAttack = false;
+        }
     }
 
-    void OnTriggerStay2D(Collider2D col)
+    void OnTriggerEnter2D(Collider2D col)
     {
         if (col.CompareTag("Enemy"))
         {
             playerController.canAttack = true;
+            enemyCount++;
         }
-        else
+    }
+
+    void OnTriggerExit2D(Collider2D col)
+    {
+        if (col.CompareTag("Enemy"))
         {
-            playerController.canAttack = false;
+            enemyCount--;
         }
     }
 }

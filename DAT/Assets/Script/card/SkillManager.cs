@@ -16,7 +16,7 @@ public class SkillManager : MonoBehaviour
     [SerializeField] int enhanceTime;           // エンハンス効果時間
     [SerializeField] int hyperTime;             // ハイパー効果時間
     [SerializeField] int fbCooldownTime;        // ファイアーボール使用可能間隔
-    [SerializeField] int cfCooldownTime;        // ファイアーボール使用可能間隔
+    [SerializeField] int cfCooldownTime;        // カースドフレイム使用可能間隔
     [SerializeField] int waitTime;              // 使用待機時間
     [SerializeField] int enhanceAmount;         // エンハンス強化量
     [SerializeField] int hyperDamageAmount;     // ハイパーモード攻撃力強化量
@@ -223,55 +223,6 @@ public class SkillManager : MonoBehaviour
 
             if (Mouse.current.rightButton.wasPressedThisFrame)
             {
-                /*// publicにしたもの
-                // attackDir lastDir strongAttackObj defaultFXRot onAttack attackTime
-
-                Debug.Log("slash!");
-
-                float flipX = 0;
-                float rotZ = 0;
-                //onAttack = true;
-                player.attackDir = player.lastDir;
-
-                GameObject obj = Instantiate(player.strongAttackObj, transform);
-                obj.transform.position = transform.position + player.attackDir * 0.50f;
-
-                // 斬撃の方向を決定
-                if (player.attackDir.x > 0)
-                {
-                    flipX = 0;
-                }
-                else if (player.attackDir.x < 0)
-                {
-                    flipX = 180;
-                }
-
-                if (player.attackDir.x == 0)
-                {
-                    // 真上・真下（左右の入力がないとき）
-                    if (player.attackDir.y > 0) rotZ = 90 + player.defaultFXRot;
-                    else if (player.attackDir.y < 0) rotZ = -90 + player.defaultFXRot;
-                    else rotZ = 0 + player.defaultFXRot; // 入力なし（真横など）
-                }
-                else
-                {
-                    // 斜め入力（左右の入力があるとき）
-                    if (player.attackDir.y > 0) rotZ = 45 + player.defaultFXRot;
-                    else if (player.attackDir.y < 0) rotZ = -45 + player.defaultFXRot;
-                    else rotZ = 0 + player.defaultFXRot; // 真横
-                }
-
-                obj.transform.rotation = Quaternion.Euler(0, flipX, rotZ);
-
-                hand.DisCard(ind);
-
-                await Task.Delay((int)(0.1f * 1000));
-
-                player.onAttack = true;
-
-                await Task.Delay((int)(player.attackTime * 1000));
-
-                player.onAttack = false;*/
                 player.SlashTypeAndDir(slashTypePrefab[0]);　// 強切りを生成して使う方向を決定する
                 playerAttack = slashTypePrefab[0].GetComponent<PlayerAttack>();
                 playerAttack.attackDamage = player.attackDamage + strongSlashDamage; // 強切りのアタックダメージを代入

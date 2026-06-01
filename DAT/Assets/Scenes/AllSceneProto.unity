@@ -4713,6 +4713,8 @@ MonoBehaviour:
   - {fileID: 2043265445299197516, guid: 58d0be559afd79143913115f924f86b0, type: 3}
   - {fileID: 8939842006103904273, guid: e56d32cd72e7e16459c01f4841b31623, type: 3}
   - {fileID: 4921229836753551308, guid: beba0ee43266ed44c883c92ae0694bd4, type: 3}
+  - {fileID: 5583439559110052746, guid: 14e578e4950c3704689485bfb16bcd9e, type: 3}
+  - {fileID: 2805000845809767299, guid: 90145ff2422ea7249838ff54c72be535, type: 3}
   deckCardTrans:
   - {fileID: 1928526412}
   - {fileID: 1604061362}
@@ -5476,7 +5478,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 2
   m_MaskInteraction: 0
   m_Sprite: {fileID: 1448252480329919801, guid: bf29f581365379b489ef412b503d3e39, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -5966,6 +5968,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::skill_manager
   healAmount: 20
+  overHealAmount: 0
   enhanceTime: 2
   hyperTime: 2
   fbCooldownTime: 2
@@ -5974,13 +5977,17 @@ MonoBehaviour:
   enhanceAmount: 2
   hyperDamageAmount: 4
   curseAmount: 10
+  absorbDamage: 0
+  absorbHealAmount: 0
   hyperSpeedAmount: 0.2
   fbSpeed: 0.5
   cfSpeed: 0.5
   discardInd1: -1
   discardInd2: -1
+  absorbFlag: 0
   fireBall: {fileID: 6676543517733875803, guid: c1f2ad0cd1675dd44b70842ea6e4c916, type: 3}
   cursedFlame: {fileID: 5380163840605547912, guid: 852e8346ed8d4bb41a49280de6fa1df8, type: 3}
+  absorbPrefab: {fileID: 5860723255738655983, guid: 31f52b17f673d604580a04acbd855c4b, type: 3}
   fireBallPreFab: {fileID: 0}
   cursedFlamePreFab: {fileID: 0}
   slashTypePrefab:

@@ -682,6 +682,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 4876145872219913294, guid: 40446f423e254a642a122f7e36b0e8fa, type: 3}
     - target: {fileID: 9190601027444089525, guid: f6545e77c56c98841962ce3e926c813d, type: 3}
+      propertyPath: attackPower
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 9190601027444089525, guid: f6545e77c56c98841962ce3e926c813d, type: 3}
       propertyPath: alwaysFindPlayer
       value: 0
       objectReference: {fileID: 0}

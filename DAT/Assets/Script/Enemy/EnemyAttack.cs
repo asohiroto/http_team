@@ -5,17 +5,18 @@ public class EnemyAttack : MonoBehaviour
     PlayerController playerCtrl;
     GameObject objParent;
     EnemyController enemyCtrl;
-    private int attackPower = 0;
+    private int attackPower;
 
     //private float attackPower => ;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         objParent = transform.parent.gameObject;
-        Debug.Log(objParent);
+        //Debug.Log(objParent);
         enemyCtrl = objParent.GetComponent<EnemyController>();
-        Debug.Log(enemyCtrl);
+        //Debug.Log(enemyCtrl);
         attackPower = enemyCtrl.AttackPower;
+        Debug.Log(attackPower);
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -26,6 +27,7 @@ public class EnemyAttack : MonoBehaviour
             GameObject playerObj = other.gameObject;
             playerCtrl = playerObj.GetComponent<PlayerController>();
             playerCtrl.Damaged(attackPower);
+            //playerCtrl.Damaged(40);
         }
     }
 }

@@ -6,26 +6,28 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField] private int maxHp = 100;
     private int currentHp;
 
-    [SerializeField] private int spaceKeyDamage = 20;  //スペースキーで受けるダメージ量
+   
 
     [SerializeField] private Image hpBarImage;
 
-    [SerializeField]GameObject playerObj;
     PlayerController player;
 
     void Start()
     {
-        player = playerObj.GetComponent<PlayerController>();
+        GameObject[] objs = GameObject.FindGameObjectsWithTag("Player");
+
+        foreach (GameObject obj in objs)
+        {
+            player = obj.GetComponent<PlayerController>();
+            if (player != null) break;
+        }
         currentHp = player.maxPlayerHP;
         UpdateHpBar();
     }
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            TakeDamage(spaceKeyDamage);
-        }
+       
     }
 
     public void TakeDamage(int damage)
@@ -34,8 +36,6 @@ public class PlayerHealth : MonoBehaviour
         currentHp = Mathf.Max(currentHp, 0);
 
         UpdateHpBar();
-
-        Debug.Log($"スペースキー入力！ {damage} ダメージ受けた！ 残りHP: {currentHp}");
 
         if (currentHp <= 0)
         {

@@ -12,7 +12,8 @@ public class SkillManager : MonoBehaviour
     HandManager hand;
     CraftManager craft;
 
-    [SerializeField] int healAmount;            // 回復量
+    [SerializeField] int healAmount;            // ヒール回復量
+    [SerializeField] int overHealAmount;        // オーバーヒール回復量
     [SerializeField] int enhanceTime;           // エンハンス効果時間
     [SerializeField] int hyperTime;             // ハイパー効果時間
     [SerializeField] int fbCooldownTime;        // ファイアーボール使用可能間隔
@@ -21,6 +22,8 @@ public class SkillManager : MonoBehaviour
     [SerializeField] int enhanceAmount;         // エンハンス強化量
     [SerializeField] int hyperDamageAmount;     // ハイパーモード攻撃力強化量
     [SerializeField] int curseAmount;           // カースHP減少量
+    [SerializeField] int absorbDamage;          // アブソーブのダメージ
+    [SerializeField] int absorbHealAmount;      // アブソーブの吸収量
 
     [SerializeField] float hyperSpeedAmount;    // ハイパーモード素早さ強化量
     [SerializeField] float fbSpeed;             // ファイアーボールで生成したオブジェクトの速度
@@ -46,9 +49,12 @@ public class SkillManager : MonoBehaviour
     bool hyperFlag = false;                     // ハイパーモードのフラグ
     bool fbFlag = false;                        // ファイアーボールのフラグ
     bool cfFlag = false;                        // カースドフレイムのフラグ
+    
+    public bool absorbFlag = false;                    // アブソーブのヒットフラグ
 
     [SerializeField] GameObject fireBall;       // ファイアーボールで生成するオブジェクト
     [SerializeField] GameObject cursedFlame;    // カースドフレイムで生成するオブジェクト
+    [SerializeField] GameObject absorbPrefab;   // アブソーブで生成するオブジェクト
 
     public GameObject fireBallPreFab;                  // 生成したファイアーボール
     public GameObject cursedFlamePreFab;               // 生成したカースドフレイム
@@ -108,6 +114,25 @@ public class SkillManager : MonoBehaviour
         if (fbFlag) BallMove(fireBallPreFab, destPosFb, fbSpeed, fbMousePos, fbCount, ref fbFlag); // ファイアーボール使用後の挙動
 
         if (cfFlag) BallMove(cursedFlamePreFab, destPosCf, cfSpeed, cfMousePos, cfCount, ref cfFlag); // カースドフレイム使用後の挙動
+
+        if(absorbFlag) // アブソーブがヒットしたら体力吸収
+        {
+            if (player.playerHP > player.maxPlayerHP - absorbHealAmount) // 回復して最大HPを超える場合は、最大HPまで回復
+            {
+                player.playerHP = player.maxPlayerHP;
+            }
+            else if (player.playerHP == player.maxPlayerHP)
+            {
+                Debug.Log("元気すぎやしないかい？");
+            }
+            else
+            {
+                player.playerHP += absorbHealAmount;
+            }
+
+            Debug.Log(player.playerHP);
+            absorbFlag = false;
+        }
 
         if (Keyboard.current.pKey.wasPressedThisFrame) // 【テスト用】　pを押すと体力を減らす
         {
@@ -446,6 +471,80 @@ public class SkillManager : MonoBehaviour
 
         CraftMethod(cardID, ind);
 
+    }
+
+    public async Task OverHeal(int ind) // オーバーヒール　ID->8
+    {
+        int cardID = 8;
+
+        if (craft.craftFrag == 0)
+        {
+            int waitFrames = 0;
+
+            while (!Mouse.current.rightButton.wasPressedThisFrame && waitFrames < 60 * waitTime)
+            {
+                waitFrames++;
+
+                await Task.Yield();
+            }
+
+
+            if (Mouse.current.rightButton.wasPressedThisFrame)
+            {
+                player.playerHP += overHealAmount;
+
+                Debug.Log(player.playerHP);
+
+                hand.DisCard(ind);
+            }
+            else
+            {
+                Debug.Log("スキップしたよ");
+            }
+        }
+
+        CraftMethod(cardID, ind);
+    }
+
+    public async Task Absorb(int ind) // アブソーブ　ID->9
+    {
+        int cardID = 9;
+
+        if (craft.craftFrag == 0)
+        {
+            int waitFrames = 0;
+
+            while (!Mouse.current.rightButton.wasPressedThisFrame && waitFrames < 60 * waitTime)
+            {
+                waitFrames++;
+
+                await Task.Yield();
+            }
+
+
+            if (Mouse.current.rightButton.wasPressedThisFrame)
+            {
+                player.SlashTypeAndDir(absorbPrefab);　// アブソーブを生成して使う方向を決定する
+                playerAttack = absorbPrefab.GetComponent<PlayerAttack>();
+                playerAttack.attackDamage = player.attackDamage + absorbDamage; // アブソーブのアタックダメージを代入
+
+                hand.DisCard(ind);
+
+                await Task.Delay((int)(0.1f * 1000)); // アタック方向の固定を少し遅らせる
+
+                player.onAttack = true;
+
+                await Task.Delay((int)(player.attackTime * 1000));
+
+                player.onAttack = false;
+            }
+            else
+            {
+                Debug.Log("スキップしたよ");
+            }
+        }
+
+        CraftMethod(cardID, ind);
     }
 
     public void CraftMethod(int id, int ind) // カード合成の関数

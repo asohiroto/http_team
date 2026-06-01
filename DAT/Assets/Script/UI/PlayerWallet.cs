@@ -12,14 +12,8 @@ public class PlayerWallet : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Return))
-        {
-            if (CoinManager.instance != null)
-            {
-                // マネージャーにお金を加算してもらう
-                CoinManager.instance.ReduceMoney(useCoins);
-            }
-        }
+        
+        
     }
 
 }

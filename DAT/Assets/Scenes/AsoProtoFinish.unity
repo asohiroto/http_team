@@ -1402,6 +1402,9 @@ MonoBehaviour:
   - materialA: 3
     materialB: 6
     result: 7
+  - materialA: 1
+    materialB: 1
+    result: 8
   craftFrag: 0
   material1: 0
 --- !u!4 &943071131
@@ -1728,6 +1731,8 @@ MonoBehaviour:
   - {fileID: 2043265445299197516, guid: 58d0be559afd79143913115f924f86b0, type: 3}
   - {fileID: 8939842006103904273, guid: e56d32cd72e7e16459c01f4841b31623, type: 3}
   - {fileID: 4921229836753551308, guid: beba0ee43266ed44c883c92ae0694bd4, type: 3}
+  - {fileID: 5583439559110052746, guid: 14e578e4950c3704689485bfb16bcd9e, type: 3}
+  - {fileID: 2805000845809767299, guid: 90145ff2422ea7249838ff54c72be535, type: 3}
   deckCardTrans:
   - {fileID: 1928526412}
   - {fileID: 1604061362}
@@ -1735,7 +1740,6 @@ MonoBehaviour:
   - {fileID: 555665968}
   cardDrawFee: 10
   cardDrawFeeBase: 10
-  cardDrawFeeMagnif: 0.1
   isCardPressed: 
 --- !u!4 &1219670158
 Transform:
@@ -1768,6 +1772,37 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
+--- !u!1 &1273764421
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1273764422}
+  m_Layer: 0
+  m_Name: DropItems
+  m_TagString: DropItems
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1273764422
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1273764421}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1321472685
 GameObject:
   m_ObjectHideFlags: 0
@@ -2753,6 +2788,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::skill_manager
   healAmount: 20
+  overHealAmount: 40
   enhanceTime: 2
   hyperTime: 2
   fbCooldownTime: 2
@@ -2761,13 +2797,17 @@ MonoBehaviour:
   enhanceAmount: 2
   hyperDamageAmount: 4
   curseAmount: 10
+  absorbDamage: 10
+  absorbHealAmount: 0
   hyperSpeedAmount: 0.2
   fbSpeed: 0.5
   cfSpeed: 0.5
   discardInd1: -1
   discardInd2: -1
+  absorbFlag: 0
   fireBall: {fileID: 6676543517733875803, guid: c1f2ad0cd1675dd44b70842ea6e4c916, type: 3}
   cursedFlame: {fileID: 5380163840605547912, guid: 852e8346ed8d4bb41a49280de6fa1df8, type: 3}
+  absorbPrefab: {fileID: 5860723255738655983, guid: 31f52b17f673d604580a04acbd855c4b, type: 3}
   fireBallPreFab: {fileID: 0}
   cursedFlamePreFab: {fileID: 0}
   slashTypePrefab:
@@ -2955,3 +2995,4 @@ SceneRoots:
   - {fileID: 2104284480}
   - {fileID: 1096320687}
   - {fileID: 309566864}
+  - {fileID: 1273764422}

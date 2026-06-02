@@ -17,8 +17,9 @@ public class EnemySpawner : MonoBehaviour
 
     public int dirX;
     public int sponeX;
-    public int tempX;
     public int sponeY;
+    public int tempX;
+    public int tempY;
 
     void FixedUpdate()
     {
@@ -30,6 +31,7 @@ public class EnemySpawner : MonoBehaviour
             if (maxEnemy < enemyCount) return;
             timer = 0;
             dirX = Random.Range(-1, 2);
+            tempY = Random.Range(0, 2); // 0か1
 
             tempX = Random.Range(10, 15);
             sponeX = tempX * dirX;
@@ -41,7 +43,19 @@ public class EnemySpawner : MonoBehaviour
             // x座標 10～15 * (1 or -1)
             // 秒数 % 2 で 1, -1を出す
             // y座標 6～10
-            newObj.transform.localPosition = new Vector3(sponeX, sponeY, 0);
+            if (dirX == 0)
+            {
+                newObj.transform.localPosition = new Vector3(sponeX, sponeY, 0);
+            }
+            else
+            {
+                newObj.transform.localPosition = new Vector3(sponeX, sponeY * tempY, 0);
+            }
         }
+    }
+
+    public void DestiriyEnemy()
+    {
+        enemyCount--;
     }
 }

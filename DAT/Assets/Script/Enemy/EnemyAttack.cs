@@ -16,14 +16,14 @@ public class EnemyAttack : MonoBehaviour
         enemyCtrl = objParent.GetComponent<EnemyController>();
         //Debug.Log(enemyCtrl);
         attackPower = enemyCtrl.AttackPower;
-        Debug.Log(attackPower);
+        //Debug.Log(attackPower);
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Player"))
         {
-            Debug.Log("attack!");
+            //Debug.Log("attack!");
             GameObject playerObj = other.gameObject;
             playerCtrl = playerObj.GetComponent<PlayerController>();
             playerCtrl.Damaged(attackPower);

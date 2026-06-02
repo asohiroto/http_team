@@ -89,16 +89,19 @@ public class EnemyController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        CheckDist();
-        Attack();
-        AttackCool();
-        ChangeAnimation();
-        LookPlayer();
-        CheckLookDir();
-        LookHor();
-        ChasePlayer();
-        //Animation();
-        //AttackAnim();
+        if (player != null)
+        {
+            CheckDist();
+            Attack();
+            AttackCool();
+            ChangeAnimation();
+            LookPlayer();
+            CheckLookDir();
+            LookHor();
+            ChasePlayer();
+            //Animation();
+            //AttackAnim();
+        }
     }
 
     // EnemyDamaged

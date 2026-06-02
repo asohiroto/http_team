@@ -32,8 +32,8 @@ public class PlayerController : MonoBehaviour
     PlayerAttack playerAttack;
     [SerializeField] GameObject attackObj; // アタックのエフェクトと当たり判定を持つオブジェクトを代入
     [SerializeField] public GameObject strongAttackObj;
-    [SerializeField] public float attackTime = 1.0f; // アタック中の時間
-    [SerializeField] float attackCd = 1.0f; // アタックのクールダウン
+    [SerializeField] public float attackTime = 1.2f; // アタック中の時間
+    [SerializeField] float attackCd = 1.5f; // アタックのクールダウン
     float attackCdTimer; // クールダウンを実際にカウントする変数
     public int defaultAttackDamage = 5; // デフォルトのアタックダメージ
     public int attackDamage = 5; // アタックダメージ
@@ -76,10 +76,10 @@ public class PlayerController : MonoBehaviour
         InputManager();
         CheckDie();
 
-        if (playerHP <= 0)
+        /*if (playerHP <= 0)
         {
             Destroy(gameObject);
-        }
+        }*/
     }
     /// <summary>
     /// 入力の受け付け、ダッシュやアタックのクールダウンを数える関数
@@ -138,25 +138,25 @@ public class PlayerController : MonoBehaviour
         // プレイヤーの向き
         // アタックしている間はその向きを向くようになる
         // x方向の向きを変更
-        if (dirX > 0 && !onAttack)
+        if (lastDir.x > 0 && !onAttack)
         {
             spriteRenderer.sprite = leftSprite[animIdx];
             transform.rotation = Quaternion.Euler(0, 0, 0);
         }
-        else if (dirX < 0 && !onAttack)
+        else if (lastDir.x < 0 && !onAttack)
         {
             spriteRenderer.sprite = leftSprite[animIdx];
             transform.rotation = Quaternion.Euler(0, 180, 0);
         }
 
         // y方向の向きを変更
-        if (dirX == 0 && !onAttack)
+        if (lastDir.x == 0 && !onAttack)
         {
-            if (dirY > 0)
+            if (lastDir.y > 0)
             {
                 spriteRenderer.sprite = upSprite[animIdx];
             }
-            else if (dirY < 0)
+            else if (lastDir.y < 0)
             {
                 spriteRenderer.sprite = downSprite[animIdx];
             }
@@ -185,7 +185,6 @@ public class PlayerController : MonoBehaviour
     {
         float flipX = 0;
         float rotZ = 0;
-        //onAttack = true;
         attackDir = lastDir;
 
         GameObject obj = Instantiate(slashType, transform);
@@ -227,31 +226,12 @@ public class PlayerController : MonoBehaviour
     {
         SlashTypeAndDir(attackObj,ref normalAttack);
 
-        yield return new WaitForSeconds(0.1f); // アタック方向の固定を少し遅らせる
-
         onAttack = true;
 
         yield return new WaitForSeconds(attackTime);
 
         onAttack = false;
     }
-
-
-
-    //public IEnumerator StrongAttack(GameObject slashType, int slashDamage) // 強斬り用の関数
-    //{
-    //    SlashTypeAndDir(slashType);
-
-        
-
-    //    yield return new WaitForSeconds(0.1f); // アタック方向の固定を少し遅らせる
-
-    //    onAttack = true;
-
-    //    yield return new WaitForSeconds(attackTime);
-
-    //    onAttack = false;
-    //}
 
     /// <summary>
     /// プレイヤーがダメージを受けたときの関数

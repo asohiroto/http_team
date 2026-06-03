@@ -46,9 +46,6 @@ public class PlayerController : MonoBehaviour
     public int maxPlayerHP = 100; // プレイヤーの最大HP
     [SerializeField] bool canDie = true;
     private float damageFXTime = 0.2f; // ダメージエフェクトをする時間
-    private float damageFXTimer = 0f; // ダメージエフェクトする
-    private bool changeColor;
-
 
     // アニメーションに使う変数------------------------------------------------------------
     SpriteRenderer spriteRenderer;
@@ -239,15 +236,6 @@ public class PlayerController : MonoBehaviour
     /// プレイヤーがダメージを受けたときの関数
     /// </summary>
     /// <param name="enemyAttack"></param>
-    /*public IEnumerator Damaged(int enemyAttack)
-    {
-        playerHP -= enemyAttack;
-        Debug.Log("Player残りHP：" + enemyAttack);
-        spriteRenderer.color = Color.red;
-        yield return new WaitForSeconds(damageFXTime);
-        spriteRenderer.color = Color.white;
-    }*/
-
     public void Damaged(int enemyAttack)
     {
         playerHP -= enemyAttack;
@@ -255,6 +243,10 @@ public class PlayerController : MonoBehaviour
         StartCoroutine(BackDamageColor());
     }
 
+    /// <summary>
+    /// ダメージを受けた時プレイヤーの色を変える関数
+    /// </summary>
+    /// <returns></returns>
     private IEnumerator BackDamageColor()
     {
         spriteRenderer.color = Color.red;

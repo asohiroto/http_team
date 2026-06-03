@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4682138903170219821}
   - component: {fileID: 1962047186981151943}
   - component: {fileID: 9087150994472670550}
-  - component: {fileID: 6876584782639253650}
+  - component: {fileID: 4718090887922342835}
   m_Layer: 0
   m_Name: CursedFlame 1
   m_TagString: Untagged
@@ -139,7 +139,7 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 0.42, y: 0.42}
   m_EdgeRadius: 0
---- !u!114 &6876584782639253650
+--- !u!114 &4718090887922342835
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -148,7 +148,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 5380163840605547912}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0567ae61fe93722498c4abede7834fed, type: 3}
+  m_Script: {fileID: 11500000, guid: 359733af8e8f3d848afe68b1178dcab8, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::SkillController
-  skillDmg: 15
+  m_EditorClassIdentifier: Assembly-CSharp::SkillAttack
+  attackSprite: []
+  attackDamage: 15

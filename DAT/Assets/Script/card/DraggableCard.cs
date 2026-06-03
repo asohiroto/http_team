@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -7,35 +8,71 @@ public class DraggableCard : MonoBehaviour, IBeginDragHandler, IEndDragHandler, 
 {
     private Canvas canvas;
     private CanvasGroup canvasGroup;
+
     private GameObject ghostImage;
+    private GameObject cardEffectManager;
 
     public int cardIndex;
     public int cardId;
 
+    public Vector2 destiPos = Vector2.zero;
+
+
     CraftManager craft;
     HandManager hand;
+    SkillManager skill;
 
-    void Awake()
+    // スクリプトをタプルで格納
+    private (Enhance enhance, Heal heal, Slash slash, FireBall fireBall, FireSlash fireSlash, HyperMode hyperMode, Curse curse, CursedFlame cursedFlame, OverHeal overHeal, Absorb absorb) cardEffect;
+
+    void Start()
     {
         canvas = GetComponentInParent<Canvas>();
         canvasGroup = gameObject.AddComponent<CanvasGroup>();
+        cardEffectManager = GameObject.Find("CardEffectManager");
 
-        craft = GameObject.Find("CraftManager").GetComponent<CraftManager>();
-        hand = GameObject.Find("HandManager").GetComponent<HandManager>();
+        GameObject[] objs = GameObject.FindGameObjectsWithTag("Card");
+        foreach (GameObject obj in objs) // それぞれ探す
+        {
+            if (hand == null) hand = obj.GetComponent<HandManager>();
+
+            if (craft == null) craft = obj.GetComponent<CraftManager>();
+
+            if (skill == null) skill = obj.GetComponent<SkillManager>();
+
+            if (hand != null && craft != null) break;
+        }
+
+        if (cardEffectManager != null)
+        {
+            cardEffectManager.TryGetComponent(out cardEffect.enhance);
+            cardEffectManager.TryGetComponent(out cardEffect.heal);
+            cardEffectManager.TryGetComponent(out cardEffect.slash);
+            cardEffectManager.TryGetComponent(out cardEffect.fireBall);
+            cardEffectManager.TryGetComponent(out cardEffect.fireSlash);
+            cardEffectManager.TryGetComponent(out cardEffect.hyperMode);
+            cardEffectManager.TryGetComponent(out cardEffect.curse);
+            cardEffectManager.TryGetComponent(out cardEffect.cursedFlame);
+            cardEffectManager.TryGetComponent(out cardEffect.overHeal);
+            cardEffectManager.TryGetComponent(out cardEffect.absorb);
+        }
+
     }
+
 
     // ドラッグ開始時に実行
     public void OnBeginDrag(PointerEventData eventData)
     {
-        if (craft.craftFrag == 0) return; // クラフト状態じゃなければドラッグできない
+        // レイキャストで自分自身を感知しない
+        canvasGroup.blocksRaycasts = false;
 
-        canvasGroup.blocksRaycasts = false; // レイキャストで自分自身を感知しない
-
-        if (ghostImage != null) Destroy(ghostImage); // 存在しうるゴーストイメージは常に一つ
+        // 存在しうるゴーストイメージは常に一つ
+        if (ghostImage != null) Destroy(ghostImage);
 
         Image originalImage = GetComponentInChildren<Image>();
 
-        ghostImage = new GameObject("GhostImage"); // ドラッグ中にマウスに追従するゴーストイメージを作成
+        // ドラッグ中にマウスに追従するゴーストイメージを作成
+        ghostImage = new GameObject("GhostImage");
         ghostImage.transform.SetParent(canvas.transform);
         ghostImage.transform.SetAsLastSibling();
 
@@ -44,23 +81,25 @@ public class DraggableCard : MonoBehaviour, IBeginDragHandler, IEndDragHandler, 
 
         Image ghostImg = ghostImage.AddComponent<Image>();
         ghostImg.sprite = originalImage.sprite;
-        ghostImg.color = new Color(1, 1, 1, 0.7f); // ゴーストイメージを半透明に
+
+        // ゴーストイメージを半透明に
+        ghostImg.color = new Color(1, 1, 1, 0.7f);
 
         CanvasGroup cg = ghostImage.AddComponent<CanvasGroup>();
-        cg.blocksRaycasts = false; // レイキャストでゴーストイメージを感知しない
+
+        // レイキャストでゴーストイメージを感知しない
+        cg.blocksRaycasts = false;
     }
 
     // ドラッグ中に実行
     public void OnDrag(PointerEventData eventData)
     {
-        if (craft.craftFrag == 0 || ghostImage == null) return;
-
         RectTransform ghostRect = ghostImage.GetComponent<RectTransform>();
         RectTransformUtility.ScreenPointToLocalPointInRectangle(
-            canvas.transform as RectTransform, // キャンバスを基準とする
-            eventData.position, // マウスのスクリーン座標
-            canvas.worldCamera, // 使用するカメラ
-            out Vector2 localPoint // 変換結果を受け取る変数
+            canvas.transform as RectTransform,  // キャンバスを基準とする
+            eventData.position,                 // マウスのスクリーン座標
+            canvas.worldCamera,                 // 使用するカメラ
+            out Vector2 localPoint              // 変換結果を受け取る変数
             );
         ghostRect.localPosition = localPoint;
     }
@@ -68,30 +107,81 @@ public class DraggableCard : MonoBehaviour, IBeginDragHandler, IEndDragHandler, 
     // ドロップ時に実行
     public void OnDrop(PointerEventData eventData)
     {
-        if (craft.craftFrag == 0) return;
-
         DraggableCard dragged = eventData.pointerDrag?.GetComponent<DraggableCard>(); // pointerDragがnullじゃなければGetComponentを実行
         DraggableCard target = transform.GetComponentInChildren<DraggableCard>();
 
         if (dragged == null || dragged == this) return;
 
-        int craftResult = craft.CraftItems(dragged.cardId, target.cardId); // IDをそれぞれ取得し、合成を実行
+        if (craft.craftFrag == 1)
+        {
+            int craftResult = craft.CraftItems(dragged.cardId, target.cardId); // IDをそれぞれ取得し、合成を実行
 
-        if (craftResult < 0) return;
+            if (craftResult < 0)
+            {
+                Debug.Log("tukaenaiyo");
+                return;
+            }
 
-        int fromIndex = dragged.cardIndex; // それぞれの住所を取得
-        int toIndex = this.cardIndex;
+            int fromIndex = dragged.cardIndex; // それぞれの住所を取得
+            int toIndex = this.cardIndex;
 
-        Destroy(dragged.ghostImage);
+            Destroy(dragged.ghostImage);
 
-        hand.DisCard(fromIndex);
-        hand.DisCard(toIndex);
+            hand.DisCard(fromIndex);
+            hand.DisCard(toIndex);
 
-        int spawnIndex = Mathf.Min(fromIndex, toIndex); // より小さいほう（左側にあるカード）を生成する住所とする
-        GameObject obj = hand.CardGenerate(craftResult, spawnIndex);
-        hand.ButtonListener(craftResult, obj, spawnIndex);
+            int spawnIndex = Mathf.Min(fromIndex, toIndex); // より小さいほう（左側にあるカード）を生成する住所とする
+            GameObject obj = hand.CardGenerate(craftResult, spawnIndex);
 
-        craft.craftFrag = 0;
+            craft.craftFrag = 0;
+        }
+        else if (craft.craftFrag == 2)
+        {
+            Debug.Log("tukatteruyo");
+            switch (dragged.cardId)
+            {
+                case 0:
+                    cardEffect.enhance.Effect(dragged.cardIndex);
+
+                    break;
+                case 1:
+                    cardEffect.heal.Effect(dragged.cardIndex);
+
+                    break;
+                case 2:
+                    cardEffect.slash.Effect(dragged.cardIndex);
+
+                    break;
+                case 3:
+                    cardEffect.fireBall.Effect(dragged.cardIndex, skill.mousePosWorld);
+
+                    break;
+                case 4:
+                    cardEffect.fireSlash.Effect(dragged.cardIndex);
+
+                    break;
+                case 5:
+                    cardEffect.hyperMode.Effect(dragged.cardIndex);
+
+                    break;
+                case 6:
+                    cardEffect.curse.Effect(dragged.cardIndex);
+
+                    break;
+                case 7:
+                    cardEffect.cursedFlame.Effect(dragged.cardIndex, skill.mousePosWorld);
+
+                    break;
+                case 8:
+                    cardEffect.overHeal.Effect(dragged.cardIndex);
+
+                    break;
+                case 9:
+                    cardEffect.absorb.Effect(dragged.cardIndex);
+
+                    break;
+            }
+        }
     }
 
     // ドラッグ終了時に実行

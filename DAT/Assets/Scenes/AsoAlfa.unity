@@ -1826,6 +1826,7 @@ GameObject:
   m_Component:
   - component: {fileID: 752779831}
   - component: {fileID: 752779832}
+  - component: {fileID: 752779833}
   m_Layer: 5
   m_Name: PrayArea
   m_TagString: Untagged
@@ -1911,6 +1912,52 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+--- !u!61 &752779833
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 752779830}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1, y: 1}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Size: {x: 1, y: 1}
+  m_EdgeRadius: 0
 --- !u!1 &769359501
 GameObject:
   m_ObjectHideFlags: 0
@@ -5145,6 +5192,159 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1604061361}
   m_CullTransparentMesh: 1
+--- !u!1 &1641167054
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1641167063}
+  - component: {fileID: 1641167062}
+  - component: {fileID: 1641167061}
+  - component: {fileID: 1641167060}
+  - component: {fileID: 1641167059}
+  - component: {fileID: 1641167058}
+  - component: {fileID: 1641167057}
+  - component: {fileID: 1641167056}
+  - component: {fileID: 1641167055}
+  m_Layer: 0
+  m_Name: CardEffectManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1641167055
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1641167054}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac6fdcd9177dc504dbfb77dde5336177, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Curse
+  curseAmount: 0
+--- !u!114 &1641167056
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1641167054}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a687735debe83d342a69401a23d701f1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CursedFlame
+  cfSpeed: 0
+  curseAmount: 0
+  cursedFlame: {fileID: 0}
+  cursedFlamePrefab: {fileID: 0}
+--- !u!114 &1641167057
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1641167054}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ed5d5f488c871244ab92226435f2bb4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Enhance
+  enhanceAmount: 0
+  enhanceTime: 0
+--- !u!114 &1641167058
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1641167054}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f36769a5477c67a44bd5bfe27c5a03a4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FireBall
+  fbSpeed: 0
+  fireBall: {fileID: 0}
+  fireBallPrefab: {fileID: 0}
+--- !u!114 &1641167059
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1641167054}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 19840de90e255f2468e5f97c41b17ed2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FireSlash
+  fireSlashDamage: 0
+  fireSlashTypePrefab: {fileID: 0}
+--- !u!114 &1641167060
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1641167054}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df035ed913ee47f4da8a2455c2955c45, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Heal
+  healAmount: 0
+--- !u!114 &1641167061
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1641167054}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 17fec664adb071d4b921199bb0fee216, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HyperMode
+  hyperDamageAmount: 0
+  hyperSpeedAmount: 0
+  hyperTime: 0
+--- !u!114 &1641167062
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1641167054}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea7bf39f7450e034c91316d5fb788510, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Slash
+  slashDamage: 0
+  slashTypePrefab: {fileID: 0}
+--- !u!4 &1641167063
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1641167054}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.01008, y: -0.24795, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!224 &1710573130 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 1616504351256448252, guid: 3dd3c32791ff63443aee86f08b6d8f96, type: 3}
@@ -5786,7 +5986,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1942110015}
-  - component: {fileID: 1942110014}
+  - component: {fileID: 1942110016}
   m_Layer: 0
   m_Name: SkillManager
   m_TagString: Card
@@ -5794,44 +5994,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1942110014
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1942110013}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9367e1b94f492d84bae0ce933f800fb2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::skill_manager
-  healAmount: 20
-  overHealAmount: 30
-  enhanceTime: 2
-  hyperTime: 2
-  fbCooldownTime: 2
-  cfCooldownTime: 2
-  waitTime: 2
-  enhanceAmount: 2
-  hyperDamageAmount: 4
-  curseAmount: 10
-  absorbDamage: 10
-  absorbHealAmount: 2
-  hyperSpeedAmount: 0.1
-  fbSpeed: 0.5
-  cfSpeed: 0.5
-  discardInd1: -1
-  discardInd2: -1
-  absorbFlag: 0
-  fireBall: {fileID: 6676543517733875803, guid: c1f2ad0cd1675dd44b70842ea6e4c916, type: 3}
-  cursedFlame: {fileID: 5380163840605547912, guid: 852e8346ed8d4bb41a49280de6fa1df8, type: 3}
-  absorbPrefab: {fileID: 5860723255738655983, guid: 31f52b17f673d604580a04acbd855c4b, type: 3}
-  fireBallPreFab: {fileID: 0}
-  cursedFlamePreFab: {fileID: 0}
-  slashTypePrefab:
-  - {fileID: 132122364930665669, guid: 9d0fa2fe56967ff4790f505ff03d0108, type: 3}
-  - {fileID: 132122364930665669, guid: 9d0fa2fe56967ff4790f505ff03d0108, type: 3}
 --- !u!4 &1942110015
 Transform:
   m_ObjectHideFlags: 0
@@ -5847,6 +6009,21 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1942110016
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1942110013}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9367e1b94f492d84bae0ce933f800fb2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SkillManager
+  discardInd1: -1
+  discardInd2: -1
+  mousePosWorld: {x: 0, y: 0, z: 0}
 --- !u!224 &1964648985 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 7253484781739197279, guid: 196aa60c426a356418cdbddac337afeb, type: 3}
@@ -5887,8 +6064,9 @@ MonoBehaviour:
   WeakTorcher: {fileID: 4419746953452864637, guid: f6545e77c56c98841962ce3e926c813d, type: 3}
   dirX: 0
   sponeX: 0
-  tempX: 0
   sponeY: 0
+  tempX: 0
+  tempY: 0
 --- !u!4 &2041828261
 Transform:
   m_ObjectHideFlags: 0
@@ -6161,3 +6339,4 @@ SceneRoots:
   - {fileID: 443153413}
   - {fileID: 850733650}
   - {fileID: 1440570388}
+  - {fileID: 1641167063}

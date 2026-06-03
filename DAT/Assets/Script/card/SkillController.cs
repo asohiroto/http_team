@@ -4,6 +4,7 @@ public class SkillController : MonoBehaviour
 {
     EnemyController enem;
     SkillManager skill;
+    Absorb absorb;
 
     GameObject enemyObj;
 
@@ -13,6 +14,8 @@ public class SkillController : MonoBehaviour
     void Start()
     {
         GameObject[] objs = GameObject.FindGameObjectsWithTag("Card");
+
+        absorb = GameObject.Find("CardEffectManager").GetComponent<Absorb>();
 
         foreach(GameObject obj in objs)
         {
@@ -36,7 +39,7 @@ public class SkillController : MonoBehaviour
             enem = enemyObj.GetComponent<EnemyController>();
             enem.EnemyDamaged(skillDmg);
 
-            skill.absorbFlag = true;
+            absorb.absorbFlag = true;
 
         }
     }

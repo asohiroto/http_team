@@ -46,7 +46,7 @@ public class HandManager : MonoBehaviour
 
             newCard = Instantiate(cardPrefab[cardIdStart[cardId]], deckCardTrans[i]); // 初期手札の生成
 
-            ButtonListener(cardIdStart[cardId], newCard, i);
+            // ButtonListener(cardIdStart[cardId], newCard, i);
             DraggableCard dc = newCard.GetComponent<DraggableCard>();
 
             if(dc != null )
@@ -94,7 +94,7 @@ public class HandManager : MonoBehaviour
                     cardDrawFee = (int)(cardDrawFee +  cardDrawCount); // カードの購入代金を倍率に回数をかけたものとする
 
                     GameObject obj = CardGenerate(cardIdStart[cardRandomId], i);
-                    ButtonListener(cardIdStart[cardRandomId], obj, i);
+                    // ButtonListener(cardIdStart[cardRandomId], obj, i);
 
                     coinManager.ReduceMoney(cardDrawFee);
                 }
@@ -118,78 +118,5 @@ public class HandManager : MonoBehaviour
         {
             Destroy(deckCardTrans[chan].GetChild(0).gameObject);
         }
-    }
-
-    public void ButtonListener(int id, GameObject targetCard, int index) // ボタンの入力を検知する
-    {
-
-        Button btn = targetCard.GetComponentInChildren<Button>();
-
-        if (btn == null) return; // ボタンコンポーネントがついていなかった場合の安全装置
-
-
-        switch (id)
-        {
-            case 0:
-
-                btn.onClick.AddListener(async () => await skill.Enhance(index)); // ボタンの入力を検知するリスナーを付与
-
-                break;
-
-            case 1:
-
-                btn.onClick.AddListener(async () => await skill.Heal(index));
-
-                break;
-
-            case 2:
-
-                btn.onClick.AddListener(async () => await skill.Slash(index));
-
-                break;
-
-            case 3:
-
-                btn.onClick.AddListener(async () => await skill.FireBall(index));
-
-                break;
-
-            case 4:
-
-                btn.onClick.AddListener(async () => await skill.FireSlash(index));
-
-                break;
-
-            case 5:
-
-                btn.onClick.AddListener(async () => await skill.HyperMode(index));
-
-                break;
-
-            case 6:
-
-                btn.onClick.AddListener(async () => await skill.Curse(index));
-
-                break;
-
-            case 7:
-
-                btn.onClick.AddListener(async () => await skill.CursedFlame(index));
-
-                break;
-
-            case 8:
-
-                btn.onClick.AddListener(async () => await skill.OverHeal(index));
-
-                break;
-
-            case 9:
-
-                btn.onClick.AddListener(async () => await skill.Absorb(index));
-
-                break;
-        }
-
     }
 }

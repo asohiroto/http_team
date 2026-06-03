@@ -304,6 +304,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02dc50f7c4cee894a9ff0a38efb0c1cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EneBoss2
+  rangeAttackObj: {fileID: 8394997815050280804, guid: b5e6d98e70044bb4eb372a0d1d34eb92, type: 3}
 --- !u!1 &1729439561
 GameObject:
   m_ObjectHideFlags: 0

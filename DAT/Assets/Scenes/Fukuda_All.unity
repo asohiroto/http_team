@@ -2124,32 +2124,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9367e1b94f492d84bae0ce933f800fb2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::skill_manager
-  healAmount: 20
-  overHealAmount: 0
-  enhanceTime: 2
-  hyperTime: 2
-  fbCooldownTime: 2
-  cfCooldownTime: 2
-  waitTime: 2
-  enhanceAmount: 2
-  hyperDamageAmount: 4
-  curseAmount: 10
-  absorbDamage: 0
-  absorbHealAmount: 0
-  hyperSpeedAmount: 0.2
-  fbSpeed: 0.5
-  cfSpeed: 0.5
   discardInd1: -1
   discardInd2: -1
-  absorbFlag: 0
-  fireBall: {fileID: 6676543517733875803, guid: c1f2ad0cd1675dd44b70842ea6e4c916, type: 3}
-  cursedFlame: {fileID: 5380163840605547912, guid: 852e8346ed8d4bb41a49280de6fa1df8, type: 3}
-  absorbPrefab: {fileID: 5860723255738655983, guid: 31f52b17f673d604580a04acbd855c4b, type: 3}
-  fireBallPreFab: {fileID: 0}
-  cursedFlamePreFab: {fileID: 0}
-  slashTypePrefab:
-  - {fileID: 132122364930665669, guid: 9d0fa2fe56967ff4790f505ff03d0108, type: 3}
-  - {fileID: 132122364930665669, guid: 9d0fa2fe56967ff4790f505ff03d0108, type: 3}
+  mousePosWorld: {x: 0, y: 0, z: 0}
 --- !u!4 &1232017825
 Transform:
   m_ObjectHideFlags: 0
@@ -4724,7 +4701,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 071f95b3de59d1d47a4830a66ea0ad75, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController
-  speed: 0.1
+  speed: 0.05
   defaultSpeed: 0.1
   dashSpeed: 0.5
   xLimit: 8.5

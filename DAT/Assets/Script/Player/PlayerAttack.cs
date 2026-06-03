@@ -11,8 +11,11 @@ public class PlayerAttack : MonoBehaviour
     [SerializeField] Sprite[] attackSprite;
     float animTime = 0.05f;
     SpriteRenderer spriteRenderer;
-
     public int attackDamage;
+
+    [SerializeField] int startColFrame;
+    [SerializeField] int endColFrame;
+    BoxCollider2D boxCol;
 
     // アタックエフェクトのアニメーションと当たり判定の管理------------------
 
@@ -21,7 +24,9 @@ public class PlayerAttack : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
         playerObj = GameObject.Find("Player");
         playerController = playerObj.GetComponent<PlayerController>();
-        
+        boxCol = GetComponent<BoxCollider2D>();
+        boxCol.enabled = false;
+
         StartCoroutine(AttackAnim());
         
     }
@@ -48,6 +53,14 @@ public class PlayerAttack : MonoBehaviour
             spriteRenderer.sprite = attackSprite[i];
 
             yield return new WaitForSeconds(animTime);
+            if (i+ 1 >= startColFrame && i + 1 <= endColFrame)
+            {
+                boxCol.enabled = true;
+            }
+            else
+            {
+                boxCol.enabled = false;
+            }
         }
         Destroy(gameObject);
     }

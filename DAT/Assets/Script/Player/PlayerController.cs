@@ -46,6 +46,7 @@ public class PlayerController : MonoBehaviour
     public int playerHP = 100; // プレイヤーのHP
     public int maxPlayerHP = 100; // プレイヤーの最大HP
     [SerializeField] bool canDie = true;
+    private float damageFXTime = 0.2f; // ダメージエフェクトをする時間
 
 
     // アニメーションに使う変数------------------------------------------------------------
@@ -237,10 +238,13 @@ public class PlayerController : MonoBehaviour
     /// プレイヤーがダメージを受けたときの関数
     /// </summary>
     /// <param name="enemyAttack"></param>
-    public void Damaged(int enemyAttack)
+    public IEnumerator Damaged(int enemyAttack)
     {
         playerHP -= enemyAttack;
         Debug.Log("Player残りHP：" + enemyAttack);
+        spriteRenderer.color = Color.red;
+        yield return new WaitForSeconds(damageFXTime);
+        spriteRenderer.color = Color.white;
     }
 
     /// <summary>

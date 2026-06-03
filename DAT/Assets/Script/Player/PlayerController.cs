@@ -1,8 +1,7 @@
 using System.Collections;
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
-using UnityEngine.Rendering.VirtualTexturing;
+
 
 public class PlayerController : MonoBehaviour
 {
@@ -47,7 +46,8 @@ public class PlayerController : MonoBehaviour
     public int maxPlayerHP = 100; // プレイヤーの最大HP
     [SerializeField] bool canDie = true;
     private float damageFXTime = 0.2f; // ダメージエフェクトをする時間
-    private float damageFXTimer = 0f;
+    private float damageFXTimer = 0f; // ダメージエフェクトする
+    private bool changeColor;
 
 
     // アニメーションに使う変数------------------------------------------------------------
@@ -252,11 +252,14 @@ public class PlayerController : MonoBehaviour
     {
         playerHP -= enemyAttack;
         Debug.Log("Player残りHP：" + enemyAttack);
+        StartCoroutine(BackDamageColor());
     }
 
-    private void checkDamaged()
+    private IEnumerator BackDamageColor()
     {
-
+        spriteRenderer.color = Color.red;
+        yield return new WaitForSeconds(damageFXTime);
+        spriteRenderer.color = Color.white;
     }
 
     /// <summary>

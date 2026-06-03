@@ -4532,7 +4532,9 @@ MonoBehaviour:
   - {fileID: 555665968}
   cardDrawFee: 10
   cardDrawFeeBase: 10
-  isCardPressed: 
+  cardIdArray: 00000000000000000000000000000000
+  markedIndexArray: 00000000000000000000000000000000
+  discraftableMark: {fileID: 6230245422680260073, guid: fa250e509bbfb2946b3c50e31a197092, type: 3}
 --- !u!4 &1219670158
 Transform:
   m_ObjectHideFlags: 0

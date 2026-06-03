@@ -17,12 +17,18 @@ public class HandManager : MonoBehaviour
     int cardDrawCount = 0; // これまでにカードを引いた回数
     int[] cardIdStart = { 0, 1, 2, 3, 6, 9}; // 初期手札にできるカードのID
 
+    public int[] cardIdArray = new int[4]; // カードのIDを配列に保存
+    public int[] markedIndexArray = new int [4]; // マークした位置を配列に保存
+
+    [SerializeField] GameObject discraftableMark; // 合成不可マーク
+
     GameObject newCard;
+
+    GameObject[] mark = new GameObject[4];
 
     CoinManager coinManager;
     SkillManager skill;
 
-    public bool[] isCardPressed;
 
     void Start()
     {
@@ -38,15 +44,16 @@ public class HandManager : MonoBehaviour
         // craft = GetComponent<CraftManager>();
         coinManager = GameObject.Find("CoinManager").GetComponent<CoinManager>();
 
-        isCardPressed = new bool[deckCardTrans.Length];
 
-        for (int i = 0; i < 4; i++) // それぞれの手札の位置にランダムなカードを生成
+        for (int i = 0; i < deckCardTrans.Length; i++) // それぞれの手札の位置にランダムなカードを生成
         {
             cardId = Random.Range(0, cardIdStart.Length);
 
             newCard = Instantiate(cardPrefab[cardIdStart[cardId]], deckCardTrans[i]); // 初期手札の生成
 
             DraggableCard dc = newCard.GetComponent<DraggableCard>();
+
+            cardIdArray[i] = cardId;
 
             if(dc != null )
             {
@@ -66,15 +73,17 @@ public class HandManager : MonoBehaviour
         }
     }
 
-    public GameObject CardGenerate(int ran, int chan) // 新たにカードを生成する
+    public GameObject CardGenerate(int id, int ind) // 新たにカードを生成する
     {
-        GameObject genCard = Instantiate(cardPrefab[ran], deckCardTrans[chan]); // カードを作る処理
+        GameObject genCard = Instantiate(cardPrefab[id], deckCardTrans[ind]); // カードを作る処理
         DraggableCard dc = genCard.GetComponentInChildren<DraggableCard>();
+
+        cardIdArray[ind] = id; 
 
         if(dc != null)
         {
-            dc.cardIndex = chan;
-            dc.cardId = ran;
+            dc.cardIndex = ind;
+            dc.cardId = id;
         }
         return genCard;
     }
@@ -93,7 +102,6 @@ public class HandManager : MonoBehaviour
                     cardDrawFee = (int)(cardDrawFee +  cardDrawCount); // カードの購入代金を倍率に回数をかけたものとする
 
                     GameObject obj = CardGenerate(cardIdStart[cardRandomId], i);
-                    // ButtonListener(cardIdStart[cardRandomId], obj, i);
 
                     coinManager.ReduceMoney(cardDrawFee);
                 }
@@ -107,15 +115,31 @@ public class HandManager : MonoBehaviour
 
     }
 
-    public void DisCard(int chan) // 手札を捨てる
+    public void DisCard(int ind) // 手札を捨てる
     {
-        if (deckCardTrans[chan].childCount <= 0)
+        if (deckCardTrans[ind].childCount <= 0)
         {
             Debug.Log("破壊対象が存在しません");
         }
         else
         {
-            Destroy(deckCardTrans[chan].GetChild(0).gameObject);
+            cardIdArray[ind] = -1;
+            Destroy(deckCardTrans[ind].GetChild(0).gameObject);
         }
+    }
+
+    // 合成不可の場合マーキング
+    public void DiscraftableMark(int ind)
+    {
+        mark[ind] = Instantiate(discraftableMark, deckCardTrans[ind]);
+        markedIndexArray[ind] = 1;
+
+    }
+
+    // マークを削除
+    public void DestroyMark(int ind)
+    {
+        Destroy(mark[ind]);
+        markedIndexArray[ind] = 0;
     }
 }

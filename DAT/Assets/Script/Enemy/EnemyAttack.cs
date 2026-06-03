@@ -26,8 +26,9 @@ public class EnemyAttack : MonoBehaviour
             //Debug.Log("attack!");
             GameObject playerObj = other.gameObject;
             playerCtrl = playerObj.GetComponent<PlayerController>();
-            playerCtrl.Damaged(attackPower);
             //playerCtrl.Damaged(40);
+            //StartCoroutine(playerCtrl.Damaged(attackPower));
+            playerCtrl.Damaged(attackPower);
         }
     }
 }

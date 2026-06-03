@@ -21,6 +21,11 @@ public class EnemySpawner : MonoBehaviour
     public int tempX;
     public int tempY;
 
+    private void Start()
+    {
+        timer = spawnIntervalSec;
+    }
+
     void FixedUpdate()
     {
         timer += 0.02f;
@@ -33,9 +38,9 @@ public class EnemySpawner : MonoBehaviour
             dirX = Random.Range(-1, 2);
             tempY = Random.Range(0, 2); // 0か1
 
-            tempX = Random.Range(10, 15);
+            tempX = Random.Range(10, 13);
             sponeX = tempX * dirX;
-            sponeY = Random.Range(6, 10);
+            sponeY = Random.Range(5, 7);
 
             GameObject newObj = Instantiate(WeakTorcher, this.transform);
 

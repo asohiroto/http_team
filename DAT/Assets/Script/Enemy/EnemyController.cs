@@ -232,7 +232,7 @@ public class EnemyController : MonoBehaviour
         
     }
 
-    public void IsAttackFalse()
+    public void AttackFin()
     {
         isAttack = false;
         isAttackCool = false;

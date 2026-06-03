@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: c795b31367045dc44bd1adb23d5c9dff
+guid: abcba885f14bf684f890d7cf0c883e60
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 2654241880671596943
-    second: fc664_0
+      213: -7281269681033361535
+    second: Warrior_BlueTaiki_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -113,13 +113,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: fc664_0
+      name: Warrior_BlueTaiki_0
       rect:
         serializedVersion: 2
-        x: 3
-        y: 0
-        width: 58
-        height: 64
+        x: 70
+        y: 49
+        width: 62
+        height: 96
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: f81356d7de2c5d420800000000000000
-      internalID: 2654241880671596943
+      spriteID: 1874f2c8dcbb3fa90800000000000000
+      internalID: -7281269681033361535
       vertices: []
       indices: 
       edges: []
@@ -148,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      fc664_0: 2654241880671596943
+      Warrior_BlueTaiki_0: -7281269681033361535
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

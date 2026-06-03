@@ -51,35 +51,6 @@ public class SkillManager : MonoBehaviour
 
     }
 
-    public void CraftMethod(int id, int ind) // カード合成の関数
-    {
-        if (craft.craftFrag == 2) // 保存されたIDを呼び出し、素材となったカードを破壊し、空いたスペースにカードを合成
-        {
-            int craftResult = craft.CraftItems(craft.material1, id);
-
-            discardInd2 = ind;
-            craft.craftFrag = 0;
-
-            if (craftResult < 0)
-            {
-                return;
-            }
-
-            hand.DisCard(discardInd1);
-            hand.DisCard(discardInd2);
-
-            int spawnIndex = Mathf.Min(discardInd1, discardInd2);
-
-            GameObject obj = hand.CardGenerate(craftResult, spawnIndex);
-            // hand.ButtonListener(craftResult, obj, spawnIndex);
-        }
-        else if (craft.craftFrag == 1) // 場所とIDを保存する
-        {
-            discardInd1 = ind;
-            craft.SettingMaterial1(id);
-        }
-    }
-
     public void AttackCancell() // 攻撃力の初期化
     {
         player.attackDamage = player.defaultAttackDamage;

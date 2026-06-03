@@ -17,6 +17,7 @@ public struct AnimationData
     public bool isLoop;                 // ループ再生するかどうか
 }
 
+// スプライトの変更のみに集中する
 public class EnemyAnimation : MonoBehaviour
 {
     [SerializeField] private List<AnimationData> animationDatas = new List<AnimationData>();
@@ -83,7 +84,7 @@ public class EnemyAnimation : MonoBehaviour
                 {
                     // 仮
                     enemyCtrl.FinishAnim();
-                    enemyCtrl.IsAttackFalse();
+                    enemyCtrl.AttackFin();
 
                     ChangeState(EnemyAnimState.Idle);
                 }

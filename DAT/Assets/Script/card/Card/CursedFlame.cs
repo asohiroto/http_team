@@ -3,7 +3,7 @@ using UnityEngine.XR;
 
 public class CursedFlame : MonoBehaviour
 {
-    [SerializeField] int cfSpeed;
+    [SerializeField] float cfSpeed;
     [SerializeField] int curseAmount;
 
     [SerializeField] GameObject cursedFlame;

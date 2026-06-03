@@ -4,7 +4,7 @@ using UnityEngine.XR;
 
 public class FireBall : MonoBehaviour
 {
-    [SerializeField] int fbSpeed;
+    [SerializeField] float fbSpeed;
 
     [SerializeField] GameObject fireBall;
 
@@ -33,7 +33,7 @@ public class FireBall : MonoBehaviour
         if (fbFlag) skill.BallMove(fireBallPrefab, destPos, fbSpeed, fbPos, ref fbFlag); // ファイアーボール使用後の挙動
     }
 
-    public void Effect(int ind, Vector2 mousePos)
+    public void Effect(int ind, Vector3 mousePos)
     {
         if (!fbFlag)
         {

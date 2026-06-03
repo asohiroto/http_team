@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -14,6 +15,10 @@ public class DraggableCard : MonoBehaviour, IBeginDragHandler, IEndDragHandler, 
 
     public int cardIndex;
     public int cardId;
+
+    int craftResult;
+
+    bool craftSucces = false;
 
     public Vector2 destiPos = Vector2.zero;
 
@@ -40,7 +45,7 @@ public class DraggableCard : MonoBehaviour, IBeginDragHandler, IEndDragHandler, 
 
             if (skill == null) skill = obj.GetComponent<SkillManager>();
 
-            if (hand != null && craft != null) break;
+            if (hand != null && craft != null && skill != null) break;
         }
 
         if (cardEffectManager != null)
@@ -89,6 +94,8 @@ public class DraggableCard : MonoBehaviour, IBeginDragHandler, IEndDragHandler, 
 
         // レイキャストでゴーストイメージを感知しない
         cg.blocksRaycasts = false;
+
+        // 手札の中の合成できる、出来ないを判別
     }
 
     // ドラッグ中に実行
@@ -112,76 +119,26 @@ public class DraggableCard : MonoBehaviour, IBeginDragHandler, IEndDragHandler, 
 
         if (dragged == null || dragged == this) return;
 
-        if (craft.craftFrag == 1)
+        dragged.craftSucces = true;
+
+        craftResult = craft.CraftItems(dragged.cardId, target.cardId); // IDをそれぞれ取得し、合成を実行
+
+        if (craftResult < 0)
         {
-            int craftResult = craft.CraftItems(dragged.cardId, target.cardId); // IDをそれぞれ取得し、合成を実行
-
-            if (craftResult < 0)
-            {
-                Debug.Log("tukaenaiyo");
-                return;
-            }
-
-            int fromIndex = dragged.cardIndex; // それぞれの住所を取得
-            int toIndex = this.cardIndex;
-
-            Destroy(dragged.ghostImage);
-
-            hand.DisCard(fromIndex);
-            hand.DisCard(toIndex);
-
-            int spawnIndex = Mathf.Min(fromIndex, toIndex); // より小さいほう（左側にあるカード）を生成する住所とする
-            GameObject obj = hand.CardGenerate(craftResult, spawnIndex);
-
-            craft.craftFrag = 0;
+            return;
         }
-        else if (craft.craftFrag == 2)
-        {
-            Debug.Log("tukatteruyo");
-            switch (dragged.cardId)
-            {
-                case 0:
-                    cardEffect.enhance.Effect(dragged.cardIndex);
 
-                    break;
-                case 1:
-                    cardEffect.heal.Effect(dragged.cardIndex);
+        int fromIndex = dragged.cardIndex; // それぞれの住所を取得
+        int toIndex = this.cardIndex;
 
-                    break;
-                case 2:
-                    cardEffect.slash.Effect(dragged.cardIndex);
+        Destroy(dragged.ghostImage);
 
-                    break;
-                case 3:
-                    cardEffect.fireBall.Effect(dragged.cardIndex, skill.mousePosWorld);
+        hand.DisCard(fromIndex);
+        hand.DisCard(toIndex);
 
-                    break;
-                case 4:
-                    cardEffect.fireSlash.Effect(dragged.cardIndex);
+        int spawnIndex = Mathf.Min(fromIndex, toIndex); // より小さいほう（左側にあるカード）を生成する住所とする
+        GameObject obj = hand.CardGenerate(craftResult, spawnIndex);
 
-                    break;
-                case 5:
-                    cardEffect.hyperMode.Effect(dragged.cardIndex);
-
-                    break;
-                case 6:
-                    cardEffect.curse.Effect(dragged.cardIndex);
-
-                    break;
-                case 7:
-                    cardEffect.cursedFlame.Effect(dragged.cardIndex, skill.mousePosWorld);
-
-                    break;
-                case 8:
-                    cardEffect.overHeal.Effect(dragged.cardIndex);
-
-                    break;
-                case 9:
-                    cardEffect.absorb.Effect(dragged.cardIndex);
-
-                    break;
-            }
-        }
     }
 
     // ドラッグ終了時に実行
@@ -189,6 +146,54 @@ public class DraggableCard : MonoBehaviour, IBeginDragHandler, IEndDragHandler, 
     {
         if (ghostImage == null) return;
 
+        if (craftSucces == false)
+        {
+            switch (cardId)
+            {
+                case 0:
+                    cardEffect.enhance.Effect(cardIndex);
+
+                    break;
+                case 1:
+                    cardEffect.heal.Effect(cardIndex);
+
+                    break;
+                case 2:
+                    cardEffect.slash.Effect(cardIndex);
+
+                    break;
+                case 3:
+                    cardEffect.fireBall.Effect(cardIndex, skill.mousePosWorld);
+
+                    break;
+                case 4:
+                    cardEffect.fireSlash.Effect(cardIndex);
+
+                    break;
+                case 5:
+                    cardEffect.hyperMode.Effect(cardIndex);
+
+                    break;
+                case 6:
+                    cardEffect.curse.Effect(cardIndex);
+
+                    break;
+                case 7:
+                    cardEffect.cursedFlame.Effect(cardIndex, skill.mousePosWorld);
+
+                    break;
+                case 8:
+                    cardEffect.overHeal.Effect(cardIndex);
+
+                    break;
+                case 9:
+                    cardEffect.absorb.Effect(cardIndex);
+
+                    break;
+            }
+        }
+
+        craftSucces = false;
         canvasGroup.blocksRaycasts = true;
         Destroy(ghostImage);
         ghostImage = null;

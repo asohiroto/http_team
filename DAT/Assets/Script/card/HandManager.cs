@@ -46,7 +46,6 @@ public class HandManager : MonoBehaviour
 
             newCard = Instantiate(cardPrefab[cardIdStart[cardId]], deckCardTrans[i]); // 初期手札の生成
 
-            // ButtonListener(cardIdStart[cardId], newCard, i);
             DraggableCard dc = newCard.GetComponent<DraggableCard>();
 
             if(dc != null )

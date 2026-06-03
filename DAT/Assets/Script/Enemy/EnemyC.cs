@@ -12,6 +12,16 @@ public class EnemyC : MonoBehaviour
     [SerializeField] private float lostDist = 5f;   // Playerを見失う距離
     [SerializeField] private float stopDist = 0.8f; // この距離で立ち止まる
     [SerializeField] private float attackRange = 1f;    // 攻撃のレンジ
+
+
+    [Header("Config")]
+    [SerializeField] private GameObject playerObj;      // Playerオブジェクト
+    [SerializeField] private GameObject coinParentObj;  // Coin のプレハブ
+    [SerializeField] private GameObject coinPrefab;     // Coin を格納する親オブジェクト
+    [SerializeField] private GameObject attackCol;      // 攻撃用のコライダー(プレハブ)
+    private EnemyAnimation enemyAnim;
+    private GameObject hitObj;
+
     
 
     void Start()

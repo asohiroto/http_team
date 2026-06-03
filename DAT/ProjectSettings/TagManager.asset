@@ -8,6 +8,7 @@ TagManager:
   - Card
   - DropItems
   - EnemySpawner
+  - UI
   layers:
   - Default
   - TransparentFX

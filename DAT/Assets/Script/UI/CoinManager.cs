@@ -10,13 +10,11 @@ public class CoinManager : MonoBehaviour
 
     public int currentMoney = 0; // 所持金
 
-    
+
     private void Start()
     {
         UpdateMoneyUI();
     }
-
-
 
     // 所持金増加
     public void AddMoney(int amount)

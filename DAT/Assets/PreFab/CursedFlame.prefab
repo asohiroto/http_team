@@ -153,7 +153,7 @@ GameObject:
   - component: {fileID: 3461839661770353239}
   m_Layer: 5
   m_Name: CursedFlame
-  m_TagString: Untagged
+  m_TagString: Card
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -274,6 +274,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::DraggableCard
   cardIndex: 0
   cardId: 0
+  destiPos: {x: 0, y: 0}
 --- !u!61 &3461839661770353239
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -304,7 +305,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0

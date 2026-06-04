@@ -5624,6 +5624,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9367e1b94f492d84bae0ce933f800fb2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SkillManager
+  useFlag: 0
   discardInd1: -1
   discardInd2: -1
   mousePosWorld: {x: 0, y: 0, z: 0}

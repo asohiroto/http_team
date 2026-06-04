@@ -140,6 +140,7 @@ public class DraggableCard : MonoBehaviour, IBeginDragHandler, IEndDragHandler, 
 
         if (craftResult < 0)
         {
+            dragged.craftSucces = true;
             Debug.Log("なにかが違うようだ……？");
             return;
         }
@@ -171,7 +172,7 @@ public class DraggableCard : MonoBehaviour, IBeginDragHandler, IEndDragHandler, 
         if (ghostImage == null) return;
 
         // 合成を行っていなければ、使用する
-        if (craftSucces == false)
+        if (skill.useFlag)
         {
             switch (cardId)
             {
@@ -216,6 +217,10 @@ public class DraggableCard : MonoBehaviour, IBeginDragHandler, IEndDragHandler, 
 
                     break;
             }
+        }
+        else
+        {
+            skill.useFlag = true;
         }
 
         for (int i = 0; i < 4; i++)

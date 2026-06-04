@@ -6,9 +6,9 @@ using UnityEngine.InputSystem;
 public class PlayerController : MonoBehaviour
 {
     // 移動に使う変数-----------------------------------------------------------------
-    [SerializeField] public float speed = 0.1f; // プレイヤーのスピード
-    [SerializeField] public float defaultSpeed = 0.1f; // プレイヤーのデフォルトスピード
-    [SerializeField] private float dashSpeed = 0.5f; // プレイヤーのダッシュスピード
+    [SerializeField] public float speed = 0.05f; // プレイヤーのスピード
+    [SerializeField] public float defaultSpeed = 0.05f; // プレイヤーのデフォルトスピード
+    [SerializeField] private float dashSpeed = 0.3f; // プレイヤーのダッシュスピード
     private bool onDash; // ダッシュ中かどうか
 
     float dirX; // プレイヤーのX軸方向 (-1, 0, 1)のどれか
@@ -164,8 +164,6 @@ public class PlayerController : MonoBehaviour
         // 画面内制限
         currentPos.x = Mathf.Clamp(currentPos.x, -xLimit, xLimit);
         currentPos.y = Mathf.Clamp(currentPos.y, yMinLimit, yMaxLimit);
-
-        
     }
 
 

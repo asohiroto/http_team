@@ -198,7 +198,7 @@ public class EnemyController : MonoBehaviour
             isChasePlayer = false;
         }
         
-        if (attackDist > playerDist)
+        if (canAttack)
         {
             // 仮
             if (isAttack) return;

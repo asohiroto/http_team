@@ -15,7 +15,7 @@ public class EneBossAttack : MonoBehaviour
 
     [SerializeField] int startColFrame;
     [SerializeField] int endColFrame;
-    BoxCollider2D boxCol;
+    CircleCollider2D circleCol;
 
     // アタックエフェクトのアニメーションと当たり判定の管理------------------
 
@@ -24,8 +24,9 @@ public class EneBossAttack : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
         enemyObj = GameObject.Find("Boss2");
         eneCtrl = enemyObj.GetComponent<EneBoss2>();
-        boxCol = GetComponent<BoxCollider2D>();
-        boxCol.enabled = false;
+        circleCol = GetComponent<CircleCollider2D>();
+        circleCol.enabled = false;
+        circleCol.radius = 2;
 
         StartCoroutine(AttackAnim());
     }
@@ -54,11 +55,11 @@ public class EneBossAttack : MonoBehaviour
             yield return new WaitForSeconds(animTime);
             if (i + 1 >= startColFrame && i + 1 <= endColFrame)
             {
-                boxCol.enabled = true;
+                circleCol.enabled = true;
             }
             else
             {
-                boxCol.enabled = false;
+                circleCol.enabled = false;
             }
         }
         Destroy(gameObject);

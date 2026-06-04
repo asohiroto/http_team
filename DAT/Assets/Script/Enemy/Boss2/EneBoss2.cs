@@ -5,13 +5,16 @@ using UnityEngine.UIElements;
 
 public class EneBoss2 : MonoBehaviour
 {
-    float speed = 0.1f;
+    [SerializeField]float speed = 0.1f;
     Vector3 moveDir;
     Vector3 currentPos;
     bool endMove = false;
-    public int attackPower = 0;
+    [SerializeField]public int attackPower = 0;
+    [SerializeField]float attackWaitingTime = 1.0f;
+    [SerializeField]float showAttackRangeTime = 1.0f;
     // 範囲攻撃の変数
-    float attackTime = 1.0f;
+    [SerializeField]float rangeAttackRadius = 1.0f;
+    [SerializeField]float attackTime = 1.0f;
     [SerializeField]GameObject rangeAttackObj;
     void Start()
     {
@@ -43,9 +46,16 @@ public class EneBoss2 : MonoBehaviour
 
     IEnumerator Stanp()
     {
+        yield return new WaitForSeconds(attackWaitingTime);
+
         GameObject obj = Instantiate(rangeAttackObj, this.transform);
         obj.transform.position = transform.position;
         yield return new WaitForSeconds(attackTime);
         Destroy(obj);
+    }
+
+    void DrawCircle()
+    {
+        
     }
 }

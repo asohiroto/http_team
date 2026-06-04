@@ -13,7 +13,7 @@ public class SkillManager : MonoBehaviour
     CraftManager craft;
     CoinManager coin;
 
-
+    public bool useFlag = true;                      // カード使用できるかどうか
 
     public int discardInd1 = -1;                // 捨てるカードの住所その１
     public int discardInd2 = -1;                //                   その２
@@ -48,6 +48,11 @@ public class SkillManager : MonoBehaviour
         mousePosScreen.z = -Camera.main.transform.position.z;
 
         mousePosWorld = Camera.main.ScreenToWorldPoint(mousePosScreen);　// 座標系の変換
+
+        if(Mouse.current.rightButton.wasPressedThisFrame) // 右クリックでカード使用キャンセル
+        {
+            useFlag = false;
+        }
 
     }
 

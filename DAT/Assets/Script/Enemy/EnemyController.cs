@@ -198,7 +198,7 @@ public class EnemyController : MonoBehaviour
             isChasePlayer = false;
         }
         
-        if (attackDist > playerDist)
+        if (canAttack)
         {
             // 仮
             if (isAttack) return;
@@ -232,7 +232,7 @@ public class EnemyController : MonoBehaviour
         
     }
 
-    public void IsAttackFalse()
+    public void AttackFin()
     {
         isAttack = false;
         isAttackCool = false;

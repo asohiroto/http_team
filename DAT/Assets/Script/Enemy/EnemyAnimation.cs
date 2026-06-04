@@ -11,12 +11,13 @@ public enum EnemyAnimState { Idle, Walk, SideAttack, LowerAttack, UpperAttack, I
 [System.Serializable]
 public struct AnimationData
 {
-    public EnemyAnimState state;            // 状態 (待機/移動/攻撃)
+    public EnemyAnimState state;        // 状態 (待機/移動/攻撃)
     public Sprite[] sprites;            // 使用するスプライトの配列
     public int frameRate;               // アニメーションの再生速度 (fps)
     public bool isLoop;                 // ループ再生するかどうか
 }
 
+// スプライトの変更のみに集中する
 public class EnemyAnimation : MonoBehaviour
 {
     [SerializeField] private List<AnimationData> animationDatas = new List<AnimationData>();
@@ -32,6 +33,7 @@ public class EnemyAnimation : MonoBehaviour
     [SerializeField] private float timePerFrame = 0;
 
     EnemyController enemyCtrl;
+    EnemyC enemy;
     private SpriteRenderer spr;
 
     // 先に済ませないとtimePerFrameがInfinityになる(0で除算してしまう)
@@ -51,7 +53,8 @@ public class EnemyAnimation : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        enemyCtrl = GetComponent<EnemyController>();
+        //enemyCtrl = GetComponent<EnemyController>();
+        enemy = GetComponent<EnemyC>();
 
         spr = GetComponent<SpriteRenderer>();
 
@@ -82,10 +85,12 @@ public class EnemyAnimation : MonoBehaviour
                 else
                 {
                     // 仮
-                    enemyCtrl.FinishAnim();
-                    enemyCtrl.IsAttackFalse();
+                    //enemyCtrl.FinishAnim();
+                    //enemyCtrl.AttackFin();
 
-                    ChangeState(EnemyAnimState.Idle);
+                    //ChangeState(EnemyAnimState.Idle);
+
+                    enemy.OnAttackAnimationFinished();
                 }
             }
             else

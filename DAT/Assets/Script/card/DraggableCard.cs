@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -13,15 +14,15 @@ public class DraggableCard : MonoBehaviour, IBeginDragHandler, IEndDragHandler, 
     private GameObject ghostImage;
     private GameObject cardEffectManager;
 
+    // カードの位置と、ID
     public int cardIndex;
     public int cardId;
 
+    // 合成の結果
     int craftResult;
 
+    // 合成の成功フラグ
     bool craftSucces = false;
-
-    public Vector2 destiPos = Vector2.zero;
-
 
     CraftManager craft;
     HandManager hand;
@@ -48,6 +49,7 @@ public class DraggableCard : MonoBehaviour, IBeginDragHandler, IEndDragHandler, 
             if (hand != null && craft != null && skill != null) break;
         }
 
+        // 各スクリプトを取得
         if (cardEffectManager != null)
         {
             cardEffectManager.TryGetComponent(out cardEffect.enhance);
@@ -95,7 +97,20 @@ public class DraggableCard : MonoBehaviour, IBeginDragHandler, IEndDragHandler, 
         // レイキャストでゴーストイメージを感知しない
         cg.blocksRaycasts = false;
 
-        // 手札の中の合成できる、出来ないを判別
+        // 手札の中の合成できるカード、出来ないカードを判別し、マーキング
+        for(int i = 0; i < 4; i++)
+        {
+            int craftResultPre = craft.CraftCards(cardId, hand.cardIdArray[i]);
+
+            if (i != cardIndex)
+            {
+                if (craftResultPre < 0)
+                {
+                    hand.DiscraftableMark(i);
+                }
+            }
+        }
+
     }
 
     // ドラッグ中に実行
@@ -111,7 +126,7 @@ public class DraggableCard : MonoBehaviour, IBeginDragHandler, IEndDragHandler, 
         ghostRect.localPosition = localPoint;
     }
 
-    // ドロップ時に実行
+    // ドロップされた時に実行
     public void OnDrop(PointerEventData eventData)
     {
         DraggableCard dragged = eventData.pointerDrag?.GetComponent<DraggableCard>(); // pointerDragがnullじゃなければGetComponentを実行
@@ -121,10 +136,12 @@ public class DraggableCard : MonoBehaviour, IBeginDragHandler, IEndDragHandler, 
 
         dragged.craftSucces = true;
 
-        craftResult = craft.CraftItems(dragged.cardId, target.cardId); // IDをそれぞれ取得し、合成を実行
+        craftResult = craft.CraftCards(dragged.cardId, target.cardId); // IDをそれぞれ取得し、合成を実行
 
         if (craftResult < 0)
         {
+            dragged.craftSucces = true;
+            Debug.Log("なにかが違うようだ……？");
             return;
         }
 
@@ -139,6 +156,14 @@ public class DraggableCard : MonoBehaviour, IBeginDragHandler, IEndDragHandler, 
         int spawnIndex = Mathf.Min(fromIndex, toIndex); // より小さいほう（左側にあるカード）を生成する住所とする
         GameObject obj = hand.CardGenerate(craftResult, spawnIndex);
 
+        for (int i = 0; i < 4; i++)
+        {
+            if (hand.markedIndexArray[i] == 1)
+            {
+                hand.DestroyMark(i);
+            }
+        }
+
     }
 
     // ドラッグ終了時に実行
@@ -146,7 +171,8 @@ public class DraggableCard : MonoBehaviour, IBeginDragHandler, IEndDragHandler, 
     {
         if (ghostImage == null) return;
 
-        if (craftSucces == false)
+        // 合成を行っていなければ、使用する
+        if (skill.useFlag)
         {
             switch (cardId)
             {
@@ -190,6 +216,18 @@ public class DraggableCard : MonoBehaviour, IBeginDragHandler, IEndDragHandler, 
                     cardEffect.absorb.Effect(cardIndex);
 
                     break;
+            }
+        }
+        else
+        {
+            skill.useFlag = true;
+        }
+
+        for (int i = 0; i < 4; i++)
+        {
+            if (hand.markedIndexArray[i] == 1)
+            {
+                hand.DestroyMark(i);
             }
         }
 

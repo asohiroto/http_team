@@ -1,4 +1,6 @@
+using System.Collections;
 using UnityEngine;
+using UnityEngine.Rendering;
 using UnityEngine.UIElements;
 
 public class EneBoss2 : MonoBehaviour
@@ -6,6 +8,11 @@ public class EneBoss2 : MonoBehaviour
     float speed = 0.1f;
     Vector3 moveDir;
     Vector3 currentPos;
+    bool endMove = false;
+    public int attackPower = 0;
+    // 範囲攻撃の変数
+    float attackTime = 1.0f;
+    [SerializeField]GameObject rangeAttackObj;
     void Start()
     {
         currentPos = transform.position;
@@ -18,15 +25,27 @@ public class EneBoss2 : MonoBehaviour
     }
 
     // 指定した座標に移動する
-    void Move(Vector3 position)
+    void Move(Vector3 targetPos)
     {
-        if ((currentPos.x - position.x < 0.5f&& currentPos.x - position.x > -0.5f )
+        if (currentPos.x - targetPos.x < 0.5f&& currentPos.x - targetPos.x > -0.5f
             && currentPos.y - currentPos.y < 0.5f && currentPos.y - currentPos.y > -0.5f)
         {
+            if(endMove) return;
+            Debug.Log("移動完了！");
+            StartCoroutine(Stanp());
+            endMove = true;
             return;
         }
-        moveDir = position - currentPos;
+        moveDir = targetPos - currentPos;
         moveDir = moveDir.normalized;
         currentPos += moveDir * speed;
+    }
+
+    IEnumerator Stanp()
+    {
+        GameObject obj = Instantiate(rangeAttackObj, this.transform);
+        obj.transform.position = transform.position;
+        yield return new WaitForSeconds(attackTime);
+        Destroy(obj);
     }
 }

@@ -37,7 +37,7 @@ public class CraftManager : MonoBehaviour
         }
     }
 
-    public int CraftItems(int input1, int input2) // 鍵とレシピをもとに合成、カードの配列内の位置を示す数値を返す
+    public int CraftCards(int input1, int input2) // 鍵とレシピをもとに合成、カードの配列内の位置を示す数値を返す
     {
         int searchKey = CreateRecipeKey(input1, input2);
 
@@ -45,10 +45,6 @@ public class CraftManager : MonoBehaviour
         {
             craftFlag = true; // 合成成功
             return craftResult;
-        }
-        else
-        {
-            Debug.Log("なにかが違うようだ……？");
         }
 
         return -1;

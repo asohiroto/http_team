@@ -9,9 +9,9 @@ public class EneBoss2 : MonoBehaviour
     Vector3 moveDir;
     Vector3 currentPos;
     bool endMove = false;
+    public int attackPower = 0;
     // 範囲攻撃の変数
-    int startRangeAttackFrame = 5;
-    int endRangeAttackFrame = 5;
+    float attackTime = 1.0f;
     [SerializeField]GameObject rangeAttackObj;
     void Start()
     {
@@ -32,7 +32,7 @@ public class EneBoss2 : MonoBehaviour
         {
             if(endMove) return;
             Debug.Log("移動完了！");
-            Stanp();
+            StartCoroutine(Stanp());
             endMove = true;
             return;
         }
@@ -41,8 +41,11 @@ public class EneBoss2 : MonoBehaviour
         currentPos += moveDir * speed;
     }
 
-    void Stanp()
+    IEnumerator Stanp()
     {
-        Instantiate(rangeAttackObj, this.transform);
+        GameObject obj = Instantiate(rangeAttackObj, this.transform);
+        obj.transform.position = transform.position;
+        yield return new WaitForSeconds(attackTime);
+        Destroy(obj);
     }
 }

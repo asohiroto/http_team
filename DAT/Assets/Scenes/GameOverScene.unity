@@ -686,7 +686,7 @@ GameObject:
   - component: {fileID: 904205589}
   - component: {fileID: 904205588}
   m_Layer: 0
-  m_Name: Circle
+  m_Name: GameOverEnemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -705,12 +705,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Animation
   sprites:
+  - {fileID: -4230181108591323607, guid: 9001e956a2356c2409e4d7ed91e03382, type: 3}
+  - {fileID: 1276301746398581189, guid: 9001e956a2356c2409e4d7ed91e03382, type: 3}
+  - {fileID: 8474622326328232153, guid: 9001e956a2356c2409e4d7ed91e03382, type: 3}
   - {fileID: -4071349217737685964, guid: 9001e956a2356c2409e4d7ed91e03382, type: 3}
   - {fileID: -7369122931189845133, guid: 9001e956a2356c2409e4d7ed91e03382, type: 3}
   - {fileID: 914313290774012156, guid: 9001e956a2356c2409e4d7ed91e03382, type: 3}
-  - {fileID: -7114989445226215597, guid: 9001e956a2356c2409e4d7ed91e03382, type: 3}
-  - {fileID: 7099923657110077353, guid: 9001e956a2356c2409e4d7ed91e03382, type: 3}
-  - {fileID: -1649346297522608045, guid: 9001e956a2356c2409e4d7ed91e03382, type: 3}
   fps: 12
 --- !u!212 &904205589
 SpriteRenderer:
@@ -761,7 +761,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 1
   m_MaskInteraction: 0
-  m_Sprite: {fileID: -4071349217737685964, guid: 9001e956a2356c2409e4d7ed91e03382, type: 3}
+  m_Sprite: {fileID: -4230181108591323607, guid: 9001e956a2356c2409e4d7ed91e03382, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -780,8 +780,8 @@ Transform:
   m_GameObject: {fileID: 904205587}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -523, y: -205, z: 0}
-  m_LocalScale: {x: 300, y: 300, z: 0}
+  m_LocalPosition: {x: -964.88, y: -541.58, z: 0}
+  m_LocalScale: {x: 3, y: 3, z: 0}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 1613201750}

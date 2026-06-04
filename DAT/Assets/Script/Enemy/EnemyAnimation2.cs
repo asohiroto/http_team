@@ -5,11 +5,11 @@ using UnityEngine.InputSystem.LowLevel;
 // 列挙型 enum
 // アニメーションの状態
 // 待機、移動、攻撃 横、攻撃 上、攻撃 下
-public enum EnemyAnimState { Idle, Walk, SideAttack, LowerAttack, UpperAttack, Init }
+public enum EnemyAnimState2 { Idle, Walk, SideAttack, LowerAttack, UpperAttack, Init }
 
 // 構造体 struct
 [System.Serializable]
-public struct AnimationData
+public struct AnimationData2
 {
     public EnemyAnimState state;        // 状態 (待機/移動/攻撃)
     public Sprite[] sprites;            // 使用するスプライトの配列
@@ -18,7 +18,7 @@ public struct AnimationData
 }
 
 // スプライトの変更のみに集中する
-public class EnemyAnimation : MonoBehaviour
+public class EnemyAnimation2 : MonoBehaviour
 {
     [SerializeField] private List<AnimationData> animationDatas = new List<AnimationData>();
     // 辞書機能
@@ -33,7 +33,7 @@ public class EnemyAnimation : MonoBehaviour
     [SerializeField] private float timePerFrame = 0;
 
     EnemyController enemyCtrl;
-    //EnemyC enemy;
+    EnemyC enemy;
     private SpriteRenderer spr;
 
     // 先に済ませないとtimePerFrameがInfinityになる(0で除算してしまう)
@@ -53,8 +53,8 @@ public class EnemyAnimation : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        enemyCtrl = GetComponent<EnemyController>();
-        //enemy = GetComponent<EnemyC>();
+        //enemyCtrl = GetComponent<EnemyController>();
+        enemy = GetComponent<EnemyC>();
 
         spr = GetComponent<SpriteRenderer>();
 
@@ -88,9 +88,9 @@ public class EnemyAnimation : MonoBehaviour
                     //enemyCtrl.FinishAnim();
                     //enemyCtrl.AttackFin();
 
-                    ChangeState(EnemyAnimState.Idle);
+                    //ChangeState(EnemyAnimState.Idle);
 
-                    //enemy.OnAttackAnimationFinished();
+                    enemy.OnAttackAnimationFinished();
                 }
             }
             else

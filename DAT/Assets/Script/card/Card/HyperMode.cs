@@ -4,7 +4,7 @@ using UnityEngine.XR;
 public class HyperMode : MonoBehaviour
 {
     [SerializeField] int hyperDamageAmount; 
-    [SerializeField] int hyperSpeedAmount;
+    [SerializeField] float hyperSpeedAmount;
     [SerializeField] int hyperTime;
 
     int hyperCount;

@@ -26,7 +26,6 @@ public class EneBossAttack : MonoBehaviour
         eneCtrl = enemyObj.GetComponent<EneBoss2>();
         circleCol = GetComponent<CircleCollider2D>();
         circleCol.enabled = false;
-        circleCol.radius = 2;
 
         StartCoroutine(AttackAnim());
     }
@@ -65,3 +64,4 @@ public class EneBossAttack : MonoBehaviour
         Destroy(gameObject);
     }
 }
+

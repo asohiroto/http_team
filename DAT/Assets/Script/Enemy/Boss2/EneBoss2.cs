@@ -15,7 +15,7 @@ public class EneBoss2 : MonoBehaviour
     Vector3 currentPos;
     bool endMove = false;
     [SerializeField] public int attackPower = 0;
-    [SerializeField] float attackWaitingTime = 0.2f;
+    [SerializeField] float attackWaitingTime = 0.1f;
     [SerializeField] float showAttackRangeTime = 3.0f;
     bool isAttackWaiting = false;
     float flashTime = 0.1f;

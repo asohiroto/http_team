@@ -34,7 +34,7 @@ public class EnemyC : MonoBehaviour
     [SerializeField] private bool isLookRight;
     [SerializeField] private bool playing;// state に initを追加して判定
     [SerializeField] private bool canAttack;                       // 攻撃可能範囲内
-    [SerializeField] private bool isAttack;
+    [SerializeField] private bool wasAttack;        // 攻撃を行ったか(攻撃のコライダー呼び出し済み)
     [SerializeField] private float attackStartupTimer;              // 予備動作用のカウントダウン
     [SerializeField] private float attackCooldownTimer;             // クールダウン用のカウントダウン
     
@@ -45,6 +45,7 @@ public class EnemyC : MonoBehaviour
     [SerializeField] private GameObject DropItemPrefab; // DropItem のプレハブ
     [SerializeField] private GameObject attackCol;      // 攻撃用のコライダー(プレハブ)
     private EnemyAnimation enemyAnim;
+    GameObject attackObj;
 
     private enum EnemyAiState       // Enemyの状態
     { 
@@ -336,9 +337,15 @@ public class EnemyC : MonoBehaviour
                 break;
 
             case EnemyAiState.Attack:
+                if (wasAttack) return;
+                wasAttack = true;
+                attackObj = Instantiate(attackCol, this.transform);
+                attackObj.transform.position =attackRange * 0.5f * targetDirSign + this.enemyPos;     // 攻撃距離に合わせる
                 break;
             
             case EnemyAiState.AttackCooldown:
+                Destroy(attackObj);
+                wasAttack = false;
                 enemyAnim.ChangeState(EnemyAnimState.Idle);
                 if (attackCooldownTimer <= 0)
                 {

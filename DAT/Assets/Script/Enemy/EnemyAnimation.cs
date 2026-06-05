@@ -32,8 +32,8 @@ public class EnemyAnimation : MonoBehaviour
     [SerializeField] private float timer = 0;
     [SerializeField] private float timePerFrame = 0;
 
-    //EnemyController enemyCtrl;
-    EnemyC enemy;
+    EnemyController enemyCtrl;
+    //EnemyC enemy;
     private SpriteRenderer spr;
 
     // 先に済ませないとtimePerFrameがInfinityになる(0で除算してしまう)
@@ -53,8 +53,8 @@ public class EnemyAnimation : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        //enemyCtrl = GetComponent<EnemyController>();
-        enemy = GetComponent<EnemyC>();
+        enemyCtrl = GetComponent<EnemyController>();
+        //enemy = GetComponent<EnemyC>();
 
         spr = GetComponent<SpriteRenderer>();
 
@@ -88,9 +88,9 @@ public class EnemyAnimation : MonoBehaviour
                     //enemyCtrl.FinishAnim();
                     //enemyCtrl.AttackFin();
 
-                    //ChangeState(EnemyAnimState.Idle);
+                    ChangeState(EnemyAnimState.Idle);
 
-                    enemy.OnAttackAnimationFinished();
+                    //enemy.OnAttackAnimationFinished();
                 }
             }
             else

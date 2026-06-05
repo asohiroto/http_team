@@ -5676,7 +5676,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemySpawner
   spawnIntervalSec: 1
-  maxEnemy: 10
+  maxEnemy: 1000
   enemyCount: 0
   WeakTorcher: {fileID: 4419746953452864637, guid: f6545e77c56c98841962ce3e926c813d, type: 3}
   dirX: 0

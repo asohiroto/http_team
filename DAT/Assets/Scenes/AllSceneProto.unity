@@ -1643,7 +1643,7 @@ GameObject:
   - component: {fileID: 654759706}
   - component: {fileID: 654759705}
   - component: {fileID: 654759704}
-  - component: {fileID: 654759703}
+  - component: {fileID: 654759707}
   m_Layer: 5
   m_Name: MouseUI
   m_TagString: Untagged
@@ -1651,18 +1651,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &654759703
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 654759702}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fd6dd0510e0e21d41a39e77860b1b28a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::SimpleCursor
 --- !u!114 &654759704
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1717,9 +1705,21 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -920.00006, y: -470}
-  m_SizeDelta: {x: 100, y: 100}
+  m_AnchoredPosition: {x: -960, y: -540}
+  m_SizeDelta: {x: 1, y: 1}
   m_Pivot: {x: 0.4, y: 0.7}
+--- !u!114 &654759707
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 654759702}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 28dad3b5fd72ddb448a7072559c19c05, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MCScreen
 --- !u!1 &728799790
 GameObject:
   m_ObjectHideFlags: 0
@@ -2266,7 +2266,7 @@ MonoBehaviour:
   - materialA: 3
     materialB: 6
     result: 7
-  craftFrag: 0
+  craftFlag: 0
   material1: 0
 --- !u!4 &943071131
 Transform:
@@ -4586,7 +4586,9 @@ MonoBehaviour:
   - {fileID: 555665968}
   cardDrawFee: 10
   cardDrawFeeBase: 10
-  isCardPressed: 
+  cardIdArray: 00000000000000000000000000000000
+  markedIndexArray: 00000000000000000000000000000000
+  discraftableMark: {fileID: 0}
 --- !u!4 &1219670158
 Transform:
   m_ObjectHideFlags: 0
@@ -5812,32 +5814,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9367e1b94f492d84bae0ce933f800fb2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::skill_manager
-  healAmount: 20
-  overHealAmount: 0
-  enhanceTime: 2
-  hyperTime: 2
-  fbCooldownTime: 2
-  cfCooldownTime: 2
-  waitTime: 2
-  enhanceAmount: 2
-  hyperDamageAmount: 4
-  curseAmount: 10
-  absorbDamage: 0
-  absorbHealAmount: 0
-  hyperSpeedAmount: 0.2
-  fbSpeed: 0.5
-  cfSpeed: 0.5
+  useFlag: 1
   discardInd1: -1
   discardInd2: -1
-  absorbFlag: 0
-  fireBall: {fileID: 6676543517733875803, guid: c1f2ad0cd1675dd44b70842ea6e4c916, type: 3}
-  cursedFlame: {fileID: 5380163840605547912, guid: 852e8346ed8d4bb41a49280de6fa1df8, type: 3}
-  absorbPrefab: {fileID: 5860723255738655983, guid: 31f52b17f673d604580a04acbd855c4b, type: 3}
-  fireBallPreFab: {fileID: 0}
-  cursedFlamePreFab: {fileID: 0}
-  slashTypePrefab:
-  - {fileID: 132122364930665669, guid: 9d0fa2fe56967ff4790f505ff03d0108, type: 3}
-  - {fileID: 132122364930665669, guid: 9d0fa2fe56967ff4790f505ff03d0108, type: 3}
+  mousePosWorld: {x: 0, y: 0, z: 0}
 --- !u!4 &1942110015
 Transform:
   m_ObjectHideFlags: 0
@@ -6071,7 +6051,7 @@ Canvas:
   m_Enabled: 1
   serializedVersion: 3
   m_RenderMode: 1
-  m_Camera: {fileID: 0}
+  m_Camera: {fileID: 1729439563}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
@@ -6096,10 +6076,10 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 654759706}
   - {fileID: 627710345}
   - {fileID: 436479271}
   - {fileID: 912181505}
+  - {fileID: 654759706}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}

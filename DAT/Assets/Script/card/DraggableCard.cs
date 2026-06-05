@@ -174,6 +174,7 @@ public class DraggableCard : MonoBehaviour, IBeginDragHandler, IEndDragHandler, 
         // 合成を行っていなければ、使用する
         if (skill.useFlag)
         {
+            Debug.Log(skill.useFlag);
             switch (cardId)
             {
                 case 0:
@@ -220,6 +221,7 @@ public class DraggableCard : MonoBehaviour, IBeginDragHandler, IEndDragHandler, 
         }
         else
         {
+            Debug.Log(skill.useFlag);
             skill.useFlag = true;
         }
 

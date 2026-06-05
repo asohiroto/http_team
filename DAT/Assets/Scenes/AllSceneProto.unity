@@ -1796,9 +1796,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 071f95b3de59d1d47a4830a66ea0ad75, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController
-  speed: 0.1
-  defaultSpeed: 0.1
-  dashSpeed: 0.5
+  speed: 0.05
+  defaultSpeed: 0.05
+  dashSpeed: 0.3
   xLimit: 8.5
   yMaxLimit: 4.7
   yMinLimit: -1.6
@@ -1807,7 +1807,7 @@ MonoBehaviour:
   dashTime: 0.1
   attackObj: {fileID: 132122364930665669, guid: 428bde71b707b3b49a63a27c01b204d2, type: 3}
   strongAttackObj: {fileID: 132122364930665669, guid: 9d0fa2fe56967ff4790f505ff03d0108, type: 3}
-  attackTime: 0.5
+  attackTime: 1
   attackCd: 0.5
   defaultAttackDamage: 5
   attackDamage: 5

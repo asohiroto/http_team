@@ -17,6 +17,7 @@ public class EnemyC : MonoBehaviour
     [SerializeField] private float attackRange;                 // 攻撃のレンジ
     [SerializeField] private float attackStartupDuration;       // 攻撃の予備動作の時間
     [SerializeField] private float attackCooldownDuration;      // 攻撃のクールダウンの時間
+    [SerializeField] private float attackOnColliderDuration;      // 攻撃呼び出しのタイミング (現在のフレームを確認するのがめんどくさいのでゴリ押し)
 
 
     [Header("Debug")]
@@ -27,16 +28,10 @@ public class EnemyC : MonoBehaviour
     float AbsDirX;
     float AbsDirY;
     [SerializeField] private float sqrDistPlayer;             // 2乗したPlayerとの距離
-    [SerializeField] private bool isFindPlayer;                    // Playerを発見中
-    [SerializeField] private bool isLostPlayer;                    // Playerを見失っている
-    [SerializeField] private bool isChasePlayer;                   // Playerを追跡中
-    [SerializeField] private bool isStop;
-    [SerializeField] private bool isLookRight;
-    [SerializeField] private bool playing;// state に initを追加して判定
-    [SerializeField] private bool canAttack;                       // 攻撃可能範囲内
-    [SerializeField] private bool isAttack;
+    [SerializeField] private bool wasAttack;
     [SerializeField] private float attackStartupTimer;              // 予備動作用のカウントダウン
     [SerializeField] private float attackCooldownTimer;             // クールダウン用のカウントダウン
+    [SerializeField] private float attackOnColliderTimer;           // 攻撃呼び出し用のカウントダウン
     
      
     [Header("Object References")]
@@ -45,6 +40,7 @@ public class EnemyC : MonoBehaviour
     [SerializeField] private GameObject DropItemPrefab; // DropItem のプレハブ
     [SerializeField] private GameObject attackCol;      // 攻撃用のコライダー(プレハブ)
     private EnemyAnimation enemyAnim;
+    [SerializeField] private GameObject attackObj;
 
     private enum EnemyAiState       // Enemyの状態
     { 
@@ -57,7 +53,8 @@ public class EnemyC : MonoBehaviour
         Init
     }
     [SerializeField] private EnemyAiState enemyAiState = EnemyAiState.Init;
-
+#if false
+    // Move拡張用
     private enum EnemyMovePattern
     {
         Stay,
@@ -69,6 +66,7 @@ public class EnemyC : MonoBehaviour
         Init
     }
     [SerializeField] private EnemyMovePattern enemyMovePattern = EnemyMovePattern.Init;
+#endif
 
     void Awake()
     {
@@ -140,14 +138,20 @@ public class EnemyC : MonoBehaviour
                 break;
 
             case EnemyAiState.Attack:
-                enemyAiState = EnemyAiState.AttackCooldown;
                 attackCooldownTimer = attackCooldownDuration;
+
+                enemyAiState = EnemyAiState.AttackCooldown;
                 break;
 
             case EnemyAiState.AttackCooldown:
                 //enemyAiState = EnemyAiState.Idle;
                 break;
         }
+    }
+
+    public int GetAttackPower()
+    {
+        return attackPower;
     }
 
     /// <summary>
@@ -174,6 +178,7 @@ public class EnemyC : MonoBehaviour
     {
         attackStartupTimer -= Time.deltaTime;
         attackCooldownTimer -= Time.deltaTime;
+        attackOnColliderTimer -= Time.deltaTime;
     }
 
     /// <summary>
@@ -192,6 +197,7 @@ public class EnemyC : MonoBehaviour
     {
         sqrDistPlayer = GetSqrDistance(playerPos, enemyPos);
         targetDir = (playerPos - enemyPos).normalized;
+        
         AbsDirX = Mathf.Abs(targetDir.x);
         AbsDirY = Mathf.Abs(targetDir.y);
 
@@ -199,11 +205,11 @@ public class EnemyC : MonoBehaviour
         {
             targetDirSign.x = 0f;
 
-            if (AbsDirY < 0f)
+            if (targetDir.y < 0f)
             {
                 targetDirSign.y = -1f;  // 下
             }
-            else if (AbsDirY > 0f)
+            else if (targetDir.y > 0f)
             {
                 targetDirSign.y = 1f;   // 上
             }
@@ -216,11 +222,11 @@ public class EnemyC : MonoBehaviour
         {
             targetDirSign.y = 0f;
 
-            if (AbsDirX > 0f)
+            if (targetDir.x > 0f)
             {
                 targetDirSign.x = 1f;   // 右
             }
-            else if (AbsDirX < 0f)
+            else if (targetDir.x < 0f)
             {
                 targetDirSign.x = -1f;  // 左
             }
@@ -276,14 +282,19 @@ public class EnemyC : MonoBehaviour
         switch (enemyAiState)
         {
             case EnemyAiState.Idle:
+
                 enemyAnim.ChangeState(EnemyAnimState.Idle);
+                
                 break;
 
             case EnemyAiState.Move:
+                
                 enemyAnim.ChangeState(EnemyAnimState.Walk);
+                
                 break;
 
             case EnemyAiState.Attack:
+                
                 if (AbsDirX < AbsDirY)  // 上下
                 {
                     if (targetDir.y < 0f)   // 下
@@ -295,13 +306,15 @@ public class EnemyC : MonoBehaviour
                         enemyAnim.ChangeState(EnemyAnimState.UpperAttack);
                     }
                 }
-                else
+                else                    // 左右
                 {
                     enemyAnim.ChangeState(EnemyAnimState.SideAttack);
                 }
+                
                 break;
 
             default:
+                
                 break;
 
         }
@@ -321,29 +334,50 @@ public class EnemyC : MonoBehaviour
     }
 
     /// <summary>
-    /// 攻撃可能かを確認し、攻撃処理を行う
+    /// 攻撃可能かを確認し、攻撃処理
     /// </summary>
     void TryAttack()
     { 
         switch(enemyAiState)
         {
             case EnemyAiState.AttackStartup:
+
                 enemyAnim.ChangeState(EnemyAnimState.Idle);
+
                 if (attackStartupTimer <= 0)
                 {
+                    attackOnColliderTimer = attackOnColliderDuration;
+
                     enemyAiState = EnemyAiState.Attack;
                 }
+
                 break;
 
             case EnemyAiState.Attack:
+
+                if (wasAttack) return;
+
+                if (attackOnColliderTimer <= 0)
+                {
+                    wasAttack = true;
+                    attackObj = Instantiate(attackCol, this.transform);
+                    attackObj.transform.position = attackRange * 0.5f * targetDirSign + this.enemyPos;     // 攻撃距離に合わせる
+                }
                 break;
             
             case EnemyAiState.AttackCooldown:
+
+                Destroy(attackObj);
+                wasAttack = false;
+                
+
                 enemyAnim.ChangeState(EnemyAnimState.Idle);
+                
                 if (attackCooldownTimer <= 0)
                 {
                     enemyAiState = EnemyAiState.Idle;
                 }
+
                 break;
         }
     }
@@ -365,7 +399,7 @@ public class EnemyC : MonoBehaviour
     {
         if (enemyAiState != EnemyAiState.Move) return;
         
-        if (targetDir.x < 0)    // 左
+        if (targetDir.x < 0)    // 左向き
         {
             this.transform.rotation = Quaternion.Euler(0, 180, 0);
         }

@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2706354296108105491}
   - component: {fileID: 4249389105972050030}
-  - component: {fileID: 9190601027444089525}
+  - component: {fileID: 1657329401338922501}
   - component: {fileID: 3875057953984697843}
   - component: {fileID: 4355061071210407241}
   - component: {fileID: 6818869714989898506}
@@ -95,7 +95,7 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
---- !u!114 &9190601027444089525
+--- !u!114 &1657329401338922501
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -104,40 +104,36 @@ MonoBehaviour:
   m_GameObject: {fileID: 4419746953452864637}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4ebdcf5537ffc4a4b806569111e8b38d, type: 3}
+  m_Script: {fileID: 11500000, guid: 2518191a2b644ba46927776c411db7c3, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::EnemyController
-  eHp: 10
-  findDist: 4
-  loseDist: 5
-  alwaysFindPlayer: 1
-  e_moveSpeed: 1
-  stopDist: 0.7
-  attackDist: 1
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyC
+  enemyHp: 10
+  moveSpeed: 1
   attackPower: 3
-  attackSec: 0.6
-  attackCd: 1.4
-  ePos: {x: 0, y: 0}
+  alwaysFindPlayer: 1
+  findDist: 0
+  lostDist: 0
+  stopDist: 0.7
+  attackRange: 1
+  attackStartupDuration: 1
+  attackCooldownDuration: 1
+  attackOnColliderDuration: 0.3
+  enemyPos: {x: 0, y: 0}
   playerPos: {x: 0, y: 0}
-  nowDir: {x: 0, y: 0}
-  lookPos: {x: 0, y: 0, z: 0}
-  playerDist: 0
-  isFindPlayer: 0
-  isLostPlayer: 0
-  isChasePlayer: 0
-  canAttack: 0
-  isAttack: 0
-  isAttackCool: 0
-  isStop: 0
-  isLookRight: 0
-  IsAttack: 0
-  cdTimer: 0
-  takeDamageDist: 1
-  player: {fileID: 0}
-  coinPrefab: {fileID: 4876145872219913294, guid: 40446f423e254a642a122f7e36b0e8fa, type: 3}
-  coinParent: {fileID: 0}
+  targetDir: {x: 0, y: 0}
+  targetDirSign: {x: 0, y: 0}
+  sqrDistPlayer: 0
+  wasAttack: 0
+  attackStartupTimer: 0
+  attackCooldownTimer: 0
+  attackOnColliderTimer: 0
+  playerObj: {fileID: 0}
+  DropParentObj: {fileID: 0}
+  DropItemPrefab: {fileID: 4876145872219913294, guid: 40446f423e254a642a122f7e36b0e8fa, type: 3}
   attackCol: {fileID: 1675109570440110942, guid: eba50ab512d771843972f73eaed76870, type: 3}
-  currentMoveState: 0
+  attackObj: {fileID: 0}
+  enemyAiState: 6
+  enemyMovePattern: 6
 --- !u!114 &3875057953984697843
 MonoBehaviour:
   m_ObjectHideFlags: 0

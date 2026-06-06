@@ -1439,6 +1439,7 @@ GameObject:
   - component: {fileID: 627710345}
   - component: {fileID: 627710347}
   - component: {fileID: 627710346}
+  - component: {fileID: 627710348}
   m_Layer: 5
   m_Name: HandPanel
   m_TagString: Untagged
@@ -1511,6 +1512,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 627710344}
   m_CullTransparentMesh: 1
+--- !u!114 &627710348
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 627710344}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2aab4a3757ecac249a55339ab8f5d1fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HandPanel
 --- !u!1 &654759702
 GameObject:
   m_ObjectHideFlags: 0
@@ -2094,7 +2107,6 @@ MonoBehaviour:
   - materialA: 1
     materialB: 1
     result: 8
-  craftFlag: 1
   material1: 0
 --- !u!4 &943071131
 Transform:
@@ -5424,8 +5436,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SkillManager
   useFlag: 1
-  discardInd1: -1
-  discardInd2: -1
   mousePosWorld: {x: 0, y: 0, z: 0}
 --- !u!224 &1964648985 stripped
 RectTransform:

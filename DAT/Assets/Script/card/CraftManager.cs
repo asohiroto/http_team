@@ -3,12 +3,14 @@ using UnityEngine;
 
 public class CraftManager : MonoBehaviour
 {
-    [SerializeField] private List<CraftRecipe> recipeList; // レシピのリストUnityの画面上にを作成
+    // レシピのリストをインスペクターで設定できるようにする
+    [SerializeField] private List<CraftRecipe> recipeList;
 
-    public bool craftFlag = false; // 合成成功・失敗のフラグ
-    public int material1; // 素材１
+    // 素材１
+    public int material1;
 
-    private Dictionary<int, int> recipeDictionary = new Dictionary<int, int>(); // レシピを収めるレシピ本を作成
+    // レシピを格納する辞書を作成
+    private Dictionary<int, int> recipeDictionary = new Dictionary<int, int>();
 
     void Start()
     {
@@ -43,7 +45,6 @@ public class CraftManager : MonoBehaviour
 
         if (recipeDictionary.TryGetValue(searchKey, out int craftResult))
         {
-            craftFlag = true; // 合成成功
             return craftResult;
         }
 

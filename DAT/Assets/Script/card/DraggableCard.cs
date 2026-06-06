@@ -1,10 +1,7 @@
-using System.Collections.Generic;
-using Unity.VisualScripting;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
-using UnityEngine.XR;
+using UnityEngine.SceneManagement;
 
 public class DraggableCard : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHandler, IDropHandler
 {
@@ -12,7 +9,6 @@ public class DraggableCard : MonoBehaviour, IBeginDragHandler, IEndDragHandler, 
     private CanvasGroup canvasGroup;
 
     private GameObject ghostImage;
-    private GameObject cardEffectManager;
 
     // カードの位置と、ID
     public int cardIndex;
@@ -21,8 +17,7 @@ public class DraggableCard : MonoBehaviour, IBeginDragHandler, IEndDragHandler, 
     // 合成の結果
     int craftResult;
 
-    // 合成の成功フラグ
-    bool craftSucces = false;
+    public bool wasDroppedOnCard = false;
 
     CraftManager craft;
     HandManager hand;
@@ -31,20 +26,26 @@ public class DraggableCard : MonoBehaviour, IBeginDragHandler, IEndDragHandler, 
 
     void Start()
     {
+        // ドラッグするためのキャンバスと、ドラッグ中にレイキャストでこのカードを感知しないようにするためのCanvasGroupを取得
         canvas = GetComponentInParent<Canvas>();
         canvasGroup = gameObject.AddComponent<CanvasGroup>();
-        effect = GameObject.Find("CardEffectManager").GetComponent<CardEffectManager>();
 
-        GameObject[] objs = GameObject.FindGameObjectsWithTag("Card");
-        foreach (GameObject obj in objs) // それぞれ探す
+        // DeckSceneではカードの合成や使用は行わないため、スクリプトの取得を行わない
+        if (SceneManager.GetActiveScene().name != "DeckScene")
         {
-            if (hand == null) hand = obj.GetComponent<HandManager>();
+            effect = GameObject.Find("CardEffectManager").GetComponent<CardEffectManager>();
 
-            if (craft == null) craft = obj.GetComponent<CraftManager>();
+            GameObject[] objs = GameObject.FindGameObjectsWithTag("Card");
+            foreach (GameObject obj in objs) // それぞれ探す
+            {
+                if (hand == null) hand = obj.GetComponent<HandManager>();
 
-            if (skill == null) skill = obj.GetComponent<SkillManager>();
+                if (craft == null) craft = obj.GetComponent<CraftManager>();
 
-            if (hand != null && craft != null && skill != null) break;
+                if (skill == null) skill = obj.GetComponent<SkillManager>();
+
+                if (hand != null && craft != null && skill != null) break;
+            }
         }
 
     }
@@ -53,7 +54,7 @@ public class DraggableCard : MonoBehaviour, IBeginDragHandler, IEndDragHandler, 
     // ドラッグ開始時に実行
     public void OnBeginDrag(PointerEventData eventData)
     {
-        // レイキャストで自分自身を感知しない
+        // ドラッグ中はレイキャストでこのカードを感知しないようにする
         canvasGroup.blocksRaycasts = false;
 
         // 存在しうるゴーストイメージは常に一つ
@@ -66,6 +67,7 @@ public class DraggableCard : MonoBehaviour, IBeginDragHandler, IEndDragHandler, 
         ghostImage.transform.SetParent(canvas.transform);
         ghostImage.transform.SetAsLastSibling();
 
+        // ゴーストイメージのサイズを元のカードの半分に設定
         RectTransform ghostRect = ghostImage.AddComponent<RectTransform>();
         ghostRect.sizeDelta = GetComponent<RectTransform>().sizeDelta * 0.5f;
 
@@ -84,71 +86,85 @@ public class DraggableCard : MonoBehaviour, IBeginDragHandler, IEndDragHandler, 
     // ドラッグ中に実行
     public void OnDrag(PointerEventData eventData)
     {
+        // マウスのスクリーン座標をキャンバスのローカル座標に変換して、ゴーストイメージを追従させる
         RectTransform ghostRect = ghostImage.GetComponent<RectTransform>();
+
         RectTransformUtility.ScreenPointToLocalPointInRectangle(
             canvas.transform as RectTransform,  // キャンバスを基準とする
             eventData.position,                 // マウスのスクリーン座標
             canvas.worldCamera,                 // 使用するカメラ
             out Vector2 localPoint              // 変換結果を受け取る変数
             );
+
         ghostRect.localPosition = localPoint;
     }
 
     // ドロップされた時に実行
     public void OnDrop(PointerEventData eventData)
     {
-        DraggableCard dragged = eventData.pointerDrag?.GetComponent<DraggableCard>(); // pointerDragがnullじゃなければGetComponentを実行
+        // ドロップされたカードと、ドロップ先のカードを取得
+        DraggableCard dragged = eventData.pointerDrag?.GetComponent<DraggableCard>();
         DraggableCard target = transform.GetComponentInChildren<DraggableCard>();
 
+        // ドロップされたカードが存在しない、またはドロップ先のカードと同じ場合は何もしない
         if (dragged == null || dragged == this) return;
 
-        dragged.craftSucces = true;
-
-        craftResult = craft.CraftCards(dragged.cardId, target.cardId); // IDをそれぞれ取得し、合成を実行
-
-        if (craftResult < 0)
+        // DeckSceneではカードの合成は行わないため、合成の処理を行わない
+        if (SceneManager.GetActiveScene().name != "DeckScene")
         {
-            dragged.craftSucces = true;
-            Debug.Log("なにかが違うようだ……？");
-            return;
+            dragged.wasDroppedOnCard = true;
+
+            // ドロップされたカードとドロップ先のカードのIDをCraftManagerに渡して、合成の結果のカードのIDを取得
+            craftResult = craft.CraftCards(dragged.cardId, target.cardId);
+
+            if (craftResult < 0)
+            {
+                Debug.Log("なにかが違うようだ……？");
+                return;
+            }
+
+            // ドロップされたカードとドロップ先のカードの位置を取得
+            int fromIndex = dragged.cardIndex;
+            int toIndex = this.cardIndex;
+
+            Destroy(dragged.ghostImage);
+
+            // ドロップされたカードとドロップ先のカードを手札から消す
+            hand.DisCard(fromIndex);
+            hand.DisCard(toIndex);
+
+            // 合成の結果のカードを、ドロップされたカードとドロップ先のカードの位置のうち、より小さい位置に生成する
+            int spawnIndex = Mathf.Min(fromIndex, toIndex);
+            hand.CardGenerate(craftResult, spawnIndex);
+
         }
-
-        int fromIndex = dragged.cardIndex; // それぞれの住所を取得
-        int toIndex = this.cardIndex;
-
-        Destroy(dragged.ghostImage);
-
-        hand.DisCard(fromIndex);
-        hand.DisCard(toIndex);
-
-        int spawnIndex = Mathf.Min(fromIndex, toIndex); // より小さいほう（左側にあるカード）を生成する住所とする
-
-        hand.CardGenerate(craftResult, spawnIndex);
-
-
     }
 
     // ドラッグ終了時に実行
     public void OnEndDrag(PointerEventData eventData)
     {
-        if (ghostImage == null) return;
-
-        // 合成を行っていなければ、使用する
-        if (skill.useFlag)
+        //  DeckSceneではカードの使用は行わないため、カードの使用の処理を行わない
+        if (SceneManager.GetActiveScene().name != "DeckScene")
         {
-            Debug.Log(skill.useFlag);
+            // ドラッグ中に作成したゴーストイメージが存在しない場合は何もしない
+            if (ghostImage == null) return;
 
-            effect.cardEffect[cardId]();
+            if (wasDroppedOnCard)
+            {
+                wasDroppedOnCard = false;
+            }
+            else
+            {
+                // カードの効果を発動させる
+                Debug.Log(skill.useFlag);
 
-            hand.DisCard(cardIndex);
+                effect.cardEffect[cardId]();
+
+                hand.DisCard(cardIndex);
+            }
         }
-        else
-        {
-            Debug.Log(skill.useFlag);
-            skill.useFlag = true;
-        }
 
-        craftSucces = false;
+        // ドラッグ中はレイキャストでこのカードを感知しないようにしていたのを元に戻す
         canvasGroup.blocksRaycasts = true;
         Destroy(ghostImage);
         ghostImage = null;

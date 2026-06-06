@@ -648,6 +648,84 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 846526474}
   m_CullTransparentMesh: 1
+--- !u!1 &848654945
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 848654947}
+  - component: {fileID: 848654946}
+  m_Layer: 0
+  m_Name: DeckManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &848654946
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 848654945}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7ea0ee71af8637469b3c7b7eb8dc46d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DeckManager
+  deckPrefab:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  cardPrefab:
+  - {fileID: 2657639068744903097, guid: d96ee5e5b708aef419c5ee1841d68398, type: 3}
+  - {fileID: 5641920462193273023, guid: b858c300276902a44a2965c7fc2fa89b, type: 3}
+  - {fileID: 241848160325152693, guid: 53f0ac6c25cbb5440a111a7f58c877cc, type: 3}
+  - {fileID: 4249116306040802172, guid: ce0b2172fe387054aa30ef2f9346bcdc, type: 3}
+  - {fileID: 8072420582804794034, guid: 4ea396a550b53c94fb99efe696ebee3d, type: 3}
+  - {fileID: 5328362287839152506, guid: 329b7655987274e4091b81323eab2a16, type: 3}
+  deckTrans:
+  - {fileID: 1904065479}
+  - {fileID: 491597754}
+  - {fileID: 572561796}
+  - {fileID: 415730969}
+  cardTrans:
+  - {fileID: 1194100981}
+  - {fileID: 1388670604}
+  - {fileID: 1197763270}
+  - {fileID: 1747448613}
+  - {fileID: 1488566440}
+  - {fileID: 846526475}
+  - {fileID: 1265401870}
+  - {fileID: 2111422203}
+  - {fileID: 892068243}
+  - {fileID: 1273381115}
+  - {fileID: 345260799}
+  - {fileID: 1948746687}
+  - {fileID: 556528416}
+  - {fileID: 1543529900}
+  - {fileID: 1253395657}
+  - {fileID: 1391519018}
+--- !u!4 &848654947
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 848654945}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 648.487, y: 549.61066, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &892068242
 GameObject:
   m_ObjectHideFlags: 0
@@ -2033,6 +2111,79 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1948746686}
   m_CullTransparentMesh: 1
+--- !u!1 &2033291968
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2033291970}
+  - component: {fileID: 2033291969}
+  m_Layer: 0
+  m_Name: CardChanger
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &2033291969
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2033291968}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef93eed6bde34f846bffa367c92d18da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CardChanger
+  cardType: 0
+  cardName: 
+  cardEffect: 
+  cardImage: {fileID: 0}
+  cardData:
+  - cardType: 0
+    cardName: Fire Enhance
+    cardEffect: "\u653B\u6483\u529B\u3092\uFF11\uFF05\u4E0A\u6607\uFF08\u6C38\u7D9A\uFF09"
+    cardImage: {fileID: 0}
+  - cardType: 1
+    cardName: Water Enhance
+    cardEffect: "\u653B\u6483\u901F\u5EA6\u3092\uFF11\uFF05\u4E0A\u6607\uFF08\u6C38\u7D9A\uFF09"
+    cardImage: {fileID: 0}
+  - cardType: 2
+    cardName: Ground Enhance
+    cardEffect: "\u9632\u5FA1\u529B\u3092\uFF11\uFF05\u4E0A\u6607\uFF08\u6C38\u7D9A\uFF09"
+    cardImage: {fileID: 0}
+  - cardType: 3
+    cardName: Thunder Enhance
+    cardEffect: "\u79FB\u52D5\u901F\u5EA6\u3092\uFF11\uFF05\u4E0A\u6607"
+    cardImage: {fileID: 0}
+  - cardType: 4
+    cardName: Heal
+    cardEffect: "\u4F53\u529B\u3092\uFF11\uFF10\u56DE\u5FA9"
+    cardImage: {fileID: 0}
+  - cardType: 5
+    cardName: Curse
+    cardEffect: "\u4F53\u529B\u3092\uFF11\uFF10\u6E1B\u5C11"
+    cardImage: {fileID: 0}
+--- !u!4 &2033291970
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2033291968}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 981.2401, y: 514.46515, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2111422202
 GameObject:
   m_ObjectHideFlags: 0
@@ -2115,3 +2266,5 @@ SceneRoots:
   - {fileID: 1578523744}
   - {fileID: 1442073025}
   - {fileID: 1332336931}
+  - {fileID: 848654947}
+  - {fileID: 2033291970}

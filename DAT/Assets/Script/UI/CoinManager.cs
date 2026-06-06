@@ -16,6 +16,11 @@ public class CoinManager : MonoBehaviour
         UpdateMoneyUI();
     }
 
+    private void FixedUpdate()
+    {
+        UpdateMoneyUI();
+    }
+
     // 所持金増加
     public void AddMoney(int amount)
     {

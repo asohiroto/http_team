@@ -13,7 +13,7 @@ public class SkillAttack : MonoBehaviour
     float animTime = 0.05f;
     SpriteRenderer spriteRenderer;
 
-    public int attackDamage;
+    public float attackDamage;
 
     // アタックエフェクトのアニメーションと当たり判定の管理------------------
 

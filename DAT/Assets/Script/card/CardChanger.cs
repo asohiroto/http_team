@@ -1,3 +1,5 @@
+using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class CardChanger : MonoBehaviour
@@ -7,26 +9,7 @@ public class CardChanger : MonoBehaviour
     public string cardEffect; // カードの効果
     public Sprite cardImage; // カードのイメージ
 
-    int[] types = { 0, 1, 2, 3, 4, 5 };
-
-    string[] names = { 
-        "FireEnhance",
-        "WaterEnhance",
-        "ThunderEnhance",
-        "GroundEnhance",
-        "Heal",
-        "Curse" 
-    };
-
-
-    string[] effects = {
-        "攻撃力が１％上がる　(永続)",
-        "攻撃速度が１％上がる　(永続)",
-        "移動速度が１％上がる　(永続)",
-        "防御力が１％上がる　(永続)",
-        "体力１０回復",
-        "体力１０減少"
-    };
+    [SerializeField] private List<CardData> cardData;
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -41,15 +24,26 @@ public class CardChanger : MonoBehaviour
 
     }
 
-    // カードの種類を変更する関数
+    // カードの情報を変更するメソッド
     public int CardChange(int id)
     {
+        CardData data = cardData[id];
 
-        cardType = types[id];
-        cardName = names[id];
-        cardEffect = effects[id];
+        cardType = data.cardType;
+        cardName = data.cardName;
+        cardEffect = data.cardEffect;
+        cardImage = data.cardImage;
 
-        return types[id];
+        return cardType;
 
     }
+}
+
+[Serializable]
+public class CardData
+{
+    public int cardType; // カードの種類
+    public string cardName; // カード名
+    public string cardEffect; // カードの効果
+    public Sprite cardImage; // カードのイメージ
 }

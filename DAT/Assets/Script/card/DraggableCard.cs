@@ -27,15 +27,13 @@ public class DraggableCard : MonoBehaviour, IBeginDragHandler, IEndDragHandler, 
     CraftManager craft;
     HandManager hand;
     SkillManager skill;
-
-    // スクリプトをタプルで格納
-    private (Enhance enhance, Heal heal, Slash slash, FireBall fireBall, FireSlash fireSlash, HyperMode hyperMode, Curse curse, CursedFlame cursedFlame, OverHeal overHeal, Absorb absorb) cardEffect;
+    CardEffectManager effect;
 
     void Start()
     {
         canvas = GetComponentInParent<Canvas>();
         canvasGroup = gameObject.AddComponent<CanvasGroup>();
-        cardEffectManager = GameObject.Find("CardEffectManager");
+        effect = GameObject.Find("CardEffectManager").GetComponent<CardEffectManager>();
 
         GameObject[] objs = GameObject.FindGameObjectsWithTag("Card");
         foreach (GameObject obj in objs) // それぞれ探す
@@ -47,21 +45,6 @@ public class DraggableCard : MonoBehaviour, IBeginDragHandler, IEndDragHandler, 
             if (skill == null) skill = obj.GetComponent<SkillManager>();
 
             if (hand != null && craft != null && skill != null) break;
-        }
-
-        // 各スクリプトを取得
-        if (cardEffectManager != null)
-        {
-            cardEffectManager.TryGetComponent(out cardEffect.enhance);
-            cardEffectManager.TryGetComponent(out cardEffect.heal);
-            cardEffectManager.TryGetComponent(out cardEffect.slash);
-            cardEffectManager.TryGetComponent(out cardEffect.fireBall);
-            cardEffectManager.TryGetComponent(out cardEffect.fireSlash);
-            cardEffectManager.TryGetComponent(out cardEffect.hyperMode);
-            cardEffectManager.TryGetComponent(out cardEffect.curse);
-            cardEffectManager.TryGetComponent(out cardEffect.cursedFlame);
-            cardEffectManager.TryGetComponent(out cardEffect.overHeal);
-            cardEffectManager.TryGetComponent(out cardEffect.absorb);
         }
 
     }
@@ -96,21 +79,6 @@ public class DraggableCard : MonoBehaviour, IBeginDragHandler, IEndDragHandler, 
 
         // レイキャストでゴーストイメージを感知しない
         cg.blocksRaycasts = false;
-
-        //// 手札の中の合成できるカード、出来ないカードを判別し、マーキング
-        //for(int i = 0; i < 4; i++)
-        //{
-        //    int craftResultPre = craft.CraftCards(cardId, hand.cardIdArray[i]);
-
-        //    if (i != cardIndex)
-        //    {
-        //        if (craftResultPre < 0)
-        //        {
-        //            hand.DiscraftableMark(i);
-        //        }
-        //    }
-        //}
-
     }
 
     // ドラッグ中に実行
@@ -169,63 +137,16 @@ public class DraggableCard : MonoBehaviour, IBeginDragHandler, IEndDragHandler, 
         if (skill.useFlag)
         {
             Debug.Log(skill.useFlag);
-            switch (cardId)
-            {
-                case 0:
-                    cardEffect.enhance.Effect(cardIndex);
 
-                    break;
-                case 1:
-                    cardEffect.heal.Effect(cardIndex);
+            effect.cardEffect[cardId]();
 
-                    break;
-                case 2:
-                    cardEffect.slash.Effect(cardIndex);
-
-                    break;
-                case 3:
-                    cardEffect.fireBall.Effect(cardIndex, skill.mousePosWorld);
-
-                    break;
-                case 4:
-                    cardEffect.fireSlash.Effect(cardIndex);
-
-                    break;
-                case 5:
-                    cardEffect.hyperMode.Effect(cardIndex);
-
-                    break;
-                case 6:
-                    cardEffect.curse.Effect(cardIndex);
-
-                    break;
-                case 7:
-                    cardEffect.cursedFlame.Effect(cardIndex, skill.mousePosWorld);
-
-                    break;
-                case 8:
-                    cardEffect.overHeal.Effect(cardIndex);
-
-                    break;
-                case 9:
-                    cardEffect.absorb.Effect(cardIndex);
-
-                    break;
-            }
+            hand.DisCard(cardIndex);
         }
         else
         {
             Debug.Log(skill.useFlag);
             skill.useFlag = true;
         }
-
-        //for (int i = 0; i < 4; i++)
-        //{
-        //    if (hand.markedIndexArray[i] == 1)
-        //    {
-        //        hand.DestroyMark(i);
-        //    }
-        //}
 
         craftSucces = false;
         canvasGroup.blocksRaycasts = true;

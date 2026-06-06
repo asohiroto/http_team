@@ -32,10 +32,10 @@ public class PlayerController : MonoBehaviour
     [SerializeField] GameObject attackObj; // アタックのエフェクトと当たり判定を持つオブジェクトを代入
     [SerializeField] public GameObject strongAttackObj;
     [SerializeField] public float attackTime = 1.2f; // アタック中の時間
-    [SerializeField] float attackCd = 1.5f; // アタックのクールダウン
+    [SerializeField] public float attackCd = 1.5f; // アタックのクールダウン
     float attackCdTimer; // クールダウンを実際にカウントする変数
-    public int defaultAttackDamage = 5; // デフォルトのアタックダメージ
-    public int attackDamage = 5; // アタックダメージ
+    public float defaultAttackDamage = 5; // デフォルトのアタックダメージ
+    public float attackDamage = 5; // アタックダメージ
     public Vector3 attackDir; // アタックする方向
     public Vector3 playerToEnemyNol;
     public float defaultFXRot = -90; // 攻撃エフェクトの方向補正

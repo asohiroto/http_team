@@ -6,7 +6,7 @@ public class Absorb : MonoBehaviour
 {
     [SerializeField] GameObject absorbPrefab;
 
-    [SerializeField] int absorbDamage;
+    [SerializeField] float absorbDamage;
     [SerializeField] int absorbHealAmount;
 
     int absorbCount = 0;

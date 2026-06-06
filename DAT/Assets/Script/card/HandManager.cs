@@ -95,7 +95,7 @@ public class HandManager : MonoBehaviour
     {
         int cardRandomId = Random.Range(0, 6);
 
-        for (int i = 0; i < 4; i++)
+        for (int i = 0; i < 5; i++)
         {
             if (deckCardTrans[i].childCount == 0)
             {

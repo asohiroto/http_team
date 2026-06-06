@@ -105,7 +105,7 @@ public class EnemyController : MonoBehaviour
     }
 
     // EnemyDamaged
-    public void EnemyDamaged(int dmg)
+    public void EnemyDamaged(float dmg)
     {
         // HPをdmg分減らす
         eHp -= dmg;

@@ -40,7 +40,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 240, y: 320}
+  m_SizeDelta: {x: 210, y: 280}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2811325276768800905
 CanvasRenderer:
@@ -143,8 +143,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -1.6, y: -116.5}
-  m_SizeDelta: {x: 238.4856, y: 83.3542}
+  m_AnchoredPosition: {x: 1.6994991, y: -103.30203}
+  m_SizeDelta: {x: 172.4958, y: 56.9583}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3311690324950641331
 CanvasRenderer:
@@ -240,7 +240,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 26.515137, y: 10.606049, z: 19.6969, w: 9.090912}
+  m_margin: {x: 0.94403076, y: 1.5324402, z: 0.7248535, w: 0.8421631}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -280,8 +280,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.6904, y: 14.9665985}
-  m_SizeDelta: {x: 272.3028, y: 193.8885}
+  m_AnchoredPosition: {x: -0.89869, y: 10.2016}
+  m_SizeDelta: {x: 188.06, y: 131.9434}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7556926997426663654
 CanvasRenderer:
@@ -355,8 +355,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 125.9}
-  m_SizeDelta: {x: 250, y: 50}
+  m_AnchoredPosition: {x: -0.8979, y: 111.965}
+  m_SizeDelta: {x: 188.0551, y: 31.2533}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8448728926545252521
 CanvasRenderer:
@@ -413,8 +413,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 24
-  m_fontSizeBase: 24
+  m_fontSize: 20
+  m_fontSizeBase: 20
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -452,7 +452,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 18.939392, y: 7.5758057, z: 19.6969, w: 8.333374}
+  m_margin: {x: 0.81915283, y: 1.5357666, z: 1.5767822, w: 0.49243164}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0

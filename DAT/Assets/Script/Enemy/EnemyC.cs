@@ -4,7 +4,7 @@ using UnityEngine;
 public class EnemyC : MonoBehaviour
 {
     [Header("Enemy Stats")]
-    [SerializeField] private int enemyHp;       // 体力
+    [SerializeField] private float enemyHp;       // 体力
     [SerializeField] private float moveSpeed;   // 移動速度
     [SerializeField] private int attackPower;   // 攻撃力
 
@@ -124,7 +124,7 @@ public class EnemyC : MonoBehaviour
     /// Enemyの被ダメージ処理
     /// </summary>
     /// <param name="dmg"></param>
-    public void EnemyDamaged(int dmg)
+    public void EnemyDamaged(float dmg)
     {
         enemyHp -= dmg;
     }

@@ -37,9 +37,11 @@ public class PlayerController : MonoBehaviour
     public int defaultAttackDamage = 5; // デフォルトのアタックダメージ
     public int attackDamage = 5; // アタックダメージ
     public Vector3 attackDir; // アタックする方向
+    public Vector3 playerToEnemyNol;
     public float defaultFXRot = -90; // 攻撃エフェクトの方向補正
     public bool onAttack = false; // アタックしているかどうか
     public bool canAttack = false; // アタックする範囲内に敵がいるかどうかを判定する変数 
+    public float distanceAttackFX = 0.50f; // 攻撃エフェクトとプレイヤーとの距離を設定する（攻撃する方向の単位ベクトルにこの値をかける） 
 
     // プレイヤーのステータス-------------------------------------------------------------
     public int playerHP = 100; // プレイヤーのHP
@@ -182,10 +184,10 @@ public class PlayerController : MonoBehaviour
     {
         float flipX = 0;
         float rotZ = 0;
-        attackDir = lastDir;
+        attackDir = playerToEnemyNol;
 
-        GameObject obj = Instantiate(slashType, transform);
-        obj.transform.position = transform.position + attackDir * 0.50f;
+        GameObject obj = Instantiate(slashType);
+        obj.transform.position = transform.position + attackDir * distanceAttackFX;
         obje = obj;
 
         // 斬撃の方向を決定

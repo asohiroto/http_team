@@ -34,6 +34,7 @@ public class PlayerAttack : MonoBehaviour
     void Update()
     {
         attackDamage = playerController.attackDamage;
+        transform.position = playerObj.transform.position + playerController.attackDir * playerController.distanceAttackFX;
     }
 
     void OnTriggerEnter2D(Collider2D col)

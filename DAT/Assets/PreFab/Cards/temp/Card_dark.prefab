@@ -34,8 +34,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 157}
-  m_SizeDelta: {x: 250, y: 50}
+  m_AnchoredPosition: {x: -3.1, y: 124.2}
+  m_SizeDelta: {x: 198.4848, y: 33.684}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5734603401162693484
 CanvasRenderer:
@@ -67,8 +67,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: New Text
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 98b56f733c9056245a8e38df32b53219, type: 2}
+  m_sharedMaterial: {fileID: 7090920546460572643, guid: 98b56f733c9056245a8e38df32b53219, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -92,8 +92,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 24
+  m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -149,6 +149,7 @@ GameObject:
   - component: {fileID: 7054689551610313178}
   - component: {fileID: 8418760671636905474}
   - component: {fileID: -147951823092017240}
+  - component: {fileID: 1942743797788504382}
   m_Layer: 5
   m_Name: Card_dark
   m_TagString: Untagged
@@ -176,7 +177,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 300, y: 400}
+  m_SizeDelta: {x: 240, y: 320}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7054689551610313178
 CanvasRenderer:
@@ -231,6 +232,20 @@ MonoBehaviour:
   cardName: {fileID: 5757701067834191970}
   cardEffect: {fileID: 8595150475471025798}
   cardImage: {fileID: 7480209954319011936}
+--- !u!114 &1942743797788504382
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5328362287839152506}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1484e924cd3e3fe4f9039e780dc892f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DraggableCard
+  cardIndex: 0
+  cardId: 0
 --- !u!1 &7190358707334768577
 GameObject:
   m_ObjectHideFlags: 0
@@ -265,8 +280,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 2.138, y: -147.52763}
-  m_SizeDelta: {x: 238.4856, y: 83.3542}
+  m_AnchoredPosition: {x: 0.69038, y: -117.9}
+  m_SizeDelta: {x: 184.6977, y: 58.3542}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4041149962200619478
 CanvasRenderer:
@@ -298,8 +313,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: New Text
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 98b56f733c9056245a8e38df32b53219, type: 2}
+  m_sharedMaterial: {fileID: 7090920546460572643, guid: 98b56f733c9056245a8e38df32b53219, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -323,8 +338,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 20
+  m_fontSizeBase: 20
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18

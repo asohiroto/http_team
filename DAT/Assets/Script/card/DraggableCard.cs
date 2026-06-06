@@ -97,19 +97,19 @@ public class DraggableCard : MonoBehaviour, IBeginDragHandler, IEndDragHandler, 
         // レイキャストでゴーストイメージを感知しない
         cg.blocksRaycasts = false;
 
-        // 手札の中の合成できるカード、出来ないカードを判別し、マーキング
-        for(int i = 0; i < 4; i++)
-        {
-            int craftResultPre = craft.CraftCards(cardId, hand.cardIdArray[i]);
+        //// 手札の中の合成できるカード、出来ないカードを判別し、マーキング
+        //for(int i = 0; i < 4; i++)
+        //{
+        //    int craftResultPre = craft.CraftCards(cardId, hand.cardIdArray[i]);
 
-            if (i != cardIndex)
-            {
-                if (craftResultPre < 0)
-                {
-                    hand.DiscraftableMark(i);
-                }
-            }
-        }
+        //    if (i != cardIndex)
+        //    {
+        //        if (craftResultPre < 0)
+        //        {
+        //            hand.DiscraftableMark(i);
+        //        }
+        //    }
+        //}
 
     }
 
@@ -154,15 +154,9 @@ public class DraggableCard : MonoBehaviour, IBeginDragHandler, IEndDragHandler, 
         hand.DisCard(toIndex);
 
         int spawnIndex = Mathf.Min(fromIndex, toIndex); // より小さいほう（左側にあるカード）を生成する住所とする
-        GameObject obj = hand.CardGenerate(craftResult, spawnIndex);
 
-        for (int i = 0; i < 4; i++)
-        {
-            if (hand.markedIndexArray[i] == 1)
-            {
-                hand.DestroyMark(i);
-            }
-        }
+        hand.CardGenerate(craftResult, spawnIndex);
+
 
     }
 
@@ -225,13 +219,13 @@ public class DraggableCard : MonoBehaviour, IBeginDragHandler, IEndDragHandler, 
             skill.useFlag = true;
         }
 
-        for (int i = 0; i < 4; i++)
-        {
-            if (hand.markedIndexArray[i] == 1)
-            {
-                hand.DestroyMark(i);
-            }
-        }
+        //for (int i = 0; i < 4; i++)
+        //{
+        //    if (hand.markedIndexArray[i] == 1)
+        //    {
+        //        hand.DestroyMark(i);
+        //    }
+        //}
 
         craftSucces = false;
         canvasGroup.blocksRaycasts = true;

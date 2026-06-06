@@ -7,35 +7,30 @@ using UnityEngine.XR;
 
 public class HandManager : MonoBehaviour
 {
-    [SerializeField] public GameObject[] cardPrefab; // 生成するカード
-    [SerializeField] public Transform[] deckCardTrans; // カードの生成場所
+    // カードのプレハブと、カードを生成する位置の配列
+    [SerializeField] public GameObject[] cardPrefab;
+    [SerializeField] public Transform[] deckCardTrans;
 
-    [SerializeField] int cardDrawFee; // カードを引く代金
-    [SerializeField] int cardDrawFeeBase; // カードを引く代金
+    // カードを引くための代金
+    [SerializeField] int cardDrawFee;
 
-    int cardId = 0; // 生成するカードのID
-    int cardDrawCount = 0; // これまでにカードを引いた回数
-    int[] cardIdStart = { 0, 1, 2, 3, 6, 9}; // 初期手札にできるカードのID
+    // カードのIDと、引いた回数
+    int cardId = 0;
+    int cardDrawCount = 0;
 
-    public int[] cardIdArray = new int[4]; // カードのIDを配列に保存
-    public int[] markedIndexArray = new int [4]; // マークした位置を配列に保存
-
-    [SerializeField] GameObject discraftableMark; // 合成不可マーク
-
-    GameObject newCard;
-
-    GameObject[] mark = new GameObject[4];
+    // 現在の手札のIDを配列に保存
+    public int[] cardIdArray = new int[5];
 
     CoinManager coinManager;
     SkillManager skill;
-
+    CardChanger change;
 
     void Start()
     {
 
         GameObject[] cardObjs = GameObject.FindGameObjectsWithTag("Card");
 
-        foreach(GameObject obj in cardObjs) // スクリプトの取得
+        foreach (GameObject obj in cardObjs) // スクリプトの取得
         {
             skill = obj.GetComponent<SkillManager>();
             if (skill != null) break;
@@ -44,53 +39,61 @@ public class HandManager : MonoBehaviour
         // craft = GetComponent<CraftManager>();
         coinManager = GameObject.Find("CoinManager").GetComponent<CoinManager>();
 
+        change = GetComponent<CardChanger>();
+
+
+
 
         for (int i = 0; i < deckCardTrans.Length; i++) // それぞれの手札の位置にランダムなカードを生成
         {
-            cardId = Random.Range(0, cardIdStart.Length);
+            cardId = Random.Range(0, 6);
 
-            newCard = Instantiate(cardPrefab[cardIdStart[cardId]], deckCardTrans[i]); // 初期手札の生成
+            int cardIdStart = change.CardChange(cardId);
 
-            DraggableCard dc = newCard.GetComponent<DraggableCard>();
-
-            cardIdArray[i] = cardId;
-
-            if(dc != null )
-            {
-                dc.cardIndex = i;
-                dc.cardId = cardIdStart[cardId];
-            }
-
+            CardGenerate(cardIdStart, i);
         }
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(Keyboard.current.mKey.wasPressedThisFrame)
+        // デバッグ用　Mキーでお金を増やす
+        if (Keyboard.current.mKey.wasPressedThisFrame)
         {
             coinManager.currentMoney += 100;
         }
+
+        // 右クリックでカードを引く
+        if (Mouse.current.rightButton.wasPressedThisFrame)
+        {
+            CardDraw();
+        }
     }
 
-    public GameObject CardGenerate(int id, int ind) // 新たにカードを生成する
+    // カードを生成する関数
+    public void CardGenerate(int id, int ind) // 新たにカードを生成する
     {
         GameObject genCard = Instantiate(cardPrefab[id], deckCardTrans[ind]); // カードを作る処理
         DraggableCard dc = genCard.GetComponentInChildren<DraggableCard>();
 
-        cardIdArray[ind] = id; 
+        CardEdit edit = genCard.GetComponentInChildren<CardEdit>();
 
-        if(dc != null)
+        edit.ChangeCardName(change.cardName);
+        edit.ChangeCardEffect(change.cardEffect);
+
+        cardIdArray[ind] = id;
+
+        if (dc != null)
         {
             dc.cardIndex = ind;
             dc.cardId = id;
         }
-        return genCard;
     }
 
+    // カードを引く処理
     public void CardDraw()
     {
-        int cardRandomId = Random.Range(0, cardIdStart.Length);
+        int cardRandomId = Random.Range(0, 6);
 
         for (int i = 0; i < 4; i++)
         {
@@ -99,9 +102,13 @@ public class HandManager : MonoBehaviour
                 if (coinManager.currentMoney - cardDrawFee > 0)
                 {
                     cardDrawCount++;
-                    cardDrawFee = (int)(cardDrawFee +  cardDrawCount); // カードの購入代金を倍率に回数をかけたものとする
 
-                    GameObject obj = CardGenerate(cardIdStart[cardRandomId], i);
+                    // カードを引くたびに代金が上がる
+                    cardDrawFee = (int)(cardDrawFee + cardDrawCount * 10);
+
+                    int cardIdDraw = change.CardChange(cardRandomId);
+
+                    CardGenerate(cardIdDraw, i);
 
                     coinManager.ReduceMoney(cardDrawFee);
                 }
@@ -128,18 +135,4 @@ public class HandManager : MonoBehaviour
         }
     }
 
-    // 合成不可の場合マーキング
-    public void DiscraftableMark(int ind)
-    {
-        mark[ind] = Instantiate(discraftableMark, deckCardTrans[ind]);
-        markedIndexArray[ind] = 1;
-
-    }
-
-    // マークを削除
-    public void DestroyMark(int ind)
-    {
-        Destroy(mark[ind]);
-        markedIndexArray[ind] = 0;
-    }
 }

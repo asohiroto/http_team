@@ -4,8 +4,22 @@ using UnityEngine.SceneManagement;
 
 public class GameSceneManager : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public static GameSceneManager Instance;
+
+    void Awake()
+    {
+        if(Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+
+        // Start is called once before the first execution of Update after the MonoBehaviour is created
+        void Start()
     {
         
     }
@@ -13,6 +27,7 @@ public class GameSceneManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // 【デバッグ用】各シーンへの切り替え
         if(Keyboard.current.lKey.wasPressedThisFrame)
         {
             SceneManager.LoadScene("ClearScene");
@@ -21,5 +36,19 @@ public class GameSceneManager : MonoBehaviour
         {
             SceneManager.LoadScene("GameOverScene");
         }
+    }
+
+    public void OpenDeckEditMode()
+    {
+        Time.timeScale = 0f;
+
+        SceneManager.LoadSceneAsync("DeckScene", LoadSceneMode.Additive);
+    }
+
+    public void CloseDeckEditMode()
+    {
+        SceneManager.UnloadSceneAsync("DeckScene");
+
+        Time.timeScale = 1.0f;
     }
 }

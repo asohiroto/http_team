@@ -3,20 +3,23 @@ using UnityEngine;
 
 public class DeckManager : MonoBehaviour
 {
-    [SerializeField] public GameObject[] deckPrefab;
-    [SerializeField] public GameObject[] cardPrefab;
-
     [SerializeField] public Transform[] deckTrans;
     [SerializeField] public Transform[] cardTrans;
 
+    GameObject handManager;
+
     CardChanger change;
+    HandManager hand;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        change = GameObject.Find("CardChanger").GetComponent<CardChanger>();
+        handManager = GameObject.Find("HandManager");
 
-        for (int i = 0; i < cardPrefab.Length; i++)
+        change = handManager.GetComponent<CardChanger>();
+        hand = handManager.GetComponent<HandManager>();
+
+        for (int i = 0; i < hand.cardPrefab.Length; i++)
         {
             int cardId = change.CardChange(i);
 
@@ -33,7 +36,7 @@ public class DeckManager : MonoBehaviour
     // カードを生成する関数
     public void CardGenerate(int id, int ind) // 新たにカードを生成する
     {
-        GameObject genCard = Instantiate(cardPrefab[id], cardTrans[ind]); // カードを作る処理
+        GameObject genCard = Instantiate(hand.cardPrefab[id], cardTrans[ind]); // カードを作る処理
         DraggableCard dc = genCard.GetComponentInChildren<DraggableCard>();
 
         CardEdit edit = genCard.GetComponentInChildren<CardEdit>();

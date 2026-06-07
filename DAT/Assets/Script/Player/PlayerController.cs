@@ -141,7 +141,7 @@ public class PlayerController : MonoBehaviour
         transform.position = currentPos;
 
         //プレイヤーが歩いているときのアニメーション
-        //anim.SetBool("walk", moveDir != Vector3.zero);
+        anim.SetBool("walk", moveDir != Vector3.zero);
 
         // プレイヤーの向き
         // アタックしている間はその向きを向くようになる
@@ -197,7 +197,7 @@ public class PlayerController : MonoBehaviour
         obj.transform.position = transform.position + attackDir * distanceAttackFX;
         obje = obj;
 
-        // 斬撃の方向を決定
+        // プレイヤーから敵までの方向を取得し、8方向（縦横斜め）に変換する
         if (attackDir.x > 0)
         {
             flipX = 0;
@@ -206,20 +206,23 @@ public class PlayerController : MonoBehaviour
         {
             flipX = 180;
         }
-
-        if (attackDir.x == 0)
+        // 斬撃の方向を決定
+        if(Mathf.Abs(attackDir.x) <= 1 && Mathf.Abs(attackDir.x) > Mathf.Cos(Mathf.PI / 8))
         {
-            // 真上・真下（左右の入力がないとき）
-            if (attackDir.y > 0) rotZ = 90 + defaultFXRot;
-            else if (attackDir.y < 0) rotZ = -90 + defaultFXRot;
-            else rotZ = 0 + defaultFXRot; // 入力なし（真横など）
+            // 横方向の処理
+            rotZ = 0 + defaultFXRot;
+        }
+        else if(Mathf.Abs(attackDir.x) > Mathf.Cos(Mathf.PI * 3 / 8))
+        {
+            // 斜め方向の処理
+            if (attackDir.y > 0) rotZ = 45 + defaultFXRot;
+            else if (attackDir.y < 0) rotZ = -45 + defaultFXRot;
         }
         else
         {
-            // 斜め入力（左右の入力があるとき）
-            if (attackDir.y > 0) rotZ = 45 + defaultFXRot;
-            else if (attackDir.y < 0) rotZ = -45 + defaultFXRot;
-            else rotZ = 0 + defaultFXRot; // 真横
+            // 縦方向の処理
+            if (attackDir.y > 0) rotZ = 90 + defaultFXRot;
+            else if (attackDir.y < 0) rotZ = -90 + defaultFXRot;
         }
 
         obj.transform.rotation = Quaternion.Euler(0, flipX, rotZ);

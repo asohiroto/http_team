@@ -66,7 +66,6 @@ public class PlayerAttackReach : MonoBehaviour
             if(enemyObj.Contains(col.gameObject))
             {
                 enemyObj.Remove(col.gameObject);
-                Debug.Log("エネミーが出たよ！");
             }
         }
     }

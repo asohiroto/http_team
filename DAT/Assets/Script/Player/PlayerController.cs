@@ -50,11 +50,16 @@ public class PlayerController : MonoBehaviour
     private float damageFXTime = 0.2f; // ダメージエフェクトをする時間
 
     // アニメーションに使う変数------------------------------------------------------------
-    SpriteRenderer spriteRenderer;
+    enum State{idle, walk, dash, attack};
+    private State state;
+    private SpriteRenderer spriteRenderer;
+    private Animator anim;
     [SerializeField] Sprite[] upSprite; // 上向きのアニメーションを代入
     [SerializeField] Sprite[] downSprite; // 下向きのアニメーションを代入
     [SerializeField] Sprite[] leftSprite; // 左向きのアニメーションを代入
     private int animIdx = 0; // アニメーションのコマ数を数える変数
+    private float animSecPerFrame = 0.2f; // アニメーション一コマあたりの秒数
+    private bool animFinish = true; // アニメーションが終わったかどうか（ループさせるための変数）
 
 
     GameObject destroyObje; // 麻生が追加
@@ -68,7 +73,10 @@ public class PlayerController : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
         playerHP = maxPlayerHP;
         attackDamage = defaultAttackDamage;
+        state = State.idle;
+        anim = GetComponent<Animator>();
         Application.targetFrameRate = 60;
+        
     }
 
     void FixedUpdate()
@@ -76,11 +84,7 @@ public class PlayerController : MonoBehaviour
         Move();
         InputManager();
         CheckDie();
-
-        /*if (playerHP <= 0)
-        {
-            Destroy(gameObject);
-        }*/
+        //if(animFinish) StartCoroutine(Animation());
     }
     /// <summary>
     /// 入力の受け付け、ダッシュやアタックのクールダウンを数える関数
@@ -121,7 +125,7 @@ public class PlayerController : MonoBehaviour
         // 正規化
         moveDir.Normalize();
 
-        if ((moveDir.x != 0 || moveDir.y != 0) /*&& !onAttack*/)
+        if (moveDir.x != 0 || moveDir.y != 0)
         {
             lastDir = moveDir;
         }
@@ -136,21 +140,24 @@ public class PlayerController : MonoBehaviour
         }
         transform.position = currentPos;
 
+        //プレイヤーが歩いているときのアニメーション
+        anim.SetBool("walk", moveDir != Vector3.zero);
+
         // プレイヤーの向き
         // アタックしている間はその向きを向くようになる
         // x方向の向きを変更
         if (lastDir.x > 0 && !onAttack)
         {
-            spriteRenderer.sprite = leftSprite[animIdx];
+            //spriteRenderer.sprite = leftSprite[animIdx];
             transform.rotation = Quaternion.Euler(0, 0, 0);
         }
         else if (lastDir.x < 0 && !onAttack)
         {
-            spriteRenderer.sprite = leftSprite[animIdx];
+            //spriteRenderer.sprite = leftSprite[animIdx];
             transform.rotation = Quaternion.Euler(0, 180, 0);
         }
 
-        // y方向の向きを変更
+        /*// y方向の向きを変更
         if (lastDir.x == 0 && !onAttack)
         {
             if (lastDir.y > 0)
@@ -161,7 +168,7 @@ public class PlayerController : MonoBehaviour
             {
                 spriteRenderer.sprite = downSprite[animIdx];
             }
-        }
+        }*/
 
         // 画面内制限
         currentPos.x = Mathf.Clamp(currentPos.x, -xLimit, xLimit);
@@ -262,6 +269,23 @@ public class PlayerController : MonoBehaviour
         if (playerHP <= 0 && canDie)
         {
             Destroy(gameObject);
+        }
+    }
+
+    void Animation()
+    {
+        animFinish = false;
+        switch(state)
+        {
+            case State.idle:
+            
+            break;
+            case State.walk:
+            break;
+            case State.dash:
+            break;
+            case State.attack:
+            break;
         }
     }
 }

@@ -34,8 +34,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] public float attackTime = 1.2f; // アタック中の時間
     [SerializeField] public float attackCd = 1.5f; // アタックのクールダウン
     float attackCdTimer; // クールダウンを実際にカウントする変数
-    public float defaultAttackDamage = 5; // デフォルトのアタックダメージ
-    public float attackDamage = 5; // アタックダメージ
+    public float defaultAttackDamage = 5.0f; // デフォルトのアタックダメージ
+    public float attackDamage = 5.0f; // アタックダメージ
     public Vector3 attackDir; // アタックする方向
     public Vector3 playerToEnemyNol;
     public float defaultFXRot = -90; // 攻撃エフェクトの方向補正
@@ -44,8 +44,8 @@ public class PlayerController : MonoBehaviour
     public float distanceAttackFX = 0.50f; // 攻撃エフェクトとプレイヤーとの距離を設定する（攻撃する方向の単位ベクトルにこの値をかける） 
 
     // プレイヤーのステータス-------------------------------------------------------------
-    public int playerHP = 100; // プレイヤーのHP
-    public int maxPlayerHP = 100; // プレイヤーの最大HP
+    public float playerHP = 100; // プレイヤーのHP
+    public float maxPlayerHP = 100; // プレイヤーの最大HP
     [SerializeField] bool canDie = true;
     private float damageFXTime = 0.2f; // ダメージエフェクトをする時間
 
@@ -141,7 +141,7 @@ public class PlayerController : MonoBehaviour
         transform.position = currentPos;
 
         //プレイヤーが歩いているときのアニメーション
-        anim.SetBool("walk", moveDir != Vector3.zero);
+        //anim.SetBool("walk", moveDir != Vector3.zero);
 
         // プレイヤーの向き
         // アタックしている間はその向きを向くようになる
@@ -243,7 +243,7 @@ public class PlayerController : MonoBehaviour
     /// プレイヤーがダメージを受けたときの関数
     /// </summary>
     /// <param name="enemyAttack"></param>
-    public void Damaged(int enemyAttack)
+    public void Damaged(float enemyAttack)
     {
         playerHP -= enemyAttack;
         Debug.Log("Player残りHP：" + enemyAttack);

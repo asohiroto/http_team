@@ -26,6 +26,8 @@ public class PlayerController : MonoBehaviour
     float dashCdTimer = 0f; // クールダウンを実際にカウントする変数
     [SerializeField] float dashTime = 0.1f; // ダッシュの継続時間
     Vector3 dashDir; // ダッシュする方向
+    [SerializeField] GameObject dashLeftObj;
+    [SerializeField] GameObject dashUpObj;
 
     // アタックに使う変数---------------------------------------------------------------
     PlayerAttack playerAttack;
@@ -54,13 +56,6 @@ public class PlayerController : MonoBehaviour
     private State state;
     private SpriteRenderer spriteRenderer;
     private Animator anim;
-    [SerializeField] Sprite[] upSprite; // 上向きのアニメーションを代入
-    [SerializeField] Sprite[] downSprite; // 下向きのアニメーションを代入
-    [SerializeField] Sprite[] leftSprite; // 左向きのアニメーションを代入
-    private int animIdx = 0; // アニメーションのコマ数を数える変数
-    private float animSecPerFrame = 0.2f; // アニメーション一コマあたりの秒数
-    private bool animFinish = true; // アニメーションが終わったかどうか（ループさせるための変数）
-
 
     GameObject destroyObje; // 麻生が追加
     GameObject normalAttack;
@@ -148,27 +143,12 @@ public class PlayerController : MonoBehaviour
         // x方向の向きを変更
         if (lastDir.x > 0 && !onAttack)
         {
-            //spriteRenderer.sprite = leftSprite[animIdx];
             transform.rotation = Quaternion.Euler(0, 0, 0);
         }
         else if (lastDir.x < 0 && !onAttack)
         {
-            //spriteRenderer.sprite = leftSprite[animIdx];
             transform.rotation = Quaternion.Euler(0, 180, 0);
         }
-
-        /*// y方向の向きを変更
-        if (lastDir.x == 0 && !onAttack)
-        {
-            if (lastDir.y > 0)
-            {
-                spriteRenderer.sprite = upSprite[animIdx];
-            }
-            else if (lastDir.y < 0)
-            {
-                spriteRenderer.sprite = downSprite[animIdx];
-            }
-        }*/
 
         // 画面内制限
         currentPos.x = Mathf.Clamp(currentPos.x, -xLimit, xLimit);
@@ -183,6 +163,20 @@ public class PlayerController : MonoBehaviour
     {
         onDash = true;
         dashDir = lastDir;
+        GameObject obj;
+        // ダッシュで土煙がでるようにする
+        if(dashDir.x == 0)
+        {
+            obj = Instantiate(dashUpObj);
+            if(dashDir.y >= 0) obj.transform.rotation = Quaternion.Euler(180, 0, 0);
+            else obj.transform.rotation = Quaternion.Euler(0, 0, 0);
+        }
+        else
+        {
+            obj = Instantiate(dashLeftObj);
+            obj.transform.rotation = transform.rotation;
+        }
+        obj.transform.position = transform.position;
         yield return new WaitForSeconds(dashTime);
         onDash = false;
     }
@@ -272,23 +266,6 @@ public class PlayerController : MonoBehaviour
         if (playerHP <= 0 && canDie)
         {
             Destroy(gameObject);
-        }
-    }
-
-    void Animation()
-    {
-        animFinish = false;
-        switch(state)
-        {
-            case State.idle:
-            
-            break;
-            case State.walk:
-            break;
-            case State.dash:
-            break;
-            case State.attack:
-            break;
         }
     }
 }

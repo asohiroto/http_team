@@ -3281,6 +3281,8 @@ MonoBehaviour:
   currentPos: {x: 0, y: 0, z: 0}
   lastDir: {x: 1, y: 0, z: 0}
   dashTime: 0.1
+  dashLeftObj: {fileID: 7240636172749574767, guid: 6a400b437a247c740a4dfed347c2a346, type: 3}
+  dashUpObj: {fileID: 5337022448235006613, guid: c28f4b94c0ccd61419936ce6fc6f5043, type: 3}
   attackObj: {fileID: 132122364930665669, guid: 428bde71b707b3b49a63a27c01b204d2, type: 3}
   strongAttackObj: {fileID: 132122364930665669, guid: 9d0fa2fe56967ff4790f505ff03d0108, type: 3}
   attackTime: 0.5
@@ -3296,12 +3298,6 @@ MonoBehaviour:
   playerHP: 100
   maxPlayerHP: 100
   canDie: 1
-  upSprite:
-  - {fileID: -3057998330571279762, guid: bf29f581365379b489ef412b503d3e39, type: 3}
-  downSprite:
-  - {fileID: 5737398224882651483, guid: bf29f581365379b489ef412b503d3e39, type: 3}
-  leftSprite:
-  - {fileID: 5013799040997709749, guid: bf29f581365379b489ef412b503d3e39, type: 3}
 --- !u!212 &1801050804
 SpriteRenderer:
   serializedVersion: 2

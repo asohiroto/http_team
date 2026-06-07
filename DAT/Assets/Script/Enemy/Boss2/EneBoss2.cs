@@ -10,10 +10,12 @@ using UnityEngine.UIElements;
 
 public class EneBoss2 : MonoBehaviour
 {
+    enum State{Idle, Walk, Stamp}
     [SerializeField] float speed = 0.1f;
     Vector3 moveDir;
     Vector3 currentPos;
     bool endMove = false;
+    GameObject playerObj;
     [SerializeField] public int attackPower = 0;
     [SerializeField] float attackWaitingTime = 0.1f;
     [SerializeField] float showAttackRangeTime = 3.0f;
@@ -23,6 +25,7 @@ public class EneBoss2 : MonoBehaviour
     [SerializeField] float attackTime = 1.0f;
     [SerializeField] GameObject rangeAttackObj;
     [SerializeField] Transform rangeAttackReach;
+    float stampHeight = 4.0f; // 範囲攻撃の高さ
     SpriteRenderer spriteRenderer;
     void Start()
     {
@@ -30,23 +33,30 @@ public class EneBoss2 : MonoBehaviour
         currentPos = transform.position;
         rangeAttackReach = transform.GetChild(0); // 範囲攻撃のリーチを取得
         rangeAttackReach.gameObject.SetActive(false); //範囲攻撃のリーチを非表示にする
+        playerObj = GameObject.Find("Player");
     }
 
     void FixedUpdate()
     {
-        Move(new Vector3(5, 0, 0));
+        //Move(playerObj.transform.position);
         transform.position = currentPos;
+        ActionManager();
+    }
+
+    void ActionManager()
+    {
+        Move(playerObj.transform.position + Vector3.up * 4);
     }
 
     // 指定した座標に移動する
     void Move(Vector3 targetPos)
     {
+        if (endMove) return;
         if (currentPos.x - targetPos.x < 0.5f && currentPos.x - targetPos.x > -0.5f
-            && currentPos.y - currentPos.y < 0.5f && currentPos.y - currentPos.y > -0.5f)
+            && currentPos.y - targetPos.y < 0.5f && currentPos.y - targetPos.y > -0.5f)
         {
-            if (endMove) return;
             Debug.Log("移動完了！");
-            StartCoroutine(Stanp());
+            StartCoroutine(Stamp());
             endMove = true;
             return;
         }
@@ -55,7 +65,12 @@ public class EneBoss2 : MonoBehaviour
         currentPos += moveDir * speed;
     }
 
-    IEnumerator Stanp()
+    void StanpMove(Vector3 targetPos)
+    {
+        Move(targetPos);
+    }
+
+    IEnumerator Stamp()
     {
         isAttackWaiting = true;
         StartCoroutine(ChangeColor());

@@ -1,5 +1,6 @@
 using System.Runtime.CompilerServices;
 using System.Threading;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
@@ -59,8 +60,10 @@ public class EnemySpawner : MonoBehaviour
         }
     }
 
-    public void DestiriyEnemy()
+    public void DestroyEnemy()
     {
         enemyCount--;
+
+        return;
     }
 }

@@ -4,7 +4,7 @@ using UnityEngine;
 public class PlayerAttack : MonoBehaviour
 {
     //EnemyController eneController;
-    EnemyC eneController;
+    EnemyController eneController;
     PlayerController playerController;
     GameObject enemyObj;
     GameObject playerObj;
@@ -29,7 +29,6 @@ public class PlayerAttack : MonoBehaviour
         boxCol.enabled = false;
 
         StartCoroutine(AttackAnim());
-        
     }
 
     void Update()
@@ -43,7 +42,7 @@ public class PlayerAttack : MonoBehaviour
         if (col.CompareTag("Enemy"))
         {
             enemyObj = col.gameObject;
-            eneController = enemyObj.GetComponent<EnemyC>();
+            eneController = enemyObj.GetComponent<EnemyController>();
             eneController.EnemyDamaged(attackDamage);
         }
     }

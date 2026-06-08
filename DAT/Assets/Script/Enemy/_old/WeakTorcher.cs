@@ -1,3 +1,4 @@
+#if false
 using System.Collections;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
@@ -222,3 +223,4 @@ public class WeakTorcher : MonoBehaviour
         enemyCtrl.IsAttack = false;
     }
 }
+#endif

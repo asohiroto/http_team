@@ -1,13 +1,5 @@
-using System;
 using System.Collections;
-using NUnit.Framework;
-using Unity.VisualScripting;
-using UnityEditor.Animations;
 using UnityEngine;
-using UnityEngine.Animations;
-using UnityEngine.Rendering;
-using UnityEngine.UIElements;
-
 public class EneBoss2 : MonoBehaviour
 {
     enum State{Idle, Walk, Stamp}

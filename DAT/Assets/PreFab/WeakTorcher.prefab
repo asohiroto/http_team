@@ -111,7 +111,9 @@ MonoBehaviour:
   moveSpeed: 1
   attackPower: 3
   mass: 0
+  initInverseMass: 0
   inverseMass: 0
+  radious: 0
   alwaysFindPlayer: 1
   findDist: 0
   lostDist: 0
@@ -215,7 +217,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 10
   m_LinearDamping: 0
   m_AngularDamping: 0.05
   m_GravityScale: 0

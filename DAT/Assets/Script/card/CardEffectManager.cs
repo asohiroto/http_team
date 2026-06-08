@@ -3,6 +3,17 @@ using UnityEngine;
 
 public class CardEffectManager : MonoBehaviour
 {
+
+    [SerializeField] float healAmount;
+    float healDefaultAmount;
+    
+    [SerializeField] float curseAmount;
+    float curseDefaultAmount;
+    
+    [SerializeField] int boostTime;
+
+    int boostCount = 0;
+    
     public Action[] cardEffect;
 
     PlayerController player;
@@ -19,7 +30,16 @@ public class CardEffectManager : MonoBehaviour
                 () => ThunderEnhance(),
                 () => Heal(),
                 () => Curse(),
+                () => FireBoost(),
+                () => WaterBoost(),
+                () => GroundBoost(),
+                () => ThunderBoost(),
+                () => SaintBoost(),
+                () => CursedBoost(),
             };
+        
+        healDefaultAmount = healAmount;
+        curseDefaultAmount = curseAmount;
 
         player = GameObject.Find("Player").GetComponent<PlayerController>();
     }
@@ -27,7 +47,7 @@ public class CardEffectManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        boostCount++;
     }
 
     void FireEnhance()
@@ -40,6 +60,7 @@ public class CardEffectManager : MonoBehaviour
     void WaterEnhance()
     {
         player.attackCd *= 0.99f;
+        player.attackTime *= 0.99f;
 
         Debug.Log("攻撃速度強化！");
     }
@@ -58,7 +79,7 @@ public class CardEffectManager : MonoBehaviour
 
     void Heal()
     {
-        player.playerHP += 10;
+        player.playerHP += healAmount;
         if (player.playerHP > player.maxPlayerHP)
         {
             player.playerHP = player.maxPlayerHP;
@@ -69,12 +90,54 @@ public class CardEffectManager : MonoBehaviour
 
     void Curse()
     {
-        player.playerHP -= 10;
-        if (player.playerHP < 11)
+        player.playerHP -= curseAmount;
+        if (player.playerHP < curseAmount + 1)
         {
             player.playerHP = 1;
         }
 
         Debug.Log("体力減少！");
+    }
+
+    void FireBoost()
+    {
+        player.attackDamage *= 1.3f;
+        player.defaultAttackDamage = player.attackDamage;
+
+        boostCount = 0;
+    }
+
+    void WaterBoost()
+    {
+        player.attackCd *= 0.7f;
+        
+
+        boostCount = 0;
+    }
+
+    void GroundBoost()
+    {
+        Debug.Log("一時的に防御力上昇！");
+    }
+
+    void ThunderBoost()
+    {
+        player.speed *= 1.3f;
+
+        boostCount = 0;
+    }
+
+    void SaintBoost()
+    {
+        healAmount *= 1.3f;
+
+        boostCount = 0;
+    }
+
+    void CursedBoost()
+    {
+        curseAmount *= 1.3f;
+
+        curseAmount = 0;
     }
 }

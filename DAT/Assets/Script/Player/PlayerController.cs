@@ -22,7 +22,7 @@ public class PlayerController : MonoBehaviour
     public Vector3 lastDir = new Vector3(1, 0, 0); // プレイヤーが前のフレームで入力した方向
 
     // ダッシュに使う変数---------------------------------------------------------------
-    float dashCd = 0.3f; // ダッシュのクールダウン
+    float dashCd = 0.5f; // ダッシュのクールダウン
     float dashCdTimer = 0f; // クールダウンを実際にカウントする変数
     [SerializeField] float dashTime = 0.1f; // ダッシュの継続時間
     Vector3 dashDir; // ダッシュする方向
@@ -252,9 +252,10 @@ public class PlayerController : MonoBehaviour
     /// <param name="enemyAttack"></param>
     public void Damaged(float enemyAttack)
     {
+        if (onDash) return;
         playerHP -= enemyAttack;
-        Debug.Log("Player残りHP：" + enemyAttack);
         StartCoroutine(BackDamageColor());
+        Debug.Log("Player残りHP：" + enemyAttack);
     }
 
     /// <summary>

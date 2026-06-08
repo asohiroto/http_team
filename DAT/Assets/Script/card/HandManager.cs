@@ -41,12 +41,9 @@ public class HandManager : MonoBehaviour
 
         change = GetComponent<CardChanger>();
 
-
-
-
         for (int i = 0; i < deckCardTrans.Length; i++) // それぞれの手札の位置にランダムなカードを生成
         {
-            cardId = Random.Range(0, 6);
+            cardId = Random.Range(0, 12);
 
             int cardIdStart = change.CardChange(cardId);
 
@@ -93,7 +90,7 @@ public class HandManager : MonoBehaviour
     // カードを引く処理
     public void CardDraw()
     {
-        int cardRandomId = Random.Range(0, 6);
+        int cardRandomId = Random.Range(0, 12);
 
         for (int i = 0; i < 5; i++)
         {

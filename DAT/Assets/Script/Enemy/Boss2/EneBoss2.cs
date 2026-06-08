@@ -1,13 +1,5 @@
-using System;
 using System.Collections;
-using NUnit.Framework;
-using Unity.VisualScripting;
-using UnityEditor.Animations;
 using UnityEngine;
-using UnityEngine.Animations;
-using UnityEngine.Rendering;
-using UnityEngine.UIElements;
-
 public class EneBoss2 : MonoBehaviour
 {
     enum State{Idle, Walk, Stamp}
@@ -24,15 +16,14 @@ public class EneBoss2 : MonoBehaviour
     // 範囲攻撃の変数
     [SerializeField] float attackTime = 1.0f;
     [SerializeField] GameObject rangeAttackObj;
-    [SerializeField] Transform rangeAttackReach;
+    [SerializeField] GameObject stampAttackReach;
+    Vector3 stampPos;
     float stampHeight = 4.0f; // 範囲攻撃の高さ
     SpriteRenderer spriteRenderer;
     void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
         currentPos = transform.position;
-        rangeAttackReach = transform.GetChild(0); // 範囲攻撃のリーチを取得
-        rangeAttackReach.gameObject.SetActive(false); //範囲攻撃のリーチを非表示にする
         playerObj = GameObject.Find("Player");
     }
 
@@ -56,13 +47,13 @@ public class EneBoss2 : MonoBehaviour
             && currentPos.y - targetPos.y < 0.5f && currentPos.y - targetPos.y > -0.5f)
         {
             Debug.Log("移動完了！");
-            StartCoroutine(Stamp());
+            StartCoroutine(Stamp(playerObj.transform.position));
             endMove = true;
             return;
         }
         moveDir = targetPos - currentPos;
         moveDir = moveDir.normalized;
-        currentPos += moveDir * speed;
+        currentPos += moveDir;
     }
 
     void StanpMove(Vector3 targetPos)
@@ -70,23 +61,25 @@ public class EneBoss2 : MonoBehaviour
         Move(targetPos);
     }
 
-    IEnumerator Stamp()
+    IEnumerator Stamp(Vector3 targetPos)
     {
         isAttackWaiting = true;
+        stampPos = targetPos;
         StartCoroutine(ChangeColor());
         //攻撃待機時間
         yield return new WaitForSeconds(attackWaitingTime);
         // 攻撃予測線を出す
-        rangeAttackReach.gameObject.SetActive(true);
+        GameObject reachObj = Instantiate(stampAttackReach);
+        reachObj.transform.position = stampPos;
         yield return new WaitForSeconds(showAttackRangeTime);
         // 攻撃を行う
-        GameObject obj = Instantiate(rangeAttackObj, this.transform);
-        obj.transform.position = transform.position;
-        rangeAttackReach.gameObject.SetActive(false);
+        GameObject attackObj = Instantiate(rangeAttackObj, this.transform);
+        attackObj.transform.position = currentPos;
+        
         isAttackWaiting = false;
         // 攻撃終了
         yield return new WaitForSeconds(attackTime);
-        Destroy(obj);
+        Destroy(reachObj);
     }
 
     IEnumerator ChangeColor()

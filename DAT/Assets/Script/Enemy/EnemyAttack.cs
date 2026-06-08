@@ -5,8 +5,8 @@ public class EnemyAttack : MonoBehaviour
 {
     PlayerController playerCtrl;
     GameObject objParent;
-    EnemyC enemyCtrl;
-    private int attackPower;
+    EnemyController enemyCtrl;
+    private float attackPower;
 
     //private float attackPower => ;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -14,7 +14,7 @@ public class EnemyAttack : MonoBehaviour
     {
         objParent = transform.parent.gameObject;
         //Debug.Log(objParent);
-        enemyCtrl = objParent.GetComponent<EnemyC>();
+        enemyCtrl = objParent.GetComponent<EnemyController>();
         //Debug.Log(enemyCtrl);
         attackPower = enemyCtrl.GetAttackPower();
         Debug.Log("attackPower : " + attackPower);
@@ -39,7 +39,7 @@ public class EnemyAttack : MonoBehaviour
         Gizmos.color = Color.green;
         Vector2 size = new Vector2(1f, 1f);
 
-        // 指定したサイズで四角形の枠線を描画（Z軸は0に固定）
+        // 四角形の枠線を描画
         Vector3 center = transform.position;
         Vector3 drawSize = new Vector3(size.x, size.y, 0.001f);
         Gizmos.DrawWireCube(center, drawSize);

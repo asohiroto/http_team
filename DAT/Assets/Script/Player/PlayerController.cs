@@ -48,8 +48,11 @@ public class PlayerController : MonoBehaviour
     public float distanceAttackFX = 0.50f; // 攻撃エフェクトとプレイヤーとの距離を設定する（攻撃する方向の単位ベクトルにこの値をかける） 
 
     // プレイヤーのステータス-------------------------------------------------------------
-    public float playerHP = 100; // プレイヤーのHP
-    public float maxPlayerHP = 100; // プレイヤーの最大HP
+    public float playerHP = 100.0f; // プレイヤーのHP
+    public float maxPlayerHP = 100.0f; // プレイヤーの最大HP
+    public float defaultdeffence;
+    public float deffence = 1.0f;
+
     [SerializeField] bool canDie = true;
     private float damageFXTime = 0.2f; // ダメージエフェクトをする時間
 

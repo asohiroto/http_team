@@ -6,12 +6,12 @@ public class ClearCoinSpawner : MonoBehaviour
     public GameObject coinPrefab;
 
     // 生成する間隔（秒）
-    private float spawnInterval = 0.1f;
+    private float spawnInterval = 0.15f;
     // 生成する高さのプラス分
     private float heightOffset = 5f;   
 
     // 時間調整
-    private float duration = 10.0f;
+   // private float duration = 90.0f;
     // -------------------------------------
 
     void Start()
@@ -24,14 +24,14 @@ public class ClearCoinSpawner : MonoBehaviour
         float elapsedTime = 0f;
 
         // 指定時間のみ生成
-        while (elapsedTime < duration)
+        while (true)
         {
             if (coinPrefab == null || !coinPrefab)
             {
                 yield break;
             }
 
-            float randomX = Random.Range(-15f, 5f);
+            float randomX = Random.Range(-14f, 4f);
             Vector3 spawnPosition = new Vector3(
                 transform.position.x + randomX,
                 transform.position.y + heightOffset,
@@ -45,7 +45,5 @@ public class ClearCoinSpawner : MonoBehaviour
             // 待った時間を経過時間に足す
             elapsedTime += spawnInterval;
         }
-
-        Debug.Log(duration + "秒間の生成が終了しました！");
     }
 }

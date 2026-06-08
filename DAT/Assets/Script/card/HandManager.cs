@@ -1,9 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.UI;
-using UnityEngine.XR;
 
 public class HandManager : MonoBehaviour
 {
@@ -45,9 +41,7 @@ public class HandManager : MonoBehaviour
         {
             cardId = Random.Range(0, 12);
 
-            int cardIdStart = change.CardChange(cardId);
-
-            CardGenerate(cardIdStart, i);
+            CardGenerate(cardId, i);
         }
     }
 
@@ -70,7 +64,9 @@ public class HandManager : MonoBehaviour
     // カードを生成する関数
     public void CardGenerate(int id, int ind) // 新たにカードを生成する
     {
-        GameObject genCard = Instantiate(cardPrefab[id], deckCardTrans[ind]); // カードを作る処理
+        int cardType = change.CardChange(id);
+
+        GameObject genCard = Instantiate(cardPrefab[cardType], deckCardTrans[ind]); // カードを作る処理
         DraggableCard dc = genCard.GetComponentInChildren<DraggableCard>();
 
         CardEdit edit = genCard.GetComponentInChildren<CardEdit>();
@@ -101,11 +97,9 @@ public class HandManager : MonoBehaviour
                     cardDrawCount++;
 
                     // カードを引くたびに代金が上がる
-                    cardDrawFee = (int)(cardDrawFee + cardDrawCount * 10);
+                    cardDrawFee = (int)(cardDrawFee + cardDrawCount);
 
-                    int cardIdDraw = change.CardChange(cardRandomId);
-
-                    CardGenerate(cardIdDraw, i);
+                    CardGenerate(cardRandomId, i);
 
                     coinManager.ReduceMoney(cardDrawFee);
                 }

@@ -2252,9 +2252,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 7402475843637736188, guid: adafc529adc6fb84d8417122a115aaa6, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1336979534}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: adafc529adc6fb84d8417122a115aaa6, type: 3}
+--- !u!4 &920968463 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7402475843637736188, guid: adafc529adc6fb84d8417122a115aaa6, type: 3}
+  m_PrefabInstance: {fileID: 920968462}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &943071129
 GameObject:
   m_ObjectHideFlags: 0
@@ -2285,18 +2293,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CraftManager
   recipeList:
-  - materialA: 2
-    materialB: 3
-    result: 4
   - materialA: 0
-    materialB: 1
-    result: 5
-  - materialA: 3
-    materialB: 6
-    result: 7
-  - materialA: 1
-    materialB: 1
-    result: 8
+    materialB: 0
+    result: 12
+  - materialA: 4
+    materialB: 4
+    result: 14
+  - materialA: 5
+    materialB: 5
+    result: 13
   material1: 0
 --- !u!4 &943071131
 Transform:
@@ -2436,6 +2441,12 @@ MonoBehaviour:
   healAmount: 10
   curseAmount: 10
   boostTime: 3
+  fbSpeed: 1
+  fireBall: {fileID: 6676543517733875803, guid: c1f2ad0cd1675dd44b70842ea6e4c916, type: 3}
+  fireBallPrefab: {fileID: 0}
+  cfSpeed: 1
+  cursedFlame: {fileID: 5380163840605547912, guid: 852e8346ed8d4bb41a49280de6fa1df8, type: 3}
+  cursedFlamePrefab: {fileID: 0}
 --- !u!4 &1168530632
 Transform:
   m_ObjectHideFlags: 0
@@ -2460,6 +2471,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1182969259}
+  - component: {fileID: 1182969260}
   m_Layer: 0
   m_Name: MyDeck
   m_TagString: Untagged
@@ -2482,6 +2494,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1182969260
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1182969258}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98b389d4d5876ed4ca898f451e55ed1b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MyDeck
 --- !u!1 &1187121701
 GameObject:
   m_ObjectHideFlags: 0
@@ -4558,6 +4582,100 @@ MonoBehaviour:
     cardName: Curse Boost
     cardEffect: "\u4F53\u529B\u6E1B\u5C11\u91CF\u3092\uFF13\uFF10\uFF05\u4E0A\u6607"
     cardImage: {fileID: 0}
+  - cardType: 0
+    cardName: FireBall
+    cardEffect: "\u708E\u5F3E\u3092\u98DB\u3070\u3059"
+    cardImage: {fileID: 0}
+  - cardType: 5
+    cardName: CursedFlame
+    cardEffect: "\u4F53\u529B\u3092\u6D88\u8CBB\u3057\u3001\u546A\u5F3E\u3092\u98DB\u3070\u3059"
+    cardImage: {fileID: 0}
+  - cardType: 4
+    cardName: OverHeal
+    cardEffect: "\u4F53\u529B\u3092\u4E2D\u91CF\u56DE\u5FA9"
+    cardImage: {fileID: 0}
+--- !u!1 &1336979533
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1336979534}
+  - component: {fileID: 1336979536}
+  - component: {fileID: 1336979535}
+  m_Layer: 0
+  m_Name: SkillReach
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1336979534
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1336979533}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 920968463}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1336979535
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1336979533}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e05396701814c14aab5423095442f08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CardAttackReach
+  playerToEnemyNol: {x: 0, y: 0, z: 0}
+--- !u!58 &1336979536
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1336979533}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0}
+  m_Radius: 4
 --- !u!1 &1401892871
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,23 +1,20 @@
 #if false
 
 using System;
-using static MyPhys.PhysMath;
+using UnitySystem;
+//using static MyPhys.PhysMath;
 
 namespace MyPhys
 {
     public static class Collisions
     {
-        // 分離軸定理を使用する?
-        // separating axis theorem (SAT)
-        // エピソード03 円の衝突判定
-
         // 真であれば交差している
         public static bool IntersectCircles(
             Vector2 centerA, float radiusA, Vector2 centerB, float radiusB,
             out Vector2 normal, out float depth)
         {
             // パラメーターにデフォルト値を指定する
-            normal = Vector2.Zero;
+            normal = Vector2.zero;
             depth = 0f;
 
             // using staticしているから省略できる

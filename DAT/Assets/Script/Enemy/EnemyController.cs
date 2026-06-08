@@ -1,12 +1,18 @@
 using System;
 using UnityEngine;
 
-public class EnemyC : MonoBehaviour
+public class EnemyController : MonoBehaviour
 {
     [Header("Enemy Stats")]
     [SerializeField] private float enemyHp;       // 体力
     [SerializeField] private float moveSpeed;   // 移動速度
-    [SerializeField] private int attackPower;   // 攻撃力
+    [SerializeField] private float attackPower;   // 攻撃力
+
+    [Header("Physics")]
+    [SerializeField] private float mass;            // 質量
+    [SerializeField] private float initInverseMass; // 質量の逆数の初期値
+    [SerializeField] private float inverseMass;     // 質量の逆数
+    [SerializeField] private float radious;     // 半径
 
     [Header("Enemy Settings")]
     // コード内では2乗した状態で使用する
@@ -17,7 +23,7 @@ public class EnemyC : MonoBehaviour
     [SerializeField] private float attackRange;                 // 攻撃のレンジ
     [SerializeField] private float attackStartupDuration;       // 攻撃の予備動作の時間
     [SerializeField] private float attackCooldownDuration;      // 攻撃のクールダウンの時間
-    [SerializeField] private float attackOnColliderDuration;      // 攻撃呼び出しのタイミング (現在のフレームを確認するのがめんどくさいのでゴリ押し)
+    [SerializeField] private float attackOnColliderDuration;      // 攻撃呼び出しのタイミング (現在のフレームを確認するのがめんどくさいのでゴリ押し。規模的に問題ないと思う)
 
 
     [Header("Debug")]
@@ -149,7 +155,11 @@ public class EnemyC : MonoBehaviour
         }
     }
 
-    public int GetAttackPower()
+    /// <summary>
+    /// Enemyの攻撃力
+    /// </summary>
+    /// <returns>攻撃力を返す(float)</returns>
+    public float GetAttackPower()
     {
         return attackPower;
     }
@@ -157,8 +167,6 @@ public class EnemyC : MonoBehaviour
     /// <summary>
     /// 二つのベクトル間の距離を2乗した値を取得
     /// </summary>
-    /// <param name="a"></param>
-    /// <param name="b"></param>
     /// <returns>ベクトル間の距離を2乗した値</returns>
     float GetSqrDistance (Vector2 a, Vector2 b)
     {

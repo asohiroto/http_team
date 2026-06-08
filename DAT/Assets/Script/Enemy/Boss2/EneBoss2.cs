@@ -18,7 +18,8 @@ public class EneBoss2 : MonoBehaviour
     [SerializeField] GameObject rangeAttackObj;
     [SerializeField] GameObject stampAttackReach;
     Vector3 stampPos;
-    float stampHeight = 4.0f; // 範囲攻撃の高さ
+    float jumpHeight = 20.0f; // 範囲攻撃の高さ
+    float jumpSpeed = 1.0f;
     SpriteRenderer spriteRenderer;
     void Start()
     {
@@ -36,7 +37,8 @@ public class EneBoss2 : MonoBehaviour
 
     void ActionManager()
     {
-        Move(playerObj.transform.position + Vector3.up * 4);
+        //Move(playerObj.transform.position);
+        Jump();
     }
 
     // 指定した座標に移動する
@@ -47,7 +49,7 @@ public class EneBoss2 : MonoBehaviour
             && currentPos.y - targetPos.y < 0.5f && currentPos.y - targetPos.y > -0.5f)
         {
             Debug.Log("移動完了！");
-            StartCoroutine(Stamp(playerObj.transform.position));
+            //StartCoroutine(Stamp(playerObj.transform.position));
             endMove = true;
             return;
         }
@@ -56,30 +58,28 @@ public class EneBoss2 : MonoBehaviour
         currentPos += moveDir;
     }
 
-    void StanpMove(Vector3 targetPos)
+    /*IEnumerator Stamp(Vector3 targetPos)
     {
-        Move(targetPos);
-    }
+        if (currentPos.y <= jumpHeight)
+        {
+            currentPos += Vector3.up * jumpSpeed;
+        }
+        else
+        {
+            GameObject reachObj = Instantiate(stampAttackReach);
+        }
+    }*/
 
-    IEnumerator Stamp(Vector3 targetPos)
+    void Jump()
     {
-        isAttackWaiting = true;
-        stampPos = targetPos;
-        StartCoroutine(ChangeColor());
-        //攻撃待機時間
-        yield return new WaitForSeconds(attackWaitingTime);
-        // 攻撃予測線を出す
-        GameObject reachObj = Instantiate(stampAttackReach);
-        reachObj.transform.position = stampPos;
-        yield return new WaitForSeconds(showAttackRangeTime);
-        // 攻撃を行う
-        GameObject attackObj = Instantiate(rangeAttackObj, this.transform);
-        attackObj.transform.position = currentPos;
-        
-        isAttackWaiting = false;
-        // 攻撃終了
-        yield return new WaitForSeconds(attackTime);
-        Destroy(reachObj);
+        if(currentPos.y <= jumpHeight)
+        {
+            currentPos += Vector3.up * jumpSpeed;
+        }
+        else
+        {
+            
+        }
     }
 
     IEnumerator ChangeColor()

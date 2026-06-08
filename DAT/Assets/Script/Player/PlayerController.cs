@@ -33,8 +33,10 @@ public class PlayerController : MonoBehaviour
     PlayerAttack playerAttack;
     [SerializeField] GameObject attackObj; // アタックのエフェクトと当たり判定を持つオブジェクトを代入
     [SerializeField] public GameObject strongAttackObj;
-    [SerializeField] public float attackTime = 1.2f; // アタック中の時間
-    [SerializeField] public float attackCd = 1.5f; // アタックのクールダウン
+    [SerializeField] public float defaultAttackTime = 0.5f;
+    [SerializeField] public float defaultAttackCd = 0.5f;
+    [SerializeField] public float attackTime; // アタック中の時間
+    [SerializeField] public float attackCd; // アタックのクールダウン
     float attackCdTimer; // クールダウンを実際にカウントする変数
     public float defaultAttackDamage = 5.0f; // デフォルトのアタックダメージ
     public float attackDamage = 5.0f; // アタックダメージ
@@ -65,6 +67,8 @@ public class PlayerController : MonoBehaviour
         currentPos = transform.position;
         onDash = false;
         attackCdTimer = 0f;
+        attackCd = defaultAttackCd;
+        attackTime = defaultAttackTime;
         spriteRenderer = GetComponent<SpriteRenderer>();
         playerHP = maxPlayerHP;
         attackDamage = defaultAttackDamage;

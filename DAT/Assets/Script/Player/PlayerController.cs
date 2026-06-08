@@ -31,6 +31,8 @@ public class PlayerController : MonoBehaviour
 
     // アタックに使う変数---------------------------------------------------------------
     PlayerAttack playerAttack;
+    PlayerAttackReach playerAttackReach;
+    GameObject reachObj;
     [SerializeField] GameObject attackObj; // アタックのエフェクトと当たり判定を持つオブジェクトを代入
     [SerializeField] public GameObject strongAttackObj;
     [SerializeField] public float defaultAttackTime = 0.5f;
@@ -41,7 +43,6 @@ public class PlayerController : MonoBehaviour
     public float defaultAttackDamage = 5.0f; // デフォルトのアタックダメージ
     public float attackDamage = 5.0f; // アタックダメージ
     public Vector3 attackDir; // アタックする方向
-    public Vector3 playerToEnemyNol;
     public float defaultFXRot = -90; // 攻撃エフェクトの方向補正
     public bool onAttack = false; // アタックしているかどうか
     public bool canAttack = false; // アタックする範囲内に敵がいるかどうかを判定する変数 
@@ -77,6 +78,8 @@ public class PlayerController : MonoBehaviour
         attackDamage = defaultAttackDamage;
         state = State.idle;
         anim = GetComponent<Animator>();
+        reachObj = transform.Find("AttackReach").gameObject;
+        playerAttackReach = reachObj.GetComponent<PlayerAttackReach>();
         Application.targetFrameRate = 60;
         
     }
@@ -192,7 +195,7 @@ public class PlayerController : MonoBehaviour
     {
         float flipX = 0;
         float rotZ = 0;
-        attackDir = playerToEnemyNol;
+        attackDir = playerAttackReach.playerToEnemyNol;
 
         GameObject obj = Instantiate(slashType);
         obj.transform.position = transform.position + attackDir * distanceAttackFX;

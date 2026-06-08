@@ -661,6 +661,8 @@ MonoBehaviour:
   dashUpObj: {fileID: 5337022448235006613, guid: c28f4b94c0ccd61419936ce6fc6f5043, type: 3}
   attackObj: {fileID: 132122364930665669, guid: 428bde71b707b3b49a63a27c01b204d2, type: 3}
   strongAttackObj: {fileID: 132122364930665669, guid: 9d0fa2fe56967ff4790f505ff03d0108, type: 3}
+  defaultAttackTime: 0.5
+  defaultAttackCd: 0.5
   attackTime: 0.5
   attackCd: 0.5
   defaultAttackDamage: 5
@@ -2619,6 +2621,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86224e0de1c176d4e99f7aabb7d3a006, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CardEffectManager
+  healAmount: 10
+  curseAmount: 10
+  boostTime: 3
 --- !u!4 &1168530632
 Transform:
   m_ObjectHideFlags: 0
@@ -4685,6 +4690,30 @@ MonoBehaviour:
   - cardType: 5
     cardName: Curse
     cardEffect: "\u4F53\u529B\u3092\uFF11\uFF10\u6E1B\u5C11"
+    cardImage: {fileID: 0}
+  - cardType: 0
+    cardName: Fire Boost
+    cardEffect: "\u653B\u6483\u529B\u3092\uFF13\uFF10\uFF05\u4E0A\u6607\uFF08\u4E00\u6642\uFF09"
+    cardImage: {fileID: 0}
+  - cardType: 1
+    cardName: Water Boost
+    cardEffect: "\u653B\u6483\u901F\u5EA6\u3092\uFF13\uFF10\uFF05\u4E0A\u6607\uFF08\u4E00\u6642\uFF09"
+    cardImage: {fileID: 0}
+  - cardType: 2
+    cardName: Ground Boost
+    cardEffect: "\u9632\u5FA1\u529B\u3092\uFF13\uFF10\uFF05\u4E0A\u6607\uFF08\u4E00\u6642\uFF09"
+    cardImage: {fileID: 0}
+  - cardType: 3
+    cardName: Thunder Boost
+    cardEffect: "\u79FB\u52D5\u901F\u5EA6\u3092\uFF13\uFF10\uFF05\u4E0A\u6607\uFF08\u4E00\u6642\uFF09"
+    cardImage: {fileID: 0}
+  - cardType: 4
+    cardName: Saint Boost
+    cardEffect: "\u56DE\u5FA9\u529B\u3092\uFF13\uFF10\uFF05\u4E0A\u6607\uFF08\u4E00\u6642\uFF09"
+    cardImage: {fileID: 0}
+  - cardType: 5
+    cardName: Curse Boost
+    cardEffect: "\u4F53\u529B\u6E1B\u5C11\u91CF\u3092\uFF13\uFF10\uFF05\u4E0A\u6607\uFF08\u4E00\u6642\uFF09"
     cardImage: {fileID: 0}
 --- !u!1 &1401892871
 GameObject:

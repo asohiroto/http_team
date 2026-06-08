@@ -11,7 +11,7 @@ public class PlayerAttackReach : MonoBehaviour
     // プレイヤーから敵へのベクトル
     Vector3 playerToEnemy = Vector3.zero;
     float distance;
-    Vector3 playerToEnemyNol = Vector3.zero;
+    public Vector3 playerToEnemyNol = Vector3.zero;
     // プレイヤーから敵へのベクトルの最小値をいれる（最小値を更新していくため、あえて大きい数字を入れている）
     Vector3 playerToEnemyMin = new Vector3(100, 100); 
 
@@ -41,7 +41,7 @@ public class PlayerAttackReach : MonoBehaviour
                     playerToEnemyMin = playerToEnemy;
                 }
             }
-            playerController.playerToEnemyNol = playerToEnemyMin.normalized; // 一番近いエネミーへの単位ベクトル
+            playerToEnemyNol = playerToEnemyMin.normalized; // 一番近いエネミーへの単位ベクトル
         }
     }
 

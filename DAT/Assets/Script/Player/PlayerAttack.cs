@@ -27,7 +27,6 @@ public class PlayerAttack : MonoBehaviour
         playerController = playerObj.GetComponent<PlayerController>();
         boxCol = GetComponent<BoxCollider2D>();
         boxCol.enabled = false;
-
         StartCoroutine(AttackAnim());
     }
 

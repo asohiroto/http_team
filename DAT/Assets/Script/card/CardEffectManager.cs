@@ -48,6 +48,11 @@ public class CardEffectManager : MonoBehaviour
     void Update()
     {
         boostCount++;
+
+        if(boostCount > 60 * boostTime)
+        {
+            EndBoost();
+        }
     }
 
     void FireEnhance()
@@ -62,6 +67,9 @@ public class CardEffectManager : MonoBehaviour
         player.attackCd *= 0.99f;
         player.attackTime *= 0.99f;
 
+        player.defaultAttackCd = player.attackCd;
+        player.defaultAttackTime = player.attackTime;
+
         Debug.Log("攻撃速度強化！");
     }
 
@@ -73,6 +81,7 @@ public class CardEffectManager : MonoBehaviour
     void ThunderEnhance()
     {
         player.speed *= 1.01f;
+        player.defaultSpeed = player.speed;
 
         Debug.Log("移動速度強化！");
     }
@@ -137,6 +146,17 @@ public class CardEffectManager : MonoBehaviour
     void CursedBoost()
     {
         curseAmount *= 1.3f;
+
+        curseAmount = 0;
+    }
+    void EndBoost()
+    {
+        player.attackDamage = player.defaultAttackDamage;
+        player.attackCd = player.defaultAttackCd;
+        player.attackTime = player.defaultAttackTime;
+        Debug.Log("防御力が元に戻った");
+        healAmount = healDefaultAmount;
+        curseAmount = curseDefaultAmount;
 
         curseAmount = 0;
     }

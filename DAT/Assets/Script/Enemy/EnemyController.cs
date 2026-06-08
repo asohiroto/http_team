@@ -46,6 +46,7 @@ public class EnemyController : MonoBehaviour
     [SerializeField] private GameObject DropItemPrefab; // DropItem のプレハブ
     [SerializeField] private GameObject attackCol;      // 攻撃用のコライダー(プレハブ)
     private EnemyAnimation enemyAnim;
+    private EnemySpawner enemySpawner;
     [SerializeField] private GameObject attackObj;
 
     private enum EnemyAiState       // Enemyの状態
@@ -87,6 +88,7 @@ public class EnemyController : MonoBehaviour
         }
 
         enemyAnim = GetComponent<EnemyAnimation>();
+        enemySpawner = GetComponent<EnemySpawner>();
 
     }
 
@@ -337,6 +339,8 @@ public class EnemyController : MonoBehaviour
 
         GameObject dropItem = Instantiate(DropItemPrefab, this.transform);
         dropItem.transform.SetParent(DropParentObj.transform);
+
+        //enemySpawner.DestroyEnemy();
 
         Destroy(this.gameObject);
     }

@@ -135,6 +135,7 @@ public class EnemyController : MonoBehaviour
     public void EnemyDamaged(float dmg)
     {
         enemyHp -= dmg;
+        enemyAnim.StartBlink(4);
     }
 
     public void OnAttackAnimationFinished()

@@ -407,7 +407,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1657329401338922501, guid: f6545e77c56c98841962ce3e926c813d, type: 3}
       propertyPath: enemyHp
-      value: 1293.5
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 1657329401338922501, guid: f6545e77c56c98841962ce3e926c813d, type: 3}
       propertyPath: playerObj
@@ -463,7 +463,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3875057953984697843, guid: f6545e77c56c98841962ce3e926c813d, type: 3}
       propertyPath: blinkInterval
-      value: 1
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 4355061071210407241, guid: f6545e77c56c98841962ce3e926c813d, type: 3}
       propertyPath: m_Mass

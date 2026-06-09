@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Threading;
 using UnityEngine;
 using UnityEngine.InputSystem.LowLevel;
 
@@ -29,8 +30,13 @@ public class EnemyAnimation : MonoBehaviour
     private AnimationData currentActiveData;
     [SerializeField] private EnemyAnimState currentState = EnemyAnimState.Init;
     [SerializeField] private int currentFrame = 0;   // 現在のフレーム
-    [SerializeField] private float timer = 0;
-    [SerializeField] private float timePerFrame = 0;
+    [SerializeField] private float Animtimer = 0.0f;
+    [SerializeField] private float timePerFrame = 0.0f;
+    [SerializeField] private float blinkTimer = 0.0f;   // 被ダメージ時の点滅処理
+    [SerializeField] private float blinkInterval = 0.2f;
+    [SerializeField] private int blinkCounter = 0;
+    [SerializeField] private bool isBlinking = false;
+    [SerializeField] private bool isRed = false;
 
     EnemyController enemy;
     private SpriteRenderer spr;
@@ -57,16 +63,19 @@ public class EnemyAnimation : MonoBehaviour
         spr = GetComponent<SpriteRenderer>();
 
         ChangeState(EnemyAnimState.Idle);
+
+        blinkTimer = blinkInterval;
     }
 
     // Update is called once per frame
     void Update()
     {
-        timer += Time.deltaTime;
+        Animtimer -= Time.deltaTime;
+        blinkTimer -= Time.deltaTime;
 
-        if (timer >= timePerFrame)
+        if (Animtimer < 0)
         {
-            timer -= timePerFrame;
+            Animtimer += timePerFrame;
 
             int nextFrame = currentFrame + 1;
 
@@ -77,7 +86,7 @@ public class EnemyAnimation : MonoBehaviour
                 {
                     // ループ処理
                     currentFrame = 0;
-                    timer = 0;
+                    Animtimer = 0;
                 }
                 else
                 {
@@ -93,8 +102,34 @@ public class EnemyAnimation : MonoBehaviour
 
             this.spr.sprite = currentActiveData.sprites[currentFrame];
         }
+
+        if (isBlinking)
+        {
+            if (blinkCounter <= 0) return;
+            blinkTimer -= Time.deltaTime;
+            if (blinkTimer < 0)
+            {
+                if (isRed)
+                {
+                    spr.color = Color.white;
+                    isRed = false;
+                }
+                else
+                {
+                    spr.color = Color.red;
+                    isRed = true;
+                }
+                blinkCounter--;
+
+                blinkTimer += timePerFrame;
+            }
+        }
     }
 
+    /// <summary>
+    /// アニメーションの変更
+    /// </summary>
+    /// <param name="changedState"></param>
     public void ChangeState(EnemyAnimState changedState)
     {
         if (currentState == changedState) return;
@@ -105,7 +140,7 @@ public class EnemyAnimation : MonoBehaviour
         {
             currentActiveData = foundData;
             currentFrame = 0;
-            timer = 0f;
+            Animtimer = 0f;
 
             //Debug.Log("statusを変更しました：");
 
@@ -113,4 +148,16 @@ public class EnemyAnimation : MonoBehaviour
             timePerFrame = 1f / currentActiveData.frameRate;
         }
     }
+
+    public void StartBlink(int count)
+    {
+        isBlinking = true;
+        Animtimer = 0f; // タイマーリセット
+        blinkCounter = count * 2;
+        isRed = false;
+        spr.color = Color.red; // 最初は赤からスタート
+    }
+
+    // 点滅用の関数を作る
+    // 引数に点滅回数を指定する
 }

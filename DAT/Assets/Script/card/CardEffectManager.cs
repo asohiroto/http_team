@@ -73,7 +73,7 @@ public class CardEffectManager : MonoBehaviour
         curseDefaultAmount = curseAmount;
 
         player = GameObject.Find("Player").GetComponent<PlayerController>();
-        reach = GameObject.Find("Player").GetComponent<CardAttackReach>();
+        reach = GameObject.Find("Player").GetComponentInChildren<CardAttackReach>();
         skill = GameObject.Find("SkillManager").GetComponent<SkillManager>();
     }
 

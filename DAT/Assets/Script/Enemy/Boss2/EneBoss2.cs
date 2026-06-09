@@ -22,6 +22,7 @@ public class EneBoss2 : MonoBehaviour
     [SerializeField] float attackTime = 1.0f;
     [SerializeField] GameObject rangeAttackObj;
     [SerializeField] GameObject stampAttackReach;
+    SpriteRenderer stampSpr;
     GameObject stampAttackReachObj = null;
     bool isAttackReach = false;
     float landingPosAdj = 1.0f;
@@ -33,7 +34,12 @@ public class EneBoss2 : MonoBehaviour
     int attackFrame = 60;
     int attackWaitingFrame = 10;
     bool followPlayer;
-
+    int flashRangeFrame = 15;
+    bool isTransparent = false;
+    // ミサイル攻撃の変数
+    enum ShotState { Wait, Shot} // ミサイル攻撃の状態を管理する
+    ShotState shotState;
+    [SerializeField] GameObject missilePrefab;
 
     SpriteRenderer spriteRenderer;
     void Start()
@@ -85,6 +91,19 @@ public class EneBoss2 : MonoBehaviour
         currentPos += moveDir;
     }
 
+    void Shot()
+    {
+        switch(shotState)
+        {
+            case ShotState.Wait:
+                
+                break;
+            case ShotState.Shot:
+                break;
+        }
+    }
+
+    // スタンプ攻撃の処理
     void Stamp()
     {
         switch(stampState)
@@ -102,14 +121,25 @@ public class EneBoss2 : MonoBehaviour
                 break;
             case StampState.Aim:
                 frameTimer++;
-                if (!isAttackReach)
+                if (!isAttackReach)　// 一度だけ生成する
                 {
                     stampAttackReachObj = Instantiate(stampAttackReach);
+                    stampSpr = stampAttackReachObj.GetComponent<SpriteRenderer>();
                     isAttackReach = true;
                 }
-                if (stampAttackReachObj != null && followPlayer)stampAttackReachObj.transform.position = targetPos;
+                if (stampAttackReachObj != null && followPlayer)
+                {
+                    stampAttackReachObj.transform.position = targetPos;
+                    // 点滅処理する状態かどうか
+                    if(frameTimer % flashRangeFrame == 0)
+                    {
+                        if(!isTransparent)isTransparent = true;
+                        else if (isTransparent) isTransparent = false;
+                    }
+                }
                 if (frameTimer >= attackFrame)
                 {
+                    isTransparent = false;
                     followPlayer = false;
                     if(frameTimer >= attackFrame + attackWaitingFrame)
                     {
@@ -117,6 +147,10 @@ public class EneBoss2 : MonoBehaviour
                         stampState = StampState.Stamp;
                     }
                 }
+
+                // 点滅処理の本体
+                if (!isTransparent) stampAttackReachObj.SetActive(true);
+                else if (isTransparent) stampAttackReachObj.SetActive(false); 
             break;
             case StampState.Stamp:
                 currentPos.x = stampAttackReachObj.transform.position.x;
@@ -133,13 +167,7 @@ public class EneBoss2 : MonoBehaviour
         }
     }
 
-    void Jump()
-    {
-        if(currentPos.y <= jumpHeight)
-        {
-            currentPos += Vector3.up * jumpSpeed;
-        }
-    }
+    
 
     IEnumerator ChangeColor()
     {

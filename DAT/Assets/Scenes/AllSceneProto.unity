@@ -650,6 +650,119 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &461212077 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4374503095024090849, guid: adafc529adc6fb84d8417122a115aaa6, type: 3}
+  m_PrefabInstance: {fileID: 1185538662}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &461212078 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7402475843637736188, guid: adafc529adc6fb84d8417122a115aaa6, type: 3}
+  m_PrefabInstance: {fileID: 1185538662}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &461212085
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 461212077}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef6245c5bed91cf4a999fb2b7a814392, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HPBarController
+  hpBarFill: {fileID: 0}
+--- !u!1 &493827788
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 493827789}
+  - component: {fileID: 493827792}
+  - component: {fileID: 493827791}
+  - component: {fileID: 493827790}
+  m_Layer: 5
+  m_Name: HpBar
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &493827789
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 493827788}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 0}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 1646791948}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0.000022888, y: -47.296112}
+  m_SizeDelta: {x: 105.463, y: 16.7052}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &493827790
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 493827788}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ababaf8784537e4d991b815f5523dc8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HpFollowTarget
+  target: {fileID: 461212078}
+  offset: {x: 0, y: -0.5, z: 0}
+--- !u!114 &493827791
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 493827788}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: -2700711109828642718, guid: 3cfb620af46adcc47b9f5a3b765fd979, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &493827792
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 493827788}
+  m_CullTransparentMesh: 1
 --- !u!1 &535683923
 GameObject:
   m_ObjectHideFlags: 0
@@ -1550,7 +1663,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 4374503095024090849, guid: adafc529adc6fb84d8417122a115aaa6, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 461212085}
   m_SourcePrefab: {fileID: 100100000, guid: adafc529adc6fb84d8417122a115aaa6, type: 3}
 --- !u!1 &1188069454
 GameObject:
@@ -3948,6 +4064,7 @@ RectTransform:
   m_Children:
   - {fileID: 1576872214}
   - {fileID: 264326540}
+  - {fileID: 493827789}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}

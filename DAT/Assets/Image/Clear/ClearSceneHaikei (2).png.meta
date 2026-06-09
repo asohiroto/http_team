@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: fa675e0a369c88d4ba5342133142010a
+guid: 916b8d8e9ed0ff3478dd573edbec4bfc
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 1490122312239849419
-    second: fc863_0
+      213: -5508484937586923521
+    second: ClearSceneHaikei (2)_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -113,13 +113,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: fc863_0
+      name: ClearSceneHaikei (2)_0
       rect:
         serializedVersion: 2
-        x: 11
-        y: 3
-        width: 50
-        height: 61
+        x: 0
+        y: 0
+        width: 1448
+        height: 1086
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: bcf90f4195afda410800000000000000
-      internalID: 1490122312239849419
+      spriteID: ff7aa8c622eed83b0800000000000000
+      internalID: -5508484937586923521
       vertices: []
       indices: 
       edges: []
@@ -148,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      fc863_0: 1490122312239849419
+      ClearSceneHaikei (2)_0: -5508484937586923521
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -16,14 +16,16 @@ public class EneBoss2 : MonoBehaviour
     [SerializeField] float showAttackRangeTime = 3.0f;
     bool isAttackWaiting = false;
     float flashTime = 0.1f;
-    // 範囲攻撃の変数
+    // 範囲攻撃の変数---------------------------------
     enum StampState { Jump, Aim, Stamp} // スタンプ攻撃の状態を管理する
     StampState stampState;
     [SerializeField] float attackTime = 1.0f;
     [SerializeField] GameObject rangeAttackObj;
     [SerializeField] GameObject stampAttackReach;
+    [SerializeField] GameObject cautionEffectPrefab;
     SpriteRenderer stampSpr;
     GameObject stampAttackReachObj = null;
+    GameObject cautionObj = null;
     bool isAttackReach = false;
     float landingPosAdj = 1.0f;
     float jumpHeight = 20.0f; // 範囲攻撃の高さ
@@ -31,12 +33,12 @@ public class EneBoss2 : MonoBehaviour
     [SerializeField] int frameDelay = 10; // 何フレーム前の値をとるか
     Queue<Vector3> pastPositions = new Queue<Vector3>();
     Vector3 targetPos = Vector3.zero;
-    int attackFrame = 60;
-    int attackWaitingFrame = 10;
+    int attackFrame = 120;
+    int attackWaitingFrame = 5;
     bool followPlayer;
-    int flashRangeFrame = 15;
+    int flashRangeFrame = 20;
     bool isTransparent = false;
-    // ミサイル攻撃の変数
+    // ミサイル攻撃の変数-------------------------------
     enum ShotState { Wait, Shot} // ミサイル攻撃の状態を管理する
     ShotState shotState;
     [SerializeField] GameObject missilePrefab;
@@ -91,18 +93,6 @@ public class EneBoss2 : MonoBehaviour
         currentPos += moveDir;
     }
 
-    void Shot()
-    {
-        switch(shotState)
-        {
-            case ShotState.Wait:
-                
-                break;
-            case ShotState.Shot:
-                break;
-        }
-    }
-
     // スタンプ攻撃の処理
     void Stamp()
     {
@@ -124,17 +114,21 @@ public class EneBoss2 : MonoBehaviour
                 if (!isAttackReach)　// 一度だけ生成する
                 {
                     stampAttackReachObj = Instantiate(stampAttackReach);
-                    stampSpr = stampAttackReachObj.GetComponent<SpriteRenderer>();
+                    //stampSpr = stampAttackReachObj.GetComponent<SpriteRenderer>();
+                    cautionObj = Instantiate(cautionEffectPrefab);
                     isAttackReach = true;
                 }
                 if (stampAttackReachObj != null && followPlayer)
                 {
                     stampAttackReachObj.transform.position = targetPos;
+                    // 警告エフェクトを当たり判定の右上に
+                    cautionObj.transform.position = targetPos + new Vector3(3, 3, 0);
                     // 点滅処理する状態かどうか
                     if(frameTimer % flashRangeFrame == 0)
                     {
                         if(!isTransparent)isTransparent = true;
                         else if (isTransparent) isTransparent = false;
+                        flashRangeFrame--;
                     }
                 }
                 if (frameTimer >= attackFrame)
@@ -149,10 +143,15 @@ public class EneBoss2 : MonoBehaviour
                 }
 
                 // 点滅処理の本体
-                if (!isTransparent) stampAttackReachObj.SetActive(true);
-                else if (isTransparent) stampAttackReachObj.SetActive(false); 
+                if (!isTransparent) cautionObj.SetActive(true);
+                else if (isTransparent) cautionObj.SetActive(false);
             break;
             case StampState.Stamp:
+                // スタンプ攻撃がおわったら行動を終了
+                if (stampAttackReachObj == null || cautionObj == null)
+                {
+                    return;
+                }
                 currentPos.x = stampAttackReachObj.transform.position.x;
                 if (currentPos.y >= stampAttackReachObj.transform.position.y + landingPosAdj)
                 {
@@ -162,6 +161,7 @@ public class EneBoss2 : MonoBehaviour
                 else
                 {
                     Destroy(stampAttackReachObj);
+                    Destroy(cautionObj);
                 }
             break;
         }

@@ -40,15 +40,7 @@ public class GameSceneManager : MonoBehaviour
 
     public void OpenDeckEditMode()
     {
-        Time.timeScale = 0f;
-
-        SceneManager.LoadSceneAsync("DeckScene", LoadSceneMode.Additive);
+        SceneManager.LoadScene("DeckScene");
     }
 
-    public void CloseDeckEditMode()
-    {
-        SceneManager.UnloadSceneAsync("DeckScene");
-
-        Time.timeScale = 1.0f;
-    }
 }

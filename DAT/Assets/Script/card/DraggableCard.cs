@@ -7,7 +7,6 @@ public class DraggableCard : MonoBehaviour, IBeginDragHandler, IEndDragHandler, 
 {
     private Canvas canvas;
     private CanvasGroup canvasGroup;
-
     private GameObject ghostImage;
 
     // カードの位置と、ID
@@ -19,6 +18,8 @@ public class DraggableCard : MonoBehaviour, IBeginDragHandler, IEndDragHandler, 
 
     public bool wasDroppedOnCard = false;
 
+    string currentScene;
+
     CraftManager craft;
     HandManager hand;
     SkillManager skill;
@@ -27,23 +28,27 @@ public class DraggableCard : MonoBehaviour, IBeginDragHandler, IEndDragHandler, 
 
     void Start()
     {
+        currentScene = SceneManager.GetActiveScene().name;
+
         // ドラッグするためのキャンバスと、ドラッグ中にレイキャストでこのカードを感知しないようにするためのCanvasGroupを取得
         canvas = GetComponentInParent<Canvas>();
         canvasGroup = gameObject.AddComponent<CanvasGroup>();
-
-        effect = GameObject.Find("CardEffectManager").GetComponent<CardEffectManager>();
-        change = GameObject.Find("HandManager").GetComponent<CardChanger>();
-
-        GameObject[] objs = GameObject.FindGameObjectsWithTag("Card");
-        foreach (GameObject obj in objs) // それぞれ探す
+        if (currentScene != "DeckScene")
         {
-            if (hand == null) hand = obj.GetComponent<HandManager>();
+            effect = GameObject.Find("CardEffectManager").GetComponent<CardEffectManager>();
+            change = GameObject.Find("HandManager").GetComponent<CardChanger>();
 
-            if (craft == null) craft = obj.GetComponent<CraftManager>();
+            GameObject[] objs = GameObject.FindGameObjectsWithTag("Card");
+            foreach (GameObject obj in objs) // それぞれ探す
+            {
+                if (hand == null) hand = obj.GetComponent<HandManager>();
 
-            if (skill == null) skill = obj.GetComponent<SkillManager>();
+                if (craft == null) craft = obj.GetComponent<CraftManager>();
 
-            if (hand != null && craft != null && skill != null) break;
+                if (skill == null) skill = obj.GetComponent<SkillManager>();
+
+                if (hand != null && craft != null && skill != null) break;
+            }
         }
     }
 
@@ -99,66 +104,72 @@ public class DraggableCard : MonoBehaviour, IBeginDragHandler, IEndDragHandler, 
     // ドロップされた時に実行
     public void OnDrop(PointerEventData eventData)
     {
-        // ドロップされたカードと、ドロップ先のカードを取得
-        DraggableCard dragged = eventData.pointerDrag?.GetComponent<DraggableCard>();
-        DraggableCard target = transform.GetComponentInChildren<DraggableCard>();
-
-        // ドロップされたカードが存在しない、またはドロップ先のカードと同じ場合は何もしない
-        if (dragged == null || dragged == this) return;
-
-        // DeckSceneではカードの合成は行わないため、合成の処理を行わない
-        if (SceneManager.GetActiveScene().name != "DeckScene")
+        if (currentScene != "DeckScene")
         {
-            dragged.wasDroppedOnCard = true;
 
-            // ドロップされたカードとドロップ先のカードのIDをCraftManagerに渡して、合成の結果のカードのIDを取得
-            craftResult = craft.CraftCards(dragged.cardId, target.cardId);
+            // ドロップされたカードと、ドロップ先のカードを取得
+            DraggableCard dragged = eventData.pointerDrag?.GetComponent<DraggableCard>();
+            DraggableCard target = transform.GetComponentInChildren<DraggableCard>();
 
-            if (craftResult < 0)
+            // ドロップされたカードが存在しない、またはドロップ先のカードと同じ場合は何もしない
+            if (dragged == null || dragged == this) return;
+
+            // DeckSceneではカードの合成は行わないため、合成の処理を行わない
+            if (SceneManager.GetActiveScene().name != "DeckScene")
             {
-                Debug.Log("なにかが違うようだ……？");
-                return;
+                dragged.wasDroppedOnCard = true;
+
+                // ドロップされたカードとドロップ先のカードのIDをCraftManagerに渡して、合成の結果のカードのIDを取得
+                craftResult = craft.CraftCards(dragged.cardId, target.cardId);
+
+                if (craftResult < 0)
+                {
+                    Debug.Log("なにかが違うようだ……？");
+                    return;
+                }
+
+                // ドロップされたカードとドロップ先のカードの位置を取得
+                int fromIndex = dragged.cardIndex;
+                int toIndex = this.cardIndex;
+
+                Destroy(dragged.ghostImage);
+
+                // ドロップされたカードとドロップ先のカードを手札から消す
+                hand.DisCard(fromIndex);
+                hand.DisCard(toIndex);
+
+                // 合成の結果のカードを、ドロップされたカードとドロップ先のカードの位置のうち、より小さい位置に生成する
+                int spawnIndex = Mathf.Min(fromIndex, toIndex);
+                hand.CardGenerate(craftResult, spawnIndex);
             }
-
-            // ドロップされたカードとドロップ先のカードの位置を取得
-            int fromIndex = dragged.cardIndex;
-            int toIndex = this.cardIndex;
-
-            Destroy(dragged.ghostImage);
-
-            // ドロップされたカードとドロップ先のカードを手札から消す
-            hand.DisCard(fromIndex);
-            hand.DisCard(toIndex);
-
-            // 合成の結果のカードを、ドロップされたカードとドロップ先のカードの位置のうち、より小さい位置に生成する
-            int spawnIndex = Mathf.Min(fromIndex, toIndex);
-            hand.CardGenerate(craftResult, spawnIndex);
         }
     }
-
     // ドラッグ終了時に実行
     public void OnEndDrag(PointerEventData eventData)
     {
-        // ドラッグ中に作成したゴーストイメージが存在しない場合は何もしない
-        if (ghostImage == null) return;
-
-        if (wasDroppedOnCard)
+        if (currentScene != "DeckScene")
         {
-            wasDroppedOnCard = false;
+            // ドラッグ中に作成したゴーストイメージが存在しない場合は何もしない
+            if (ghostImage == null) return;
+
+            if (wasDroppedOnCard)
+            {
+                wasDroppedOnCard = false;
+            }
+            else
+            {
+                // カードの効果を発動させる
+                Debug.Log(skill.useFlag);
+
+                effect.cardEffect[cardId]();
+
+                hand.DisCard(cardIndex);
+            }
+
+            // ドラッグ中はレイキャストでこのカードを感知しないようにしていたのを元に戻す
+            canvasGroup.blocksRaycasts = true;
+            Destroy(ghostImage);
+            ghostImage = null;
         }
-        else
-        {
-            // カードの効果を発動させる
-            Debug.Log(skill.useFlag);
-
-            effect.cardEffect[cardId]();
-
-            hand.DisCard(cardIndex);
-        }
-
-        // ドラッグ中はレイキャストでこのカードを感知しないようにしていたのを元に戻す
-        canvasGroup.blocksRaycasts = true;
-        Destroy(ghostImage);
-        ghostImage = null;
     }
 }

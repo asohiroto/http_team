@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class DeckSceneManager : MonoBehaviour
 {
@@ -14,12 +15,8 @@ public class DeckSceneManager : MonoBehaviour
     {
         if(Keyboard.current.escapeKey.wasPressedThisFrame)
         {
-            CloseDeckScene();
+            SceneManager.LoadScene("AllSceneProto");
         }
     }
 
-    public void CloseDeckScene()
-    {
-        GameSceneManager.Instance.CloseDeckEditMode();
-    }
 }

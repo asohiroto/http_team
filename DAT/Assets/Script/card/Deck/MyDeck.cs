@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 public class MyDeck : MonoBehaviour
 {
-    List<int> myDeckId = new List<int>();
+    public List<int> myDeckId = new List<int>();
 
     public static MyDeck instance;
 

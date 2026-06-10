@@ -165,11 +165,12 @@ public class DraggableCard : MonoBehaviour, IBeginDragHandler, IEndDragHandler, 
 
                 hand.DisCard(cardIndex);
             }
+        }
 
             // ドラッグ中はレイキャストでこのカードを感知しないようにしていたのを元に戻す
             canvasGroup.blocksRaycasts = true;
             Destroy(ghostImage);
             ghostImage = null;
-        }
+        
     }
 }

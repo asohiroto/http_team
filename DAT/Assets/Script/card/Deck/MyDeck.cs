@@ -1,9 +1,10 @@
 using UnityEngine;
 using System.Collections.Generic;
+using System.Linq;
 
 public class MyDeck : MonoBehaviour
 {
-    public List<int> myDeckId = new List<int>();
+    public int[] myDeckId = {-1, -1, -1, -1, -1, -1, -1, -1};
 
     public static MyDeck instance;
 
@@ -23,7 +24,7 @@ public class MyDeck : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+    
     }
 
     // Update is called once per frame

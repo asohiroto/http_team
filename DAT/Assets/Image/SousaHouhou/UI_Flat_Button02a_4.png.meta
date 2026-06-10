@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 916b8d8e9ed0ff3478dd573edbec4bfc
+guid: f5603797f7cf4244397b4877bab23393
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -5508484937586923521
-    second: ClearSceneHaikei (2)_0
+      213: -1126324709393654888
+    second: UI_Flat_Button02a_4_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -113,13 +113,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: ClearSceneHaikei (2)_0
+      name: UI_Flat_Button02a_4_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 1448
-        height: 1086
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: ff7aa8c622eed83b0800000000000000
-      internalID: -5508484937586923521
+      spriteID: 89b98d2f4ad7e50f0800000000000000
+      internalID: -1126324709393654888
       vertices: []
       indices: 
       edges: []
@@ -148,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      ClearSceneHaikei (2)_0: -5508484937586923521
+      UI_Flat_Button02a_4_0: -1126324709393654888
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

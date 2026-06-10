@@ -34,7 +34,6 @@ public class EnemyAnimation : MonoBehaviour
     [SerializeField] private float timePerFrame = 0.0f;
     [SerializeField] private float blinkTimer = 0.0f;   // 被ダメージ時の点滅処理
     [SerializeField] private float blinkInterval = 0.2f;
-    [SerializeField] private int blinkCounter = 0;
     [SerializeField] private bool isBlinking = false;
     [SerializeField] private bool isRed = false;
 
@@ -105,23 +104,11 @@ public class EnemyAnimation : MonoBehaviour
 
         if (isBlinking)
         {
-            if (blinkCounter <= 0) return;
             blinkTimer -= Time.deltaTime;
             if (blinkTimer < 0)
             {
-                if (isRed)
-                {
-                    spr.color = Color.white;
-                    isRed = false;
-                }
-                else
-                {
-                    spr.color = Color.red;
-                    isRed = true;
-                }
-                blinkCounter--;
-
-                blinkTimer += timePerFrame;
+                spr.color = Color.white;
+                isBlinking = false;
             }
         }
     }
@@ -149,11 +136,10 @@ public class EnemyAnimation : MonoBehaviour
         }
     }
 
-    public void StartBlink(int count)
+    public void StartBlink()
     {
         isBlinking = true;
-        Animtimer = 0f; // タイマーリセット
-        blinkCounter = count * 2;
+        blinkTimer = blinkInterval; // タイマーリセット
         isRed = false;
         spr.color = Color.red; // 最初は赤からスタート
     }

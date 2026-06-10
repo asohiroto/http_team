@@ -134,27 +134,17 @@ public class EnemyController : MonoBehaviour
     /// <param name="dmg"></param>
     public void EnemyDamaged(float dmg)
     {
+        enemyAiState = EnemyAiState.KnockBack;
         enemyHp -= dmg;
-        enemyAnim.StartBlink(4);
     }
 
     public void OnAttackAnimationFinished()
     {
-        switch (enemyAiState)
+        if (enemyAiState == EnemyAiState.Attack)
         {
-            case EnemyAiState.AttackStartup:
-                //enemyAiState = EnemyAiState.Attack;
-                break;
+            attackCooldownTimer = attackCooldownDuration;
 
-            case EnemyAiState.Attack:
-                attackCooldownTimer = attackCooldownDuration;
-
-                enemyAiState = EnemyAiState.AttackCooldown;
-                break;
-
-            case EnemyAiState.AttackCooldown:
-                //enemyAiState = EnemyAiState.Idle;
-                break;
+            enemyAiState = EnemyAiState.AttackCooldown;
         }
     }
 
@@ -260,6 +250,7 @@ public class EnemyController : MonoBehaviour
         if (enemyAiState == EnemyAiState.KnockBack) return;
         */
 
+        // アイドル時と移動時以外飛ばす
         if (enemyAiState != EnemyAiState.Idle 
             && enemyAiState != EnemyAiState.Move) return;
 
@@ -322,6 +313,17 @@ public class EnemyController : MonoBehaviour
                     enemyAnim.ChangeState(EnemyAnimState.SideAttack);
                 }
                 
+                break;
+
+            case EnemyAiState.KnockBack:
+                
+                enemyAnim.StartBlink();
+                
+                Vector3 force = new Vector3 (targetDir.x, targetDir.y, 0) * -1 * 0.75f + this.transform.position;
+                this.transform.position = force;
+                // 2重で飛ばされるのを防止したい
+
+                enemyAiState = EnemyAiState.Idle;
                 break;
 
             default:

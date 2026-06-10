@@ -1,27 +1,27 @@
 fileFormatVersion: 2
-guid: 956c0a130ab5b8c4f8d60c228f44b6e2
+guid: 35fa85671fd6ab444be57d25b3c8edd0
 AssetOrigin:
   serializedVersion: 1
   productId: 356470
   packageName: Pixel Art - Gear Wheels Pack - Animated
   packageVersion: 1.0
-  assetPath: Assets/karsiori/Cog Wheels - Gears/SpriteSheets/Silver Gear Wheels/Gear
-    9 - Silver_spritesheet.png
+  assetPath: Assets/karsiori/Cog Wheels - Gears/SpriteSheets/Bronze Gear Wheels/Gear
+    1 - Bronze_spritesheet.png
   uploadId: 849496
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 3145839168032484837
-    second: Gear 9 - Silver_spritesheet_0
+      213: 948324044546373383
+    second: Gear 1 - Bronze_spritesheet_0
   - first:
-      213: -4379996231951828010
-    second: Gear 9 - Silver_spritesheet_1
+      213: 3109865660750362222
+    second: Gear 1 - Bronze_spritesheet_1
   - first:
-      213: -9049412901788482878
-    second: Gear 9 - Silver_spritesheet_2
+      213: -7694061708888864898
+    second: Gear 1 - Bronze_spritesheet_2
   - first:
-      213: 2569809905280595868
-    second: Gear 9 - Silver_spritesheet_3
+      213: 1944909904742065972
+    second: Gear 1 - Bronze_spritesheet_3
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -130,13 +130,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Gear 9 - Silver_spritesheet_0
+      name: Gear 1 - Bronze_spritesheet_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 60
-        height: 59
+        width: 44
+        height: 43
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -145,20 +145,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 5ed26135e0448ab20800000000000000
-      internalID: 3145839168032484837
+      spriteID: 707f52fa1bf192d00800000000000000
+      internalID: 948324044546373383
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Gear 9 - Silver_spritesheet_1
+      name: Gear 1 - Bronze_spritesheet_1
       rect:
         serializedVersion: 2
-        x: 59
+        x: 43
         y: 0
-        width: 59
-        height: 59
+        width: 43
+        height: 43
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -167,20 +167,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 6db36fc12a02733c0800000000000000
-      internalID: -4379996231951828010
+      spriteID: e66f5387756782b20800000000000000
+      internalID: 3109865660750362222
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Gear 9 - Silver_spritesheet_2
+      name: Gear 1 - Bronze_spritesheet_2
       rect:
         serializedVersion: 2
-        x: 117
+        x: 85
         y: 0
-        width: 61
-        height: 59
+        width: 45
+        height: 43
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -189,20 +189,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 2c28f0369e60a6280800000000000000
-      internalID: -9049412901788482878
+      spriteID: e778eb104a3393590800000000000000
+      internalID: -7694061708888864898
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Gear 9 - Silver_spritesheet_3
+      name: Gear 1 - Bronze_spritesheet_3
       rect:
         serializedVersion: 2
-        x: 177
+        x: 129
         y: 0
-        width: 59
-        height: 59
+        width: 43
+        height: 43
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -211,8 +211,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: c97b7805e7cc9a320800000000000000
-      internalID: 2569809905280595868
+      spriteID: 4372a48f045bdfa10800000000000000
+      internalID: 1944909904742065972
       vertices: []
       indices: 
       edges: []
@@ -231,10 +231,10 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Gear 9 - Silver_spritesheet_0: 3145839168032484837
-      Gear 9 - Silver_spritesheet_1: -4379996231951828010
-      Gear 9 - Silver_spritesheet_2: -9049412901788482878
-      Gear 9 - Silver_spritesheet_3: 2569809905280595868
+      Gear 1 - Bronze_spritesheet_0: 948324044546373383
+      Gear 1 - Bronze_spritesheet_1: 3109865660750362222
+      Gear 1 - Bronze_spritesheet_2: -7694061708888864898
+      Gear 1 - Bronze_spritesheet_3: 1944909904742065972
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class DeckSceneManager : MonoBehaviour
 {
@@ -12,14 +13,10 @@ public class DeckSceneManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Keyboard.current.escapeKey.wasPressedThisFrame)
+        if(Keyboard.current.qKey.wasPressedThisFrame)
         {
-            CloseDeckScene();
+            SceneManager.LoadScene("AllSceneProto");
         }
     }
 
-    public void CloseDeckScene()
-    {
-        GameSceneManager.Instance.CloseDeckEditMode();
-    }
 }

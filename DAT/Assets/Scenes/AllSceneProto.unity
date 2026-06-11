@@ -699,6 +699,7 @@ GameObject:
   - component: {fileID: 264326540}
   - component: {fileID: 264326542}
   - component: {fileID: 264326541}
+  - component: {fileID: 264326543}
   m_Layer: 5
   m_Name: HandPanel
   m_TagString: Untagged
@@ -770,6 +771,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 264326539}
   m_CullTransparentMesh: 1
+--- !u!114 &264326543
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 264326539}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2aab4a3757ecac249a55339ab8f5d1fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HandPanel
 --- !u!1 &265012515
 GameObject:
   m_ObjectHideFlags: 0
@@ -6482,7 +6495,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemySpawner
   spawnIntervalSec: 1
-  maxEnemy: 10
+  maxEnemy: 1000
   enemyCount: 0
   WeakTorcher: {fileID: 4419746953452864637, guid: f6545e77c56c98841962ce3e926c813d, type: 3}
   dirX: 0

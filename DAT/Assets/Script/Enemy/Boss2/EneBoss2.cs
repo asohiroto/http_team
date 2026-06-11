@@ -36,7 +36,7 @@ public class EneBoss2 : MonoBehaviour
     int attackFrame = 120;
     int attackWaitingFrame = 5;
     bool followPlayer;
-    int flashRangeFrame = 20;
+    int flashRangeFrame = 10;
     bool isTransparent = false;
     // ミサイル攻撃の変数-------------------------------
     enum ShotState { Wait, Shot} // ミサイル攻撃の状態を管理する
@@ -93,6 +93,19 @@ public class EneBoss2 : MonoBehaviour
         currentPos += moveDir;
     }
 
+    void Missile()
+    {
+        switch (shotState)
+        {
+            case ShotState.Wait:
+                Instantiate(missilePrefab);
+                break;
+            case ShotState.Shot:
+
+                break;
+        }
+    }
+
     // スタンプ攻撃の処理
     void Stamp()
     {
@@ -103,7 +116,7 @@ public class EneBoss2 : MonoBehaviour
                 {
                     currentPos += Vector3.up * jumpSpeed;
                 }
-                else 
+                else
                 {
                     // ジャンプ終了後、エイム状態へ遷移
                     stampState = StampState.Aim;
@@ -122,13 +135,12 @@ public class EneBoss2 : MonoBehaviour
                 {
                     stampAttackReachObj.transform.position = targetPos;
                     // 警告エフェクトを当たり判定の右上に
-                    cautionObj.transform.position = targetPos + new Vector3(3, 3, 0);
+                    cautionObj.transform.position = targetPos + new Vector3(2.5f, 2.5f, 0);
                     // 点滅処理する状態かどうか
                     if(frameTimer % flashRangeFrame == 0)
                     {
                         if(!isTransparent)isTransparent = true;
                         else if (isTransparent) isTransparent = false;
-                        flashRangeFrame--;
                     }
                 }
                 if (frameTimer >= attackFrame)

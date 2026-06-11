@@ -8,7 +8,6 @@ public class SousaHouhouManager : MonoBehaviour
     // ボタンが押された時に実行する関数
     public void ShowBackground()
     {
-        // 🛠️ ここにデバッグログを追加しました！
         Debug.Log("表示");
 
         if (darkBackground != null)

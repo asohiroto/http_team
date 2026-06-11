@@ -1263,9 +1263,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1063555950}
-        m_TargetAssemblyTypeName: StartSceneContoroller, Assembly-CSharp
-        m_MethodName: GameSceneChange
+      - m_Target: {fileID: 1063555952}
+        m_TargetAssemblyTypeName: SousaHouhouScene, Assembly-CSharp
+        m_MethodName: SousaHouhouSceneChange
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1473,6 +1473,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1063555951}
   - component: {fileID: 1063555950}
+  - component: {fileID: 1063555952}
   m_Layer: 0
   m_Name: SceneManager
   m_TagString: Untagged
@@ -1507,6 +1508,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1063555952
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1063555949}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 19e35233bf8ed9d48b48eb760bc1bddd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SousaHouhouScene
 --- !u!1 &1135819264
 GameObject:
   m_ObjectHideFlags: 0

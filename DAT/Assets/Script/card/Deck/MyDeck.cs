@@ -4,7 +4,7 @@ using System.Linq;
 
 public class MyDeck : MonoBehaviour
 {
-    public int[] myDeckId = {-1, -1, -1, -1, -1, -1, -1, -1};
+    public int[] myDeckId;
 
     public static MyDeck instance;
 

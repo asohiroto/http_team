@@ -1,27 +1,28 @@
 using System;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class DeckManager : MonoBehaviour
 {
-    [SerializeField] public Transform[] deckTrans;
     [SerializeField] public Transform[] cardTrans;
     [SerializeField] public GameObject[] possessionCards;
 
-    MyDeck deckId;
+    [SerializeField] public Transform[] deckTrans;
+    [SerializeField] public GameObject deckCard;
+
     CardChanger change;
-    HandManager hand;
+
+    MyDeck deck;
+    DeckCardChanger changer;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        deckId = GameObject.Find("MyDeck").GetComponent<MyDeck>();
         change = GetComponent<CardChanger>();
 
         for (int i = 0; i < cardTrans.Length; i++)
         {
-            int cardId = change.CardChange(i);
-
-            CardGenerate(cardId, i);
+            CardGenerate(i);
         }
     }
 
@@ -32,8 +33,10 @@ public class DeckManager : MonoBehaviour
     }
 
     // カードを生成する関数
-    public void CardGenerate(int id, int ind) // 新たにカードを生成する
+    public void CardGenerate(int ind) // 新たにカードを生成する
     {
+        int id = change.CardChange(ind);
+
         GameObject genCard = Instantiate(possessionCards[id], cardTrans[ind]); // カードを作る処理
         DraggableCard dc = genCard.GetComponentInChildren<DraggableCard>();
 
@@ -45,7 +48,15 @@ public class DeckManager : MonoBehaviour
         if (dc != null)
         {
             dc.cardIndex = ind;
-            dc.cardId = id;
+            dc.cardId = ind;
         }
+    }
+
+    public void DeckRegistrate(int i, int cardId)
+    {
+        GameObject obj = Instantiate(deckCard, deckTrans[i]);
+
+        changer = obj.GetComponent<DeckCardChanger>();
+        changer.DeckCardChange(cardId);
     }
 }

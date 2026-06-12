@@ -540,7 +540,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98b389d4d5876ed4ca898f451e55ed1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MyDeck
-  myDeckId: 0000000000000000000000000000000000000000000000000000000000000000
+  myDeckId: ffffffffffffffffffffffffffffffffffffffffffffffff
 --- !u!4 &204440429
 Transform:
   m_ObjectHideFlags: 0

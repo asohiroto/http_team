@@ -35,7 +35,24 @@ public class CardChanger : MonoBehaviour
         cardImage = data.cardImage;
 
         return cardType;
+    }
 
+    public int CardIdChange(int id)
+    {
+        CardData data = cardData[id];
+
+        int cardType = data.cardType;
+
+        return cardType;
+    }
+
+    public string CardNameChange(int id)
+    {
+        CardData data = cardData[id];
+
+        string name = data.cardName;
+
+        return name;
     }
 }
 

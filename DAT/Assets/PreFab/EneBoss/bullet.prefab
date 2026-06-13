@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 8578536080103382771}
   - component: {fileID: 3149637949115095036}
-  - component: {fileID: 7431520061466149518}
   m_Layer: 0
   m_Name: bullet
   m_TagString: Untagged
@@ -92,15 +91,3 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
---- !u!114 &7431520061466149518
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8957258972696803171}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6ac72a053f3bc2043a28065773ef51e3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::EneBossShot

@@ -184,7 +184,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_MaskInteraction: 0
   m_Sprite: {fileID: -8552552408617614191, guid: 2c57c7f80bd958040a944ddd8f87d123, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -232,7 +232,9 @@ MonoBehaviour:
   stampAttackReach: {fileID: 1648080044229311865, guid: 15a85347db8b4b548a786a2c371212b2, type: 3}
   cautionEffectPrefab: {fileID: 4697020134824317878, guid: bc418ef7af663a74b9c131b35e211996, type: 3}
   frameDelay: 10
-  missilePrefab: {fileID: 0}
+  missilePrefab: {fileID: 8957258972696803171, guid: 416323e1ac113fa46ad7b29fc913b18c, type: 3}
+  missileRangePrefab: {fileID: 1648080044229311865, guid: ae407d3c3c76cc24b8f0c8710bf87bd4, type: 3}
+  missileEffectPrefab: {fileID: 0}
 --- !u!1 &1729439561
 GameObject:
   m_ObjectHideFlags: 0
@@ -381,6 +383,14 @@ PrefabInstance:
     - target: {fileID: 4374503095024090849, guid: adafc529adc6fb84d8417122a115aaa6, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 5862498836062507077, guid: adafc529adc6fb84d8417122a115aaa6, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -6.37
+      objectReference: {fileID: 0}
+    - target: {fileID: 5862498836062507077, guid: adafc529adc6fb84d8417122a115aaa6, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.22
       objectReference: {fileID: 0}
     - target: {fileID: 7402475843637736188, guid: adafc529adc6fb84d8417122a115aaa6, type: 3}
       propertyPath: m_LocalPosition.x

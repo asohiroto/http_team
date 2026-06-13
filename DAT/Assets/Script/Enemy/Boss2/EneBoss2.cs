@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using System.Collections.Generic;
+using System;
 public class EneBoss2 : MonoBehaviour
 {
     int frameTimer = 0;
@@ -23,7 +24,6 @@ public class EneBoss2 : MonoBehaviour
     [SerializeField] GameObject rangeAttackObj;
     [SerializeField] GameObject stampAttackReach;
     [SerializeField] GameObject cautionEffectPrefab;
-    SpriteRenderer stampSpr;
     GameObject stampAttackReachObj = null;
     GameObject cautionObj = null;
     bool isAttackReach = false;
@@ -39,10 +39,17 @@ public class EneBoss2 : MonoBehaviour
     int flashRangeFrame = 10;
     bool isTransparent = false;
     // ミサイル攻撃の変数-------------------------------
-    enum ShotState { Wait, Shot} // ミサイル攻撃の状態を管理する
+    enum ShotState { Aim, Shot} // ミサイル攻撃の状態を管理する
     ShotState shotState;
     [SerializeField] GameObject missilePrefab;
-
+    [SerializeField] GameObject missileRangePrefab;
+    [SerializeField] GameObject missileEffectPrefab;
+    GameObject missileObj = null;
+    GameObject RangeObj = null;
+    Vector3 missileLandingPos;
+    Vector3 missilePos;
+    int missileWaitingFrame = 120;
+    bool isShot = false;
     SpriteRenderer spriteRenderer;
     void Start()
     {
@@ -62,18 +69,19 @@ public class EneBoss2 : MonoBehaviour
             pastPositions.Dequeue();
         }
 
+        // ターゲットポジションを少しディレイをかける
         if(pastPositions.Count >= frameDelay)
         {
             targetPos = pastPositions.Peek();
         }
-        ActionManager();
+        Missile();
     }
 
     void ActionManager()
     {
         //Move(playerObj.transform.position);
         //Jump();
-        Stamp();
+        //Stamp();
     }
 
     // 指定した座標に移動する
@@ -93,15 +101,55 @@ public class EneBoss2 : MonoBehaviour
         currentPos += moveDir;
     }
 
+    // ミサイルを一発発射する処理
     void Missile()
     {
+        
         switch (shotState)
         {
-            case ShotState.Wait:
-                Instantiate(missilePrefab);
+            // プレイヤーを狙う処理
+            case ShotState.Aim:
+                frameTimer++;
+                if (!isAttackReach) // 一度だけ生成するための条件処理
+                {
+                    // 着弾地点を決定
+                    missileLandingPos = playerObj.transform.position;
+                    // 攻撃範囲を表示するプレハブを生成
+                    RangeObj = Instantiate(missileRangePrefab);
+                    RangeObj.transform.position = missileLandingPos;
+                    isAttackReach = true;
+                }
+                if(frameTimer >= attackWaitingFrame) shotState = ShotState.Shot;
                 break;
+            // ミサイルを発射する処理（一発だけ）
             case ShotState.Shot:
-
+                if (!isShot) // 一度だけ生成するための条件処理
+                {
+                    // ミサイルを生成
+                    missileObj = Instantiate(missilePrefab);
+                    // ミサイルのポジションを設定
+                    missilePos = transform.position;
+                    missileObj.transform.position = missilePos;
+                    isShot = true;
+                }
+                if (endMove || missileObj == null) return;
+                // 到着したかどうかの判定
+                if (Math.Abs(missilePos.x - missileLandingPos.x) < 0.05f && 
+                    Math.Abs(missilePos.y - missileLandingPos.y) < 0.05f)
+                {
+                    endMove = true;
+                    Instantiate(missileEffectPrefab);
+                    Destroy(missileObj);
+                    Destroy(RangeObj);
+                    return;
+                }
+                // ミサイルから着弾点までのベクトルを計算
+                moveDir = missileLandingPos - missilePos;
+                // 方向ベクトルの正規化
+                moveDir = moveDir.normalized;
+                // ミサイルの移動処理
+                missilePos += moveDir * 0.1f;
+                missileObj.transform.position = missilePos;
                 break;
         }
     }
@@ -111,9 +159,11 @@ public class EneBoss2 : MonoBehaviour
     {
         switch(stampState)
         {
+            // 空中に飛び上がるまでの処理
             case StampState.Jump:
                 if (currentPos.y <= jumpHeight)
                 {
+                    // ジャンプの高さまで飛び上がる
                     currentPos += Vector3.up * jumpSpeed;
                 }
                 else
@@ -122,31 +172,39 @@ public class EneBoss2 : MonoBehaviour
                     stampState = StampState.Aim;
                 }
                 break;
+            // プレイヤーを狙っているときの処理
             case StampState.Aim:
                 frameTimer++;
-                if (!isAttackReach)　// 一度だけ生成する
+                if (!isAttackReach) // 一度だけ生成するための条件処理
                 {
+                    // 攻撃範囲を表示するプレハブを生成
                     stampAttackReachObj = Instantiate(stampAttackReach);
-                    //stampSpr = stampAttackReachObj.GetComponent<SpriteRenderer>();
+                    // 攻撃警告を表示するプレハブを生成
                     cautionObj = Instantiate(cautionEffectPrefab);
                     isAttackReach = true;
                 }
+                // プレイヤーを追いかけるための処理
                 if (stampAttackReachObj != null && followPlayer)
                 {
+                    // 攻撃範囲を表示するエフェクトをターゲットポジションまで移動させる
                     stampAttackReachObj.transform.position = targetPos;
                     // 警告エフェクトを当たり判定の右上に
                     cautionObj.transform.position = targetPos + new Vector3(2.5f, 2.5f, 0);
-                    // 点滅処理する状態かどうか
+                    // 点滅処理用の関数
                     if(frameTimer % flashRangeFrame == 0)
                     {
                         if(!isTransparent)isTransparent = true;
                         else if (isTransparent) isTransparent = false;
                     }
                 }
+                // プレイヤーを追いかけるのをやめて攻撃位置を決定する
                 if (frameTimer >= attackFrame)
                 {
+                    // 点滅処理後、警告マークが消えないようにする
                     isTransparent = false;
+                    // プレイヤーを追いかけるのをやめる
                     followPlayer = false;
+                    // 攻撃開始時間になったらStampState.Stampへ遷移する
                     if(frameTimer >= attackFrame + attackWaitingFrame)
                     {
                         frameTimer = 0;
@@ -158,20 +216,26 @@ public class EneBoss2 : MonoBehaviour
                 if (!isTransparent) cautionObj.SetActive(true);
                 else if (isTransparent) cautionObj.SetActive(false);
             break;
+            // スタンプ攻撃の処理
             case StampState.Stamp:
                 // スタンプ攻撃がおわったら行動を終了
                 if (stampAttackReachObj == null || cautionObj == null)
                 {
                     return;
                 }
+                // ｘ軸の位置を攻撃範囲がある位置に移動させる
                 currentPos.x = stampAttackReachObj.transform.position.x;
+                // 着地位置に到達するまで下向きに移動させる
                 if (currentPos.y >= stampAttackReachObj.transform.position.y + landingPosAdj)
                 {
+                    // ジャンプスピード分下向きに速さを加える
                     currentPos.y -= jumpSpeed;
-                    Instantiate(rangeAttackObj, transform);
                 }
                 else
                 {
+                    // エフェクトの生成
+                    Instantiate(rangeAttackObj, transform);
+                    // 攻撃範囲と警告マークを消す
                     Destroy(stampAttackReachObj);
                     Destroy(cautionObj);
                 }

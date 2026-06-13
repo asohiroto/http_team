@@ -232,9 +232,7 @@ MonoBehaviour:
   stampAttackReach: {fileID: 1648080044229311865, guid: 15a85347db8b4b548a786a2c371212b2, type: 3}
   cautionEffectPrefab: {fileID: 4697020134824317878, guid: bc418ef7af663a74b9c131b35e211996, type: 3}
   frameDelay: 10
-  missilePrefab: {fileID: 8957258972696803171, guid: 416323e1ac113fa46ad7b29fc913b18c, type: 3}
-  missileRangePrefab: {fileID: 1648080044229311865, guid: ae407d3c3c76cc24b8f0c8710bf87bd4, type: 3}
-  missileEffectPrefab: {fileID: 0}
+  missilePrefab: {fileID: 6190273025951132290, guid: a447eb36d23708446899a47492a5fa0f, type: 3}
 --- !u!1 &1729439561
 GameObject:
   m_ObjectHideFlags: 0

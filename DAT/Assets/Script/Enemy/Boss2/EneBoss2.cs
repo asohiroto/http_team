@@ -33,23 +33,19 @@ public class EneBoss2 : MonoBehaviour
     [SerializeField] int frameDelay = 10; // 何フレーム前の値をとるか
     Queue<Vector3> pastPositions = new Queue<Vector3>();
     Vector3 targetPos = Vector3.zero;
-    int attackFrame = 120;
+    int attackFrame = 5;
     int attackWaitingFrame = 5;
     bool followPlayer;
     int flashRangeFrame = 10;
     bool isTransparent = false;
     // ミサイル攻撃の変数-------------------------------
-    enum ShotState { Aim, Shot} // ミサイル攻撃の状態を管理する
-    ShotState shotState;
     [SerializeField] GameObject missilePrefab;
-    [SerializeField] GameObject missileRangePrefab;
-    [SerializeField] GameObject missileEffectPrefab;
-    GameObject missileObj = null;
-    GameObject RangeObj = null;
-    Vector3 missileLandingPos;
-    Vector3 missilePos;
-    int missileWaitingFrame = 120;
-    bool isShot = false;
+    int missileMax = 10; // 0~missileMaxまでミサイルを生成する
+    int missileIdx = 0;
+    int missileSpanFrame = 20;
+    int missileFrameTimer = 0;
+
+
     SpriteRenderer spriteRenderer;
     void Start()
     {
@@ -74,14 +70,13 @@ public class EneBoss2 : MonoBehaviour
         {
             targetPos = pastPositions.Peek();
         }
-        Missile();
+        
+        ActionManager();
     }
 
     void ActionManager()
     {
-        //Move(playerObj.transform.position);
-        //Jump();
-        //Stamp();
+        MissileGene();
     }
 
     // 指定した座標に移動する
@@ -101,56 +96,20 @@ public class EneBoss2 : MonoBehaviour
         currentPos += moveDir;
     }
 
-    // ミサイルを一発発射する処理
-    void Missile()
+    // ミサイルを発射する処理（MissileManagerを生成する）
+    void MissileGene()
     {
-        
-        switch (shotState)
+        missileFrameTimer++;
+        if(missileIdx >= missileMax)
         {
-            // プレイヤーを狙う処理
-            case ShotState.Aim:
-                frameTimer++;
-                if (!isAttackReach) // 一度だけ生成するための条件処理
-                {
-                    // 着弾地点を決定
-                    missileLandingPos = playerObj.transform.position;
-                    // 攻撃範囲を表示するプレハブを生成
-                    RangeObj = Instantiate(missileRangePrefab);
-                    RangeObj.transform.position = missileLandingPos;
-                    isAttackReach = true;
-                }
-                if(frameTimer >= attackWaitingFrame) shotState = ShotState.Shot;
-                break;
-            // ミサイルを発射する処理（一発だけ）
-            case ShotState.Shot:
-                if (!isShot) // 一度だけ生成するための条件処理
-                {
-                    // ミサイルを生成
-                    missileObj = Instantiate(missilePrefab);
-                    // ミサイルのポジションを設定
-                    missilePos = transform.position;
-                    missileObj.transform.position = missilePos;
-                    isShot = true;
-                }
-                if (endMove || missileObj == null) return;
-                // 到着したかどうかの判定
-                if (Math.Abs(missilePos.x - missileLandingPos.x) < 0.05f && 
-                    Math.Abs(missilePos.y - missileLandingPos.y) < 0.05f)
-                {
-                    endMove = true;
-                    Instantiate(missileEffectPrefab);
-                    Destroy(missileObj);
-                    Destroy(RangeObj);
-                    return;
-                }
-                // ミサイルから着弾点までのベクトルを計算
-                moveDir = missileLandingPos - missilePos;
-                // 方向ベクトルの正規化
-                moveDir = moveDir.normalized;
-                // ミサイルの移動処理
-                missilePos += moveDir * 0.1f;
-                missileObj.transform.position = missilePos;
-                break;
+            // ミサイル処理を終了する
+            return;
+        }
+        else if(missileFrameTimer >= missileSpanFrame)
+        {
+            Instantiate(missilePrefab, transform);
+            missileIdx++;
+            missileFrameTimer = 0;
         }
     }
 

@@ -4,6 +4,7 @@ using UnityEngine;
 public class MissileManager : MonoBehaviour
 {
     GameObject playerObj;
+    PlayerController playerCtrl;
     enum ShotState { Aim, Shot} // ミサイル攻撃の状態を管理する
     ShotState shotState;
     [SerializeField] GameObject missilePrefab;
@@ -20,10 +21,16 @@ public class MissileManager : MonoBehaviour
     bool isShot = false;
     bool isAttackReach = false;
     float moveSpeed = 0.12f;
+    float landingBackAdj = 1.0f;
+    float landingForwardAdj = 2.0f;
     void Start()
     {
+        // プレイヤーオブジェクトとスクリプトの取得
         playerObj = GameObject.Find("Player");
-        landingPosAdj = new Vector3(UnityEngine.Random.Range(-1, 1), UnityEngine.Random.Range(-1,1));
+        playerCtrl = playerObj.GetComponent<PlayerController>();
+        // 着地地点を若干ずらすための変数を設定する
+        landingPosAdj = new Vector3(UnityEngine.Random.Range(-landingBackAdj, landingForwardAdj) * playerCtrl.lastDir.x, 
+            UnityEngine.Random.Range(-landingBackAdj,landingForwardAdj) * playerCtrl.lastDir.y);
     }
 
     void FixedUpdate()

@@ -44,7 +44,18 @@ public class EneBoss2 : MonoBehaviour
     int missileIdx = 0;
     int missileSpanFrame = 20;
     int missileFrameTimer = 0;
-
+    // 近接攻撃の変数----------------------------------
+    enum MeleeState{Wait, Attack}
+    MeleeState meleeState;
+    [SerializeField] GameObject meleePrefab;
+    [SerializeField] GameObject meleeRangePrefab;
+    [SerializeField] GameObject meleeFXPrefab;
+    GameObject meleeObj;
+    GameObject meleeRangeObj;
+    int meleeWaitingFrame;
+    int meleeFrameTimer;
+    int isMelee;
+    bool isMeleeRange;
 
     SpriteRenderer spriteRenderer;
     void Start()
@@ -94,6 +105,30 @@ public class EneBoss2 : MonoBehaviour
         moveDir = targetPos - currentPos;
         moveDir = moveDir.normalized;
         currentPos += moveDir;
+    }
+
+    void MeleeAttack()
+    {
+        switch(meleeState)
+        {
+            case MeleeState.Wait:
+            meleeFrameTimer++;
+                if (!isMeleeRange) // 一度だけ生成するための条件処理
+                {
+                    // 攻撃範囲を表示するプレハブを生成
+                    meleeRangePrefab = Instantiate(meleeRangePrefab);
+                    isMeleeRange = true;
+                }
+                // 攻撃待機時間が終われば攻撃状態に遷移する
+                else if(meleeFrameTimer >= meleeWaitingFrame)
+                {
+                    meleeState = MeleeState.Attack;
+                }
+            break;
+            case MeleeState.Attack:
+                meleeObj = Instantiate(meleePrefab);
+            break;
+        }
     }
 
     // ミサイルを発射する処理（MissileManagerを生成する）

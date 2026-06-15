@@ -194,19 +194,19 @@ public class DraggableCard : MonoBehaviour, IBeginDragHandler, IEndDragHandler, 
 
                 hand.DisCard(cardIndex);
             }
+
+            for (int i = 0; i < hand.deckCardTrans.Length; i++)
+            {
+                if (hand.markedIndexArray[i] == 1)
+                {
+                    hand.DestroyMark(i);
+                }
+            }
         }
 
         // ドラッグ中はレイキャストでこのカードを感知しないようにしていたのを元に戻す
         canvasGroup.blocksRaycasts = true;
         Destroy(ghostImage);
         ghostImage = null;
-
-        for (int i = 0; i < hand.deckCardTrans.Length; i++)
-        {
-            if (hand.markedIndexArray[i] == 1)
-            {
-                hand.DestroyMark(i);
-            }
-        }
     }
 }

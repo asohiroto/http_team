@@ -17,6 +17,6 @@ public class StartSceneContoroller : MonoBehaviour
 
     public void GameSceneChange()
     {
-        SceneManager.LoadScene("AllSceneProto");
+        SceneManager.LoadScene("DeckSecne");
     }
 }

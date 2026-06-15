@@ -10,8 +10,7 @@ public class EneBoss2 : MonoBehaviour
     State state = State.Idle;
     [SerializeField] float speed = 0.1f;
     Vector3 moveDir;
-    int dir; // 敵の向きを決定する変数（-1：左向き、1：右向き）
-    int dirY; // 敵の向きを決定する変数（-1：下向き、1：上向き）
+    int dir; // 敵のX方向の向きを決定する変数（-1：左向き、1：右向き）
     bool isAttack; // 敵ボスがアタック中かどうか
     Vector3 currentPos;
     bool endMove = false;
@@ -22,7 +21,7 @@ public class EneBoss2 : MonoBehaviour
     [SerializeField] float showAttackRangeTime = 3.0f;
     bool isAttackWaiting = false;
     bool isGetPosition = false;
-    float idleFrame = 10;
+    float idleFrame = 30;
     float flashTime = 0.1f;
     // 範囲攻撃の変数---------------------------------
     enum StampState { Jump, Aim, Stamp} // スタンプ攻撃の状態を管理する
@@ -71,6 +70,10 @@ public class EneBoss2 : MonoBehaviour
     Vector3 meleeTargetPos = Vector3.zero;
 
     SpriteRenderer spriteRenderer;
+
+    // 衝突時の変数-----------------------------------
+    BoxCollider2D boxCol;
+    float colDamage; // 敵ボスとプレイヤーが衝突したときに与えるダメージ
     void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
@@ -102,6 +105,14 @@ public class EneBoss2 : MonoBehaviour
             else dir = -1;
             
             transform.rotation = Quaternion.Euler(0, 180 * dir, 0);
+        }
+    }
+
+    void OnTriggerEnter2D(Collider2D col)
+    {
+        if (col.CompareTag("Player") && state != State.Stamp)
+        {
+            playerCtrl.Damaged(colDamage);
         }
     }
 

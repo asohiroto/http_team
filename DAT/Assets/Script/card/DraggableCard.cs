@@ -99,6 +99,13 @@ public class DraggableCard : MonoBehaviour, IBeginDragHandler, IEndDragHandler, 
                 }
             }
         }
+
+        if(currentScene == "DeckScene")
+        {
+            DataPanelManager dataPanel = GameObject.Find("DeckManager").GetComponent<DataPanelManager>();
+
+            dataPanel.CardDataPanel(dragged.cardId);
+        }
     }
 
     // ドラッグ中に実行

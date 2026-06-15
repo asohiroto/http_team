@@ -12,7 +12,6 @@ public class DeckManager : MonoBehaviour
 
     CardChanger change;
 
-    MyDeck deck;
     DeckCardChanger changer;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -54,6 +53,7 @@ public class DeckManager : MonoBehaviour
 
     public void DeckRegistrate(int i, int cardId)
     {
+
         GameObject obj = Instantiate(deckCard, deckTrans[i]);
 
         changer = obj.GetComponent<DeckCardChanger>();

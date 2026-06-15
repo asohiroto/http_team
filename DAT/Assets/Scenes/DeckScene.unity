@@ -816,6 +816,51 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 4170216637076986077, guid: c16406927657f8c42b2035b6cee66d1b, type: 3}
   m_PrefabInstance: {fileID: 999559590}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &705979176
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 705979178}
+  - component: {fileID: 705979177}
+  m_Layer: 0
+  m_Name: MyDeck
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &705979177
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 705979176}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98b389d4d5876ed4ca898f451e55ed1b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MyDeck
+  myDeckId: ffffffffffffffffffffffffffffffffffffffffffffffff
+--- !u!4 &705979178
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 705979176}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 833.2038, y: 563.93097, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &707524389 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5472960970347547692, guid: c16406927657f8c42b2035b6cee66d1b, type: 3}
@@ -2319,6 +2364,61 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1623788051}
   m_CullTransparentMesh: 1
+--- !u!1 &1707555908
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1707555910}
+  - component: {fileID: 1707555909}
+  m_Layer: 0
+  m_Name: CraftManager
+  m_TagString: Card
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1707555909
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1707555908}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1e5832904cefd3428127b7437862983, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CraftManager
+  recipeList:
+  - materialA: 0
+    materialB: 0
+    result: 12
+  - materialA: 4
+    materialB: 4
+    result: 14
+  - materialA: 5
+    materialB: 5
+    result: 13
+  material1: 0
+--- !u!4 &1707555910
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1707555908}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -10, y: -10, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1712087962
 GameObject:
   m_ObjectHideFlags: 0
@@ -2861,3 +2961,5 @@ SceneRoots:
   - {fileID: 1443594203}
   - {fileID: 1756838342}
   - {fileID: 34572288}
+  - {fileID: 705979178}
+  - {fileID: 1707555910}

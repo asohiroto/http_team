@@ -11,6 +11,7 @@ public class DataPanelManager : MonoBehaviour
 
     CardChanger changer;
     DeckManager deck;
+    CraftManager craft;
 
     string currentScene;
 
@@ -19,7 +20,8 @@ public class DataPanelManager : MonoBehaviour
     {
         changer = GameObject.Find("DeckManager").GetComponent<CardChanger>();
         deck = GameObject.Find("DeckManager").GetComponent<DeckManager>();
-    
+        craft = GameObject.Find("CraftManager").GetComponent<CraftManager>();
+
         currentScene = SceneManager.GetActiveScene().name;
     }
 
@@ -47,10 +49,21 @@ public class DataPanelManager : MonoBehaviour
 
             edit.ChangeCardName(changer.cardName);
             edit.ChangeCardEffect(changer.cardEffect);
-            
+
             if (dc != null)
             {
                 dc.cardId = id;
+            }
+
+            int evoId = craft.CraftCards(id, id);
+            if (evoId > 0)
+            {
+                CardData evoData = changer.cardData[evoId];
+                cardEvolution.text = evoData.cardName;
+            }
+            else
+            {
+                cardEvolution.text = "ないよ";
             }
         }
     }

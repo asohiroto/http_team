@@ -36,7 +36,7 @@ public class DeckRegistrate : MonoBehaviour, IDropHandler
         }
     }
 
-    bool CheckMyDeck(int id)
+    public bool CheckMyDeck(int id)
     {
         bool check = true;
 

@@ -4,18 +4,27 @@ using UnityEngine.SceneManagement;
 
 public class DeckSceneManager : MonoBehaviour
 {
+    DeckRegistrate regis;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        regis = GameObject.Find("Panel").GetComponentInChildren<DeckRegistrate>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(Keyboard.current.qKey.wasPressedThisFrame)
+        if (Keyboard.current.qKey.wasPressedThisFrame)
         {
-            SceneManager.LoadScene("AllSceneProto");
+            if (regis.CheckMyDeck(-1))
+            {
+                SceneManager.LoadScene("AllSceneProto");
+            }
+            else
+            {
+                Debug.Log("できぬ");
+            }
         }
     }
 

@@ -7,6 +7,11 @@ public class HandManager : MonoBehaviour
     [SerializeField] public GameObject[] cardPrefab;
     [SerializeField] public Transform[] deckCardTrans;
 
+    // 合成不可のマーク
+    [SerializeField] GameObject discraftableMark;
+    GameObject[] mark = new GameObject[5];
+    public int[] markedIndexArray;
+
     // カードを引くための代金
     [SerializeField] int cardDrawFee;
 
@@ -124,6 +129,21 @@ public class HandManager : MonoBehaviour
             cardIdArray[ind] = -1;
             Destroy(deckCardTrans[ind].GetChild(0).gameObject);
         }
+    }
+
+    // 合成不可の場合マーキング
+    public void DiscraftableMark(int ind)
+    {
+        mark[ind] = Instantiate(discraftableMark, deckCardTrans[ind]);
+        markedIndexArray[ind] = 1;
+
+    }
+
+    // マークを削除
+    public void DestroyMark(int ind)
+    {
+        Destroy(mark[ind]);
+        markedIndexArray[ind] = 0;
     }
 
 }

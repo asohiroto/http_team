@@ -6,9 +6,11 @@ public class GameSceneManager : MonoBehaviour
 {
     public static GameSceneManager Instance;
 
+    MyDeck deck;
+
     void Awake()
     {
-        if(Instance == null)
+        if (Instance == null)
         {
             Instance = this;
         }
@@ -18,21 +20,21 @@ public class GameSceneManager : MonoBehaviour
         }
     }
 
-        // Start is called once before the first execution of Update after the MonoBehaviour is created
-        void Start()
+    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    void Start()
     {
-        
+        deck = GameObject.Find("MyDeck").GetComponent<MyDeck>();
     }
 
     // Update is called once per frame
     void Update()
     {
         // 【デバッグ用】各シーンへの切り替え
-        if(Keyboard.current.lKey.wasPressedThisFrame)
+        if (Keyboard.current.lKey.wasPressedThisFrame)
         {
             SceneManager.LoadScene("ClearScene");
         }
-        else if(Keyboard.current.kKey.wasPressedThisFrame)
+        else if (Keyboard.current.kKey.wasPressedThisFrame)
         {
             SceneManager.LoadScene("GameOverScene");
         }
@@ -41,6 +43,12 @@ public class GameSceneManager : MonoBehaviour
     public void OpenDeckEditMode()
     {
         SceneManager.LoadScene("DeckScene");
+
+        for (int i = 0; i < 6; i++)
+        {
+            deck.myDeckId[i] = -1;
+
+        }
     }
 
 }

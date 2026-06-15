@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using Unity.VisualScripting;
 
 public class DraggableCard : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHandler, IDropHandler
 {
@@ -33,6 +34,7 @@ public class DraggableCard : MonoBehaviour, IBeginDragHandler, IEndDragHandler, 
         // ドラッグするためのキャンバスと、ドラッグ中にレイキャストでこのカードを感知しないようにするためのCanvasGroupを取得
         canvas = GetComponentInParent<Canvas>();
         canvasGroup = gameObject.AddComponent<CanvasGroup>();
+
         if (currentScene != "DeckScene")
         {
             effect = GameObject.Find("CardEffectManager").GetComponent<CardEffectManager>();
@@ -56,6 +58,9 @@ public class DraggableCard : MonoBehaviour, IBeginDragHandler, IEndDragHandler, 
     // ドラッグ開始時に実行
     public void OnBeginDrag(PointerEventData eventData)
     {
+        // ドラッグ中のカードを取得
+        DraggableCard dragged = eventData.pointerDrag?.GetComponent<DraggableCard>();
+
         // ドラッグ中はレイキャストでこのカードを感知しないようにする
         canvasGroup.blocksRaycasts = false;
 
@@ -83,6 +88,24 @@ public class DraggableCard : MonoBehaviour, IBeginDragHandler, IEndDragHandler, 
 
         // レイキャストでゴーストイメージを感知しない
         cg.blocksRaycasts = false;
+
+        if (currentScene != "DeckScene")
+        {
+            for (int i = 0; i < hand.deckCardTrans.Length; i++)
+            {
+                if (craft.CraftCards(dragged.cardId, hand.cardIdArray[i]) < 0 && hand.cardIdArray[i] >= 0)
+                {
+                    hand.DiscraftableMark(i);
+                }
+            }
+        }
+
+        if(currentScene == "DeckScene")
+        {
+            DataPanelManager dataPanel = GameObject.Find("DeckManager").GetComponent<DataPanelManager>();
+
+            dataPanel.CardDataPanel(dragged.cardId);
+        }
     }
 
     // ドラッグ中に実行
@@ -138,9 +161,15 @@ public class DraggableCard : MonoBehaviour, IBeginDragHandler, IEndDragHandler, 
                 hand.DisCard(fromIndex);
                 hand.DisCard(toIndex);
 
-                // 合成の結果のカードを、ドロップされたカードとドロップ先のカードの位置のうち、より小さい位置に生成する
-                int spawnIndex = Mathf.Min(fromIndex, toIndex);
-                hand.CardGenerate(craftResult, spawnIndex);
+                hand.CardGenerate(craftResult, toIndex);
+
+                for (int i = 0; i < hand.deckCardTrans.Length; i++)
+                {
+                    if (hand.markedIndexArray[i] == 1)
+                    {
+                        hand.DestroyMark(i);
+                    }
+                }
             }
         }
     }
@@ -165,12 +194,19 @@ public class DraggableCard : MonoBehaviour, IBeginDragHandler, IEndDragHandler, 
 
                 hand.DisCard(cardIndex);
             }
+
+            for (int i = 0; i < hand.deckCardTrans.Length; i++)
+            {
+                if (hand.markedIndexArray[i] == 1)
+                {
+                    hand.DestroyMark(i);
+                }
+            }
         }
 
-            // ドラッグ中はレイキャストでこのカードを感知しないようにしていたのを元に戻す
-            canvasGroup.blocksRaycasts = true;
-            Destroy(ghostImage);
-            ghostImage = null;
-        
+        // ドラッグ中はレイキャストでこのカードを感知しないようにしていたのを元に戻す
+        canvasGroup.blocksRaycasts = true;
+        Destroy(ghostImage);
+        ghostImage = null;
     }
 }

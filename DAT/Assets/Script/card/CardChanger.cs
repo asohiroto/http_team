@@ -9,7 +9,7 @@ public class CardChanger : MonoBehaviour
     public string cardEffect; // カードの効果
     public Sprite cardImage; // カードのイメージ
 
-    [SerializeField] private List<CardData> cardData;
+    [SerializeField] public List<CardData> cardData;
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created

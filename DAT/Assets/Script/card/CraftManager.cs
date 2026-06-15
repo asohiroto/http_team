@@ -12,8 +12,20 @@ public class CraftManager : MonoBehaviour
     // レシピを格納する辞書を作成
     private Dictionary<int, int> recipeDictionary = new Dictionary<int, int>();
 
-    void Start()
+    public static CraftManager instance;
+
+    private void Awake()
     {
+        if (instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+
         foreach (var recipe in recipeList) // レシピ本の索引を作成
         {
             int key = CreateRecipeKey(recipe.materialA, recipe.materialB);
@@ -25,6 +37,11 @@ public class CraftManager : MonoBehaviour
         }
 
         material1 = 0;
+    }
+
+    void Start()
+    {
+
     }
 
     private int CreateRecipeKey(int item1, int item2) // レシピの索引用の鍵を作成

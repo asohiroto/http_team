@@ -162,4 +162,4 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 1d582896f40a0754ab31e1471cf24102, type: 3}
   - {fileID: 21300000, guid: b13dc60848c2e3344a70ec986e0d5202, type: 3}
   - {fileID: 21300000, guid: 828c707409242f0418f9e58ff2269131, type: 3}
-  attackDamage: 0
+  attackDamage: 5

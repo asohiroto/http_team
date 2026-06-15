@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class CardEffectManager : MonoBehaviour
 {
-
+    // エンハンス関連-------------------------
     [SerializeField] float healAmount;
     float healDefaultAmount;
 
@@ -41,6 +41,53 @@ public class CardEffectManager : MonoBehaviour
 
     bool cfFlag = false;
 
+    // ウォーターショット関連-----------------
+    [SerializeField] float wsSpeed;
+
+    [SerializeField] GameObject watershot;
+
+    public GameObject waterShotPrefab;
+
+    Vector2 wsPos = Vector2.zero;
+
+    bool wsFlag = false;
+
+    // グラウンドショット関連-----------------
+    [SerializeField] float gsSpeed;
+
+    [SerializeField] GameObject groundshot;
+
+    public GameObject groundShotPrefab;
+
+    Vector2 gsPos = Vector2.zero;
+
+    bool gsFlag = false;
+
+    // サンダーボール関連--------------------
+    [SerializeField] float tbSpeed;
+
+    [SerializeField] GameObject thunderball;
+
+    public GameObject thunderballPrefab;
+
+    Vector2 tbPos = Vector2.zero;
+
+    bool tbFlag = false;
+
+    // ラバスプラッシュ関連--------------------
+    [SerializeField] GameObject lavaSprash;
+
+    public GameObject lavaSprashPrefab;
+
+    Vector2 lsPos = Vector2.zero;
+
+    // ウォータースプラッシュ関連--------------
+    [SerializeField] GameObject waterSprash;
+
+    public GameObject waterSprashPrefab;
+
+    Vector2 wspPos = Vector2.zero;
+
     // 共通------------------------------------
     PlayerController player;
     CardAttackReach reach;
@@ -67,6 +114,11 @@ public class CardEffectManager : MonoBehaviour
                 () => FireBall(),
                 () => CursedFlame(),
                 () => OverHeal(),
+                () => WaterShot(),
+                () => GroundShot(),
+                () => ThunderBall(),
+                () => LavaSprash(),
+                () => WaterSprash(),
             };
 
         healDefaultAmount = healAmount;
@@ -93,6 +145,15 @@ public class CardEffectManager : MonoBehaviour
 
         // カースドフレイム使用後の挙動
         if (cfFlag) skill.BallMove(cursedFlamePrefab, destPos, cfSpeed, cfPos, ref cfFlag);
+
+        // ウォーターショット使用後の挙動
+        if (wsFlag) skill.BallMove(waterShotPrefab, destPos, wsSpeed, wsPos, ref wsFlag);
+
+        // グランドショット使用後の挙動
+        if (gsFlag) skill.BallMove(groundShotPrefab, destPos, gsSpeed, gsPos, ref gsFlag);
+
+        // サンダーボール使用後の挙動
+        if(tbFlag) skill.BallMove(thunderballPrefab, destPos, tbSpeed, tbPos, ref tbFlag);
     }
 
     void FireEnhance()
@@ -254,6 +315,100 @@ public class CardEffectManager : MonoBehaviour
         Debug.Log("つかうの？");
 
         player.playerHP += (healAmount * 2);
+    }
+
+    void WaterShot()
+    {
+        Debug.Log("使ったよ");
+
+        if (!wsFlag)
+        {
+            destPos = reach.playerToEnemyNol;
+
+            wsPos = destPos;
+
+            float angle = Mathf.Atan2(destPos.y, destPos.x) * Mathf.Rad2Deg;
+
+            // オブジェクトを作成する
+            GameObject obj = Instantiate(watershot);
+            obj.transform.position = player.currentPos;
+            obj.transform.name = ("WaterShot");
+            obj.transform.rotation = Quaternion.Euler(0, 0, angle);
+
+            waterShotPrefab = obj;
+
+            wsFlag = true; // フラグを立てる
+        }
+    }
+
+    void GroundShot()
+    {
+        Debug.Log("使ったよ");
+
+        if (!gsFlag)
+        {
+            destPos = reach.playerToEnemyNol;
+
+            gsPos = destPos;
+
+            float angle = Mathf.Atan2(destPos.y, destPos.x) * Mathf.Rad2Deg;
+
+            // オブジェクトを作成する
+            GameObject obj = Instantiate(groundshot);
+            obj.transform.position = player.currentPos;
+            obj.transform.name = ("GroundShot");
+            obj.transform.rotation = Quaternion.Euler(0, 0, angle);
+
+            groundShotPrefab = obj;
+
+            gsFlag = true; // フラグを立てる
+        }
+    }
+
+    void ThunderBall()
+    {
+        Debug.Log("使ったよ");
+
+        if (!tbFlag)
+        {
+            destPos = reach.playerToEnemyNol;
+
+            tbPos = destPos;
+
+            float angle = Mathf.Atan2(destPos.y, destPos.x) * Mathf.Rad2Deg;
+
+            // オブジェクトを作成する
+            GameObject obj = Instantiate(thunderball);
+            obj.transform.position = player.currentPos;
+            obj.transform.name = ("ThunderBall");
+            obj.transform.rotation = Quaternion.Euler(0, 0, angle);
+
+            thunderballPrefab = obj;
+
+            tbFlag = true; // フラグを立てる
+        }
+    }
+
+    void LavaSprash()
+    {
+        lsPos = reach.mousePosWorld;
+
+        GameObject obj = Instantiate(lavaSprash);
+        obj.transform.position = lsPos;
+        obj.transform.name = ("LavaSprash");
+
+        lavaSprashPrefab = obj;
+    }
+
+    void WaterSprash()
+    {
+        wspPos = reach.mousePosWorld;
+
+        GameObject obj = GameObject.Instantiate(waterSprash);
+        obj.transform.position = wspPos;
+        obj.transform.name = ("WaterSprash");
+
+        waterSprashPrefab = obj;
     }
 
     void EndBoost()

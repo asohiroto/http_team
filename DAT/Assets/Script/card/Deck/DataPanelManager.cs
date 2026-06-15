@@ -56,6 +56,7 @@ public class DataPanelManager : MonoBehaviour
             }
 
             int evoId = craft.CraftCards(id, id);
+
             if (evoId > 0)
             {
                 CardData evoData = changer.cardData[evoId];

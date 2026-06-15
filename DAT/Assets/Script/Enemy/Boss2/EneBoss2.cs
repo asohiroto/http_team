@@ -85,7 +85,6 @@ public class EneBoss2 : MonoBehaviour
 
     void FixedUpdate()
     {
-        transform.position = currentPos;
         // frameDelayフレーム前のプレイヤーの位置情報を取得する
         pastPositions.Enqueue(playerCtrl.currentPos);
         if(pastPositions.Count > frameDelay)
@@ -98,7 +97,11 @@ public class EneBoss2 : MonoBehaviour
         {
             targetPos = pastPositions.Peek();
         }
+
+        // 行動を管理する関数
         ActionManager();
+
+        // x方向の向きを管理
         if(!isAttack)
         {
             if (currentPos.x >= playerCtrl.currentPos.x) dir = 1;
@@ -106,8 +109,10 @@ public class EneBoss2 : MonoBehaviour
             
             transform.rotation = Quaternion.Euler(0, 180 * dir, 0);
         }
+        transform.position = currentPos;
     }
 
+    // 敵ボスそのものの当たり判定
     void OnTriggerEnter2D(Collider2D col)
     {
         if (col.CompareTag("Player") && state != State.Stamp)
@@ -116,6 +121,7 @@ public class EneBoss2 : MonoBehaviour
         }
     }
 
+    // 行動を管理する関数（ランダムで攻撃を抽選し、攻撃を行う）
     void ActionManager()
     {
         switch (state)
@@ -124,8 +130,10 @@ public class EneBoss2 : MonoBehaviour
                 frameTimer++;
                 if(frameTimer >= idleFrame)
                 {
+                    // 初期化
                     InitAttackBool();
                     frameTimer = 0;
+
                     // ランダムな状態を取得する
                     state = (State)Enum.ToObject(typeof(State), UnityEngine.Random.Range(0, Enum.GetNames(typeof(State)).Length));
                 }
@@ -142,7 +150,7 @@ public class EneBoss2 : MonoBehaviour
         }
     }
 
-    // アタックで使ったブール変数をまとめて初期化
+    // アタックで使った変数をまとめて初期化
     void InitAttackBool()
     {
         isAttack = false;
@@ -159,7 +167,7 @@ public class EneBoss2 : MonoBehaviour
         missileIdx = 0;
     }
 
-    // 指定した座標に移動する
+    // 指定した座標に移動させる関数
     void Move(Vector3 targetPos, float moveSpeed)
     {
         if (endMove) return;
@@ -180,23 +188,28 @@ public class EneBoss2 : MonoBehaviour
     {
         switch(meleeState)
         {
+            // プレイヤーの近くまで移動する状態
             case MeleeState.Walk:
                 if(!isGetPosition) // 一度だけ行うための条件処理
                 {
+                    // どこまで移動するかを取得
                     meleeTargetPos = GetClosePos();
                     isGetPosition = true;
                     isMeleeRange = false;
                     isMeleeAttack = false;
                 }
+                // 移動が終わった時、WaitStateへ
                 if(endMove)
                 {
                     meleeState = MeleeState.Wait;
                 }
                 else
                 {
+                    // 実際に移動する処理
                     Move(meleeTargetPos, speed * 2);
                 }
                 break;
+            // 攻撃を開始するまでの待機時間
             case MeleeState.Wait:
             meleeFrameTimer++;
                 if (!isMeleeRange) // 一度だけ生成するための条件処理
@@ -215,6 +228,7 @@ public class EneBoss2 : MonoBehaviour
                     meleeState = MeleeState.Attack;
                 }
             break;
+            // 攻撃をする状態
             case MeleeState.Attack:
                 if(!isMeleeAttack)
                 {
@@ -223,7 +237,6 @@ public class EneBoss2 : MonoBehaviour
                     if(dir < 0) meleeObj.transform.rotation = Quaternion.Euler(0, 180, 90);
                     Destroy(meleeRangeObj);
                     isMeleeAttack = true;
-                    state = State.Idle;
                 }
             break;
         }

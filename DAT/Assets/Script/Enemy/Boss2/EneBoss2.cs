@@ -54,7 +54,7 @@ public class EneBoss2 : MonoBehaviour
     GameObject meleeRangeObj;
     int meleeWaitingFrame;
     int meleeFrameTimer;
-    int isMelee;
+    bool isMeleeAttack;
     bool isMeleeRange;
 
     SpriteRenderer spriteRenderer;
@@ -87,7 +87,7 @@ public class EneBoss2 : MonoBehaviour
 
     void ActionManager()
     {
-        MissileGene();
+        MeleeAttack();
     }
 
     // 指定した座標に移動する
@@ -116,7 +116,8 @@ public class EneBoss2 : MonoBehaviour
                 if (!isMeleeRange) // 一度だけ生成するための条件処理
                 {
                     // 攻撃範囲を表示するプレハブを生成
-                    meleeRangePrefab = Instantiate(meleeRangePrefab);
+                    meleeRangeObj = Instantiate(meleeRangePrefab);
+                    meleeRangeObj.transform.position = transform.position;
                     isMeleeRange = true;
                 }
                 // 攻撃待機時間が終われば攻撃状態に遷移する
@@ -126,7 +127,12 @@ public class EneBoss2 : MonoBehaviour
                 }
             break;
             case MeleeState.Attack:
-                meleeObj = Instantiate(meleePrefab);
+                if(!isMeleeAttack)
+                {
+                    meleeObj = Instantiate(meleePrefab);
+                    meleeObj.transform.position = transform.position;
+                    isMeleeAttack = true;
+                }
             break;
         }
     }

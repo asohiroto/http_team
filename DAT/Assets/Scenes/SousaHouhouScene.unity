@@ -153,8 +153,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -956.46, y: -543.44}
-  m_SizeDelta: {x: 1080.3276, y: 171.29}
+  m_AnchoredPosition: {x: -956.46, y: -543.03296}
+  m_SizeDelta: {x: 1080.3276, y: 89.8747}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &36505079
 MonoBehaviour:
@@ -179,7 +179,7 @@ MonoBehaviour:
   m_text: "\u5225\u306E\u30AB\u30FC\u30C9\u3092\u5408\u6210\u3059\u308B\u3068\u9032\u5316\u3059\u308B\u304B\u3082..."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 98b56f733c9056245a8e38df32b53219, type: 2}
-  m_sharedMaterial: {fileID: 7090920546460572643, guid: 98b56f733c9056245a8e38df32b53219, type: 2}
+  m_sharedMaterial: {fileID: 7479633546364413261, guid: 98b56f733c9056245a8e38df32b53219, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -404,7 +404,7 @@ MonoBehaviour:
   m_text: "\u540C\u3058\u30AB\u30FC\u30C9\u306F\u5408\u6210\u3059\u308B\u3068\u9032\u5316"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 98b56f733c9056245a8e38df32b53219, type: 2}
-  m_sharedMaterial: {fileID: 7090920546460572643, guid: 98b56f733c9056245a8e38df32b53219, type: 2}
+  m_sharedMaterial: {fileID: 7479633546364413261, guid: 98b56f733c9056245a8e38df32b53219, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1062,7 +1062,7 @@ MonoBehaviour:
   m_text: "\u203B\u8A2D\u5B9A\u304B\u3089\u81EA\u52D5\u3067\u5408\u6210\u3059\u308B\u304B\u9078\u629E\u53EF\u80FD"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 98b56f733c9056245a8e38df32b53219, type: 2}
-  m_sharedMaterial: {fileID: 7090920546460572643, guid: 98b56f733c9056245a8e38df32b53219, type: 2}
+  m_sharedMaterial: {fileID: 7479633546364413261, guid: 98b56f733c9056245a8e38df32b53219, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -2138,7 +2138,7 @@ MonoBehaviour:
   m_text: "\u4E0A\u306B\u30C9\u30E9\u30C3\u30B0&\u30C9\u30ED\u30C3\u30D7\u3059\u308B\u3068\u30AB\u30FC\u30C9\u3092\u4F7F\u7528"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 98b56f733c9056245a8e38df32b53219, type: 2}
-  m_sharedMaterial: {fileID: 7090920546460572643, guid: 98b56f733c9056245a8e38df32b53219, type: 2}
+  m_sharedMaterial: {fileID: 7479633546364413261, guid: 98b56f733c9056245a8e38df32b53219, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []

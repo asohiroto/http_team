@@ -29,7 +29,7 @@ public class DeckRegistrate : MonoBehaviour, IDropHandler
                 deck.myDeckId[i] = dragged.cardId;
 
                 manager.DeckRegistrate(i, dragged.cardId);
-
+                
                 break;
 
             }

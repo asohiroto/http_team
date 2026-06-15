@@ -1679,6 +1679,8 @@ MonoBehaviour:
   - {fileID: 1712087963}
   - {fileID: 2079308981}
   deckCard: {fileID: 4737596715520258968, guid: 2b968d7188f249b4898f27543378d1b6, type: 3}
+  deckCounter: {fileID: 1623788053}
+  deckCount: 0
 --- !u!4 &1443594203
 Transform:
   m_ObjectHideFlags: 0

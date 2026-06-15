@@ -88,7 +88,11 @@ public class EnemyController : MonoBehaviour
         }
 
         enemyAnim = GetComponent<EnemyAnimation>();
-        enemySpawner = GetComponent<EnemySpawner>();
+
+        // 親オブジェクト(EnemySpawner)を取得
+        GameObject parentObj = transform.parent.gameObject;
+
+        enemySpawner = parentObj.GetComponent<EnemySpawner>();
 
     }
 
@@ -343,7 +347,7 @@ public class EnemyController : MonoBehaviour
         GameObject dropItem = Instantiate(DropItemPrefab, this.transform);
         dropItem.transform.SetParent(DropParentObj.transform);
 
-        //enemySpawner.DestroyEnemy();
+        enemySpawner.DestroyEnemy();
 
         Destroy(this.gameObject);
     }

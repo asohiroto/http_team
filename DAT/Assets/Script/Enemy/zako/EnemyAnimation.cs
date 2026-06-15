@@ -25,10 +25,8 @@ public class EnemyAnimation : MonoBehaviour
     // 辞書機能
     private Dictionary<EnemyAnimState, AnimationData> animDictionary = new Dictionary<EnemyAnimState, AnimationData>();
 
-    // current = 現在
-    private AnimationData animData;
     private AnimationData currentActiveData;
-    [SerializeField] private EnemyAnimState currentState = EnemyAnimState.Init;
+    [SerializeField] private EnemyAnimState currentAnimState = EnemyAnimState.Init;
     [SerializeField] private int currentFrame = 0;   // 現在のフレーム
     [SerializeField] private float Animtimer = 0.0f;
     [SerializeField] private float timePerFrame = 0.0f;
@@ -40,7 +38,6 @@ public class EnemyAnimation : MonoBehaviour
     EnemyController enemy;
     private SpriteRenderer spr;
 
-    // 先に済ませないとtimePerFrameがInfinityになる(0で除算してしまう)
     private void Awake()
     {
         // インスペクターで設定したリストをループで回し、Dictionaryに登録する
@@ -70,7 +67,7 @@ public class EnemyAnimation : MonoBehaviour
     void Update()
     {
         Animtimer -= Time.deltaTime;
-        blinkTimer -= Time.deltaTime;
+        //blinkTimer -= Time.deltaTime;
 
         if (Animtimer < 0)
         {
@@ -116,11 +113,11 @@ public class EnemyAnimation : MonoBehaviour
     /// <summary>
     /// アニメーションの変更
     /// </summary>
-    /// <param name="changedState"></param>
+    /// <param name="changedState">変更先のState</param>
     public void ChangeState(EnemyAnimState changedState)
     {
-        if (currentState == changedState) return;
-        currentState = changedState;
+        if (currentAnimState == changedState) return;
+        currentAnimState = changedState;
 
         // Dictionaryから指示されたステートのデータを特定して保持する
         if (animDictionary.TryGetValue(changedState, out var foundData))
@@ -131,7 +128,7 @@ public class EnemyAnimation : MonoBehaviour
 
             //Debug.Log("statusを変更しました：");
 
-            // 新しいスプライトのフレームレートに変更
+            // フレームレートを更新
             timePerFrame = 1f / currentActiveData.frameRate;
         }
     }

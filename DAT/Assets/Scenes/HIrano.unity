@@ -362,13 +362,14 @@ GameObject:
   m_Component:
   - component: {fileID: 1951224556}
   - component: {fileID: 1951224555}
+  - component: {fileID: 1951224557}
   m_Layer: 0
   m_Name: EnemySpawner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1951224555
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -385,11 +386,7 @@ MonoBehaviour:
   maxEnemy: 10
   enemyCount: 0
   WeakTorcher: {fileID: 4419746953452864637, guid: f6545e77c56c98841962ce3e926c813d, type: 3}
-  dirX: 0
-  sponeX: 0
-  sponeY: 0
-  tempX: 0
-  tempY: 0
+  spawnPos: {x: 0, y: 0}
 --- !u!4 &1951224556
 Transform:
   m_ObjectHideFlags: 0
@@ -405,6 +402,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1951224557
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1951224554}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 773dbae7ec77a1f4da342ebef67e89b2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WaveManager
+  waveManagers: []
 --- !u!1001 &7870452178756838651
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -483,7 +493,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4419746953452864637, guid: f6545e77c56c98841962ce3e926c813d, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6818869714989898506, guid: f6545e77c56c98841962ce3e926c813d, type: 3}
       propertyPath: m_IsTrigger

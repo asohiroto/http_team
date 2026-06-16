@@ -12,6 +12,12 @@ EditorBuildSettings:
     path: Assets/Scenes/SousaHouhouScene.unity
     guid: 9d59b1121018d954181ef9885542aaf0
   - enabled: 1
+    path: Assets/Scenes/SecondSousaHouhouScene.unity
+    guid: 5001d6277f215324d996c3dfc20502e8
+  - enabled: 1
+    path: Assets/Scenes/DeckScene.unity
+    guid: 53f46c8ea87e4ff4080bc5369ed4407c
+  - enabled: 1
     path: Assets/Scenes/AllSceneProto.unity
     guid: 1b7fc95269edfb54ca20309516a6e803
   - enabled: 1
@@ -20,9 +26,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/GameOverScene.unity
     guid: 0ec5d9d8993947c42a9f2e74cfc0dfa2
-  - enabled: 1
-    path: Assets/Scenes/DeckScene.unity
-    guid: 53f46c8ea87e4ff4080bc5369ed4407c
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   m_UseUCBPForAssetBundles: 0

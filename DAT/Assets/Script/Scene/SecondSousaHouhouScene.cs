@@ -15,8 +15,8 @@ public class SecondSousaHouhouScene : MonoBehaviour
 
     }
 
-    public void GameSceneChange()
+    public void SecondSousaHouhouSceneChange()
     {
-        SceneManager.LoadScene("DeckScene");
+        SceneManager.LoadScene("SecondSousaHouhouScene");
     }
 }

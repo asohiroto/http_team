@@ -14,49 +14,35 @@ public class EnemySpawner : MonoBehaviour
 
 
     float timer = 0;
-    float count = 0;
 
-    public int dirX;
-    public int sponeX;
-    public int sponeY;
-    public int tempX;
-    public int tempY;
+    [SerializeField] Vector2 spawnPos = Vector2.zero;
 
     private void Start()
     {
         timer = spawnIntervalSec;
     }
 
+    private void Update()
+    {
+        timer += Time.deltaTime;
+    }
+
     void FixedUpdate()
     {
-        timer += 0.02f;
 
         if (timer >= spawnIntervalSec)
         {
             // 敵のスポーン上限
             if (maxEnemy < enemyCount) return;
             timer = 0;
-            dirX = Random.Range(-1, 2);
-            tempY = Random.Range(0, 2); // 0か1
 
-            tempX = Random.Range(10, 13);
-            sponeX = tempX * dirX;
-            sponeY = Random.Range(5, 7);
+            spawnPos = SetSpawnPos();
 
             GameObject newObj = Instantiate(WeakTorcher, this.transform);
 
+            newObj.transform.localPosition = spawnPos;
+
             enemyCount++;
-            // x座標 10～15 * (1 or -1)
-            // 秒数 % 2 で 1, -1を出す
-            // y座標 6～10
-            if (dirX == 0)
-            {
-                newObj.transform.localPosition = new Vector3(sponeX, sponeY, 0);
-            }
-            else
-            {
-                newObj.transform.localPosition = new Vector3(sponeX, sponeY * tempY, 0);
-            }
         }
     }
 
@@ -65,5 +51,39 @@ public class EnemySpawner : MonoBehaviour
         enemyCount--;
 
         return;
+    }
+
+    public void UpdataSpawner()
+    {
+
+    }
+
+    private Vector2 SetSpawnPos()
+    {
+        const int width = 9;
+        const int height = 5;
+        const int widthRangw = 13;
+        const int heightRange = 9;
+
+        int dirX = Random.Range(0, 2);
+        int dirY = Random.Range(0, 2);
+
+        int spawnX = 0;
+        int spawnY = 0;
+
+        if (dirY == 1)  // 上側にスポーン
+        {
+            spawnX = Random.Range(0, widthRangw) * dirX;
+            spawnY = Random.Range(height, heightRange);
+        }
+        else if (dirY == 0)
+        {
+            spawnX = Random.Range(width, widthRangw);
+            if (dirX == 0) spawnX *= -1;   // 0なら左
+            else spawnX *= 1;   // それ以外は右にスポーン
+
+            spawnY = Random.Range(0, height);
+        }
+        return new Vector2(spawnX, spawnY);
     }
 }

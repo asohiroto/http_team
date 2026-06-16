@@ -368,7 +368,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1951224555
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -385,11 +385,7 @@ MonoBehaviour:
   maxEnemy: 10
   enemyCount: 0
   WeakTorcher: {fileID: 4419746953452864637, guid: f6545e77c56c98841962ce3e926c813d, type: 3}
-  dirX: 0
-  sponeX: 0
-  sponeY: 0
-  tempX: 0
-  tempY: 0
+  spawnPos: {x: 0, y: 0}
 --- !u!4 &1951224556
 Transform:
   m_ObjectHideFlags: 0
@@ -483,7 +479,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4419746953452864637, guid: f6545e77c56c98841962ce3e926c813d, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6818869714989898506, guid: f6545e77c56c98841962ce3e926c813d, type: 3}
       propertyPath: m_IsTrigger

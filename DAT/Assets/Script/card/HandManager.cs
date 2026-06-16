@@ -19,6 +19,8 @@ public class HandManager : MonoBehaviour
     int cardId = 0;
     int cardDrawCount = 0;
 
+    bool autoCraft = true;
+
     // 現在の手札のIDを配列に保存
     public int[] cardIdArray = new int[5];
 
@@ -26,6 +28,7 @@ public class HandManager : MonoBehaviour
     SkillManager skill;
     CardChanger change;
     MyDeck deck;
+    CraftManager craft;
 
     void Start()
     {
@@ -38,7 +41,7 @@ public class HandManager : MonoBehaviour
             if (skill != null) break;
         }
 
-        // craft = GetComponent<CraftManager>();
+        craft = GameObject.Find("CraftManager").GetComponent<CraftManager>();
         coinManager = GameObject.Find("CoinManager").GetComponent<CoinManager>();
 
         change = GetComponent<CardChanger>();
@@ -84,6 +87,7 @@ public class HandManager : MonoBehaviour
         edit.ChangeCardEffect(change.cardEffect);
 
         cardIdArray[ind] = id;
+        AutoCraft(id);
 
         if (dc != null)
         {
@@ -99,7 +103,7 @@ public class HandManager : MonoBehaviour
 
         cardId = deck.myDeckId[randCard];
 
-        for (int i = 0; i < 5; i++)
+        for (int i = 0; i < deckCardTrans.Length; i++)
         {
             if (deckCardTrans[i].childCount == 0)
             {
@@ -152,4 +156,31 @@ public class HandManager : MonoBehaviour
         markedIndexArray[ind] = 0;
     }
 
+    void AutoCraft(int id)
+    {
+        for(int i = 0; i < cardIdArray.Length; i++)
+        {
+            int craftResult = craft.CraftCards(id, cardIdArray[i]);
+            if(craftResult > 0)
+            {
+                int cardType = change.CardChange(id);
+
+                GameObject genCard = Instantiate(cardPrefab[cardType], deckCardTrans[i]); // カードを作る処理
+                DraggableCard dc = genCard.GetComponentInChildren<DraggableCard>();
+
+                CardEdit edit = genCard.GetComponentInChildren<CardEdit>();
+
+                edit.ChangeCardName(change.cardName);
+                edit.ChangeCardEffect(change.cardEffect);
+
+                cardIdArray[i] = id;
+
+                if (dc != null)
+                {
+                    dc.cardIndex = i;
+                    dc.cardId = id;
+                }
+            }
+        }
+    }
 }

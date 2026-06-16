@@ -10,18 +10,27 @@ public class DraggablePanel : MonoBehaviour, IBeginDragHandler, IEndDragHandler,
     private CanvasGroup canvasGroup;
     private GameObject ghostImage;
 
+    public int cardId = -1;
+    public int cardInd = -1;
+
+    MyDeck deck;
+    DeckManager manager;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         // ドラッグするためのキャンバスと、ドラッグ中にレイキャストでこのカードを感知しないようにするためのCanvasGroupを取得
         canvas = GetComponentInParent<Canvas>();
         canvasGroup = gameObject.AddComponent<CanvasGroup>();
+
+        deck = GameObject.Find("MyDeck").GetComponent<MyDeck>();
+        manager = GameObject.Find("DeckManager").GetComponent<DeckManager>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     public void OnBeginDrag(PointerEventData eventData)
@@ -72,6 +81,13 @@ public class DraggablePanel : MonoBehaviour, IBeginDragHandler, IEndDragHandler,
 
     public void OnEndDrag(PointerEventData eventData)
     {
+        deck.myDeckId[cardInd] = -1;
+
+        manager.deckCount--;
+        manager.DeckCounter(manager.deckCount);
+
+        Destroy(gameObject);
+
         // ドラッグ中はレイキャストでこのカードを感知しないようにしていたのを元に戻す
         canvasGroup.blocksRaycasts = true;
         Destroy(ghostImage);

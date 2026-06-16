@@ -25,6 +25,7 @@ public class HandManager : MonoBehaviour
     CoinManager coinManager;
     SkillManager skill;
     CardChanger change;
+    MyDeck deck;
 
     void Start()
     {
@@ -41,10 +42,13 @@ public class HandManager : MonoBehaviour
         coinManager = GameObject.Find("CoinManager").GetComponent<CoinManager>();
 
         change = GetComponent<CardChanger>();
+        deck = GameObject.Find("MyDeck").GetComponent<MyDeck>();
 
         for (int i = 0; i < deckCardTrans.Length; i++) // それぞれの手札の位置にランダムなカードを生成
         {
-            cardId = Random.Range(0, 12);
+            int randCard = Random.Range(0, 6);
+
+            cardId = deck.myDeckId[randCard];
 
             CardGenerate(cardId, i);
         }
@@ -91,7 +95,9 @@ public class HandManager : MonoBehaviour
     // カードを引く処理
     public void CardDraw()
     {
-        int cardRandomId = Random.Range(0, 12);
+        int randCard = Random.Range(0, 6);
+
+        cardId = deck.myDeckId[randCard];
 
         for (int i = 0; i < 5; i++)
         {
@@ -104,7 +110,7 @@ public class HandManager : MonoBehaviour
                     // カードを引くたびに代金が上がる
                     cardDrawFee = (int)(cardDrawFee + cardDrawCount);
 
-                    CardGenerate(cardRandomId, i);
+                    CardGenerate(cardId, i);
 
                     coinManager.ReduceMoney(cardDrawFee);
                 }

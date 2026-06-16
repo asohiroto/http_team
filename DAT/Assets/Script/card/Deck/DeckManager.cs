@@ -1,5 +1,4 @@
-using System;
-using UnityEditor.Experimental.GraphView;
+using TMPro;
 using UnityEngine;
 
 public class DeckManager : MonoBehaviour
@@ -9,6 +8,10 @@ public class DeckManager : MonoBehaviour
 
     [SerializeField] public Transform[] deckTrans;
     [SerializeField] public GameObject deckCard;
+
+    [SerializeField] public TMP_Text deckCounter;
+
+    public int deckCount = 0;
 
     CardChanger change;
 
@@ -23,12 +26,14 @@ public class DeckManager : MonoBehaviour
         {
             CardGenerate(i);
         }
+
+        DeckCounter(deckCount);
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     // カードを生成する関数
@@ -58,5 +63,18 @@ public class DeckManager : MonoBehaviour
 
         changer = obj.GetComponent<DeckCardChanger>();
         changer.DeckCardChange(cardId);
+
+        DraggablePanel panel = obj.GetComponentInChildren<DraggablePanel>();
+
+        panel.cardId = cardId;
+        panel.cardInd = i;
+
+        deckCount++;
+        DeckCounter(deckCount);
+    }
+
+    public void DeckCounter(int count)
+    {
+        deckCounter.text = $"{count} / 6枚";
     }
 }

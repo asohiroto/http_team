@@ -175,4 +175,4 @@ MonoBehaviour:
   - {fileID: 8628015757821773985, guid: 8dfe8a8ad9b6c7d42adef24fd3bf1451, type: 3}
   - {fileID: 194267116164964566, guid: 463aeb6123bec9945b0be67d130a643b, type: 3}
   - {fileID: 4307378007268850688, guid: 17a9f2777cb359640bc51fd3caae11ef, type: 3}
-  attackDamage: 0
+  attackDamage: 5

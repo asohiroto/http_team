@@ -1,4 +1,4 @@
 player attackDamageとdefaultAttackDamageをfloat型に
 attackCdを０．９９倍する効果あり（正しく作動するかわからないため、要検証。ついでにpublicにした）
 PlayerAttackのattackDamageをfloatに
-EnemyControllerのEnemyDamagedの引数をfloatに
+EnemyControllerのEnemyDamagedの引数をfloatに、enemyHpをfloatに

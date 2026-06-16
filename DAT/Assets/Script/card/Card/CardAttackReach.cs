@@ -14,10 +14,10 @@ public class CardAttackReach : MonoBehaviour
     public Vector3 playerToEnemyNol = Vector3.zero;
 
     // プレイヤーから敵へのベクトルの最小値をいれる（最小値を更新していくため、あえて大きい数字を入れている）
-    Vector3 playerToEnemyMin = new Vector3(100, 100);
+    public Vector3 playerToEnemyMin = new Vector3(100, 100);
 
-    Vector3 mousePosScreen = Vector3.zero;
-    Vector3 mousePosWorld = Vector3.zero;
+    public Vector3 mousePosScreen = Vector3.zero;
+    public Vector3 mousePosWorld = Vector3.zero;
 
     void Start()
     {
@@ -45,15 +45,19 @@ public class CardAttackReach : MonoBehaviour
         else
         {
             playerToEnemyMin = new Vector3(100, 100); // 最小値を更新していくため、あえて大きな数字を入れる
+
             for (int i = 0; i < enemyObj.Count; i++)
             {
                 if (enemyObj[i] == null) return;
+
                 playerToEnemy = enemyObj[i].transform.position - playerObj.transform.position;
+
                 if (playerToEnemyMin.magnitude > playerToEnemy.magnitude)
                 {
                     playerToEnemyMin = playerToEnemy;
                 }
             }
+
             playerToEnemyNol = playerToEnemyMin.normalized; // 一番近いエネミーへの単位ベクトル
         }
     }

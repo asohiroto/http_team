@@ -87,7 +87,7 @@ public class HandManager : MonoBehaviour
         edit.ChangeCardEffect(change.cardEffect);
 
         cardIdArray[ind] = id;
-        AutoCraft(id);
+        //AutoCraft(id);
 
         if (dc != null)
         {
@@ -156,31 +156,31 @@ public class HandManager : MonoBehaviour
         markedIndexArray[ind] = 0;
     }
 
-    void AutoCraft(int id)
-    {
-        for(int i = 0; i < cardIdArray.Length; i++)
-        {
-            int craftResult = craft.CraftCards(id, cardIdArray[i]);
-            if(craftResult > 0)
-            {
-                int cardType = change.CardChange(id);
+    //void AutoCraft(int id)
+    //{
+    //    for(int i = 0; i < cardIdArray.Length; i++)
+    //    {
+    //        int craftResult = craft.CraftCards(id, cardIdArray[i]);
+    //        if(craftResult > 0)
+    //        {
+    //            int cardType = change.CardChange(id);
 
-                GameObject genCard = Instantiate(cardPrefab[cardType], deckCardTrans[i]); // カードを作る処理
-                DraggableCard dc = genCard.GetComponentInChildren<DraggableCard>();
+    //            GameObject genCard = Instantiate(cardPrefab[cardType], deckCardTrans[i]); // カードを作る処理
+    //            DraggableCard dc = genCard.GetComponentInChildren<DraggableCard>();
 
-                CardEdit edit = genCard.GetComponentInChildren<CardEdit>();
+    //            CardEdit edit = genCard.GetComponentInChildren<CardEdit>();
 
-                edit.ChangeCardName(change.cardName);
-                edit.ChangeCardEffect(change.cardEffect);
+    //            edit.ChangeCardName(change.cardName);
+    //            edit.ChangeCardEffect(change.cardEffect);
 
-                cardIdArray[i] = id;
+    //            cardIdArray[i] = id;
 
-                if (dc != null)
-                {
-                    dc.cardIndex = i;
-                    dc.cardId = id;
-                }
-            }
-        }
-    }
+    //            if (dc != null)
+    //            {
+    //                dc.cardIndex = i;
+    //                dc.cardId = id;
+    //            }
+    //        }
+    //    }
+    //}
 }

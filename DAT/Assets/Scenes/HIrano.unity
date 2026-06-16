@@ -362,6 +362,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1951224556}
   - component: {fileID: 1951224555}
+  - component: {fileID: 1951224557}
   m_Layer: 0
   m_Name: EnemySpawner
   m_TagString: Untagged
@@ -384,7 +385,10 @@ MonoBehaviour:
   spawnIntervalSec: 0.6
   maxEnemy: 10
   enemyCount: 0
+  enemyVariations: 0
+  totalSpawnCount: 0
   WeakTorcher: {fileID: 4419746953452864637, guid: f6545e77c56c98841962ce3e926c813d, type: 3}
+  enemyList: []
   spawnPos: {x: 0, y: 0}
 --- !u!4 &1951224556
 Transform:
@@ -401,6 +405,56 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1951224557
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1951224554}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 773dbae7ec77a1f4da342ebef67e89b2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WaveManager
+  waveManagers:
+  - Wave: 5
+    Enemys: []
+    SpawnInterval: 0
+    MaxSpawnEnemy: 0
+    WaveDuration: 0
+  - Wave: 0
+    Enemys: []
+    SpawnInterval: 0
+    MaxSpawnEnemy: 0
+    WaveDuration: Infinity
+  - Wave: 1
+    Enemys:
+    - {fileID: 4419746953452864637, guid: f6545e77c56c98841962ce3e926c813d, type: 3}
+    - {fileID: 4419746953452864637, guid: f6545e77c56c98841962ce3e926c813d, type: 3}
+    - {fileID: 4419746953452864637, guid: f6545e77c56c98841962ce3e926c813d, type: 3}
+    - {fileID: 5471602684806819181, guid: 515c8a6ce46db834aad76669e1e46aef, type: 3}
+    SpawnInterval: 1
+    MaxSpawnEnemy: 10
+    WaveDuration: 30
+  - Wave: 2
+    Enemys:
+    - {fileID: 5471602684806819181, guid: 515c8a6ce46db834aad76669e1e46aef, type: 3}
+    - {fileID: 5471602684806819181, guid: 515c8a6ce46db834aad76669e1e46aef, type: 3}
+    - {fileID: 4419746953452864637, guid: f6545e77c56c98841962ce3e926c813d, type: 3}
+    - {fileID: 5471602684806819181, guid: 515c8a6ce46db834aad76669e1e46aef, type: 3}
+    SpawnInterval: 1
+    MaxSpawnEnemy: 3
+    WaveDuration: 30
+  - Wave: 3
+    Enemys:
+    - {fileID: 5471602684806819181, guid: 515c8a6ce46db834aad76669e1e46aef, type: 3}
+    - {fileID: 5471602684806819181, guid: 515c8a6ce46db834aad76669e1e46aef, type: 3}
+    - {fileID: 4419746953452864637, guid: f6545e77c56c98841962ce3e926c813d, type: 3}
+    - {fileID: 5471602684806819181, guid: 515c8a6ce46db834aad76669e1e46aef, type: 3}
+    SpawnInterval: 1
+    MaxSpawnEnemy: 3
+    WaveDuration: 30
 --- !u!1001 &7870452178756838651
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.IO;
 using System.Runtime.CompilerServices;
 using System.Threading;
 using Unity.VisualScripting;
@@ -8,8 +10,12 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] private float spawnIntervalSec = 2.0f;
     [SerializeField] private int maxEnemy = 10;
     [SerializeField] private int enemyCount = 0;
+    [SerializeField] private int enemyVariations = 0;
+    [SerializeField] private int totalSpawnCount = 0;
 
     [SerializeField] private GameObject WeakTorcher;
+
+    [SerializeField] private List<GameObject> enemyList = new List<GameObject>(); 
     // ほかの敵も追加していく
 
 
@@ -29,23 +35,10 @@ public class EnemySpawner : MonoBehaviour
 
     void FixedUpdate()
     {
+        SpawnEnemy();
 
-        if (timer >= spawnIntervalSec)
-        {
-            // 敵のスポーン上限
-            if (maxEnemy < enemyCount) return;
-            timer = 0;
-
-            spawnPos = SetSpawnPos();
-
-            GameObject newObj = Instantiate(WeakTorcher, this.transform);
-
-            newObj.transform.localPosition = spawnPos;
-
-            enemyCount++;
-        }
     }
-
+    // 敵のスポーンカウントを減らす
     public void DestroyEnemy()
     {
         enemyCount--;
@@ -53,11 +46,25 @@ public class EnemySpawner : MonoBehaviour
         return;
     }
 
-    public void UpdataSpawner()
+    /// <summary>
+    /// スポーン条件の変更
+    /// </summary>
+    /// <param name="spawnInterval">スポーンの間隔</param>
+    /// <param name="spawnMax">スポーン上限</param>
+    public void UpdataSpawner(float spawnInterval, int spawnMax, GameObject[] enemys)
     {
+        spawnIntervalSec = spawnInterval;
+        maxEnemy = spawnMax;
+        enemyVariations = enemys.Length;
 
+        // リストを空にする
+        enemyList.Clear();
+        foreach (var data in enemys)
+        {
+            enemyList.Add(data);
+        }
     }
-
+    // スポーン位置の設定
     private Vector2 SetSpawnPos()
     {
         const int width = 9;
@@ -85,5 +92,31 @@ public class EnemySpawner : MonoBehaviour
             spawnY = Random.Range(0, height);
         }
         return new Vector2(spawnX, spawnY);
+    }
+    // スポーン処理
+    private void SpawnEnemy()
+    {
+        if (timer < spawnIntervalSec) return;
+
+        // 敵のスポーン上限未満
+        if (maxEnemy > enemyCount)
+        {
+            timer = 0;
+
+            spawnPos = SetSpawnPos();
+
+            // リストの長さに制限
+            int nextNum = totalSpawnCount % enemyVariations;
+
+            GameObject nextSpawn = enemyList[nextNum];
+
+            GameObject newObj = Instantiate(nextSpawn, this.transform);
+
+            newObj.transform.localPosition = spawnPos;
+
+            enemyCount++;
+            totalSpawnCount++;
+        }
+
     }
 }

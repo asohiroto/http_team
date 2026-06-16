@@ -9,7 +9,7 @@ public struct WaveData
     public GameObject[] Enemys;
     public float SpawnInterval;
     public int MaxSpawnEnemy;
-    public int WaveDuration;
+    public float WaveDuration;
 }
 public class WaveManager : MonoBehaviour
 {
@@ -32,11 +32,26 @@ public class WaveManager : MonoBehaviour
             }
         }
 
+        currentWaveState = WaveState.Init;
     }
 
     void Update()
     {
         waveTimer -= Time.deltaTime;
+    }
+
+    private void FixedUpdate()
+    {
+        WaveManagement();
+    }
+
+    /// <summary>
+    /// 残り時間を取得
+    /// </summary>
+    /// <returns>ウェーブの残り秒数</returns>
+    public float GetTimeLeft()
+    {
+        return waveTimer;
     }
 
     public void ChangeWaveState(WaveState newState)
@@ -57,11 +72,28 @@ public class WaveManager : MonoBehaviour
 
     private void WaveManagement()
     {
+        // ウェーブ終了
         if (waveTimer > 0) return;
 
-        switch (currentWaveState)
+        // インターバル終了時のみ実行        <- どう実装する？
+        if (currentWaveState == WaveState.Interval)
         {
+            switch (currentWaveState)
+            {
+                case WaveState.Wave1:
 
+                    ChangeWaveState(WaveState.Wave2);
+
+                    break;
+
+                case WaveState.Wave2:
+
+                    ChangeWaveState(WaveState.Boss);
+
+                    break;
+
+
+            }
         }
 
     }

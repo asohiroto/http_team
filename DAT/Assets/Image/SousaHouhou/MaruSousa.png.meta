@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 3d9fc2a32f16aef41912c98298649936
+guid: e122d4c025d100142912caa588b93463
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 6549799733155175791
-    second: "ChatGPT Image 2026\u5E746\u670816\u65E5 18_44_01_0"
+      213: 5645517717857201919
+    second: MaruSousa_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -96,30 +96,17 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 4
-    buildTarget: WebGL
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: "ChatGPT Image 2026\u5E746\u670816\u65E5 18_44_01_0"
+      name: MaruSousa_0
       rect:
         serializedVersion: 2
-        x: 0
+        x: 11
         y: 0
-        width: 1254
-        height: 1254
+        width: 495
+        height: 351
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: f6d99aca72095ea50800000000000000
-      internalID: 6549799733155175791
+      spriteID: ffe6d020478e85e40800000000000000
+      internalID: 5645517717857201919
       vertices: []
       indices: 
       edges: []
@@ -148,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      "ChatGPT Image 2026\u5E746\u670816\u65E5 18_44_01_0": 6549799733155175791
+      MaruSousa_0: 5645517717857201919
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

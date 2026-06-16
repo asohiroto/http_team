@@ -1406,7 +1406,7 @@ CanvasGroup:
   m_Enabled: 1
   m_Alpha: 1
   m_Interactable: 1
-  m_BlocksRaycasts: 1
+  m_BlocksRaycasts: 0
   m_IgnoreParentGroups: 0
 --- !u!114 &909222250
 MonoBehaviour:
@@ -1417,11 +1417,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 909222243}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 300fc9ceb265ff34c80540e40021fed0, type: 3}
+  m_Script: {fileID: 11500000, guid: 24a85f6d13c5df7458daebb28e483bd7, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::TitleSceneSkip
+  m_EditorClassIdentifier: Assembly-CSharp::AnimationSkip
   animator: {fileID: 909222248}
-  fadeAnimationName: GameStartButtonAnimation
+  stateName: GameStartButtonAnimation
 --- !u!1 &1032033299
 GameObject:
   m_ObjectHideFlags: 0
@@ -1547,7 +1547,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1063555951}
-  - component: {fileID: 1063555950}
   - component: {fileID: 1063555952}
   m_Layer: 0
   m_Name: SceneManager
@@ -1556,18 +1555,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1063555950
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1063555949}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8675faef1cf8a504296ecf4cfa73bca5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::StartSceneContoroller
 --- !u!4 &1063555951
 Transform:
   m_ObjectHideFlags: 0

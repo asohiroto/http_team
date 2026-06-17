@@ -1,3 +1,4 @@
+#if false
 using System.Collections.Generic;
 using System.Threading;
 using UnityEngine;
@@ -146,3 +147,4 @@ public class EnemyAnimation : MonoBehaviour
     // 点滅用の関数を作る
     // 引数に点滅回数を指定する
 }
+#endif

@@ -1,22 +1,22 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class StartSceneContoroller : MonoBehaviour
+public class SecondSousaHouhouScene : MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
-    public void GameSceneChange()
+    public void SecondSousaHouhouSceneChange()
     {
-        SceneManager.LoadScene("DeckScene");
+        SceneManager.LoadScene("SecondSousaHouhouScene");
     }
 }

@@ -32,7 +32,7 @@ public class TitleBgm : MonoBehaviour
                 audioSource.Play();
             }
         }
-        else if (scene.name == "AllSceneProto" || scene.name == "ClearScene" || scene.name == "GameOverScene")
+        else if (scene.name == "AllSceneProto" || scene.name == "ClearScene" || scene.name == "GameOverScene" || scene.name == "DeckScene" )
         {
             // クリアやゲームオーバーでは停止
             audioSource.Stop();

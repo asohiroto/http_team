@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum WaveState { Shop, Wave1, Wave2, Boss, Interval, Init }
+public enum WaveState { Shop, Wave1, Wave2, Boss, Interval,}
 [System.Serializable]
 public struct WaveData
 {
@@ -16,11 +16,14 @@ public class WaveManager : MonoBehaviour
     [SerializeField] private List<WaveData> waveManagers = new List<WaveData>();
     private Dictionary<WaveState, WaveData> waveDictionary = new Dictionary<WaveState, WaveData>();
 
-    private float waveTimer;
+    [SerializeField] private float waveTimer;
 
 
-    private WaveState currentWaveState;
-    private WaveData currentWaveData;
+    [SerializeField] private WaveState currentWaveState;
+    [SerializeField] private WaveState nextWaveState;    // 次のウェーブ(current == next なら インターバルをはさむ)
+    [SerializeField] private WaveData currentWaveData;
+
+    private EnemySpawner enemySpawner;
 
     void Start()
     {
@@ -32,7 +35,11 @@ public class WaveManager : MonoBehaviour
             }
         }
 
-        currentWaveState = WaveState.Init;
+        enemySpawner = GetComponent<EnemySpawner>();
+
+        currentWaveState = WaveState.Shop;
+
+        ChangeWaveState(WaveState.Wave1);
     }
 
     void Update()
@@ -58,15 +65,32 @@ public class WaveManager : MonoBehaviour
     {
         if (currentWaveState == newState) return;
 
+        // 次のウェーブを保持しておく
+        nextWaveState = newState;
+
+        // インターバル終了後じゃないなら
+        if (currentWaveState != WaveState.Interval && newState != WaveState.Interval)
+        {
+            newState = WaveState.Interval;  // 次をインターバルに
+        }
+
+        // 現在の状態を確定
         currentWaveState = newState;
 
         if (waveDictionary.TryGetValue(newState, out var foundData))
         {
             currentWaveData = foundData;
 
-            // インターバル中なら飛ばす
-            if (currentWaveData.Wave == WaveState.Interval) return;
+            // 時間を設定
+            waveTimer = currentWaveData.WaveDuration;
 
+            enemySpawner.UpdataSpawner(
+                currentWaveData.SpawnInterval,
+                currentWaveData.MaxSpawnEnemy,
+                currentWaveData.Enemys);
+
+            enemySpawner.ClearField();
+            Debug.Log("ウェーブを変更します" + newState);
         }
     }
 
@@ -75,27 +99,30 @@ public class WaveManager : MonoBehaviour
         // ウェーブ終了
         if (waveTimer > 0) return;
 
-        // インターバル終了時のみ実行        <- どう実装する？
-        if (currentWaveState == WaveState.Interval)
+
+        switch (currentWaveState)
         {
-            switch (currentWaveState)
-            {
-                case WaveState.Wave1:
+            case WaveState.Interval:
 
-                    ChangeWaveState(WaveState.Wave2);
+                ChangeWaveState(nextWaveState);
 
-                    break;
+                break;
 
-                case WaveState.Wave2:
+            case WaveState.Wave1:
 
-                    ChangeWaveState(WaveState.Boss);
+                ChangeWaveState(WaveState.Wave2);
 
-                    break;
+                break;
+
+            case WaveState.Wave2:
+
+                ChangeWaveState(WaveState.Boss);
+
+                break;
 
 
-            }
         }
-
     }
 
 }
+

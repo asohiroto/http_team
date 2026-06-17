@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 8f5c1eadc01be8f45bd4ef77213408b3
+guid: 01c714b75010d0f4b84918df6b4e4b22
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 300475813526095695
-    second: ClearSceneKariHaikei_0
+      213: -317365376319608066
+    second: run-turn_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -113,13 +113,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: ClearSceneKariHaikei_0
+      name: run-turn_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 1672
-        height: 941
+        x: 102
+        y: 109
+        width: 61
+        height: 75
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: f47c1d019218b2400800000000000000
-      internalID: 300475813526095695
+      spriteID: efa26782fdd789bf0800000000000000
+      internalID: -317365376319608066
       vertices: []
       indices: 
       edges: []
@@ -148,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      ClearSceneKariHaikei_0: 300475813526095695
+      run-turn_0: -317365376319608066
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

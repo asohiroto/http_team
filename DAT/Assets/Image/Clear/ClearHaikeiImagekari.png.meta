@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 998383368fe5d3941acb370babe7fa58
+guid: 03434f623d0d1e04b97903c2b791bdfb
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 858236552460194842
-    second: '{F12AA2CD-0F5F-4677-AAEC-235179AEC380}_0'
+      213: -788451884418770752
+    second: GOHaikeiImagekari_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -113,13 +113,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: '{F12AA2CD-0F5F-4677-AAEC-235179AEC380}_0'
+      name: GOHaikeiImagekari_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 1581
-        height: 884
+        width: 1364
+        height: 680
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: a1455aae89119eb00800000000000000
-      internalID: 858236552460194842
+      spriteID: 0c85bb2403bde05f0800000000000000
+      internalID: -788451884418770752
       vertices: []
       indices: 
       edges: []
@@ -148,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      '{F12AA2CD-0F5F-4677-AAEC-235179AEC380}_0': 858236552460194842
+      GOHaikeiImagekari_0: -788451884418770752
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

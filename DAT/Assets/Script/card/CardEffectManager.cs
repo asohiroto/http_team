@@ -18,6 +18,26 @@ public class CardEffectManager : MonoBehaviour
 
     bool boostFlag = false;
 
+    Vector2 buffPos;
+
+    // 攻撃力-------------
+    [SerializeField] GameObject atkObj;
+
+    // 防御力-------------
+    [SerializeField] GameObject defObj;
+
+    // 移動速度-----------
+    [SerializeField] GameObject spdObj;
+
+    // 攻撃速度-----------
+    [SerializeField] GameObject atkspdObj;
+
+    // 回復---------------
+    [SerializeField] GameObject healObj;
+
+    // 反回復-------------
+    [SerializeField] GameObject dishealobj;
+
     // ファイアボール関連----------------------
     [SerializeField] float fbSpeed;
 
@@ -109,6 +129,13 @@ public class CardEffectManager : MonoBehaviour
 
     Vector2 hfPos = Vector2.zero;
 
+    // モルテンスピア関連---------------------
+    [SerializeField] GameObject moltenSpear;
+
+    public GameObject moltenSpearPrefab;
+
+    Vector2 msPos = Vector2.zero;
+
     // 共通------------------------------------
     PlayerController player;
     CardAttackReach reach;
@@ -143,6 +170,7 @@ public class CardEffectManager : MonoBehaviour
                 () => GroundSpike(),
                 () => ThunderBolt(),
                 () => HeavensFury(),
+                () => MoltenSpear(),
             };
 
         healDefaultAmount = healAmount;
@@ -183,6 +211,9 @@ public class CardEffectManager : MonoBehaviour
     void FireEnhance()
     {
         player.attackDamage *= 1.01f;
+        player.defaultAttackDamage = player.attackDamage;
+
+        Effect(atkObj, buffPos);
 
         Debug.Log("攻撃強化！");
     }
@@ -195,11 +226,15 @@ public class CardEffectManager : MonoBehaviour
         player.defaultAttackCd = player.attackCd;
         player.defaultAttackTime = player.attackTime;
 
+        Effect(atkspdObj, buffPos);
+
         Debug.Log("攻撃速度強化！");
     }
 
     void GroundEnhance()
     {
+        Effect(defObj, buffPos);
+
         Debug.Log("地属性のカードの効果"); // ここに地属性のカードの効果を実装
     }
 
@@ -207,6 +242,8 @@ public class CardEffectManager : MonoBehaviour
     {
         player.speed *= 1.01f;
         player.defaultSpeed = player.speed;
+
+        Effect(spdObj, buffPos);
 
         Debug.Log("移動速度強化！");
     }
@@ -219,6 +256,8 @@ public class CardEffectManager : MonoBehaviour
             player.playerHP = player.maxPlayerHP;
         }
 
+        Effect(healObj, buffPos);
+
         Debug.Log("体力回復！");
     }
 
@@ -230,6 +269,8 @@ public class CardEffectManager : MonoBehaviour
             player.playerHP = 1;
         }
 
+        Effect(dishealobj, buffPos);
+
         Debug.Log("体力減少！");
     }
 
@@ -238,7 +279,8 @@ public class CardEffectManager : MonoBehaviour
         Debug.Log("ブースト中");
 
         player.attackDamage *= 1.3f;
-        player.defaultAttackDamage = player.attackDamage;
+
+        Effect(atkObj, buffPos);
 
         boostFlag = true;
         boostCount = 0;
@@ -249,6 +291,8 @@ public class CardEffectManager : MonoBehaviour
         Debug.Log("ブースト中");
         player.attackCd *= 0.7f;
 
+        Effect(atkspdObj, buffPos);
+
         boostFlag = true;
         boostCount = 0;
     }
@@ -257,12 +301,16 @@ public class CardEffectManager : MonoBehaviour
     {
         Debug.Log("ブースト中");
         Debug.Log("一時的に防御力上昇！");
+
+        Effect(defObj, buffPos);
     }
 
     void ThunderBoost()
     {
         Debug.Log("ブースト中");
         player.speed *= 1.3f;
+
+        Effect(spdObj, buffPos);
 
         boostFlag = true;
         boostCount = 0;
@@ -273,6 +321,8 @@ public class CardEffectManager : MonoBehaviour
         Debug.Log("ブースト中");
         healAmount *= 1.3f;
 
+        Effect(healObj, buffPos);
+
         boostFlag = true;
         boostCount = 0;
     }
@@ -281,6 +331,8 @@ public class CardEffectManager : MonoBehaviour
     {
         Debug.Log("ブースト中");
         curseAmount *= 1.3f;
+
+        Effect(dishealobj, buffPos);
 
         boostFlag = true;
         boostCount = 0;
@@ -360,9 +412,17 @@ public class CardEffectManager : MonoBehaviour
 
     void HeavensFury()
     {
-        string name = ("heavensFury");
+        string name = ("HeavensFury");
 
         SpikeSkill(hfPos, heavensFury, name, ref heavensFuryPrefab);
+    }
+
+
+    void MoltenSpear()
+    {
+        string name = ("MoltenFury");
+
+        SpikeSkill(msPos, moltenSpear, name, ref moltenSpearPrefab);
     }
 
     void BallSkill(ref bool flag, ref Vector2 destPos, ref Vector2 objPos, GameObject skill, string name, ref GameObject skillPrefab)
@@ -396,6 +456,15 @@ public class CardEffectManager : MonoBehaviour
         obj.transform.name = name;
 
         skillPrefab = obj;
+    }
+
+    void Effect(GameObject skill, Vector2 pos)
+    {
+        pos.x = player.currentPos.x;
+        pos.y = player.currentPos.y + 1.0f;
+
+        GameObject obj = GameObject.Instantiate(skill);
+        obj.transform.position = pos;
     }
 
     void EndBoost()

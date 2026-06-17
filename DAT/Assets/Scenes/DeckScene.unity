@@ -1805,6 +1805,10 @@ MonoBehaviour:
     cardName: HeavensFury
     cardEffect: "\u8056\u5149\u3092\u964D\u3089\u3059"
     cardImage: {fileID: 0}
+  - cardType: 5
+    cardName: MoltenSpear
+    cardEffect: "\u5730\u7344\u306E\u69CD\u3092\u964D\u3089\u3059"
+    cardImage: {fileID: 0}
 --- !u!114 &1443594205
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2461,6 +2465,9 @@ MonoBehaviour:
   - materialA: 10
     materialB: 10
     result: 22
+  - materialA: 11
+    materialB: 11
+    result: 23
   material1: 0
 --- !u!4 &1707555910
 Transform:

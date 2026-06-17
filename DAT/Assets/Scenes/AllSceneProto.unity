@@ -1924,6 +1924,12 @@ MonoBehaviour:
   healAmount: 10
   curseAmount: 10
   boostTime: 3
+  atkObj: {fileID: 5556711326149517656, guid: 9ba5d5e9e54fa074685d04d26721c865, type: 3}
+  defObj: {fileID: 2980463479591671236, guid: fa12978ebabcb2b4981a6a4c7560eba5, type: 3}
+  spdObj: {fileID: 543023748025405404, guid: c2daebc7ab97b154ebb57e37af066e3e, type: 3}
+  atkspdObj: {fileID: 8791620389591850477, guid: 4e035b381d154c947898cdb8442aee12, type: 3}
+  healObj: {fileID: 4028999416743085635, guid: 66b6478e89e43514dab34e945fc13f3e, type: 3}
+  dishealobj: {fileID: 1685117021338725727, guid: b5ebc6df5869bb442ac30b4c71ec99ab, type: 3}
   fbSpeed: 0.5
   fireBall: {fileID: 6676543517733875803, guid: c1f2ad0cd1675dd44b70842ea6e4c916, type: 3}
   fireBallPrefab: {fileID: 0}
@@ -1949,6 +1955,8 @@ MonoBehaviour:
   thunderBoltPrefab: {fileID: 0}
   heavensFury: {fileID: 5070741048714067806, guid: 4dba092d1d70b634eb9da1753818a285, type: 3}
   heavensFuryPrefab: {fileID: 0}
+  moltenSpear: {fileID: 2865435146257064286, guid: a734ddf3be8563745a574b93a0f91407, type: 3}
+  moltenSpearPrefab: {fileID: 0}
 --- !u!4 &557050537
 Transform:
   m_ObjectHideFlags: 0
@@ -2689,7 +2697,7 @@ SpriteRenderer:
   m_Size: {x: 15.81, y: 8.84}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_SpriteSortPoint: 0
 --- !u!1 &797354678
 GameObject:
@@ -8210,6 +8218,10 @@ MonoBehaviour:
   - cardType: 4
     cardName: HeavensFury
     cardEffect: "\u8056\u5149\u3092\u964D\u3089\u3059"
+    cardImage: {fileID: 0}
+  - cardType: 5
+    cardName: MoltenSpear
+    cardEffect: "\u5730\u7344\u306E\u69CD\u3092\u964D\u3089\u3059"
     cardImage: {fileID: 0}
 --- !u!114 &1780329273
 MonoBehaviour:

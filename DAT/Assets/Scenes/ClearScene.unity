@@ -630,15 +630,15 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4278190080
-  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
-  m_enableVertexGradient: 0
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+  m_enableVertexGradient: 1
   m_colorMode: 3
   m_fontColorGradient:
-    topLeft: {r: 1, g: 1, b: 1, a: 1}
-    topRight: {r: 1, g: 1, b: 1, a: 1}
-    bottomLeft: {r: 1, g: 1, b: 1, a: 1}
-    bottomRight: {r: 1, g: 1, b: 1, a: 1}
+    topLeft: {r: 0.6603774, g: 0.5224204, b: 0.034264866, a: 1}
+    topRight: {r: 1, g: 0.74509805, b: 0, a: 1}
+    bottomLeft: {r: 0.9811321, g: 0.7454417, b: 0, a: 1}
+    bottomRight: {r: 0, g: 0, b: 0, a: 1}
   m_fontColorGradientPreset: {fileID: 0}
   m_spriteAsset: {fileID: 0}
   m_tintAllSprites: 0
@@ -783,7 +783,7 @@ SpriteRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: -788451884418770752, guid: 03434f623d0d1e04b97903c2b791bdfb, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.6226415, g: 0.6226415, b: 0.6226415, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -1039,7 +1039,7 @@ SpriteRenderer:
   m_SortingOrder: 2
   m_MaskInteraction: 0
   m_Sprite: {fileID: 5013799040997709749, guid: bf29f581365379b489ef412b503d3e39, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.78431374}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

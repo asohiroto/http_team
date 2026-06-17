@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using static UnityEditor.PlayerSettings;
 
 public class CardEffectManager : MonoBehaviour
 {
@@ -23,20 +24,32 @@ public class CardEffectManager : MonoBehaviour
     // 攻撃力-------------
     [SerializeField] GameObject atkObj;
 
+    GameObject atkPrefab;
+
     // 防御力-------------
     [SerializeField] GameObject defObj;
+
+    GameObject defPrefab;
 
     // 移動速度-----------
     [SerializeField] GameObject spdObj;
 
+    GameObject spdPrefab;
+
     // 攻撃速度-----------
     [SerializeField] GameObject atkspdObj;
+
+    GameObject atkspdPrefab;
 
     // 回復---------------
     [SerializeField] GameObject healObj;
 
+    GameObject healPrefab;
+
     // 反回復-------------
     [SerializeField] GameObject dishealobj;
+
+    GameObject dishealprefab;
 
     // ファイアボール関連----------------------
     [SerializeField] float fbSpeed;
@@ -206,6 +219,17 @@ public class CardEffectManager : MonoBehaviour
 
         // サンダーボール使用後の挙動
         if (tbFlag) skill.BallMove(thunderballPrefab, destPos, tbSpeed, tbPos, ref tbFlag);
+
+        buffPos.x = player.currentPos.x;
+        buffPos.y = player.currentPos.y + 1.0f;
+
+        // エフェクトをプレイヤーに追従
+        if (atkPrefab != null) atkPrefab.transform.position = buffPos;
+        if (atkspdPrefab != null) atkspdPrefab.transform.position = buffPos;
+        if (defPrefab != null) defPrefab.transform.position = buffPos;
+        if (spdPrefab != null) spdPrefab.transform.position = buffPos;
+        if (healPrefab != null) healPrefab.transform.position = buffPos;
+        if (dishealprefab != null) dishealprefab.transform.position = buffPos;
     }
 
     void FireEnhance()
@@ -213,7 +237,7 @@ public class CardEffectManager : MonoBehaviour
         player.attackDamage *= 1.01f;
         player.defaultAttackDamage = player.attackDamage;
 
-        Effect(atkObj, buffPos);
+        atkPrefab = Effect(atkObj, buffPos);
 
         Debug.Log("攻撃強化！");
     }
@@ -226,14 +250,14 @@ public class CardEffectManager : MonoBehaviour
         player.defaultAttackCd = player.attackCd;
         player.defaultAttackTime = player.attackTime;
 
-        Effect(atkspdObj, buffPos);
+        atkspdPrefab = Effect(atkspdObj, buffPos);
 
         Debug.Log("攻撃速度強化！");
     }
 
     void GroundEnhance()
     {
-        Effect(defObj, buffPos);
+        defPrefab = Effect(defObj, buffPos);
 
         Debug.Log("地属性のカードの効果"); // ここに地属性のカードの効果を実装
     }
@@ -243,7 +267,7 @@ public class CardEffectManager : MonoBehaviour
         player.speed *= 1.01f;
         player.defaultSpeed = player.speed;
 
-        Effect(spdObj, buffPos);
+        spdPrefab = Effect(spdObj, buffPos);
 
         Debug.Log("移動速度強化！");
     }
@@ -256,7 +280,7 @@ public class CardEffectManager : MonoBehaviour
             player.playerHP = player.maxPlayerHP;
         }
 
-        Effect(healObj, buffPos);
+        healPrefab = Effect(healObj, buffPos);
 
         Debug.Log("体力回復！");
     }
@@ -269,7 +293,7 @@ public class CardEffectManager : MonoBehaviour
             player.playerHP = 1;
         }
 
-        Effect(dishealobj, buffPos);
+        dishealprefab = Effect(dishealobj, buffPos);
 
         Debug.Log("体力減少！");
     }
@@ -280,7 +304,7 @@ public class CardEffectManager : MonoBehaviour
 
         player.attackDamage *= 1.3f;
 
-        Effect(atkObj, buffPos);
+        atkPrefab = Effect(atkObj, buffPos);
 
         boostFlag = true;
         boostCount = 0;
@@ -291,7 +315,7 @@ public class CardEffectManager : MonoBehaviour
         Debug.Log("ブースト中");
         player.attackCd *= 0.7f;
 
-        Effect(atkspdObj, buffPos);
+        atkspdPrefab = Effect(atkspdObj, buffPos);
 
         boostFlag = true;
         boostCount = 0;
@@ -302,7 +326,7 @@ public class CardEffectManager : MonoBehaviour
         Debug.Log("ブースト中");
         Debug.Log("一時的に防御力上昇！");
 
-        Effect(defObj, buffPos);
+        defPrefab = Effect(defObj, buffPos);
     }
 
     void ThunderBoost()
@@ -310,7 +334,7 @@ public class CardEffectManager : MonoBehaviour
         Debug.Log("ブースト中");
         player.speed *= 1.3f;
 
-        Effect(spdObj, buffPos);
+        spdPrefab = Effect(spdObj, buffPos);
 
         boostFlag = true;
         boostCount = 0;
@@ -321,7 +345,7 @@ public class CardEffectManager : MonoBehaviour
         Debug.Log("ブースト中");
         healAmount *= 1.3f;
 
-        Effect(healObj, buffPos);
+        healPrefab = Effect(healObj, buffPos);
 
         boostFlag = true;
         boostCount = 0;
@@ -332,7 +356,7 @@ public class CardEffectManager : MonoBehaviour
         Debug.Log("ブースト中");
         curseAmount *= 1.3f;
 
-        Effect(dishealobj, buffPos);
+        dishealprefab = Effect(dishealobj, buffPos);
 
         boostFlag = true;
         boostCount = 0;
@@ -458,13 +482,12 @@ public class CardEffectManager : MonoBehaviour
         skillPrefab = obj;
     }
 
-    void Effect(GameObject skill, Vector2 pos)
+    public GameObject Effect(GameObject skill, Vector2 pos)
     {
-        pos.x = player.currentPos.x;
-        pos.y = player.currentPos.y + 1.0f;
-
         GameObject obj = GameObject.Instantiate(skill);
         obj.transform.position = pos;
+
+        return obj;
     }
 
     void EndBoost()
@@ -478,5 +501,4 @@ public class CardEffectManager : MonoBehaviour
 
         boostCount = 0;
     }
-
 }

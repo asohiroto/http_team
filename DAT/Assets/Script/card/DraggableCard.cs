@@ -10,6 +10,10 @@ public class DraggableCard : MonoBehaviour, IBeginDragHandler, IEndDragHandler, 
     private CanvasGroup canvasGroup;
     private GameObject ghostImage;
 
+    [SerializeField] GameObject cardUse;
+
+    GameObject cardUsePrefab;
+
     // カードの位置と、ID
     public int cardIndex;
     public int cardId;
@@ -21,11 +25,14 @@ public class DraggableCard : MonoBehaviour, IBeginDragHandler, IEndDragHandler, 
 
     string currentScene;
 
+    Vector2 pos;
+
     CraftManager craft;
     HandManager hand;
     SkillManager skill;
     CardEffectManager effect;
     CardChanger change;
+    PlayerController player;
 
     void Start()
     {
@@ -37,6 +44,7 @@ public class DraggableCard : MonoBehaviour, IBeginDragHandler, IEndDragHandler, 
 
         if (currentScene != "DeckScene")
         {
+            player = GameObject.Find("Player").GetComponent<PlayerController>();
             effect = GameObject.Find("CardEffectManager").GetComponent<CardEffectManager>();
             change = GameObject.Find("HandManager").GetComponent<CardChanger>();
 
@@ -54,6 +62,20 @@ public class DraggableCard : MonoBehaviour, IBeginDragHandler, IEndDragHandler, 
         }
     }
 
+    void Update()
+    {
+        if (currentScene != "DeckScene")
+        {
+            pos = player.currentPos;
+
+            if (cardUsePrefab != null)
+            {
+                cardUsePrefab.transform.position = pos;
+                Debug.Log(player.currentPos);
+                Debug.Log(cardUsePrefab.transform.position);
+            }
+        }
+    }
 
     // ドラッグ開始時に実行
     public void OnBeginDrag(PointerEventData eventData)
@@ -100,7 +122,7 @@ public class DraggableCard : MonoBehaviour, IBeginDragHandler, IEndDragHandler, 
             }
         }
 
-        if(currentScene == "DeckScene")
+        if (currentScene == "DeckScene")
         {
             DataPanelManager dataPanel = GameObject.Find("DeckManager").GetComponent<DataPanelManager>();
 
@@ -129,7 +151,6 @@ public class DraggableCard : MonoBehaviour, IBeginDragHandler, IEndDragHandler, 
     {
         if (currentScene != "DeckScene")
         {
-
             // ドロップされたカードと、ドロップ先のカードを取得
             DraggableCard dragged = eventData.pointerDrag?.GetComponent<DraggableCard>();
             DraggableCard target = transform.GetComponentInChildren<DraggableCard>();
@@ -187,10 +208,12 @@ public class DraggableCard : MonoBehaviour, IBeginDragHandler, IEndDragHandler, 
             }
             else
             {
-                // カードの効果を発動させる
-                Debug.Log(skill.useFlag);
+            //    // カードの効果を発動させる
+            //    Debug.Log(skill.useFlag);
 
                 effect.cardEffect[cardId]();
+
+                cardUsePrefab = effect.Effect(cardUse, pos);
 
                 hand.DisCard(cardIndex);
             }

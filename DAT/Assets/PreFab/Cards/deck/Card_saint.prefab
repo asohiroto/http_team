@@ -319,6 +319,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1484e924cd3e3fe4f9039e780dc892f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DraggableCard
+  cardUse: {fileID: 4778725995001476738, guid: 38f7d580a41ad0f40b180b951f2526de, type: 3}
   cardIndex: 0
   cardId: 0
   wasDroppedOnCard: 0

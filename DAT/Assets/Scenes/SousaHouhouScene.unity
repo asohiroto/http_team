@@ -2223,8 +2223,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 8.9, y: 0.000014782}
-  m_SizeDelta: {x: 165.65, y: 50.96}
+  m_AnchoredPosition: {x: -0.0000095367, y: 0.000014782}
+  m_SizeDelta: {x: 130.38, y: 50.96}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &933009942
 MonoBehaviour:
@@ -2702,7 +2702,7 @@ Transform:
   m_GameObject: {fileID: 1031844737}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.77, y: 2.14, z: 90}
+  m_LocalPosition: {x: 1.8, y: 2.14, z: 90}
   m_LocalScale: {x: 0.27776998, y: 0.277776, z: 0}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -2721,7 +2721,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NewMonoBehaviourScript
   speed: 2
-  stopPositionX: 4
+  stopPositionX: 3.9
 --- !u!212 &1031844740
 SpriteRenderer:
   serializedVersion: 2
@@ -4025,7 +4025,7 @@ Transform:
   m_GameObject: {fileID: 1659104087}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -7.29, y: 2.34, z: 90}
+  m_LocalPosition: {x: -7.3, y: 2.34, z: 90}
   m_LocalScale: {x: 0.27776998, y: 0.277776, z: 0}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -4044,7 +4044,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NewMonoBehaviourScript
   speed: 2
-  stopPositionX: -5
+  stopPositionX: -5.2
 --- !u!212 &1659104090
 SpriteRenderer:
   serializedVersion: 2

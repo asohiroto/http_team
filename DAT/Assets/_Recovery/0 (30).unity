@@ -130,7 +130,6 @@ GameObject:
   - component: {fileID: 701324854}
   - component: {fileID: 701324853}
   - component: {fileID: 701324855}
-  - component: {fileID: 701324856}
   m_Layer: 0
   m_Name: Boss2
   m_TagString: Enemy
@@ -237,42 +236,6 @@ MonoBehaviour:
   meleePrefab: {fileID: 8852684360780332127, guid: ecb3f64ab81f24a45a8b4b8ad8744326, type: 3}
   meleeRangePrefab: {fileID: 1718113552492981584, guid: de8cc368ef70ed64d8eba2c3ca0a352f, type: 3}
   meleeFXPrefab: {fileID: 1648080044229311865, guid: 15a85347db8b4b548a786a2c371212b2, type: 3}
---- !u!58 &701324856
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 701324852}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_CompositeOperation: 0
-  m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
-  m_Radius: 0.33
 --- !u!1 &1729439561
 GameObject:
   m_ObjectHideFlags: 0

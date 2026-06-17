@@ -60,12 +60,14 @@ public class EneBoss2 : MonoBehaviour
     [SerializeField] GameObject meleeFXPrefab;
     GameObject meleeObj;
     GameObject meleeRangeObj;
-    int meleeWaitingFrame = 50;
+    int meleeWaitingFrame = 45;
     int meleeFrameTimer = 0;
     bool isMeleeAttack = false;
     bool isMeleeRange = false;
-    float meleeRangeDistance = 2f; // 攻撃範囲を表示する際の距離
-    float meleePlayerDistance = 3.0f; // 近接攻撃をする際にとるプレイヤーとの距離
+    bool secondAttack = false;
+    int secondAttackFrame = 15;
+    float meleeRangeDistance = 2.4f; // 攻撃範囲を表示する際の距離
+    float meleePlayerDistance = 1.5f; // 近接攻撃をする際にとるプレイヤーとの距離
     Vector3 attackDir = Vector3.left;
     Vector3 meleeTargetPos = Vector3.zero;
 
@@ -137,6 +139,7 @@ public class EneBoss2 : MonoBehaviour
 
                     // ランダムな状態を取得する
                     state = (State)Enum.ToObject(typeof(State), UnityEngine.Random.Range(0, Enum.GetNames(typeof(State)).Length));
+                    //state = State.Melee;
                 }
                 break;
             case State.Melee:
@@ -163,6 +166,8 @@ public class EneBoss2 : MonoBehaviour
         followPlayer = true;
         isMeleeAttack = false;
         isMeleeRange = false;
+        secondAttack = false;
+        secondAttackFrame = 0;
         meleeState = MeleeState.Walk;
         stampState = StampState.Jump;
         stampFrameTimer = 0;
@@ -225,10 +230,24 @@ public class EneBoss2 : MonoBehaviour
                     isAttack = true;
                 }
                 // 攻撃待機時間が終われば攻撃状態に遷移する
-                else if (meleeFrameTimer >= meleeWaitingFrame)
+                else if (meleeFrameTimer >= meleeWaitingFrame - secondAttackFrame)
                 {
                     meleeFrameTimer = 0;
-                    meleeState = MeleeState.Attack;
+                    int idx = UnityEngine.Random.Range(0, 100);
+                    if (idx <= 50 || secondAttack)
+                    {
+                        meleeState = MeleeState.Attack;
+                    }
+                    else
+                    {
+                        InitAttackBool();
+                        Destroy(meleeRangeObj);
+                        // 2度目の攻撃なら待ち時間減少
+                        secondAttackFrame = 30;
+                        secondAttack = true;
+                        meleeState = MeleeState.Walk;
+                    }
+                    //meleeState = MeleeState.Attack;
                 }
                 break;
             // 攻撃をする状態
@@ -364,7 +383,7 @@ public class EneBoss2 : MonoBehaviour
     {
         Vector3 posAdj = Vector3.zero; // ポジションを調整するための変数
         // プレイヤーが右側にいるとき若干左の値を返す
-        if (playerCtrl.currentPos.x >= 0) posAdj = Vector3.left * meleePlayerDistance;
+        if (playerCtrl.currentPos.x >= currentPos.x) posAdj = Vector3.left * meleePlayerDistance;
         else posAdj = Vector3.right * meleePlayerDistance;
         // プレイヤーが左側にいるとき若干右の値を返す
         return playerCtrl.currentPos + posAdj;

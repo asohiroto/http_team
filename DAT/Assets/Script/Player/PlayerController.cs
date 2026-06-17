@@ -10,6 +10,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] public float defaultSpeed = 0.05f; // プレイヤーのデフォルトスピード
     [SerializeField] private float dashSpeed = 0.3f; // プレイヤーのダッシュスピード
     private bool onDash; // ダッシュ中かどうか
+    private bool onInvisible = false;
+    [SerializeField]private float invisibleTime = 0.05f; // 無敵時間を設定できる
 
     float dirX; // プレイヤーのX軸方向 (-1, 0, 1)のどれか
     float dirY; // プレイヤーのy軸方向(-1, 0, 1)のどれか
@@ -172,6 +174,7 @@ public class PlayerController : MonoBehaviour
     IEnumerator Dash()
     {
         onDash = true;
+        onInvisible = true;
         dashDir = lastDir;
         GameObject obj;
         // ダッシュで土煙がでるようにする
@@ -189,6 +192,8 @@ public class PlayerController : MonoBehaviour
         obj.transform.position = transform.position;
         yield return new WaitForSeconds(dashTime);
         onDash = false;
+        yield return new WaitForSeconds(invisibleTime);
+        onInvisible = false;
     }
 
     public void SlashTypeAndDir(GameObject slashType,ref GameObject obje)
@@ -252,7 +257,7 @@ public class PlayerController : MonoBehaviour
     /// <param name="enemyAttack"></param>
     public void Damaged(float enemyAttack)
     {
-        if (onDash) return;
+        if (onInvisible) return;
         playerHP -= enemyAttack;
         StartCoroutine(BackDamageColor());
         Debug.Log("Player残りHP：" + enemyAttack);

@@ -16,6 +16,7 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] private GameObject WeakTorcher;
 
     [SerializeField] private List<GameObject> enemyList = new List<GameObject>(); 
+    [SerializeField] private List<GameObject> field = new List<GameObject>(); 
     // ほかの敵も追加していく
 
 
@@ -38,12 +39,31 @@ public class EnemySpawner : MonoBehaviour
         SpawnEnemy();
 
     }
-    // 敵のスポーンカウントを減らす
-    public void DestroyEnemy()
+    /// <summary>
+    /// 敵のスポーンカウントを減らす
+    /// </summary>
+    /// <param name="deleteObj">削除したオブジェクト</param>
+    public void DestroyEnemy(GameObject deleteObj)
     {
+        field.Remove(deleteObj);
+
         enemyCount--;
 
         return;
+    }
+
+    /// <summary>
+    /// すべての敵を消す
+    /// </summary>
+    public void ClearField()
+    {
+        foreach (var data in field)
+        {
+            data.GetComponent<EnemyController>().Delete();
+        }
+
+        enemyCount = 0;
+        field.Clear();
     }
 
     /// <summary>
@@ -59,6 +79,8 @@ public class EnemySpawner : MonoBehaviour
 
         // リストを空にする
         enemyList.Clear();
+
+        // リストに敵の一覧を追加
         foreach (var data in enemys)
         {
             enemyList.Add(data);
@@ -110,9 +132,11 @@ public class EnemySpawner : MonoBehaviour
 
             GameObject nextSpawn = enemyList[nextNum];
 
-            GameObject newObj = Instantiate(nextSpawn, this.transform);
+            GameObject newObj = Instantiate(WeakTorcher, this.transform);
 
             newObj.transform.localPosition = spawnPos;
+
+            field.Add(newObj);
 
             enemyCount++;
             totalSpawnCount++;

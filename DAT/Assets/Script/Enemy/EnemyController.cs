@@ -133,6 +133,15 @@ public class EnemyController : MonoBehaviour
     }
 
     /// <summary>
+    /// 敵を消す(ドロップなし)
+    /// </summary>
+    public void Delete()
+    {
+        Destroy(this.gameObject);
+
+    }
+
+    /// <summary>
     /// Enemyの被ダメージ処理
     /// </summary>
     /// <param name="dmg"></param>
@@ -347,7 +356,7 @@ public class EnemyController : MonoBehaviour
         GameObject dropItem = Instantiate(DropItemPrefab, this.transform);
         dropItem.transform.SetParent(DropParentObj.transform);
 
-        enemySpawner.DestroyEnemy();
+        enemySpawner.DestroyEnemy(this.gameObject);
 
         Destroy(this.gameObject);
     }

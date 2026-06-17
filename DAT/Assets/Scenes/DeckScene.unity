@@ -1793,6 +1793,18 @@ MonoBehaviour:
     cardName: WaterSprash
     cardEffect: "\u6C34\u67F1\u3092\u7ACB\u3066\u308B"
     cardImage: {fileID: 0}
+  - cardType: 2
+    cardName: GroundSpike
+    cardEffect: "\u571F\u67F1\u3092\u7ACB\u3066\u308B"
+    cardImage: {fileID: 0}
+  - cardType: 3
+    cardName: ThunderBolt
+    cardEffect: "\u96F7\u6483\u3092\u843D\u3068\u3059"
+    cardImage: {fileID: 0}
+  - cardType: 4
+    cardName: HeavensFury
+    cardEffect: "\u8056\u5149\u3092\u964D\u3089\u3059"
+    cardImage: {fileID: 0}
 --- !u!114 &1443594205
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2440,6 +2452,15 @@ MonoBehaviour:
   - materialA: 7
     materialB: 7
     result: 19
+  - materialA: 8
+    materialB: 8
+    result: 20
+  - materialA: 9
+    materialB: 9
+    result: 21
+  - materialA: 10
+    materialB: 10
+    result: 22
   material1: 0
 --- !u!4 &1707555910
 Transform:

@@ -81,7 +81,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 6
   m_MaskInteraction: 0
   m_Sprite: {fileID: -8321102221490951993, guid: b7bdcf84cff13624381c60f37788f4d7, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -91,7 +91,7 @@ SpriteRenderer:
   m_Size: {x: 0.64, y: 0.64}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_SpriteSortPoint: 0
 --- !u!114 &2768892673616506444
 MonoBehaviour:
@@ -106,19 +106,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SkillAttack
   attackSprite:
-  - {fileID: -8321102221490951993, guid: b7bdcf84cff13624381c60f37788f4d7, type: 3}
-  - {fileID: 7417498029127908629, guid: 13374934560891240b8899ad4cfe617a, type: 3}
-  - {fileID: 545875093725613961, guid: f9e207924d91b5d4e962d98cdd3e16fe, type: 3}
-  - {fileID: 3432582381386852895, guid: c125e7c5aa3d38d469eed6cd4ea3d7aa, type: 3}
-  - {fileID: 438895471204581479, guid: 710ec962d21049c4682d2cd25f26234a, type: 3}
-  - {fileID: 8569003786385872269, guid: 262ec41df8658b043b2243e5e00498ca, type: 3}
-  - {fileID: 4307378007268850688, guid: a2785b9228016034cbd8d23dc16d5de7, type: 3}
-  - {fileID: 194267116164964566, guid: e466800a13586b345a8325fbd8371204, type: 3}
-  - {fileID: 8628015757821773985, guid: 4457e52be12837d4b8cd20c43e148987, type: 3}
-  - {fileID: 1882757722001119989, guid: 3640a3b8367910e45954fe89276dc163, type: 3}
-  - {fileID: -445189602233881614, guid: 0874cd1c5e3a1a045b453abb5494e503, type: 3}
-  - {fileID: -4405548165813298403, guid: ef8b23252aeca4a4bbb97f735ab26fa8, type: 3}
-  - {fileID: 637040348724207496, guid: 6f0f5ac3bcc3fb5418adb2216385689c, type: 3}
+  - {fileID: 21300000, guid: b7bdcf84cff13624381c60f37788f4d7, type: 3}
+  - {fileID: 21300000, guid: 13374934560891240b8899ad4cfe617a, type: 3}
+  - {fileID: 21300000, guid: f9e207924d91b5d4e962d98cdd3e16fe, type: 3}
+  - {fileID: 21300000, guid: c125e7c5aa3d38d469eed6cd4ea3d7aa, type: 3}
+  - {fileID: 21300000, guid: 710ec962d21049c4682d2cd25f26234a, type: 3}
+  - {fileID: 21300000, guid: 262ec41df8658b043b2243e5e00498ca, type: 3}
+  - {fileID: 21300000, guid: a2785b9228016034cbd8d23dc16d5de7, type: 3}
+  - {fileID: 21300000, guid: e466800a13586b345a8325fbd8371204, type: 3}
+  - {fileID: 21300000, guid: 4457e52be12837d4b8cd20c43e148987, type: 3}
+  - {fileID: 21300000, guid: 3640a3b8367910e45954fe89276dc163, type: 3}
+  - {fileID: 21300000, guid: 0874cd1c5e3a1a045b453abb5494e503, type: 3}
+  - {fileID: 21300000, guid: ef8b23252aeca4a4bbb97f735ab26fa8, type: 3}
+  - {fileID: 21300000, guid: 6f0f5ac3bcc3fb5418adb2216385689c, type: 3}
   attackDamage: 10
 --- !u!61 &6327155534408314282
 BoxCollider2D:

@@ -1943,6 +1943,12 @@ MonoBehaviour:
   lavaSprashPrefab: {fileID: 0}
   waterSprash: {fileID: 1934840409791303134, guid: 2bd81249c7195f84a8caf34404cfb7dd, type: 3}
   waterSprashPrefab: {fileID: 0}
+  groundSpike: {fileID: 8205134475636554047, guid: 47a3542d8303dce4793579936d848a1e, type: 3}
+  groundSpikePrefab: {fileID: 0}
+  thunderBolt: {fileID: 8580510651339090091, guid: e3dff8a3d458f4c4ba07e39ea6407a7f, type: 3}
+  thunderBoltPrefab: {fileID: 0}
+  heavensFury: {fileID: 5070741048714067806, guid: 4dba092d1d70b634eb9da1753818a285, type: 3}
+  heavensFuryPrefab: {fileID: 0}
 --- !u!4 &557050537
 Transform:
   m_ObjectHideFlags: 0
@@ -8192,6 +8198,18 @@ MonoBehaviour:
   - cardType: 1
     cardName: WaterSprash
     cardEffect: "\u6C34\u67F1\u3092\u7ACB\u3066\u308B"
+    cardImage: {fileID: 0}
+  - cardType: 2
+    cardName: GroundSpike
+    cardEffect: "\u571F\u67F1\u3092\u7ACB\u3066\u308B"
+    cardImage: {fileID: 0}
+  - cardType: 3
+    cardName: ThunderBolt
+    cardEffect: "\u96F7\u6483\u3092\u843D\u3068\u3059"
+    cardImage: {fileID: 0}
+  - cardType: 4
+    cardName: HeavensFury
+    cardEffect: "\u8056\u5149\u3092\u964D\u3089\u3059"
     cardImage: {fileID: 0}
 --- !u!114 &1780329273
 MonoBehaviour:

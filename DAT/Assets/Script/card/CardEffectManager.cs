@@ -88,6 +88,27 @@ public class CardEffectManager : MonoBehaviour
 
     Vector2 wspPos = Vector2.zero;
 
+    // グラウンドスパイク関連-----------------
+    [SerializeField] GameObject groundSpike;
+
+    public GameObject groundSpikePrefab;
+
+    Vector2 gspPos = Vector2.zero;
+
+    // サンダーボルト関連---------------------
+    [SerializeField] GameObject thunderBolt;
+
+    public GameObject thunderBoltPrefab;
+
+    Vector2 tboPos = Vector2.zero;
+
+    // ヘブンズフューリー関連-----------------
+    [SerializeField] GameObject heavensFury;
+
+    public GameObject heavensFuryPrefab;
+
+    Vector2 hfPos = Vector2.zero;
+
     // 共通------------------------------------
     PlayerController player;
     CardAttackReach reach;
@@ -119,6 +140,9 @@ public class CardEffectManager : MonoBehaviour
                 () => ThunderBall(),
                 () => LavaSprash(),
                 () => WaterSprash(),
+                () => GroundSpike(),
+                () => ThunderBolt(),
+                () => HeavensFury(),
             };
 
         healDefaultAmount = healAmount;
@@ -153,7 +177,7 @@ public class CardEffectManager : MonoBehaviour
         if (gsFlag) skill.BallMove(groundShotPrefab, destPos, gsSpeed, gsPos, ref gsFlag);
 
         // サンダーボール使用後の挙動
-        if(tbFlag) skill.BallMove(thunderballPrefab, destPos, tbSpeed, tbPos, ref tbFlag);
+        if (tbFlag) skill.BallMove(thunderballPrefab, destPos, tbSpeed, tbPos, ref tbFlag);
     }
 
     void FireEnhance()
@@ -264,50 +288,18 @@ public class CardEffectManager : MonoBehaviour
 
     void FireBall()
     {
-        Debug.Log("使ったよ");
+        string name = ("FireBall");
 
-        if (!fbFlag)
-        {
-            destPos = reach.playerToEnemyNol;
-
-            fbPos = destPos;
-
-            float angle = Mathf.Atan2(destPos.y, destPos.x) * Mathf.Rad2Deg;
-
-            // オブジェクトを作成する
-            GameObject obj = Instantiate(fireBall);
-            obj.transform.position = player.currentPos;
-            obj.transform.name = ("FireBall");
-            obj.transform.rotation = Quaternion.Euler(0, 0, angle);
-
-            fireBallPrefab = obj;
-
-            fbFlag = true; // フラグを立てる
-        }
+        BallSkill(ref fbFlag, ref destPos, ref fbPos, fireBall, name, ref fireBallPrefab);
     }
 
     void CursedFlame()
     {
-        Debug.Log("使ってるよ");
+        string name = ("CursedFlame");
 
-        if (!cfFlag)
-        {
-            player.playerHP -= curseAmount * 2;
+        BallSkill(ref cfFlag, ref destPos, ref cfPos, cursedFlame, name, ref cursedFlamePrefab);
 
-            destPos = reach.playerToEnemyNol;
-
-            cfPos = destPos;
-
-            // オブジェクトを作成する
-            GameObject obj = Instantiate(cursedFlame);
-            obj.transform.position = player.currentPos;
-            obj.transform.name = ("CursedFlame");
-
-            cursedFlamePrefab = obj;
-
-            cfFlag = true; // フラグを立てる
-
-        }
+        player.playerHP -= (curseAmount * 2);
     }
 
     void OverHeal()
@@ -319,96 +311,91 @@ public class CardEffectManager : MonoBehaviour
 
     void WaterShot()
     {
-        Debug.Log("使ったよ");
+        string name = ("WaterShot");
 
-        if (!wsFlag)
-        {
-            destPos = reach.playerToEnemyNol;
-
-            wsPos = destPos;
-
-            float angle = Mathf.Atan2(destPos.y, destPos.x) * Mathf.Rad2Deg;
-
-            // オブジェクトを作成する
-            GameObject obj = Instantiate(watershot);
-            obj.transform.position = player.currentPos;
-            obj.transform.name = ("WaterShot");
-            obj.transform.rotation = Quaternion.Euler(0, 0, angle);
-
-            waterShotPrefab = obj;
-
-            wsFlag = true; // フラグを立てる
-        }
+        BallSkill(ref wsFlag, ref destPos, ref wsPos, watershot, name, ref waterShotPrefab);
     }
 
     void GroundShot()
     {
-        Debug.Log("使ったよ");
+        string name = ("GroundShot");
 
-        if (!gsFlag)
-        {
-            destPos = reach.playerToEnemyNol;
-
-            gsPos = destPos;
-
-            float angle = Mathf.Atan2(destPos.y, destPos.x) * Mathf.Rad2Deg;
-
-            // オブジェクトを作成する
-            GameObject obj = Instantiate(groundshot);
-            obj.transform.position = player.currentPos;
-            obj.transform.name = ("GroundShot");
-            obj.transform.rotation = Quaternion.Euler(0, 0, angle);
-
-            groundShotPrefab = obj;
-
-            gsFlag = true; // フラグを立てる
-        }
+        BallSkill(ref gsFlag, ref destPos, ref gsPos, groundshot, name, ref groundShotPrefab);
     }
 
     void ThunderBall()
     {
-        Debug.Log("使ったよ");
+        string name = ("ThunderBall");
 
-        if (!tbFlag)
-        {
-            destPos = reach.playerToEnemyNol;
-
-            tbPos = destPos;
-
-            float angle = Mathf.Atan2(destPos.y, destPos.x) * Mathf.Rad2Deg;
-
-            // オブジェクトを作成する
-            GameObject obj = Instantiate(thunderball);
-            obj.transform.position = player.currentPos;
-            obj.transform.name = ("ThunderBall");
-            obj.transform.rotation = Quaternion.Euler(0, 0, angle);
-
-            thunderballPrefab = obj;
-
-            tbFlag = true; // フラグを立てる
-        }
+        BallSkill(ref tbFlag, ref destPos, ref tbPos, thunderball, name, ref thunderballPrefab);
     }
 
     void LavaSprash()
     {
-        lsPos = reach.mousePosWorld;
+        string name = ("LavaSprash");
 
-        GameObject obj = Instantiate(lavaSprash);
-        obj.transform.position = lsPos;
-        obj.transform.name = ("LavaSprash");
-
-        lavaSprashPrefab = obj;
+        SpikeSkill(lsPos, lavaSprash, name, ref lavaSprashPrefab);
     }
 
     void WaterSprash()
     {
-        wspPos = reach.mousePosWorld;
+        string name = ("WaterSprash");
 
-        GameObject obj = GameObject.Instantiate(waterSprash);
-        obj.transform.position = wspPos;
-        obj.transform.name = ("WaterSprash");
+        SpikeSkill(wspPos, waterSprash, name, ref waterSprashPrefab);
+    }
 
-        waterSprashPrefab = obj;
+    void GroundSpike()
+    {
+        string name = ("GroundSpike");
+
+        SpikeSkill(gspPos, groundSpike, name, ref groundSpikePrefab);
+    }
+
+    void ThunderBolt()
+    {
+        string name = ("ThunderBolt");
+
+        SpikeSkill(tboPos, thunderBolt, name, ref thunderBoltPrefab);
+    }
+
+    void HeavensFury()
+    {
+        string name = ("heavensFury");
+
+        SpikeSkill(hfPos, heavensFury, name, ref heavensFuryPrefab);
+    }
+
+    void BallSkill(ref bool flag, ref Vector2 destPos, ref Vector2 objPos, GameObject skill, string name, ref GameObject skillPrefab)
+    {
+        if (!flag)
+        {
+            destPos = reach.playerToEnemyNol;
+
+            objPos = destPos;
+
+            float angle = Mathf.Atan2(destPos.y, destPos.x) * Mathf.Rad2Deg;
+
+            // オブジェクトを作成する
+            GameObject obj = Instantiate(skill);
+            obj.transform.position = player.currentPos;
+            obj.transform.name = name;
+            obj.transform.rotation = Quaternion.Euler(0, 0, angle);
+
+            skillPrefab = obj;
+
+            flag = true; // フラグを立てる
+        }
+    }
+
+    void SpikeSkill(Vector2 objPos, GameObject skill, string name, ref GameObject skillPrefab)
+    {
+        objPos = reach.mousePosWorld;
+
+        GameObject obj = GameObject.Instantiate(skill);
+        obj.transform.position = objPos;
+        obj.transform.name = name;
+
+        skillPrefab = obj;
     }
 
     void EndBoost()

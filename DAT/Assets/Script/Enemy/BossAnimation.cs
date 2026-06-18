@@ -1,8 +1,6 @@
 #if false
 using System.Collections.Generic;
-using System.Threading;
 using UnityEngine;
-using UnityEngine.InputSystem.LowLevel;
 
 // 列挙型 enum
 // アニメーションの状態
@@ -11,7 +9,7 @@ public enum BossAnimState { Idle, Walk, SideAttack, LowerAttack, UpperAttack, In
 
 // 構造体 struct
 [System.Serializable]
-public struct AnimationData
+public struct BossAnimationData
 {
     public BossAnimState state;        // 状態 (待機/移動/攻撃など)
     public Sprite[] sprites;            // 使用するスプライトの配列
@@ -20,16 +18,15 @@ public struct AnimationData
 }
 
 // スプライトの変更のみに集中する
-public class EnemyAnimation : MonoBehaviour
+public class BossAnimation : MonoBehaviour
 {
-    [SerializeField] private List<AnimationData> animationDatas = new List<AnimationData>();
+    [SerializeField] private List<BossAnimationData> bossAnimationDatas = new List<BossAnimationData>();
     // 辞書機能
-    private Dictionary<BossAnimState, AnimationData> animDictionary = new Dictionary<BossAnimState, AnimationData>();
+    private Dictionary<BossAnimState, BossAnimationData> bossAnimDictionary = new Dictionary<BossAnimState, BossAnimationData>();
 
     // current = 現在
-    private AnimationData animData;
-    private AnimationData currentActiveData;
-    [SerializeField] private BossAnimState currentAnimState = BossAnimState.Init;
+    private BossAnimationData currentBossActiveData;
+    [SerializeField] private BossAnimState currentBossAnimState = BossAnimState.Init;
     [SerializeField] private int currentFrame = 0;   // 現在のフレーム
     [SerializeField] private float Animtimer = 0.0f;
     [SerializeField] private float timePerFrame = 0.0f;
@@ -45,12 +42,12 @@ public class EnemyAnimation : MonoBehaviour
     private void Awake()
     {
         // インスペクターで設定したリストをループで回し、Dictionaryに登録する
-        foreach (var data in animationDatas)
+        foreach (var data in bossAnimationDatas)
         {
             // まだDictionaryにそのステートが登録されていなければ追加
-            if (!animDictionary.ContainsKey(data.state))
+            if (!bossAnimDictionary.ContainsKey(data.state))
             {
-                animDictionary.Add(data.state, data);
+                bossAnimDictionary.Add(data.state, data);
             }
         }
     }
@@ -58,7 +55,7 @@ public class EnemyAnimation : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        bossCtrl = GetComponent<EnemyController>();
+        bossCtrl = GetComponent<BossController>();
 
         spr = GetComponent<SpriteRenderer>();
 
@@ -79,9 +76,9 @@ public class EnemyAnimation : MonoBehaviour
             int nextFrame = currentFrame + 1;
 
             // 最後のフレームのとき
-            if (nextFrame >= currentActiveData.sprites.Length)
+            if (nextFrame >= currentBossActiveData.sprites.Length)
             {
-                if (currentActiveData.isLoop == true)
+                if (currentBossActiveData.isLoop == true)
                 {
                     // ループ処理
                     currentFrame = 0;
@@ -99,7 +96,7 @@ public class EnemyAnimation : MonoBehaviour
                 currentFrame = nextFrame;
             }
 
-            this.spr.sprite = currentActiveData.sprites[currentFrame];
+            this.spr.sprite = currentBossActiveData.sprites[currentFrame];
         }
 
         if (isBlinking)
@@ -119,20 +116,20 @@ public class EnemyAnimation : MonoBehaviour
     /// <param name="changedState">変更先のState</param>
     public void ChangeState(BossAnimState changedState)
     {
-        if (currentAnimState == changedState) return;
-        currentAnimState = changedState;
+        if (currentBossAnimState == changedState) return;
+        currentBossAnimState = changedState;
 
         // Dictionaryから指示されたステートのデータを特定して保持する
-        if (animDictionary.TryGetValue(changedState, out var foundData))
+        if (bossAnimDictionary.TryGetValue(changedState, out var foundData))
         {
-            currentActiveData = foundData;
+            currentBossActiveData = foundData;
             currentFrame = 0;
             Animtimer = 0f;
 
             //Debug.Log("statusを変更しました：");
 
             // フレームレートを更新
-            timePerFrame = 1f / currentActiveData.frameRate;
+            timePerFrame = 1f / currentBossActiveData.frameRate;
         }
     }
 

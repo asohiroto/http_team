@@ -10,7 +10,7 @@ public class SkillAttack : MonoBehaviour
     GameObject playerObj;
 
     [SerializeField] Sprite[] attackSprite;
-    float animTime = 0.05f;
+    [SerializeField]float animTime = 0.05f;
     SpriteRenderer spriteRenderer;
 
     public float attackDamage;

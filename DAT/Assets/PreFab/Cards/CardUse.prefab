@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 5113311157001357277}
   - component: {fileID: 4681427483800473012}
   - component: {fileID: 3649993223473806745}
+  - component: {fileID: -798973075225530742}
   m_Layer: 0
   m_Name: CardUse
   m_TagString: Untagged
@@ -29,7 +30,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.3, y: 0.3, z: 1}
+  m_LocalScale: {x: 0.45, y: 0.6, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -134,6 +135,7 @@ MonoBehaviour:
   - {fileID: -1158871018, guid: 75c8783f8ab4f9440ab8c9801e94ae34, type: 3}
   - {fileID: 739547276, guid: 75c8783f8ab4f9440ab8c9801e94ae34, type: 3}
   - {fileID: 713053492, guid: 75c8783f8ab4f9440ab8c9801e94ae34, type: 3}
+  animTime: 0.01
   attackDamage: 0
 --- !u!61 &3649993223473806745
 BoxCollider2D:
@@ -181,3 +183,15 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 5.1300197, y: 5.12}
   m_EdgeRadius: 0
+--- !u!114 &-798973075225530742
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4778725995001476738}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5292626b1b1d61643b092bf0c9cd4c5b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CardUseEffectManager

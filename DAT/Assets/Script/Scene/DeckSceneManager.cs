@@ -15,17 +15,20 @@ public class DeckSceneManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Keyboard.current.qKey.wasPressedThisFrame)
+        
+    }
+
+    public void DeckSceneChange()
+    {
+        if (regis.CheckMyDeck(-1))
         {
-            if (regis.CheckMyDeck(-1))
-            {
-                SceneManager.LoadScene("AllSceneProto");
-            }
-            else
-            {
-                Debug.Log("できぬ");
-            }
+            SceneManager.LoadScene("AllSceneProto");
+        }
+        else
+        {
+            Debug.Log("できぬ");
         }
     }
+
 
 }

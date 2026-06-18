@@ -1,4 +1,5 @@
 #if false
+// 行動処理は専用のものを作る
 using System;
 using UnityEngine;
 

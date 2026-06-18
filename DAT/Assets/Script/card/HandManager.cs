@@ -13,7 +13,7 @@ public class HandManager : MonoBehaviour
     public int[] markedIndexArray;
 
     // カードを引くための代金
-    [SerializeField] int cardDrawFee;
+    [SerializeField] public int cardDrawFee;
 
     // カードのIDと、引いた回数
     int cardId = 0;

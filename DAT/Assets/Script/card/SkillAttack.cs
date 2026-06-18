@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SkillAttack : MonoBehaviour
 {
@@ -10,8 +11,11 @@ public class SkillAttack : MonoBehaviour
     GameObject playerObj;
 
     [SerializeField] Sprite[] attackSprite;
-    [SerializeField]float animTime = 0.05f;
+
+    [SerializeField] float animTime = 0.05f;
+
     SpriteRenderer spriteRenderer;
+    Image image;
 
     public float attackDamage;
 
@@ -20,6 +24,8 @@ public class SkillAttack : MonoBehaviour
     void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
+        image = GetComponent<Image>();
+
         playerObj = GameObject.Find("Player");
         playerController = playerObj.GetComponent<PlayerController>();
 
@@ -46,12 +52,17 @@ public class SkillAttack : MonoBehaviour
     {
         for (int i = 0; i < attackSprite.Length; i++)
         {
-            spriteRenderer.sprite = attackSprite[i];
+            if (spriteRenderer != null)
+            {
+                spriteRenderer.sprite = attackSprite[i];
+            }
+            else
+            {
+                image.sprite = attackSprite[i];
+            }
 
             yield return new WaitForSeconds(animTime);
-
         }
-
         Destroy(gameObject);
     }
 }

@@ -74,7 +74,7 @@ public class HandManager : MonoBehaviour
     }
 
     // カードを生成する関数
-    public void CardGenerate(int id, int ind) // 新たにカードを生成する
+    public GameObject CardGenerate(int id, int ind) // 新たにカードを生成する
     {
         int cardType = change.CardChange(id);
 
@@ -94,6 +94,8 @@ public class HandManager : MonoBehaviour
             dc.cardIndex = ind;
             dc.cardId = id;
         }
+
+        return genCard;
     }
 
     // カードを引く処理
@@ -155,32 +157,4 @@ public class HandManager : MonoBehaviour
         Destroy(mark[ind]);
         markedIndexArray[ind] = 0;
     }
-
-    //void AutoCraft(int id)
-    //{
-    //    for(int i = 0; i < cardIdArray.Length; i++)
-    //    {
-    //        int craftResult = craft.CraftCards(id, cardIdArray[i]);
-    //        if(craftResult > 0)
-    //        {
-    //            int cardType = change.CardChange(id);
-
-    //            GameObject genCard = Instantiate(cardPrefab[cardType], deckCardTrans[i]); // カードを作る処理
-    //            DraggableCard dc = genCard.GetComponentInChildren<DraggableCard>();
-
-    //            CardEdit edit = genCard.GetComponentInChildren<CardEdit>();
-
-    //            edit.ChangeCardName(change.cardName);
-    //            edit.ChangeCardEffect(change.cardEffect);
-
-    //            cardIdArray[i] = id;
-
-    //            if (dc != null)
-    //            {
-    //                dc.cardIndex = i;
-    //                dc.cardId = id;
-    //            }
-    //        }
-    //    }
-    //}
 }

@@ -1,0 +1,110 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &7535530528386898409
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2098118248709701008}
+  - component: {fileID: 4275079647233042267}
+  - component: {fileID: 196905748152374982}
+  - component: {fileID: 1010768390712672218}
+  m_Layer: 5
+  m_Name: cardCreate
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &2098118248709701008
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7535530528386898409}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.90909094, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 250, y: 500}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &4275079647233042267
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7535530528386898409}
+  m_CullTransparentMesh: 1
+--- !u!114 &196905748152374982
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7535530528386898409}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: -84726193, guid: 48a7c882ef4c525419011cada02f86e0, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!114 &1010768390712672218
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7535530528386898409}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 359733af8e8f3d848afe68b1178dcab8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SkillAttack
+  attackSprite:
+  - {fileID: -84726193, guid: 48a7c882ef4c525419011cada02f86e0, type: 3}
+  - {fileID: 1842806278, guid: 48a7c882ef4c525419011cada02f86e0, type: 3}
+  - {fileID: 1671111991, guid: 48a7c882ef4c525419011cada02f86e0, type: 3}
+  - {fileID: -1440151045, guid: 48a7c882ef4c525419011cada02f86e0, type: 3}
+  - {fileID: 376232145, guid: 48a7c882ef4c525419011cada02f86e0, type: 3}
+  - {fileID: 1383954825, guid: 48a7c882ef4c525419011cada02f86e0, type: 3}
+  - {fileID: -550140407, guid: 48a7c882ef4c525419011cada02f86e0, type: 3}
+  - {fileID: -218737906, guid: 48a7c882ef4c525419011cada02f86e0, type: 3}
+  - {fileID: -1609408342, guid: 48a7c882ef4c525419011cada02f86e0, type: 3}
+  - {fileID: -1052425774, guid: 48a7c882ef4c525419011cada02f86e0, type: 3}
+  - {fileID: -2141160519, guid: 48a7c882ef4c525419011cada02f86e0, type: 3}
+  - {fileID: 1188802241, guid: 48a7c882ef4c525419011cada02f86e0, type: 3}
+  - {fileID: 2058541228, guid: 48a7c882ef4c525419011cada02f86e0, type: 3}
+  - {fileID: 193622314, guid: 48a7c882ef4c525419011cada02f86e0, type: 3}
+  - {fileID: -789259348, guid: 48a7c882ef4c525419011cada02f86e0, type: 3}
+  - {fileID: -1465908572, guid: 48a7c882ef4c525419011cada02f86e0, type: 3}
+  - {fileID: 243898544, guid: 48a7c882ef4c525419011cada02f86e0, type: 3}
+  animTime: 0.05
+  attackDamage: 0

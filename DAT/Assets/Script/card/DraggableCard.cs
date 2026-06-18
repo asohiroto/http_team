@@ -11,6 +11,7 @@ public class DraggableCard : MonoBehaviour, IBeginDragHandler, IEndDragHandler, 
     private GameObject ghostImage;
 
     [SerializeField] GameObject cardUse;
+    [SerializeField] GameObject cardCreate;
 
     GameObject cardUsePrefab;
 
@@ -182,7 +183,8 @@ public class DraggableCard : MonoBehaviour, IBeginDragHandler, IEndDragHandler, 
                 hand.DisCard(fromIndex);
                 hand.DisCard(toIndex);
 
-                hand.CardGenerate(craftResult, toIndex);
+                GameObject obj = hand.CardGenerate(craftResult, toIndex);
+                Instantiate(cardCreate, obj.transform);
 
                 for (int i = 0; i < hand.deckCardTrans.Length; i++)
                 {
@@ -208,9 +210,7 @@ public class DraggableCard : MonoBehaviour, IBeginDragHandler, IEndDragHandler, 
             }
             else
             {
-            //    // カードの効果を発動させる
-            //    Debug.Log(skill.useFlag);
-
+            // カードの効果を発動させる
                 effect.cardEffect[cardId]();
 
                 cardUsePrefab = effect.Effect(cardUse, pos);

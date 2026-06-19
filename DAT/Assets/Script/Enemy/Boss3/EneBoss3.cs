@@ -35,9 +35,8 @@ public class EneBoss3 : MonoBehaviour
     [SerializeField] GameObject portalPrefab;
     int portalFrameTimer = 0;
     int portalWaitFrame = 20;
-    int portalGeneFrame = 0; // ポータルを生み出すフレームの間隔
-    int portalMax;
-    int portalIdx;
+    int portalMax = 4;
+    int portalIdx = 0;
     Vector3 portalPos;
     bool genePortal = false;
     void Start()
@@ -130,7 +129,7 @@ public class EneBoss3 : MonoBehaviour
             case PortalState.Run:
                 if(!getPos)
                 {
-                    portalPos = new Vector3(UnityEngine.Random.Range(-8, 8), UnityEngine.Random.Range(-4, 4), 0);
+                    portalPos = new Vector3(UnityEngine.Random.Range(-8, 8), UnityEngine.Random.Range(-3, 4), 0);
                     getPos = true;
                 }
                 else
@@ -139,7 +138,7 @@ public class EneBoss3 : MonoBehaviour
                 }
                 if(endMove)
                 {
-                    portalState = PortalState.Set;
+                    if(portalIdx < portalMax) portalState = PortalState.Set;
                 }
                 
                 break;
@@ -148,6 +147,7 @@ public class EneBoss3 : MonoBehaviour
                 {
                     genePortal = true;
                     Instantiate(portalPrefab);
+                    portalIdx++;
                     portalState = PortalState.Wait;
                 }
                 break;

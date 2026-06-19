@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 1b8267eea875d1f4d82076a1d09f260d
+guid: 1875ff6214b843d4f92cebe47eefc627
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -7089762892666663491
-    second: '{0D218612-AB85-4E99-93E0-1347CCCCFCBC}_0'
+      213: -7861179323683409602
+    second: hand_area_background_1920x330_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -113,13 +113,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: '{0D218612-AB85-4E99-93E0-1347CCCCFCBC}_0'
+      name: hand_area_background_1920x330_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 1580
-        height: 883
+        width: 3840
+        height: 660
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: dbd8bd8563a1c9d90800000000000000
-      internalID: -7089762892666663491
+      spriteID: e3174303e0b77e290800000000000000
+      internalID: -7861179323683409602
       vertices: []
       indices: 
       edges: []
@@ -148,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      '{0D218612-AB85-4E99-93E0-1347CCCCFCBC}_0': -7089762892666663491
+      hand_area_background_1920x330_0: -7861179323683409602
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

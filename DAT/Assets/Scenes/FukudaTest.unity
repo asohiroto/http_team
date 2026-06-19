@@ -432,8 +432,7 @@ MonoBehaviour:
   attackPower: 1
   beamPrefab: {fileID: 8662954857429943195, guid: c3a7fb64c5486a646bfaf4701f646d7e, type: 3}
   beamRangePrefab: {fileID: 5574018561758892681, guid: 38fdf94903efdc04b9debdbb42a8b924, type: 3}
-  portalPrefab: []
-  magicPrefab: []
+  portalPrefab: {fileID: 2050048250176320190, guid: 7cf167a41aa3557449a94b62a0c74ffa, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

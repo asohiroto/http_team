@@ -2148,6 +2148,7 @@ MonoBehaviour:
   spdObj: {fileID: 543023748025405404, guid: c2daebc7ab97b154ebb57e37af066e3e, type: 3}
   atkspdObj: {fileID: 8791620389591850477, guid: 4e035b381d154c947898cdb8442aee12, type: 3}
   healObj: {fileID: 4028999416743085635, guid: 66b6478e89e43514dab34e945fc13f3e, type: 3}
+  overhealObj: {fileID: 3893986927326631380, guid: bb769f24352f07443960d77170c973a8, type: 3}
   dishealobj: {fileID: 1685117021338725727, guid: b5ebc6df5869bb442ac30b4c71ec99ab, type: 3}
   fbSpeed: 0.5
   fireBall: {fileID: 6676543517733875803, guid: c1f2ad0cd1675dd44b70842ea6e4c916, type: 3}

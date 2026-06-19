@@ -26,7 +26,7 @@ public class PlayerHealth : MonoBehaviour
     {
        if(Keyboard.current.nKey.wasPressedThisFrame)
         {
-            player.playerHP -= 10;
+            player.playerHP -= 20;
         }
 
         UpdateHpBar();

@@ -2003,10 +2003,10 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_Sprite: {fileID: -2700711109828642718, guid: 3cfb620af46adcc47b9f5a3b765fd979, type: 3}
-  m_Type: 0
+  m_Type: 3
   m_PreserveAspect: 0
   m_FillCenter: 1
-  m_FillMethod: 4
+  m_FillMethod: 0
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
@@ -4387,6 +4387,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 678033419400920944, guid: adafc529adc6fb84d8417122a115aaa6, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 678033419400920944, guid: adafc529adc6fb84d8417122a115aaa6, type: 3}
+      propertyPath: hpBarImage
+      value: 
+      objectReference: {fileID: 493827791}
     - target: {fileID: 4374503095024090849, guid: adafc529adc6fb84d8417122a115aaa6, type: 3}
       propertyPath: m_Name
       value: Player

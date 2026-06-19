@@ -7,7 +7,7 @@ public class PlayerHealth : MonoBehaviour
     //private int currentHp;
 
     [SerializeField] private Image hpBarImage;
-
+    public int damage;
     PlayerController player;
 
     void Start()
@@ -26,7 +26,7 @@ public class PlayerHealth : MonoBehaviour
     {
        if(Keyboard.current.nKey.wasPressedThisFrame)
         {
-            player.playerHP -= 20;
+            player.playerHP -= damage;
         }
 
         UpdateHpBar();

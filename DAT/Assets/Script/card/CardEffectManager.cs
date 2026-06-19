@@ -43,8 +43,10 @@ public class CardEffectManager : MonoBehaviour
 
     // 回復---------------
     [SerializeField] GameObject healObj;
+    [SerializeField] GameObject overhealObj;
 
     GameObject healPrefab;
+    GameObject overHealPrefab;
 
     // 反回復-------------
     [SerializeField] GameObject dishealobj;
@@ -230,6 +232,7 @@ public class CardEffectManager : MonoBehaviour
         if (spdPrefab != null) spdPrefab.transform.position = buffPos;
         if (healPrefab != null) healPrefab.transform.position = buffPos;
         if (dishealprefab != null) dishealprefab.transform.position = buffPos;
+        if (overHealPrefab != null) overHealPrefab.transform.position = player.currentPos;
     }
 
     void FireEnhance()
@@ -381,6 +384,8 @@ public class CardEffectManager : MonoBehaviour
     void OverHeal()
     {
         Debug.Log("つかうの？");
+
+        overHealPrefab = Effect(overhealObj, player.currentPos);
 
         player.playerHP += (healAmount * 2);
     }

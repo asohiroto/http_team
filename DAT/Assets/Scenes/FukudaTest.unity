@@ -133,11 +133,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5862498836062507077, guid: adafc529adc6fb84d8417122a115aaa6, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -2.9657
+      value: -2.78
       objectReference: {fileID: 0}
     - target: {fileID: 5862498836062507077, guid: adafc529adc6fb84d8417122a115aaa6, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.84472
+      value: -0.14
       objectReference: {fileID: 0}
     - target: {fileID: 5862498836062507077, guid: adafc529adc6fb84d8417122a115aaa6, type: 3}
       propertyPath: m_LocalPosition.z
@@ -170,6 +170,18 @@ PrefabInstance:
     - target: {fileID: 5862498836062507077, guid: adafc529adc6fb84d8417122a115aaa6, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8031872241386090413, guid: adafc529adc6fb84d8417122a115aaa6, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8031872241386090413, guid: adafc529adc6fb84d8417122a115aaa6, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8031872241386090413, guid: adafc529adc6fb84d8417122a115aaa6, type: 3}
+      propertyPath: m_Color.r
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -212,8 +224,8 @@ Camera:
   m_GameObject: {fileID: 1342023660}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_ClearFlags: 2
+  m_BackGroundColor: {r: 0.21938412, g: 0.34685633, b: 0.5471698, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -323,6 +335,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1766526632}
   - component: {fileID: 1766526631}
+  - component: {fileID: 1766526633}
   m_Layer: 0
   m_Name: EneBoss3
   m_TagString: Untagged
@@ -397,13 +410,30 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1766526630}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.5078058, y: -2.9520335, z: 0}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
+  m_LocalPosition: {x: 8.24, y: 0.74, z: 0}
   m_LocalScale: {x: 3.5, y: 3.5, z: 3.5}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+--- !u!114 &1766526633
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1766526630}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d273485c14c38843a9852e60b044694, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EneBoss3
+  attackPower: 1
+  beamPrefab: {fileID: 8662954857429943195, guid: c3a7fb64c5486a646bfaf4701f646d7e, type: 3}
+  beamRangePrefab: {fileID: 5574018561758892681, guid: 38fdf94903efdc04b9debdbb42a8b924, type: 3}
+  portalPrefab: []
+  magicPrefab: []
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

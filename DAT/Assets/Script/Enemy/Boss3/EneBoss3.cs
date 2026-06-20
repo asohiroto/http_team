@@ -34,17 +34,20 @@ public class EneBoss3 : MonoBehaviour
     PortalState portalState = PortalState.Run;
     [SerializeField] GameObject portalPrefab;
     int portalFrameTimer = 0;
-    int portalWaitFrame = 20;
+    int portalWaitFrame = 10;
     int portalMax = 4;
     int portalIdx = 0;
     Vector3 portalPos;
+    Vector3[] portalPosAll;
     bool genePortal = false;
+    float runSpeed = 0.4f;
     void Start()
     {
         playerObj = GameObject.Find("Player");
         playerCtrl = playerObj.GetComponent<PlayerController>();
         InitVariable();
         currentPos = transform.position;
+        portalPosAll = new Vector3[portalMax];
     }
 
     // Update is called once per frame
@@ -122,21 +125,61 @@ public class EneBoss3 : MonoBehaviour
         }
     }
 
-    void Portal()
+void Portal()
     {
         switch(portalState)
         {
             case PortalState.Run:
                 if(!getPos)
                 {
-                    portalPos = new Vector3(UnityEngine.Random.Range(-8, 8), UnityEngine.Random.Range(-3, 4), 0);
+                    // ポータルの位置を先にすべて決める
+                    for(int i = 0; i < portalMax; i++)
+                    {
+                        int attempts = 0;
+                        bool isSetPos = false;
+
+                        while(attempts < 15)
+                        {
+                            attempts++;
+                            // ポータルの位置の仮決定
+                            portalPosAll[i] = new Vector3(Random.Range(-8, 8), Random.Range(-3, 5), 0);
+                            
+                            // ポータルの位置がプレイヤーの位置に近すぎるなら再抽選を行う
+                            if(Mathf.Abs(portalPosAll[i].x - playerCtrl.currentPos.x) >= 1f && 
+                            Mathf.Abs(portalPosAll[i].y - playerCtrl.currentPos.y) >= 1f)
+                            {
+                                continue;
+                            }
+
+                            // ポータルどうしが重なっていたら再抽選を行う
+                            bool isOverlap = false;
+                            for(int j = 0; j < i; j++)
+                            {
+                                if(Mathf.Abs(portalPosAll[i].x - portalPosAll[j].x) < 0.5f && 
+                                Mathf.Abs(portalPosAll[i].y - portalPosAll[j].y) < 0.5f)
+                                {
+                                    isOverlap = true;
+                                    break;
+                                }
+                            }
+
+                            // 重なっていないならループから抜ける
+                            if(!isOverlap)
+                            {
+                                isSetPos = true;
+                                break;
+                            }
+                            
+                        }
+                        // 生成する座標が決まらなかった時の処理
+                        if(!isSetPos)
+                        {
+                            portalPosAll[i] = new Vector3(3, -3, 0);
+                        }
+                    }
                     getPos = true;
                 }
                 else
-                {
-                    Move(portalPos, 0.5f);
-                }
-                if(endMove)
                 {
                     if(portalIdx < portalMax) portalState = PortalState.Set;
                 }
@@ -146,7 +189,8 @@ public class EneBoss3 : MonoBehaviour
                 if(!genePortal)
                 {
                     genePortal = true;
-                    Instantiate(portalPrefab);
+                    GameObject obj = Instantiate(portalPrefab);
+                    obj.transform.position = portalPosAll[portalIdx];
                     portalIdx++;
                     portalState = PortalState.Wait;
                 }

@@ -21,12 +21,14 @@ public class PortalControll : MonoBehaviour
     GameObject magicObj;
     int magicMax;
     int magicIdx;
+    int destroyDelayFrame = 10;
+    bool isGene = false;
 
 
     void Start()
     {
         enemyObj = GameObject.Find("EneBoss3");
-        transform.position = enemyObj.transform.position;
+        //transform.position = enemyObj.transform.position;
         spriteRenderer = GetComponent<SpriteRenderer>();
         animMax = animSprite.Length;
         shotFrame = Random.Range(shotFrameMin, shotFrameMax);
@@ -40,17 +42,27 @@ public class PortalControll : MonoBehaviour
         Shot();
     }
 
+    // 攻撃を生み出す処理
     void Shot()
     {
         frameTimer++;
         if(frameTimer >= shotFrame)
         {
-            magicObj = Instantiate(magicPrefab[magicIdx]);
-            magicObj.transform.position = transform.position;
-            Destroy(gameObject);
+            if(!isGene)
+            {
+                magicObj = Instantiate(magicPrefab[magicIdx]);
+                magicObj.transform.position = transform.position;
+                isGene = true;
+            }
+            
+            if(frameTimer >= shotFrame + destroyDelayFrame)
+            {
+                Destroy(gameObject);
+            }
         }
     }
 
+    // アニメーションの処理
     void Animation()
     {
         animFrameTimer++;

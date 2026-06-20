@@ -12,8 +12,9 @@ public class EneBoss3 : MonoBehaviour
     Vector3 currentPos;
     Vector3 moveDir;
     float walkSpeed = 0.1f;
-    enum State { Idle, Beam, Portal, Attack3 };
-    State state = 0;
+    public enum State { Idle, Beam, Portal, Teleport };
+    public State state = 0;
+    public State lastState = 0;
     // Shotに使う変数---------------------------
     enum BeamState { Walk, Aim, Shot};
     BeamState beamState = BeamState.Walk;
@@ -41,6 +42,12 @@ public class EneBoss3 : MonoBehaviour
     Vector3[] portalPosAll;
     bool genePortal = false;
     float runSpeed = 0.4f;
+    float geneDistance = 2.0f;
+    float portalSize = 1.0f;
+    int screenBottom = -2;
+    int screenTop = 4;
+    int screenWidth = 8;
+    // テレポートに使用する変数-------------------------
     void Start()
     {
         playerObj = GameObject.Find("Player");
@@ -57,6 +64,21 @@ public class EneBoss3 : MonoBehaviour
         transform.position = currentPos;
     }
 
+    void ActionManager()
+    {
+        switch(state)
+        {
+            case State.Idle:
+            break;
+            case State.Beam:
+            break;
+            case State.Portal:
+            break;
+            case State.Teleport:
+            break;
+        }
+    }
+    
     // 変数の初期化を行う
     void InitVariable()
     {
@@ -67,6 +89,11 @@ public class EneBoss3 : MonoBehaviour
         beamFrameTimer = 0;
         portalFrameTimer = 0;
         genePortal = false;
+    }
+
+    void Teleport()
+    {
+        
     }
 
     void Beam()
@@ -142,11 +169,11 @@ void Portal()
                         {
                             attempts++;
                             // ポータルの位置の仮決定
-                            portalPosAll[i] = new Vector3(Random.Range(-8, 8), Random.Range(-3, 5), 0);
+                            portalPosAll[i] = new Vector3(Random.Range(-screenWidth, screenWidth + 1), Random.Range(-screenBottom, screenTop + 1), 0);
                             
                             // ポータルの位置がプレイヤーの位置に近すぎるなら再抽選を行う
-                            if(Mathf.Abs(portalPosAll[i].x - playerCtrl.currentPos.x) >= 1f && 
-                            Mathf.Abs(portalPosAll[i].y - playerCtrl.currentPos.y) >= 1f)
+                            if(Mathf.Abs(portalPosAll[i].x - playerCtrl.currentPos.x) < geneDistance &&
+                            Mathf.Abs(portalPosAll[i].y - playerCtrl.currentPos.y) < geneDistance)
                             {
                                 continue;
                             }
@@ -155,8 +182,8 @@ void Portal()
                             bool isOverlap = false;
                             for(int j = 0; j < i; j++)
                             {
-                                if(Mathf.Abs(portalPosAll[i].x - portalPosAll[j].x) < 0.5f && 
-                                Mathf.Abs(portalPosAll[i].y - portalPosAll[j].y) < 0.5f)
+                                if(Mathf.Abs(portalPosAll[i].x - portalPosAll[j].x) < portalSize && 
+                                Mathf.Abs(portalPosAll[i].y - portalPosAll[j].y) < portalSize)
                                 {
                                     isOverlap = true;
                                     break;
@@ -174,14 +201,14 @@ void Portal()
                         // 生成する座標が決まらなかった時の処理
                         if(!isSetPos)
                         {
-                            portalPosAll[i] = new Vector3(3, -3, 0);
+                            portalPosAll[i] = new Vector3(5, -1, 0);
                         }
                     }
                     getPos = true;
                 }
                 else
                 {
-                    if(portalIdx < portalMax) portalState = PortalState.Set;
+                    portalState = PortalState.Set;
                 }
                 
                 break;
@@ -203,11 +230,12 @@ void Portal()
                     genePortal = false;
                     endMove = false;
                     getPos = false;
-                    portalState = PortalState.Run;
+                    if(portalIdx < portalMax) portalState = PortalState.Set;
                 }
                 break;
         }
     }
+
 
     // 指定した座標に移動する
     // 指定した座標に移動させる関数

@@ -56,7 +56,6 @@ public class EneBoss3 : MonoBehaviour
     GameObject spawnObj;
     int teleportFrameTimer = 0;
     int leaveWaitFrame = 10;
-    int 
 
     void Start()
     {

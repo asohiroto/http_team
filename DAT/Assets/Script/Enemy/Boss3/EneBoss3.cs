@@ -48,6 +48,16 @@ public class EneBoss3 : MonoBehaviour
     int screenTop = 4;
     int screenWidth = 8;
     // テレポートに使用する変数-------------------------
+    enum TeleportState { Wait, Leave, Spawn};
+    TeleportState teleportState = TeleportState.Wait;
+    [SerializeField] GameObject leavePrefab;
+    [SerializeField] GameObject spawnPrefab;
+    GameObject leaveObj;
+    GameObject spawnObj;
+    int teleportFrameTimer = 0;
+    int leaveWaitFrame = 10;
+    int 
+
     void Start()
     {
         playerObj = GameObject.Find("Player");

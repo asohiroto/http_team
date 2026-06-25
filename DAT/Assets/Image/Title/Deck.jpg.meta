@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 6d0973b03e4eb334f95d78e67fcf849f
+guid: baec95a11806ffc4ab13cc3aadb01c48
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -870702612703314354
-    second: ExitGameButton_0
+      213: -1558256198040742725
+    second: Deck_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -113,13 +113,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: ExitGameButton_0
+      name: Deck_0
       rect:
         serializedVersion: 2
-        x: 1
+        x: 0
         y: 0
-        width: 1255
-        height: 394
+        width: 767
+        height: 399
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: e4e70d04694aae3f0800000000000000
-      internalID: -870702612703314354
+      spriteID: bb41bbe6e36ff5ae0800000000000000
+      internalID: -1558256198040742725
       vertices: []
       indices: 
       edges: []
@@ -148,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      ExitGameButton_0: -870702612703314354
+      Deck_0: -1558256198040742725
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

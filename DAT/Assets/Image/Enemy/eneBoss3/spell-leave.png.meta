@@ -1,0 +1,638 @@
+fileFormatVersion: 2
+guid: a5ea6157c8e48a74fb8a53f1fb57602c
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 5815053357201829179
+    second: Spell9_BatExplosion2-Sheet_0
+  - first:
+      213: -6683573766175587922
+    second: Spell9_BatExplosion2-Sheet_1
+  - first:
+      213: 5526445712288327574
+    second: Spell9_BatExplosion2-Sheet_2
+  - first:
+      213: 3424044704816776669
+    second: Spell9_BatExplosion2-Sheet_3
+  - first:
+      213: -966312934794279775
+    second: Spell9_BatExplosion2-Sheet_4
+  - first:
+      213: -5573351982374623999
+    second: Spell9_BatExplosion2-Sheet_5
+  - first:
+      213: 3124378113975823825
+    second: Spell9_BatExplosion2-Sheet_6
+  - first:
+      213: -2523590141379000529
+    second: Spell9_BatExplosion2-Sheet_7
+  - first:
+      213: 3852036040715793191
+    second: Spell9_BatExplosion2-Sheet_8
+  - first:
+      213: -4698887797193262767
+    second: Spell9_BatExplosion2-Sheet_9
+  - first:
+      213: -5764628543868249496
+    second: Spell9_BatExplosion2-Sheet_10
+  - first:
+      213: -2113478025482148903
+    second: Spell9_BatExplosion2-Sheet_11
+  - first:
+      213: -1309574682305259458
+    second: Spell9_BatExplosion2-Sheet_12
+  - first:
+      213: -4083081835821281969
+    second: Spell9_BatExplosion2-Sheet_13
+  - first:
+      213: -9188244050783465278
+    second: Spell9_BatExplosion2-Sheet_14
+  - first:
+      213: 1504032109212662719
+    second: Spell9_BatExplosion2-Sheet_15
+  - first:
+      213: 3384112080316721970
+    second: Spell9_BatExplosion2-Sheet_16
+  - first:
+      213: -3000886619272541451
+    second: Spell9_BatExplosion2-Sheet_17
+  - first:
+      213: -8032066568796046656
+    second: Spell9_BatExplosion2-Sheet_18
+  - first:
+      213: 6060365547651753809
+    second: Spell9_BatExplosion2-Sheet_19
+  - first:
+      213: -4053855622215671584
+    second: Spell9_BatExplosion2-Sheet_20
+  - first:
+      213: 5595612785042609923
+    second: Spell9_BatExplosion2-Sheet_21
+  - first:
+      213: -3030745390428217084
+    second: Spell9_BatExplosion2-Sheet_22
+  - first:
+      213: -1644452960889345244
+    second: Spell9_BatExplosion2-Sheet_23
+  - first:
+      213: 5888224484368170003
+    second: Spell9_BatExplosion2-Sheet_24
+  - first:
+      213: -1449057653979618981
+    second: Spell9_BatExplosion2-Sheet_25
+  - first:
+      213: -1170114748228294182
+    second: Spell9_BatExplosion2-Sheet_26
+  - first:
+      213: 1885864532115947810
+    second: Spell9_BatExplosion2-Sheet_27
+  - first:
+      213: -4712025155995359033
+    second: Spell9_BatExplosion2-Sheet_28
+  - first:
+      213: -1193508082273932402
+    second: Spell9_BatExplosion2-Sheet_29
+  - first:
+      213: 358438871738663917
+    second: Spell9_BatExplosion2-Sheet_30
+  - first:
+      213: 8165672209026507950
+    second: Spell9_BatExplosion2-Sheet_31
+  - first:
+      213: 9033246191225287687
+    second: Spell9_BatExplosion2-Sheet_32
+  - first:
+      213: -157653691926207958
+    second: Spell9_BatExplosion2-Sheet_33
+  - first:
+      213: -7787754377552551625
+    second: Spell9_BatExplosion2-Sheet_34
+  - first:
+      213: -5375530249918509138
+    second: Spell9_BatExplosion2-Sheet_35
+  - first:
+      213: -5409663273922655291
+    second: Spell9_BatExplosion2-Sheet_36
+  - first:
+      213: 3072443113447087260
+    second: Spell9_BatExplosion2-Sheet_37
+  - first:
+      213: 3529936274652722188
+    second: Spell9_BatExplosion2-Sheet_38
+  - first:
+      213: 4232135028035363994
+    second: Spell9_BatExplosion2-Sheet_39
+  - first:
+      213: -8724166460771798474
+    second: Spell9_BatExplosion2-Sheet_40
+  - first:
+      213: -8566124229901242223
+    second: Spell9_BatExplosion2-Sheet_41
+  - first:
+      213: -3017781818270251954
+    second: Spell9_BatExplosion2-Sheet_42
+  - first:
+      213: 5520445677613056031
+    second: Spell9_BatExplosion2-Sheet_43
+  - first:
+      213: -2677807997618910142
+    second: Spell9_BatExplosion2-Sheet_44
+  - first:
+      213: 3261843041853839264
+    second: Spell9_BatExplosion2-Sheet_45
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: spell-leave_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6cd15b91dbe0fb64bb300553c5071738
+      internalID: 978112608
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spell-leave_1
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 0
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0776ea1602adbc8418938c437cafaffe
+      internalID: -1231147302
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spell-leave_2
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 0
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fbf4fd98f14ab50449ebb95334dec290
+      internalID: 610043083
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spell-leave_3
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 0
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ad7e69985543e1c47b67e2cf98c94b03
+      internalID: 1266612021
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spell-leave_4
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 0
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ed1d7eccb7f783e4dbe81455b99f3f0c
+      internalID: -227855281
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spell-leave_5
+      rect:
+        serializedVersion: 2
+        x: 640
+        y: 0
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 26ea9c73e933c8e40b8fd7aa00b06b42
+      internalID: 1015040084
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spell-leave_6
+      rect:
+        serializedVersion: 2
+        x: 768
+        y: 0
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 552db36a3d8a4d34d99a1cdfd8fa60b7
+      internalID: 240448982
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spell-leave_7
+      rect:
+        serializedVersion: 2
+        x: 896
+        y: 0
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 392d8147002f2a64e9b48d474ba8f49d
+      internalID: -1691040091
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spell-leave_8
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 0
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 26caf3dde8049484db0871a2ac41772f
+      internalID: 1062811855
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spell-leave_9
+      rect:
+        serializedVersion: 2
+        x: 1152
+        y: 0
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f3f1a8be21a767644aa907ab691bbeca
+      internalID: -1964011677
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spell-leave_10
+      rect:
+        serializedVersion: 2
+        x: 1280
+        y: 0
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5d238ff17b9dbbd478ac7df06bf9eb37
+      internalID: 17679651
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spell-leave_11
+      rect:
+        serializedVersion: 2
+        x: 1408
+        y: 0
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c3d62cc362dda7a438fa1c7b961cc497
+      internalID: -1559405116
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spell-leave_12
+      rect:
+        serializedVersion: 2
+        x: 1536
+        y: 0
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a0c584c6d6ca11a4091cd1777147aeb7
+      internalID: -1534849280
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spell-leave_13
+      rect:
+        serializedVersion: 2
+        x: 1664
+        y: 0
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4ec43641e4dc7c04199410974a4738a0
+      internalID: 1230630531
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spell-leave_14
+      rect:
+        serializedVersion: 2
+        x: 1792
+        y: 0
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 33d708e2371b2a144b79f62f6ff14e58
+      internalID: 1654103254
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spell-leave_15
+      rect:
+        serializedVersion: 2
+        x: 1920
+        y: 0
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a09fa1a795672fa46bba7790b1dce34e
+      internalID: -167952242
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 733f04df311f54e4e823a81804216d53
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries:
+      - key: SpriteEditor.SliceSettings
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":16.0,"y":1.0},"gridSpriteSize":{"x":128.0,"y":128.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":2,"keepEmptyRects":false,"isAlternate":false}'
+    nameFileIdTable:
+      spell-leave_0: 978112608
+      spell-leave_1: -1231147302
+      spell-leave_10: 17679651
+      spell-leave_11: -1559405116
+      spell-leave_12: -1534849280
+      spell-leave_13: 1230630531
+      spell-leave_14: 1654103254
+      spell-leave_15: -167952242
+      spell-leave_2: 610043083
+      spell-leave_3: 1266612021
+      spell-leave_4: -227855281
+      spell-leave_5: 1015040084
+      spell-leave_6: 240448982
+      spell-leave_7: -1691040091
+      spell-leave_8: 1062811855
+      spell-leave_9: -1964011677
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

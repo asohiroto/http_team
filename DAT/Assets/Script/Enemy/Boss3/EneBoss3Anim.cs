@@ -5,8 +5,6 @@ public class EneBoss3Anim : MonoBehaviour
 {
     
     // EneBoss3内変数
-    // public enum State { Idle, Beam, Portal, Attack3 };
-    //public State state = 0;
     EneBoss3 enemyCtrl;
     // 1フレーム前の状態を取得する
     EneBoss3.State lastState;

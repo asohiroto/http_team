@@ -1,0 +1,748 @@
+fileFormatVersion: 2
+guid: 6166dd9f065e6954684801605dd3ce98
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -1064496735416604472
+    second: Spell8_BatExplosion1-Sheet_0
+  - first:
+      213: -8631520678546523796
+    second: Spell8_BatExplosion1-Sheet_1
+  - first:
+      213: -1935678629823070356
+    second: Spell8_BatExplosion1-Sheet_2
+  - first:
+      213: 4386288085519529124
+    second: Spell8_BatExplosion1-Sheet_3
+  - first:
+      213: 594925239660666981
+    second: Spell8_BatExplosion1-Sheet_4
+  - first:
+      213: 5626225065692618192
+    second: Spell8_BatExplosion1-Sheet_5
+  - first:
+      213: 4680240135808274190
+    second: Spell8_BatExplosion1-Sheet_6
+  - first:
+      213: 6003467208590254655
+    second: Spell8_BatExplosion1-Sheet_7
+  - first:
+      213: 4201224856260939698
+    second: Spell8_BatExplosion1-Sheet_8
+  - first:
+      213: 737911275542043443
+    second: Spell8_BatExplosion1-Sheet_9
+  - first:
+      213: -8495436089805418826
+    second: Spell8_BatExplosion1-Sheet_10
+  - first:
+      213: 7696627150832245266
+    second: Spell8_BatExplosion1-Sheet_11
+  - first:
+      213: -2362636412105301423
+    second: Spell8_BatExplosion1-Sheet_12
+  - first:
+      213: 8823808670309464571
+    second: Spell8_BatExplosion1-Sheet_13
+  - first:
+      213: -5479741544728582259
+    second: Spell8_BatExplosion1-Sheet_14
+  - first:
+      213: -804671830243949458
+    second: Spell8_BatExplosion1-Sheet_15
+  - first:
+      213: 518462271612443663
+    second: Spell8_BatExplosion1-Sheet_16
+  - first:
+      213: -4680836578289845983
+    second: Spell8_BatExplosion1-Sheet_17
+  - first:
+      213: -5328065626375767360
+    second: Spell8_BatExplosion1-Sheet_18
+  - first:
+      213: 888375520337148866
+    second: Spell8_BatExplosion1-Sheet_19
+  - first:
+      213: 8153530227518255246
+    second: Spell8_BatExplosion1-Sheet_20
+  - first:
+      213: -7856345951377656390
+    second: Spell8_BatExplosion1-Sheet_21
+  - first:
+      213: -5838598635311102767
+    second: Spell8_BatExplosion1-Sheet_22
+  - first:
+      213: 8995783300232197542
+    second: Spell8_BatExplosion1-Sheet_23
+  - first:
+      213: -3875319745992281910
+    second: Spell8_BatExplosion1-Sheet_24
+  - first:
+      213: 8454732954937868847
+    second: Spell8_BatExplosion1-Sheet_25
+  - first:
+      213: -5727081999950346806
+    second: Spell8_BatExplosion1-Sheet_26
+  - first:
+      213: -2078585298879843799
+    second: Spell8_BatExplosion1-Sheet_27
+  - first:
+      213: 4270994456162862945
+    second: Spell8_BatExplosion1-Sheet_28
+  - first:
+      213: -8092363002628333103
+    second: Spell8_BatExplosion1-Sheet_29
+  - first:
+      213: -8989423191432945570
+    second: Spell8_BatExplosion1-Sheet_30
+  - first:
+      213: 8353173851776240714
+    second: Spell8_BatExplosion1-Sheet_31
+  - first:
+      213: 844231965766643951
+    second: Spell8_BatExplosion1-Sheet_32
+  - first:
+      213: 2296338568146294900
+    second: Spell8_BatExplosion1-Sheet_33
+  - first:
+      213: -511784705706166049
+    second: Spell8_BatExplosion1-Sheet_34
+  - first:
+      213: -3568501810002098785
+    second: Spell8_BatExplosion1-Sheet_35
+  - first:
+      213: 463049132441666801
+    second: Spell8_BatExplosion1-Sheet_36
+  - first:
+      213: 1266406919158829164
+    second: Spell8_BatExplosion1-Sheet_37
+  - first:
+      213: 7092300478406592208
+    second: Spell8_BatExplosion1-Sheet_38
+  - first:
+      213: -2770157042784254432
+    second: Spell8_BatExplosion1-Sheet_39
+  - first:
+      213: 5280391976258580104
+    second: Spell8_BatExplosion1-Sheet_40
+  - first:
+      213: -2062407995770519395
+    second: Spell8_BatExplosion1-Sheet_41
+  - first:
+      213: -2562969270176182140
+    second: Spell8_BatExplosion1-Sheet_42
+  - first:
+      213: 4764084087707455912
+    second: Spell8_BatExplosion1-Sheet_43
+  - first:
+      213: 732274452237342169
+    second: Spell8_BatExplosion1-Sheet_44
+  - first:
+      213: 8441942827380811023
+    second: Spell8_BatExplosion1-Sheet_45
+  - first:
+      213: 1899260635228894199
+    second: Spell8_BatExplosion1-Sheet_46
+  - first:
+      213: -8583726727865137710
+    second: Spell8_BatExplosion1-Sheet_47
+  - first:
+      213: 2649575229869075146
+    second: Spell8_BatExplosion1-Sheet_48
+  - first:
+      213: -8691590914643088841
+    second: Spell8_BatExplosion1-Sheet_49
+  - first:
+      213: 4778947791489884579
+    second: Spell8_BatExplosion1-Sheet_50
+  - first:
+      213: 8778081731022045544
+    second: Spell8_BatExplosion1-Sheet_51
+  - first:
+      213: 3582673167277732844
+    second: Spell8_BatExplosion1-Sheet_52
+  - first:
+      213: 8935433891815783685
+    second: Spell8_BatExplosion1-Sheet_53
+  - first:
+      213: -5233514579587608605
+    second: Spell8_BatExplosion1-Sheet_54
+  - first:
+      213: 4443066053747777662
+    second: Spell8_BatExplosion1-Sheet_55
+  - first:
+      213: 337648201697289251
+    second: Spell8_BatExplosion1-Sheet_56
+  - first:
+      213: -4916276970228368012
+    second: Spell8_BatExplosion1-Sheet_57
+  - first:
+      213: 5272556865174875024
+    second: Spell8_BatExplosion1-Sheet_58
+  - first:
+      213: 5527007003100210012
+    second: Spell8_BatExplosion1-Sheet_59
+  - first:
+      213: -2227668018873579437
+    second: Spell8_BatExplosion1-Sheet_60
+  - first:
+      213: 3586535548019982868
+    second: Spell8_BatExplosion1-Sheet_61
+  - first:
+      213: -19851720377378106
+    second: Spell8_BatExplosion1-Sheet_62
+  - first:
+      213: -5498380624790477886
+    second: Spell8_BatExplosion1-Sheet_63
+  - first:
+      213: -4087198972876732612
+    second: Spell8_BatExplosion1-Sheet_64
+  - first:
+      213: -3765182610656810585
+    second: Spell8_BatExplosion1-Sheet_65
+  - first:
+      213: -1737616657953889524
+    second: Spell8_BatExplosion1-Sheet_66
+  - first:
+      213: -85294290065795779
+    second: Spell8_BatExplosion1-Sheet_67
+  - first:
+      213: -4515548294691513144
+    second: Spell8_BatExplosion1-Sheet_68
+  - first:
+      213: 8957878639314897180
+    second: Spell8_BatExplosion1-Sheet_69
+  - first:
+      213: 4736092040283505847
+    second: Spell8_BatExplosion1-Sheet_70
+  - first:
+      213: 652256068068330504
+    second: Spell8_BatExplosion1-Sheet_71
+  - first:
+      213: -6942110055311617316
+    second: Spell8_BatExplosion1-Sheet_72
+  - first:
+      213: -3551376594353829819
+    second: Spell8_BatExplosion1-Sheet_73
+  - first:
+      213: 5647729337634528158
+    second: Spell8_BatExplosion1-Sheet_74
+  - first:
+      213: 9144907584353402916
+    second: Spell8_BatExplosion1-Sheet_75
+  - first:
+      213: 2369556471503374085
+    second: Spell8_BatExplosion1-Sheet_76
+  - first:
+      213: -5788057273224297464
+    second: Spell8_BatExplosion1-Sheet_77
+  - first:
+      213: 3344441557896222503
+    second: Spell8_BatExplosion1-Sheet_78
+  - first:
+      213: -6452217429738829620
+    second: Spell8_BatExplosion1-Sheet_79
+  - first:
+      213: -4011346113770115143
+    second: Spell8_BatExplosion1-Sheet_80
+  - first:
+      213: -3635188620883573336
+    second: Spell8_BatExplosion1-Sheet_81
+  - first:
+      213: -261202101463841764
+    second: Spell8_BatExplosion1-Sheet_82
+  - first:
+      213: -1592662420350205189
+    second: Spell8_BatExplosion1-Sheet_83
+  - first:
+      213: -4277949140254776012
+    second: Spell8_BatExplosion1-Sheet_84
+  - first:
+      213: 9183067769879104749
+    second: Spell8_BatExplosion1-Sheet_85
+  - first:
+      213: 6204788258043720012
+    second: Spell8_BatExplosion1-Sheet_86
+  - first:
+      213: 7680428352488404241
+    second: Spell8_BatExplosion1-Sheet_87
+  - first:
+      213: 8797936366015807592
+    second: Spell8_BatExplosion1-Sheet_88
+  - first:
+      213: -1284280017433261756
+    second: Spell8_BatExplosion1-Sheet_89
+  - first:
+      213: 6461682312135757945
+    second: Spell8_BatExplosion1-Sheet_90
+  - first:
+      213: 4823679717698893061
+    second: Spell8_BatExplosion1-Sheet_91
+  - first:
+      213: 5198362693000266829
+    second: Spell8_BatExplosion1-Sheet_92
+  - first:
+      213: -6473694168906869652
+    second: Spell8_BatExplosion1-Sheet_93
+  - first:
+      213: 4329493490045843853
+    second: Spell8_BatExplosion1-Sheet_94
+  - first:
+      213: 1901284035276082517
+    second: Spell8_BatExplosion1-Sheet_95
+  - first:
+      213: 913370152109658960
+    second: Spell8_BatExplosion1-Sheet_96
+  - first:
+      213: 3012147616233831836
+    second: Spell8_BatExplosion1-Sheet_97
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: spell-spawn_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3db9de3bbcc66a2489615a820a3a7ee1
+      internalID: 1012427748
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spell-spawn_1
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 0
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9d6eebdc1d0d82a43bf574c631f8aecd
+      internalID: 1097684248
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spell-spawn_2
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 0
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 12d08c8cb5f8de546bbf9225363e99e0
+      internalID: 2064805579
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spell-spawn_3
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 0
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6f59bd744fc8c684b887b15f36e55760
+      internalID: -1948392938
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spell-spawn_4
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 0
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4f9b3dbc18e43804b96f469703b84cb8
+      internalID: 1872188738
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spell-spawn_5
+      rect:
+        serializedVersion: 2
+        x: 640
+        y: 0
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2f286e0389b2ebe469fc8aa601bf8108
+      internalID: 945688092
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spell-spawn_6
+      rect:
+        serializedVersion: 2
+        x: 768
+        y: 0
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d6b26e0b543ca7441b6d7374838cb5db
+      internalID: -1343222991
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spell-spawn_7
+      rect:
+        serializedVersion: 2
+        x: 896
+        y: 0
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 440d751dd3a90e1459da5aae6a560f10
+      internalID: 353348742
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spell-spawn_8
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 0
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9706f55c2c4566f4f904fc2cf8d4da81
+      internalID: 1545337947
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spell-spawn_9
+      rect:
+        serializedVersion: 2
+        x: 1152
+        y: 0
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c0766e52a703b464cb1a068e73d5cf3c
+      internalID: -703931683
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spell-spawn_10
+      rect:
+        serializedVersion: 2
+        x: 1280
+        y: 0
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bbbc2a17dab90bd408f1e5a652bc091d
+      internalID: -641364089
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spell-spawn_11
+      rect:
+        serializedVersion: 2
+        x: 1408
+        y: 0
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 12ffd063c5cd89347b13d2346bded0de
+      internalID: 1477086132
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spell-spawn_12
+      rect:
+        serializedVersion: 2
+        x: 1536
+        y: 0
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 838602e3676d83f4c9ec7251b85dfc42
+      internalID: 1015473225
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spell-spawn_13
+      rect:
+        serializedVersion: 2
+        x: 1664
+        y: 0
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4be6df0be087a1c4cba6cdb9a1acb2d1
+      internalID: 1312179996
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 4e0a48bdab98cfc4aa86aaa10d68483d
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries:
+      - key: SpriteEditor.SliceSettings
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":14.0,"y":1.0},"gridSpriteSize":{"x":128.0,"y":128.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":2,"keepEmptyRects":false,"isAlternate":false}'
+    nameFileIdTable:
+      spell-spawn_0: 1012427748
+      spell-spawn_1: 1097684248
+      spell-spawn_10: -641364089
+      spell-spawn_11: 1477086132
+      spell-spawn_12: 1015473225
+      spell-spawn_13: 1312179996
+      spell-spawn_2: 2064805579
+      spell-spawn_3: -1948392938
+      spell-spawn_4: 1872188738
+      spell-spawn_5: 945688092
+      spell-spawn_6: -1343222991
+      spell-spawn_7: 353348742
+      spell-spawn_8: 1545337947
+      spell-spawn_9: -703931683
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

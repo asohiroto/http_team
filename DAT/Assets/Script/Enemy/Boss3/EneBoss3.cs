@@ -48,15 +48,17 @@ public class EneBoss3 : MonoBehaviour
     int screenTop = 4;
     int screenWidth = 8;
     // テレポートに使用する変数-------------------------
-    enum TeleportState { Wait, Leave, Spawn};
-    TeleportState teleportState = TeleportState.Wait;
+    enum TeleState { Wait, Leave, Spawn};
+    TeleState teleState = TeleState.Wait;
     [SerializeField] GameObject leavePrefab;
     [SerializeField] GameObject spawnPrefab;
     GameObject leaveObj;
     GameObject spawnObj;
-    int teleportFrameTimer = 0;
+    int teleFrameTimer = 0;
     int leaveWaitFrame = 10;
-    Vector3[] teleportPos;
+    int spawnCdFrame = 100;
+    Vector3[] telePosPattern; // テレポートの座標をいくつか事前に準備
+    Vector3 telePos; // 決定したてれーポートの座標
     float teleRightPos = 8.0f;
     float teleLeftPos = -8.0f;
     float teleTopPos = 3.4f;
@@ -70,8 +72,8 @@ public class EneBoss3 : MonoBehaviour
         InitVariable();
         currentPos = transform.position;
         portalPosAll = new Vector3[portalMax];
-        // テレポートの場所
-        teleportPos = new Vector3[]
+        // テレポートのする場所のパターン
+        telePosPattern = new Vector3[]
         {
             new Vector3(teleRightPos, teleTopPos, 0),
             new Vector3(teleRightPos, teleMiddlePos, 0),
@@ -123,8 +125,31 @@ public class EneBoss3 : MonoBehaviour
         if(!getPos)
         {
             // 瞬間移動する場所は画面右端左端の上側下側真ん中の合計6種類からランダムに選ばれる
+            int rand = UnityEngine.Random.Range(0, telePosPattern.Length);
+            telePos = telePosPattern[rand];
+            
         }
         // 瞬間移動する処理
+        switch(teleState)
+        {
+            case TeleState.Leave:
+                // アニメーションが終わるまで待つ
+                if (teleFrameTimer >= leaveWaitFrame)
+                {
+                    teleFrameTimer = 0;
+                    transform.position = telePos;
+                    teleState = TeleState.Spawn;
+                } 
+                
+                break;
+            case TeleState.Spawn:
+                // アニメーションが終わるまで待つ
+                if(teleFrameTimer <= spawnCdFrame)
+                {
+                    Debug.Log("テレポート終了");
+                }
+                break;
+        }
     }
 
     void Beam()

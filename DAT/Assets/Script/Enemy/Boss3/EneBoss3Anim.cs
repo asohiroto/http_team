@@ -13,12 +13,16 @@ public class EneBoss3Anim : MonoBehaviour
     SpriteRenderer spriteRenderer;
     // アニメーションの画像
     [SerializeField] Sprite[] walkAnim;
-    [SerializeField] Sprite[] teleportAnim;
+    [SerializeField] Sprite[] leaveAnim;
+    [SerializeField] Sprite[] spawnAnim;
     [SerializeField] Sprite[] idleAnim;
     [SerializeField] Sprite[] deathAnim;
+    enum TeleportState{Leave, Spawn, End};
+    TeleportState teleportState;
     // アニメーションの最大数
     int walkAnimMax;
-    int teleportAnimMax;
+    int leaveAnimMax;
+    int spawnAnimMax;
     int idleAnimMax;
     int deathAnimMax;
     // 現在のコマ数
@@ -34,7 +38,8 @@ public class EneBoss3Anim : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
         // アニメーションの最大数の取得
         walkAnimMax = walkAnim.Length;
-        teleportAnimMax = teleportAnim.Length;
+        leaveAnimMax = leaveAnim.Length;
+        spawnAnimMax = spawnAnim.Length;
         idleAnimMax = idleAnim.Length;
         deathAnimMax = deathAnim.Length;
     }
@@ -46,25 +51,27 @@ public class EneBoss3Anim : MonoBehaviour
         if (frameTimer >= animFrame)
         {
             animIdx++;
-            if(frameTimer >= animFrame)
+            frameTimer = 0;
+            switch(teleportState)
             {
-
-            }
-            switch (enemyCtrl.state)
-            {
-                case EneBoss3.State.Idle:
-                    
-                    break;
-                case EneBoss3.State.Beam:
-                    break;
-                case EneBoss3.State.Teleport:
-                    if (frameTimer >= teleportAnimMax)
-                    {
-
-                    }
-                    break;
-                case EneBoss3.State.Portal:
-                    break;
+                //移動前のアニメーション
+                case TeleportState.Leave:
+                if(animIdx >= leaveAnimMax)
+                {
+                    //状態を変える
+                    animIdx = 0;
+                    teleportState = TeleportState.Spawn;
+                }
+                spriteRenderer.sprite = leaveAnim[animIdx];
+                break;
+                // 移動後のアニメーション
+                case TeleportState.Spawn:
+                if(animIdx >= spawnAnimMax)
+                {
+                    teleportState = TeleportState.End;
+                }
+                spriteRenderer.sprite = spawnAnim[animIdx];
+                break;
             }
         }
     }

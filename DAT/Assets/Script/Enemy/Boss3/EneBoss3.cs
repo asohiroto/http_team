@@ -56,6 +56,12 @@ public class EneBoss3 : MonoBehaviour
     GameObject spawnObj;
     int teleportFrameTimer = 0;
     int leaveWaitFrame = 10;
+    Vector3[] teleportPos;
+    float teleRightPos = 8.0f;
+    float teleLeftPos = -8.0f;
+    float teleTopPos = 3.4f;
+    float teleMiddlePos = 1.1f;
+    float teleBottomPos = -0.8f;
 
     void Start()
     {
@@ -64,6 +70,16 @@ public class EneBoss3 : MonoBehaviour
         InitVariable();
         currentPos = transform.position;
         portalPosAll = new Vector3[portalMax];
+        // テレポートの場所
+        teleportPos = new Vector3[]
+        {
+            new Vector3(teleRightPos, teleTopPos, 0),
+            new Vector3(teleRightPos, teleMiddlePos, 0),
+            new Vector3(teleRightPos, teleBottomPos, 0),
+            new Vector3(teleLeftPos, teleTopPos, 0),
+            new Vector3(teleLeftPos, teleMiddlePos, 0),
+            new Vector3(teleLeftPos, teleBottomPos, 0)
+        };
     }
 
     // Update is called once per frame
@@ -100,9 +116,15 @@ public class EneBoss3 : MonoBehaviour
         genePortal = false;
     }
 
+    // 移動前アニメーション流す⇒移動⇒移動後アニメーション；この流れで行う
     void Teleport()
     {
-        
+        // 一度だけ行う処理
+        if(!getPos)
+        {
+            // 瞬間移動する場所は画面右端左端の上側下側真ん中の合計6種類からランダムに選ばれる
+        }
+        // 瞬間移動する処理
     }
 
     void Beam()

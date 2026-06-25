@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class PlayerHP : MonoBehaviour
@@ -55,6 +56,7 @@ public class PlayerHP : MonoBehaviour
             //lastDamageTime = Time.time; // ダメージの時間を最新に更新
         }
     }
+    
     private void OnTriggerStay2D(Collider2D collision)
     {
         // 接触した敵のTagが"Enemy"だったらダメージ
@@ -102,6 +104,7 @@ public class PlayerHP : MonoBehaviour
     private void Die()
     {
         Debug.Log("死亡");
+        SceneManager.LoadScene("GameOverScene");
 
     }
 }

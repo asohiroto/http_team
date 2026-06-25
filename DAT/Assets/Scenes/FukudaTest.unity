@@ -411,7 +411,7 @@ Transform:
   m_GameObject: {fileID: 1766526630}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: 8.24, y: 0.74, z: 0}
+  m_LocalPosition: {x: 7.99, y: -0.58, z: 0}
   m_LocalScale: {x: 3.5, y: 3.5, z: 3.5}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -430,9 +430,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EneBoss3
   attackPower: 1
+  state: 0
+  lastState: 0
   beamPrefab: {fileID: 8662954857429943195, guid: c3a7fb64c5486a646bfaf4701f646d7e, type: 3}
   beamRangePrefab: {fileID: 5574018561758892681, guid: 38fdf94903efdc04b9debdbb42a8b924, type: 3}
   portalPrefab: {fileID: 2050048250176320190, guid: 7cf167a41aa3557449a94b62a0c74ffa, type: 3}
+  leavePrefab: {fileID: 0}
+  spawnPrefab: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

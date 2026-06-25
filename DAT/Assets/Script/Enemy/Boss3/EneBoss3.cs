@@ -1,3 +1,4 @@
+using System;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -13,8 +14,11 @@ public class EneBoss3 : MonoBehaviour
     Vector3 moveDir;
     float walkSpeed = 0.1f;
     public enum State { Idle, Beam, Portal, Teleport };
-    public State state = 0;
+    public State state = State.Teleport;
     public State lastState = 0;
+    // 状態管理に使う変数----------------------
+    int frameTimer = 0;
+    int idleFrame = 20;
     // Shotに使う変数---------------------------
     enum BeamState { Walk, Aim, Shot};
     BeamState beamState = BeamState.Walk;
@@ -30,6 +34,7 @@ public class EneBoss3 : MonoBehaviour
     int destroyRangeDelay = 15;
     bool isBeamRange = false;
     bool isBeam = false;
+    [SerializeField]float beamPosAdjX = 15f;
     // Portalに使う関数---------------------------
     enum PortalState { Wait, Run, Set};
     PortalState portalState = PortalState.Run;
@@ -49,14 +54,14 @@ public class EneBoss3 : MonoBehaviour
     int screenWidth = 8;
     // テレポートに使用する変数-------------------------
     enum TeleState { Wait, Leave, Spawn};
-    TeleState teleState = TeleState.Wait;
+    TeleState teleState = TeleState.Leave;
     [SerializeField] GameObject leavePrefab;
     [SerializeField] GameObject spawnPrefab;
     GameObject leaveObj;
     GameObject spawnObj;
     int teleFrameTimer = 0;
-    int leaveWaitFrame = 10;
-    int spawnCdFrame = 100;
+    int leaveWaitFrame = 80;
+    int spawnCdFrame = 75;
     Vector3[] telePosPattern; // テレポートの座標をいくつか事前に準備
     Vector3 telePos; // 決定したてれーポートの座標
     float teleRightPos = 8.0f;
@@ -65,7 +70,11 @@ public class EneBoss3 : MonoBehaviour
     float teleMiddlePos = 1.1f;
     float teleBottomPos = -0.8f;
 
-    void Start()
+    // 方向の向きを管理する----------------------------
+    int dir = 0;
+    bool isAttack = false;
+
+void Start()
     {
         playerObj = GameObject.Find("Player");
         playerCtrl = playerObj.GetComponent<PlayerController>();
@@ -87,22 +96,50 @@ public class EneBoss3 : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        Portal();
+        ActionManager();
+        // x方向の向きを管理
+        if (currentPos.x >= playerCtrl.currentPos.x)
+        {
+            // 左向き
+            transform.rotation = Quaternion.Euler(0, 180, 0);
+            dir = -1;
+        }
+        else
+        {
+            // 右向き
+            transform.rotation = Quaternion.Euler(0, 0, 0);
+            dir = 1;
+        }
+
         transform.position = currentPos;
     }
 
+    // 行動を管理する関数（ランダムで攻撃を抽選し、攻撃を行う）
     void ActionManager()
     {
-        switch(state)
+        switch (state)
         {
             case State.Idle:
-            break;
-            case State.Beam:
-            break;
-            case State.Portal:
-            break;
+                frameTimer++;
+                if (frameTimer >= idleFrame)
+                {
+                    // 初期化
+                    InitVariable();
+                    frameTimer = 0;
+
+                    // ランダムな状態を取得する
+                    state = (State)Enum.ToObject(typeof(State), UnityEngine.Random.Range(0, Enum.GetNames(typeof(State)).Length));
+                }
+                break;
             case State.Teleport:
-            break;
+                Teleport();
+                break;
+            case State.Portal:
+                Portal();
+                break;
+            case State.Beam:
+                Beam();
+                break;
         }
     }
     
@@ -116,37 +153,45 @@ public class EneBoss3 : MonoBehaviour
         beamFrameTimer = 0;
         portalFrameTimer = 0;
         genePortal = false;
+        isAttack = false;
+        portalIdx = 0;
+        teleFrameTimer = 0;
+        teleState = TeleState.Leave;
+        portalState = PortalState.Run;
+        beamState = BeamState.Walk;
     }
 
     // 移動前アニメーション流す⇒移動⇒移動後アニメーション；この流れで行う
     void Teleport()
     {
-        // 一度だけ行う処理
-        if(!getPos)
-        {
-            // 瞬間移動する場所は画面右端左端の上側下側真ん中の合計6種類からランダムに選ばれる
-            int rand = UnityEngine.Random.Range(0, telePosPattern.Length);
-            telePos = telePosPattern[rand];
-            
-        }
+        teleFrameTimer++;
         // 瞬間移動する処理
         switch(teleState)
         {
             case TeleState.Leave:
+                // 一度だけ行う処理
+                if (!getPos)
+                {
+                    // 瞬間移動する場所は画面右端左端の上側下側真ん中の合計6種類からランダムに選ばれる
+                    int rand = UnityEngine.Random.Range(0, telePosPattern.Length);
+                    telePos = telePosPattern[rand];
+                    getPos = true;
+                    state = State.Teleport;
+                    Debug.Log(telePos);
+                }
                 // アニメーションが終わるまで待つ
                 if (teleFrameTimer >= leaveWaitFrame)
                 {
                     teleFrameTimer = 0;
-                    transform.position = telePos;
+                    currentPos = telePos;
                     teleState = TeleState.Spawn;
                 } 
-                
                 break;
             case TeleState.Spawn:
                 // アニメーションが終わるまで待つ
-                if(teleFrameTimer <= spawnCdFrame)
+                if(teleFrameTimer > spawnCdFrame)
                 {
-                    Debug.Log("テレポート終了");
+                    state = State.Idle;
                 }
                 break;
         }
@@ -160,6 +205,7 @@ public class EneBoss3 : MonoBehaviour
                 Debug.Log("walk");
                 if (!getPos)
                 {
+                    state = State.Beam;
                     beamPos = new Vector3(currentPos.x, playerObj.transform.position.y + UnityEngine.Random.Range(-1.5f, 1.5f));
                     if(currentPos.x > playerCtrl.currentPos.x)
                     {
@@ -182,7 +228,6 @@ public class EneBoss3 : MonoBehaviour
                 if(!isBeamRange)
                 {
                     beamRangeObj = Instantiate(beamRangePrefab, transform);
-                    //beamRangeObj.transform.rotation = Quaternion.Euler(0, 0, beamRotAdjZ);
                     isBeamRange = true;
                 }
                 else if(beamFrameTimer >= beamRangeFrame)
@@ -195,14 +240,27 @@ public class EneBoss3 : MonoBehaviour
                 beamFrameTimer++;
                 if(!isBeam)
                 {
-                    beamObj = Instantiate(beamPrefab, transform);
-                    beamObj.transform.rotation = Quaternion.Euler(0, 0, beamRotAdjZ);
-                    isBeam = true;
+                    /*beamObj = Instantiate(beamPrefab);
+                    beamObj.transform.position = currentPos + new Vector3(beamPosAdjX * dir, 0, 0);
+                    beamObj.transform.rotation = Quaternion.Euler(0, transform.rotation.y, beamRotAdjZ);
+                    isBeam = true;*/
+                    beamObj = Instantiate(beamPrefab);
+
+                    // 【修正点①】dirの正負で位置のズレ（オフセット）を計算
+                    // dir = 1（左向き）のときはマイナス方向、dir = -1（右向き）のときはプラス方向
+                    float offsetX = (dir == 1) ? -beamPosAdjX : beamPosAdjX;
+                    beamObj.transform.position = currentPos + new Vector3(offsetX, 0, 0);
+
+                    // 【修正点②】transform.rotation.y を直接使わず、dirからオイラー角を組み立てる
+                    // 左向き(dir=1)ならY軸180度、右向き(dir=-1)ならY軸0度
+                    float rotY = (dir == 1) ? 180f : 0f;
+                    beamObj.transform.rotation = Quaternion.Euler(0, rotY, beamRotAdjZ);
                 }
                 if(beamFrameTimer >= destroyRangeDelay)
                 {
                     Destroy(beamRangeObj);
                     beamFrameTimer = 0;
+                    state = State.Idle;
                 }
             break;
         }
@@ -215,6 +273,7 @@ void Portal()
             case PortalState.Run:
                 if(!getPos)
                 {
+                    state = State.Portal;
                     // ポータルの位置を先にすべて決める
                     for(int i = 0; i < portalMax; i++)
                     {
@@ -225,7 +284,7 @@ void Portal()
                         {
                             attempts++;
                             // ポータルの位置の仮決定
-                            portalPosAll[i] = new Vector3(Random.Range(-screenWidth, screenWidth + 1), Random.Range(-screenBottom, screenTop + 1), 0);
+                            portalPosAll[i] = new Vector3(UnityEngine.Random.Range(-screenWidth, screenWidth + 1), UnityEngine.Random.Range(-screenBottom, screenTop + 1), 0);
                             
                             // ポータルの位置がプレイヤーの位置に近すぎるなら再抽選を行う
                             if(Mathf.Abs(portalPosAll[i].x - playerCtrl.currentPos.x) < geneDistance &&
@@ -285,8 +344,14 @@ void Portal()
                     portalFrameTimer = 0;
                     genePortal = false;
                     endMove = false;
-                    getPos = false;
-                    if(portalIdx < portalMax) portalState = PortalState.Set;
+                    if (portalIdx < portalMax)
+                    {
+                        portalState = PortalState.Set;
+                    }
+                    else
+                    {
+                        state = State.Idle;
+                    }
                 }
                 break;
         }

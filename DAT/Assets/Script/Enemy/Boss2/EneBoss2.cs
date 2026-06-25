@@ -103,7 +103,6 @@ public class EneBoss2 : MonoBehaviour
 
         // 行動を管理する関数
         ActionManager();
-
         // x方向の向きを管理
         if (!isAttack)
         {

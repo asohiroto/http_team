@@ -28,7 +28,10 @@ public class EneBoss3Anim : MonoBehaviour
     // フレームを数える変数
     int frameTimer = 0;
     // アニメーション1コマあたりのコマ数
-    int animFrame = 10;
+    int animFrame = 5;
+    // テレポートのスポーン状態の途中で敵ボスを出現させるための変数
+    GameObject childObj;
+    int spawnChildAnim = 2;
 
     void Start()
     {
@@ -40,37 +43,65 @@ public class EneBoss3Anim : MonoBehaviour
         spawnAnimMax = spawnAnim.Length;
         idleAnimMax = idleAnim.Length;
         deathAnimMax = deathAnim.Length;
+        // 子オブジェクトの取得
+        childObj = transform.GetChild(0).gameObject;
     }
 
-    void Update()
+    void FixedUpdate()
     {
+        Debug.Log(teleportState);
         frameTimer++;
         CheckChangeState();
-        if (frameTimer >= animFrame)
+        if (enemyCtrl.state == EneBoss3.State.Teleport)
         {
-            animIdx++;
-            frameTimer = 0;
-            switch(teleportState)
+            if (frameTimer >= animFrame)
             {
-                //移動前のアニメーション
-                case TeleportState.Leave:
-                if(animIdx >= leaveAnimMax)
+                switch (teleportState)
                 {
-                    //状態を変える
-                    animIdx = 0;
-                    teleportState = TeleportState.Spawn;
+                    //移動前のアニメーション
+                    case TeleportState.Leave:
+                        if (animIdx < leaveAnimMax)
+                        {
+                            spriteRenderer.sprite = leaveAnim[animIdx];
+                            animIdx++;
+                        }
+                        else
+                        {
+                            animIdx = 0;
+                            //状態を変える
+                            teleportState = TeleportState.Spawn;
+                        }
+                        
+                        break;
+                    // 移動後のアニメーション
+                    case TeleportState.Spawn:
+                        if (animIdx < spawnAnimMax)
+                        {
+                            spriteRenderer.sprite = spawnAnim[animIdx];
+                            animIdx++;
+                            if (animIdx >= spawnAnimMax - spawnChildAnim) childObj.SetActive(true);
+                        }
+                        else
+                        {   animIdx = 0;
+                            spriteRenderer.sprite = walkAnim[0];
+                            childObj.SetActive(false);
+                            teleportState = TeleportState.End;
+                            
+                        }
+                        break;
+                    // アニメーション終了後の処理
+                    case TeleportState.End:
+                        spriteRenderer.sprite = walkAnim[0];
+                        Debug.Log("End!!");
+                        break;
                 }
-                spriteRenderer.sprite = leaveAnim[animIdx];
-                break;
-                // 移動後のアニメーション
-                case TeleportState.Spawn:
-                if(animIdx >= spawnAnimMax)
-                {
-                    teleportState = TeleportState.End;
-                }
-                spriteRenderer.sprite = spawnAnim[animIdx];
-                break;
+                frameTimer = 0;
             }
+        }
+        else
+        {
+            // ここには仮で通常画像を入れる
+            spriteRenderer.sprite = walkAnim[0];
         }
     }
 
@@ -79,7 +110,10 @@ public class EneBoss3Anim : MonoBehaviour
         if(lastState != enemyCtrl.state)
         {
             animIdx = 0;
-            animFrame = 0;
+            frameTimer = 0;
+            teleportState = TeleportState.Leave;
+            childObj.SetActive(false);
+            Debug.Log("アニメーション状態を変更");
         }
 
         lastState = enemyCtrl.state;

@@ -449,7 +449,9 @@ public class CardEffectManager : MonoBehaviour
 
     void MoltenSpear()
     {
-        string name = ("MoltenFury");
+        string name = ("MoltenSpear");
+
+        player.playerHP -= (curseAmount * 2);
 
         SpikeSkill(msPos, moltenSpear, name, ref moltenSpearPrefab);
     }

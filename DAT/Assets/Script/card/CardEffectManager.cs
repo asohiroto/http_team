@@ -1,6 +1,5 @@
 using System;
 using UnityEngine;
-using static UnityEditor.PlayerSettings;
 
 public class CardEffectManager : MonoBehaviour
 {
@@ -151,6 +150,18 @@ public class CardEffectManager : MonoBehaviour
 
     Vector2 msPos = Vector2.zero;
 
+    // ソードストーム関連--------------------
+    [SerializeField] float ssSpeed;
+
+    [SerializeField] GameObject[] sword;
+
+    public GameObject[] swordPrefab;
+
+    Vector2[] sPos = new Vector2[5];
+    Vector2[] ssPos = new Vector2[5];
+
+    bool[] ssFlag = new bool[5];
+
     // 共通------------------------------------
     PlayerController player;
     CardAttackReach reach;
@@ -186,6 +197,7 @@ public class CardEffectManager : MonoBehaviour
                 () => ThunderBolt(),
                 () => HeavensFury(),
                 () => MoltenSpear(),
+                () => SwordStorm(),
             };
 
         healDefaultAmount = healAmount;
@@ -197,7 +209,7 @@ public class CardEffectManager : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         boostCount++;
 
@@ -221,6 +233,11 @@ public class CardEffectManager : MonoBehaviour
 
         // サンダーボール使用後の挙動
         if (tbFlag) skill.BallMove(thunderballPrefab, destPos, tbSpeed, tbPos, ref tbFlag);
+
+        for(int i = 0; i < 5; i++)
+        {
+            if (ssFlag[i]) skill.BallMove(swordPrefab[i], destPos, ssSpeed, ssPos[i], ref ssFlag[i]);
+        }
 
         buffPos.x = player.currentPos.x;
         buffPos.y = player.currentPos.y + 1.0f;
@@ -369,14 +386,14 @@ public class CardEffectManager : MonoBehaviour
     {
         string name = ("FireBall");
 
-        BallSkill(ref fbFlag, ref destPos, ref fbPos, fireBall, name, ref fireBallPrefab);
+        BallSkill(ref fbFlag, ref destPos, ref fbPos, fireBall, name, ref fireBallPrefab, player.currentPos);
     }
 
     void CursedFlame()
     {
         string name = ("CursedFlame");
 
-        BallSkill(ref cfFlag, ref destPos, ref cfPos, cursedFlame, name, ref cursedFlamePrefab);
+        BallSkill(ref cfFlag, ref destPos, ref cfPos, cursedFlame, name, ref cursedFlamePrefab, player.currentPos);
 
         player.playerHP -= (curseAmount * 2);
     }
@@ -394,21 +411,21 @@ public class CardEffectManager : MonoBehaviour
     {
         string name = ("WaterShot");
 
-        BallSkill(ref wsFlag, ref destPos, ref wsPos, watershot, name, ref waterShotPrefab);
+        BallSkill(ref wsFlag, ref destPos, ref wsPos, watershot, name, ref waterShotPrefab, player.currentPos);
     }
 
     void GroundShot()
     {
         string name = ("GroundShot");
 
-        BallSkill(ref gsFlag, ref destPos, ref gsPos, groundshot, name, ref groundShotPrefab);
+        BallSkill(ref gsFlag, ref destPos, ref gsPos, groundshot, name, ref groundShotPrefab, player.currentPos);
     }
 
     void ThunderBall()
     {
         string name = ("ThunderBall");
 
-        BallSkill(ref tbFlag, ref destPos, ref tbPos, thunderball, name, ref thunderballPrefab);
+        BallSkill(ref tbFlag, ref destPos, ref tbPos, thunderball, name, ref thunderballPrefab, player.currentPos);
     }
 
     void LavaSprash()
@@ -456,7 +473,25 @@ public class CardEffectManager : MonoBehaviour
         SpikeSkill(msPos, moltenSpear, name, ref moltenSpearPrefab);
     }
 
-    void BallSkill(ref bool flag, ref Vector2 destPos, ref Vector2 objPos, GameObject skill, string name, ref GameObject skillPrefab)
+    void SwordStorm()
+    {
+        string name = ("SwordStorm");
+
+        sPos[0] = player.currentPos;
+        sPos[1] = player.currentPos + new Vector3(0.5f, 0.5f);
+        sPos[2] = player.currentPos + new Vector3(1.0f, 1.0f);
+        sPos[3] = player.currentPos - new Vector3(0.5f, 0.5f);
+        sPos[4] = player.currentPos - new Vector3(1.0f, 1.0f);
+
+        for (int i = 0; i < 5; i++)
+        {
+            BallSkill(ref ssFlag[i], ref destPos, ref ssPos[i], sword[i], name, ref swordPrefab[i], sPos[i]);
+        }
+
+
+    }
+
+    void BallSkill(ref bool flag, ref Vector2 destPos, ref Vector2 objPos, GameObject skill, string name, ref GameObject skillPrefab, Vector2 skillPos)
     {
         if (!flag)
         {
@@ -468,7 +503,7 @@ public class CardEffectManager : MonoBehaviour
 
             // オブジェクトを作成する
             GameObject obj = Instantiate(skill);
-            obj.transform.position = player.currentPos;
+            obj.transform.position = skillPos;
             obj.transform.name = name;
             obj.transform.rotation = Quaternion.Euler(0, 0, angle);
 

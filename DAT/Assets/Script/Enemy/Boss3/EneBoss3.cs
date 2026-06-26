@@ -13,6 +13,7 @@ public class EneBoss3 : MonoBehaviour
     Vector3 currentPos;
     Vector3 moveDir;
     float walkSpeed = 0.1f;
+    public bool isWalk = false; // アニメーションに用いる変数
     public enum State { Idle, Beam, Portal, Teleport };
     public State state = State.Idle;
     State lastAttack = State.Idle;
@@ -63,7 +64,7 @@ public class EneBoss3 : MonoBehaviour
     GameObject spawnObj;
     int teleFrameTimer = 0;
     int leaveWaitFrame = 80;
-    int spawnCdFrame = 75;
+    int spawnCdFrame = 70;
     Vector3[] telePosPattern; // テレポートの座標をいくつか事前に準備
     Vector3 telePos; // 決定したてれーポートの座標
     float teleRightPos = 8.0f;
@@ -369,12 +370,14 @@ void Portal()
         if (currentPos.x - targetPos.x < 0.5f && currentPos.x - targetPos.x > -0.5f
             && currentPos.y - targetPos.y < 0.5f && currentPos.y - targetPos.y > -0.5f)
         {
+            isWalk = false;
             endMove = true;
             return;
         }
         moveDir = targetPos - currentPos;
         moveDir = moveDir.normalized;
         currentPos += moveDir * moveSpeed;
+        isWalk = true;
     }
 
     // 最後に行った攻撃の種類を保存する
@@ -404,7 +407,7 @@ void Portal()
     Vector3 GetWalkPos()
     {
         // 敵の現在の座標からちょうどいい場所を取得して返す
-        
+
 
         return Vector3.zero;
     }

@@ -436,6 +436,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EneBoss3
   attackPower: 1
+  isWalk: 0
   state: 0
   lastState: 0
   beamPrefab: {fileID: 8662954857429943195, guid: c3a7fb64c5486a646bfaf4701f646d7e, type: 3}
@@ -456,7 +457,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EneBoss3Anim
   walkAnim:
-  - {fileID: -4913982344839117222, guid: fc7e78ab96e3a2141a329dbecc354306, type: 3}
+  - {fileID: -4913982344839117222, guid: ff6703c2f065f6e46b15837021938af2, type: 3}
+  - {fileID: -575696589628924425, guid: 38d8ebb48dcc23443ac4ac0de2deb281, type: 3}
+  - {fileID: -1679085568475732275, guid: 9eb97c18634c25f4981c9604c46f6510, type: 3}
+  - {fileID: -4960229840327395196, guid: badf0abad5e666c4d83c35378cd35015, type: 3}
+  - {fileID: -8398409672689469449, guid: ca9fb8b82e75eec4e84c4b8e42584b3e, type: 3}
+  - {fileID: -6658418643737043593, guid: 0ac8db18199002448bca5c1bef30fcd9, type: 3}
+  - {fileID: 6490354421893865411, guid: 892d40e952357454b95df9461267f34e, type: 3}
+  - {fileID: -3047093270054505527, guid: 2bdf596485a984343810b18056a098b4, type: 3}
+  - {fileID: 417835678940605132, guid: 25a64845ae6867e42ae0b90e6b261e00, type: 3}
+  - {fileID: 6216626595070851197, guid: 7bdd780c2a9460f44bfc6e730568d2a6, type: 3}
+  - {fileID: -609197253124883428, guid: 40c2df99301f6f44e914b73b9bd9fabc, type: 3}
+  - {fileID: -4109647963036294930, guid: 2d67b446a1a9af84faa0b47516880ff5, type: 3}
   leaveAnim:
   - {fileID: 978112608, guid: a5ea6157c8e48a74fb8a53f1fb57602c, type: 3}
   - {fileID: -1231147302, guid: a5ea6157c8e48a74fb8a53f1fb57602c, type: 3}
@@ -489,7 +501,23 @@ MonoBehaviour:
   - {fileID: 1477086132, guid: 6166dd9f065e6954684801605dd3ce98, type: 3}
   - {fileID: 1015473225, guid: 6166dd9f065e6954684801605dd3ce98, type: 3}
   - {fileID: 1312179996, guid: 6166dd9f065e6954684801605dd3ce98, type: 3}
-  idleAnim: []
+  idleAnim:
+  - {fileID: -4913982344839117222, guid: fc7e78ab96e3a2141a329dbecc354306, type: 3}
+  - {fileID: -575696589628924425, guid: b3f03b3b55d5e1441b4c9d78bae86fd6, type: 3}
+  - {fileID: -1679085568475732275, guid: c9da43e4acebff543a1254c9bd53e69c, type: 3}
+  - {fileID: -4960229840327395196, guid: abc4fde914c348e4da4b55639b19c1a8, type: 3}
+  - {fileID: -8398409672689469449, guid: cbdb2e01792e3ba4288201170b46aa44, type: 3}
+  - {fileID: -6658418643737043593, guid: 5e32f4bc85db9ee438ef0f68fd9b6d79, type: 3}
+  - {fileID: 6490354421893865411, guid: 0c5c04744749f434d9390f24ff9c4641, type: 3}
+  - {fileID: -3047093270054505527, guid: 68cd83f584296ac4584f7fc04aa64eda, type: 3}
+  - {fileID: 417835678940605132, guid: ac0eb8de3bf131140b4cfe622272ad5a, type: 3}
+  - {fileID: 6216626595070851197, guid: 2cd5ce7577c45a141893fc26f0ba58bb, type: 3}
+  - {fileID: -609197253124883428, guid: 801fac6c384c1ce46b37730760af2ac8, type: 3}
+  - {fileID: -4109647963036294930, guid: 8ba22b732c3c86d4c993a3d9fa4cf4b5, type: 3}
+  - {fileID: -3067493327820312267, guid: fed97f9fa755656459a5ad123e6c6378, type: 3}
+  - {fileID: 8051787128312575447, guid: 57bb09a90f3e179429b7c630e33b08e4, type: 3}
+  - {fileID: -391791065217982268, guid: cb498fb4f7691014abed1721753f64ea, type: 3}
+  - {fileID: 991369460418844821, guid: 05eb7f8c189f62b41954d7bb8e7721ec, type: 3}
   deathAnim: []
 --- !u!1 &1918608854
 GameObject:

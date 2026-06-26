@@ -14,8 +14,10 @@ public class EneBoss3 : MonoBehaviour
     Vector3 moveDir;
     float walkSpeed = 0.1f;
     public enum State { Idle, Beam, Portal, Teleport };
-    public State state = State.Teleport;
+    public State state = State.Idle;
+    State lastAttack = State.Idle;
     public State lastState = 0;
+    int stateCount = 0;
     // 状態管理に使う変数----------------------
     int frameTimer = 0;
     int idleFrame = 20;
@@ -34,7 +36,7 @@ public class EneBoss3 : MonoBehaviour
     int destroyRangeDelay = 15;
     bool isBeamRange = false;
     bool isBeam = false;
-    [SerializeField]float beamPosAdjX = 15f;
+    float beamPosAdjX = 8.4f;
     // Portalに使う関数---------------------------
     enum PortalState { Wait, Run, Set};
     PortalState portalState = PortalState.Run;
@@ -91,12 +93,15 @@ void Start()
             new Vector3(teleLeftPos, teleMiddlePos, 0),
             new Vector3(teleLeftPos, teleBottomPos, 0)
         };
+        stateCount = Enum.GetNames(typeof(State)).Length;
+        lastAttack = state;
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
         ActionManager();
+        SaveLastAttackState();
         // x方向の向きを管理
         if (currentPos.x >= playerCtrl.currentPos.x)
         {
@@ -128,7 +133,7 @@ void Start()
                     frameTimer = 0;
 
                     // ランダムな状態を取得する
-                    state = (State)Enum.ToObject(typeof(State), UnityEngine.Random.Range(0, Enum.GetNames(typeof(State)).Length));
+                    state = GetRandomState(lastAttack);
                 }
                 break;
             case State.Teleport:
@@ -206,7 +211,7 @@ void Start()
                 if (!getPos)
                 {
                     state = State.Beam;
-                    beamPos = new Vector3(currentPos.x, playerObj.transform.position.y + UnityEngine.Random.Range(-1.5f, 1.5f));
+                    beamPos = new Vector3(currentPos.x, playerObj.transform.position.y);
                     if(currentPos.x > playerCtrl.currentPos.x)
                     {
                         beamFlipX = 0;
@@ -240,21 +245,19 @@ void Start()
                 beamFrameTimer++;
                 if(!isBeam)
                 {
-                    /*beamObj = Instantiate(beamPrefab);
-                    beamObj.transform.position = currentPos + new Vector3(beamPosAdjX * dir, 0, 0);
-                    beamObj.transform.rotation = Quaternion.Euler(0, transform.rotation.y, beamRotAdjZ);
-                    isBeam = true;*/
                     beamObj = Instantiate(beamPrefab);
-
-                    // 【修正点①】dirの正負で位置のズレ（オフセット）を計算
-                    // dir = 1（左向き）のときはマイナス方向、dir = -1（右向き）のときはプラス方向
-                    float offsetX = (dir == 1) ? -beamPosAdjX : beamPosAdjX;
-                    beamObj.transform.position = currentPos + new Vector3(offsetX, 0, 0);
-
-                    // 【修正点②】transform.rotation.y を直接使わず、dirからオイラー角を組み立てる
-                    // 左向き(dir=1)ならY軸180度、右向き(dir=-1)ならY軸0度
-                    float rotY = (dir == 1) ? 180f : 0f;
-                    beamObj.transform.rotation = Quaternion.Euler(0, rotY, beamRotAdjZ);
+                    beamObj.transform.position = currentPos + new Vector3(beamPosAdjX * dir, 0, 0);
+                    // 左向き
+                    if(dir == -1)
+                    {
+                        beamObj.transform.rotation = Quaternion.Euler(0, 0, beamRotAdjZ);
+                    }
+                    // 右向き
+                    else if(dir == 1)
+                    {
+                        beamObj.transform.rotation = Quaternion.Euler(0, 180, beamRotAdjZ);
+                    }
+                    isBeam = true;
                 }
                 if(beamFrameTimer >= destroyRangeDelay)
                 {
@@ -297,7 +300,7 @@ void Portal()
                             bool isOverlap = false;
                             for(int j = 0; j < i; j++)
                             {
-                                if(Mathf.Abs(portalPosAll[i].x - portalPosAll[j].x) < portalSize && 
+                                if(Mathf.Abs(portalPosAll[i].x - portalPosAll[j].x) < portalSize &&
                                 Mathf.Abs(portalPosAll[i].y - portalPosAll[j].y) < portalSize)
                                 {
                                     isOverlap = true;
@@ -372,5 +375,37 @@ void Portal()
         moveDir = targetPos - currentPos;
         moveDir = moveDir.normalized;
         currentPos += moveDir * moveSpeed;
+    }
+
+    // 最後に行った攻撃の種類を保存する
+    void SaveLastAttackState()
+    {
+        if(state != State.Idle && lastAttack != state)
+        {
+            lastAttack = state;
+        }
+    }
+
+    // 最後に行った攻撃以外の種類の行動をランダムに選ぶ
+    State GetRandomState(State _lastAttack)
+    {
+        // 現在の状態を除いた数の範囲でランダムな値を決める
+        int randomIdx = UnityEngine.Random.Range(0, stateCount - 1);
+
+        // 選ばれた値が現在の状態のIdx以上なら値を＋１してずらす
+        if(randomIdx >= (int)_lastAttack)
+        {
+            randomIdx++;
+        }
+        // 状態を返す
+        return (State)randomIdx;
+    }
+
+    Vector3 GetWalkPos()
+    {
+        // 敵の現在の座標からちょうどいい場所を取得して返す
+        
+
+        return Vector3.zero;
     }
 }

@@ -3,7 +3,6 @@ using UnityEngine;
 
 public class EneBoss3Anim : MonoBehaviour
 {
-    
     // EneBoss3内変数
     EneBoss3 enemyCtrl;
     // 1フレーム前の状態を取得する

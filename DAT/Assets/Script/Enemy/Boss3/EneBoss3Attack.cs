@@ -26,7 +26,6 @@ public class EneBoss3Attack : MonoBehaviour
         eneCtrl = enemyObj.GetComponent<EneBoss3>();
         boxCol = GetComponent<BoxCollider2D>();
         boxCol.enabled = false;
-        transform.position = enemyObj.transform.position;
 
         StartCoroutine(AttackAnim());
     }

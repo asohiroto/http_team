@@ -117,7 +117,10 @@ MonoBehaviour:
   - {fileID: -9032517183376959738, guid: f530a3e7d5902324da728cd5e5a9a8b0, type: 3}
   attackDamage: 0
   startColFrame: 0
-  endColFrame: 0
+  endColFrame: 3
+  animFrame: 3
+  isLoop: 0
+  isBreakOnCol: 0
 --- !u!58 &6626163494462728743
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -271,7 +274,10 @@ MonoBehaviour:
   - {fileID: -9032517183376959738, guid: f530a3e7d5902324da728cd5e5a9a8b0, type: 3}
   attackDamage: 0
   startColFrame: 0
-  endColFrame: 0
+  endColFrame: 3
+  animFrame: 3
+  isLoop: 0
+  isBreakOnCol: 0
 --- !u!58 &3644253616187564835
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -427,7 +433,10 @@ MonoBehaviour:
   - {fileID: -9032517183376959738, guid: f530a3e7d5902324da728cd5e5a9a8b0, type: 3}
   attackDamage: 0
   startColFrame: 0
-  endColFrame: 0
+  endColFrame: 3
+  animFrame: 3
+  isLoop: 0
+  isBreakOnCol: 0
 --- !u!58 &13876812766191965
 CircleCollider2D:
   m_ObjectHideFlags: 0

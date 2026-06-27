@@ -9,15 +9,23 @@ public class EneBossAttack : MonoBehaviour
     GameObject playerObj;
 
     [SerializeField] Sprite[] attackSprite;
-    float animTime = 0.05f;
     SpriteRenderer spriteRenderer;
     public int attackDamage;
 
     [SerializeField] int startColFrame;
     [SerializeField] int endColFrame;
     CircleCollider2D circleCol;
+    // アニメーション用の変数
+    int frameTimer = 0;
+    int animMax;
+    [SerializeField]int animFrame = 5;
+    int animIdx = 0;
+    [SerializeField] bool isLoop;
+    [SerializeField] bool isBreakOnCol; // オブジェクトがプレイヤーと衝突したとき消去するかどうか
 
     // アタックエフェクトのアニメーションと当たり判定の管理------------------
+    // オブジェクトごとに設定できる項目は、アタックのダメージ、ループするかどうか、衝突したとき消去するかどうか
+    // 当たり判定を出すタイミング、消すタイミング
 
     void Start()
     {
@@ -26,13 +34,14 @@ public class EneBossAttack : MonoBehaviour
         eneCtrl = enemyObj.GetComponent<EneBoss2>();
         circleCol = GetComponent<CircleCollider2D>();
         circleCol.enabled = false;
-
-        StartCoroutine(AttackAnim());
+        animMax = attackSprite.Length;    
     }
 
-    void Update()
+    void FixedUpdate()
     {
-        attackDamage = eneCtrl.attackPower;
+        frameTimer++;
+        Animation();
+        CollisionManager();
     }
 
     void OnTriggerEnter2D(Collider2D col)
@@ -42,26 +51,46 @@ public class EneBossAttack : MonoBehaviour
             playerObj = col.gameObject;
             playerCtrl = playerObj.GetComponent<PlayerController>();
             playerCtrl.Damaged(attackDamage);
+            if(isBreakOnCol) Destroy(gameObject);
         }
     }
 
-    IEnumerator AttackAnim()
+    void CollisionManager()
     {
-        for (int i = 0; i < attackSprite.Length; i++)
+        if(frameTimer < startColFrame && startColFrame != 0)
         {
-            spriteRenderer.sprite = attackSprite[i];
+            circleCol.enabled = false;
+        }
+        else if(frameTimer >= startColFrame && frameTimer < endColFrame)
+        {
+            circleCol.enabled = true;
+        }
+        else if(frameTimer >= endColFrame)
+        {
+            circleCol.enabled = false;
+        }
+    }
 
-            yield return new WaitForSeconds(animTime);
-            if (i + 1 >= startColFrame && i + 1 <= endColFrame)
+
+    void Animation()
+    {
+        if(animMax == 0) return;
+        if(frameTimer % animFrame == 0)
+        {
+            if(animIdx < animMax - 1)
             {
-                circleCol.enabled = true;
+                animIdx++;
             }
             else
             {
-                circleCol.enabled = false;
+                animIdx = 0;
+                if(!isLoop)
+                {
+                    Destroy(gameObject);
+                }
             }
+            spriteRenderer.sprite = attackSprite[animIdx];
         }
-        Destroy(gameObject);
     }
 }
 

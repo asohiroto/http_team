@@ -14,7 +14,7 @@ public class EneBoss3 : MonoBehaviour
     Vector3 moveDir;
     float walkSpeed = 0.1f;
     public bool isWalk = false; // アニメーションに用いる変数
-    public enum State { Idle, Beam, Portal, Teleport };
+    public enum State { Idle, Beam, Portal, Teleport , Melee};
     public State state = State.Idle;
     State lastAttack = State.Idle;
     public State lastState = 0;
@@ -58,10 +58,6 @@ public class EneBoss3 : MonoBehaviour
     // テレポートに使用する変数-------------------------
     enum TeleState { Wait, Leave, Spawn};
     TeleState teleState = TeleState.Leave;
-    [SerializeField] GameObject leavePrefab;
-    [SerializeField] GameObject spawnPrefab;
-    GameObject leaveObj;
-    GameObject spawnObj;
     int teleFrameTimer = 0;
     int leaveWaitFrame = 80;
     int spawnCdFrame = 70;
@@ -72,6 +68,23 @@ public class EneBoss3 : MonoBehaviour
     float teleTopPos = 3.4f;
     float teleMiddlePos = 1.1f;
     float teleBottomPos = -0.8f;
+    // 近接攻撃に使う変数-----------------------------
+    enum MeleeState { Walk, Wait, Attack }
+    MeleeState meleeState;
+    [SerializeField] GameObject meleePrefab;
+    [SerializeField] GameObject meleeRangePrefab;
+    GameObject meleeObj;
+    GameObject meleeRangeObj;
+    int meleeWaitingFrame = 45;
+    int meleeFrameTimer = 0;
+    bool isMeleeAttack = false;
+    bool isMeleeRange = false;
+    public bool isDash = false;
+    float meleeRangeDistance = 2.4f; // 攻撃範囲を表示する際の距離
+    float meleePlayerDistance = 1.5f; // 近接攻撃をする際にとるプレイヤーとの距離
+    Vector3 attackDir = Vector3.right;
+    Vector3 meleeTargetPos = Vector3.zero;
+    float speed = 0.3f;
 
     // 方向の向きを管理する----------------------------
     int dir = 0;
@@ -146,6 +159,9 @@ void Start()
             case State.Beam:
                 Beam();
                 break;
+            case State.Melee:
+                Melee();
+                break;
         }
     }
     
@@ -165,6 +181,91 @@ void Start()
         teleState = TeleState.Leave;
         portalState = PortalState.Run;
         beamState = BeamState.Walk;
+        meleeState = MeleeState.Walk;
+        isMeleeRange = false;
+        isMeleeAttack = false;
+        meleeFrameTimer = 0;
+        isDash = false;
+    }
+
+    // 近接攻撃
+    void Melee()
+    {
+        switch (meleeState)
+        {
+            // プレイヤーの近くまで移動する状態
+            case MeleeState.Walk:
+                if (!getPos) // 一度だけ行うための条件処理
+                {
+                    // どこまで移動するかを取得
+                    meleeTargetPos = GetClosePos();
+                    getPos = true;
+                    isMeleeRange = false;
+                    isMeleeAttack = false;
+                    isDash = true;
+                }
+                // 移動が終わった時、WaitStateへ
+                if (endMove)
+                {
+                    isDash = false;
+                    meleeState = MeleeState.Wait;
+                }
+                else
+                {
+                    // 実際に移動する処理
+                    Move(meleeTargetPos, speed);
+                }
+                break;
+            // 攻撃を開始するまでの待機時間
+            case MeleeState.Wait:
+                meleeFrameTimer++;
+                if (!isMeleeRange) // 一度だけ生成するための条件処理
+                {
+                    // 攻撃範囲を表示するプレハブを生成
+                    meleeRangeObj = Instantiate(meleeRangePrefab);
+                    meleeRangeObj.transform.position = transform.position + attackDir * meleeRangeDistance * dir;
+                    // 左向き
+                    if(dir == -1)
+                    {
+                        meleeRangeObj.transform.rotation = Quaternion.Euler(0, 0, 45);
+                    }
+                    // 右向き
+                    else if(dir == 1)
+                    {
+                        meleeRangeObj.transform.rotation = Quaternion.Euler(0, 180, 45);
+                    }
+                    isMeleeRange = true;
+                    isAttack = true;
+                }
+                // 攻撃待機時間が終われば攻撃状態に遷移する
+                else if (meleeFrameTimer >= meleeWaitingFrame)
+                {
+                    meleeFrameTimer = 0;
+                        meleeState = MeleeState.Attack;
+                }
+                break;
+            // 攻撃をする状態
+            case MeleeState.Attack:
+                if (!isMeleeAttack)
+                {
+                    meleeObj = Instantiate(meleePrefab);
+                    meleeObj.transform.position = transform.position + attackDir * meleeRangeDistance * dir;
+                    // 左向き
+                    if(dir == -1)
+                    {
+                        meleeRangeObj.transform.rotation = Quaternion.Euler(0, 0, 90);
+                    }
+                    // 右向き
+                    else if(dir == 1)
+                    {
+                        meleeRangeObj.transform.rotation = Quaternion.Euler(0, 180, 90);
+                    }
+                    Destroy(meleeRangeObj);
+                    isMeleeAttack = true;
+                    state = State.Idle;
+                }
+                break;
+        }
     }
 
     // 移動前アニメーション流す⇒移動⇒移動後アニメーション；この流れで行う
@@ -404,11 +505,14 @@ void Portal()
         return (State)randomIdx;
     }
 
-    Vector3 GetWalkPos()
+
+    Vector3 GetClosePos()
     {
-        // 敵の現在の座標からちょうどいい場所を取得して返す
-
-
-        return Vector3.zero;
+        Vector3 posAdj = Vector3.zero; // ポジションを調整するための変数
+        // プレイヤーが右側にいるとき若干左の値を返す
+        if (playerCtrl.currentPos.x >= currentPos.x) posAdj = Vector3.left * meleePlayerDistance;
+        else posAdj = Vector3.right * meleePlayerDistance;
+        // プレイヤーが左側にいるとき若干右の値を返す
+        return playerCtrl.currentPos + posAdj;
     }
 }

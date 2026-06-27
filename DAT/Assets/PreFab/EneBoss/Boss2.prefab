@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4191473579663971972}
   - component: {fileID: 2831862041653962097}
   - component: {fileID: 550435067734918593}
-  - component: {fileID: 6743002652193102337}
+  - component: {fileID: 2705413162644821217}
   m_Layer: 0
   m_Name: Boss2
   m_TagString: Enemy
@@ -118,8 +118,8 @@ MonoBehaviour:
   meleePrefab: {fileID: 8852684360780332127, guid: ecb3f64ab81f24a45a8b4b8ad8744326, type: 3}
   meleeRangePrefab: {fileID: 1718113552492981584, guid: de8cc368ef70ed64d8eba2c3ca0a352f, type: 3}
   meleeFXPrefab: {fileID: 1648080044229311865, guid: 15a85347db8b4b548a786a2c371212b2, type: 3}
---- !u!58 &6743002652193102337
-CircleCollider2D:
+--- !u!61 &2705413162644821217
+BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -152,5 +152,15 @@ CircleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
-  m_Radius: 0.33
+  m_Offset: {x: 0.011259854, y: -0.0129920915}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 0.68, y: 0.62}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Size: {x: 0.35952753, y: 0.47968507}
+  m_EdgeRadius: 0

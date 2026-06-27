@@ -57,7 +57,6 @@ public class EneBoss2 : MonoBehaviour
     MeleeState meleeState;
     [SerializeField] GameObject meleePrefab;
     [SerializeField] GameObject meleeRangePrefab;
-    [SerializeField] GameObject meleeFXPrefab;
     GameObject meleeObj;
     GameObject meleeRangeObj;
     int meleeWaitingFrame = 45;

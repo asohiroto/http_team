@@ -14,8 +14,8 @@ public class PortalControll : MonoBehaviour
     int animIdx = 0;
     // ポータルから技を撃つタイミング
     int shotFrame;
-    int shotFrameMax = 150;
-    int shotFrameMin = 400;
+    int shotFrameMax = 200;
+    int shotFrameMin = 50;
     int frameTimer = 0;
     [SerializeField] GameObject[] magicPrefab;
     GameObject magicObj;

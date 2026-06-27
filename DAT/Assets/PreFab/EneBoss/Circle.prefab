@@ -151,4 +151,7 @@ MonoBehaviour:
   - {fileID: -7921052967969465774, guid: 11dce0007b631a047bd17b69529ed5c1, type: 3}
   attackDamage: 0
   startColFrame: 0
-  endColFrame: 4
+  endColFrame: 3
+  animFrame: 3
+  isLoop: 0
+  isBreakOnCol: 0

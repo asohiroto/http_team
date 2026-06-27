@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 2516814951054284091}
   - component: {fileID: -7988786368003429474}
   m_Layer: 0
-  m_Name: Magic1
+  m_Name: Magic2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -84,7 +84,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 6
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 21300000, guid: 806a4ed791a96e94c93988f5a4142408, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 01c79a672b8405f48b25952072177a41, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -128,7 +128,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0.14, y: -0.017}
+  m_Offset: {x: 0.085975714, y: -0.006754026}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -138,7 +138,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 0.23, y: 0.2}
+  m_Size: {x: 0.17411284, y: 0.13107245}
   m_EdgeRadius: 0
 --- !u!114 &2516814951054284091
 MonoBehaviour:
@@ -165,11 +165,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EneBoss3Attack
   attackSprite:
-  - {fileID: 21300000, guid: 806a4ed791a96e94c93988f5a4142408, type: 3}
-  - {fileID: 21300000, guid: 17c7383b3df3b9b45b3c6699c7d86d1d, type: 3}
-  - {fileID: 21300000, guid: 95379abf39ca8dd4d9bf66e4366ca208, type: 3}
-  - {fileID: 21300000, guid: dd0a5818c993775408a2b3ce2bb7f607, type: 3}
-  - {fileID: 21300000, guid: 347e5e8520239ea49b1c301dd77ec608, type: 3}
+  - {fileID: 21300000, guid: 01c79a672b8405f48b25952072177a41, type: 3}
+  - {fileID: 21300000, guid: b16e21149a3c017498be0bf11ec3d363, type: 3}
+  - {fileID: 21300000, guid: d5d6f19f3c48834429c0578261a73aad, type: 3}
+  - {fileID: 21300000, guid: 61cf6f5efd374104fb7c409eb21735a8, type: 3}
+  - {fileID: 21300000, guid: 43d3421b684e08141b61f41c402d42ad, type: 3}
   attackDamage: 0
   startColFrame: 0
   endColFrame: 5000

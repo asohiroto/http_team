@@ -125,8 +125,11 @@ MonoBehaviour:
   - {fileID: -411832067921670550, guid: 05d79222771cc6842adf496d585bb8fc, type: 3}
   - {fileID: -6064077947463316535, guid: 05d79222771cc6842adf496d585bb8fc, type: 3}
   attackDamage: 0
-  startColFrame: 0
-  endColFrame: 0
+  startColFrame: 12
+  endColFrame: 360
+  animFrame: 3
+  isLoop: 0
+  isBreakOnCol: 0
 --- !u!61 &-2830164752770860492
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -134,7 +137,7 @@ BoxCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8662954857429943195}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Density: 1
   m_Material: {fileID: 0}

@@ -14,6 +14,7 @@ public class EneBoss3Anim : MonoBehaviour
     [SerializeField] Sprite[] spawnAnim;
     [SerializeField] Sprite[] idleAnim;
     [SerializeField] Sprite[] deathAnim;
+    [SerializeField] Sprite[] dashAnim;
     enum TeleportState{Leave, Spawn, End};
     TeleportState teleportState;
     // アニメーションの最大数
@@ -22,13 +23,14 @@ public class EneBoss3Anim : MonoBehaviour
     int spawnAnimMax;
     int idleAnimMax;
     int deathAnimMax;
+    int dashAnimMax;
     // 現在のコマ数
     int animIdx = 0;
     // フレームを数える変数
     int frameTimer = 0;
     // アニメーション1コマあたりのコマ数
     int teleAnimFrame = 5;
-    int animFrame = 2;
+    int animFrame = 5;
     // テレポートのスポーン状態の途中で敵ボスを出現させるための変数
     GameObject childObj;
     int spawnChildAnim = 2;
@@ -44,6 +46,7 @@ public class EneBoss3Anim : MonoBehaviour
         spawnAnimMax = spawnAnim.Length;
         idleAnimMax = idleAnim.Length;
         deathAnimMax = deathAnim.Length;
+        dashAnimMax = dashAnim.Length;
         // 子オブジェクトの取得
         childObj = transform.GetChild(0).gameObject;
     }
@@ -103,28 +106,25 @@ public class EneBoss3Anim : MonoBehaviour
         }
         else if(enemyCtrl.isWalk)
         {
-            if(frameTimer >= animFrame)
-            {
-                if(animIdx < walkAnimMax)
-                {
-                    spriteRenderer.sprite = walkAnim[animIdx];
-                    animIdx++;
-                }
-                else
-                {
-                    animIdx = 0;
-                }
-                frameTimer = 0;
-            }
-            
+            Animation(walkAnimMax, walkAnim);
         }
-        else 
+        else if(enemyCtrl.isDash)
         {
-            if(frameTimer >= animFrame)
+            Animation(dashAnimMax, dashAnim);
+        }
+        else
+        {
+            Animation(idleAnimMax, idleAnim);
+        }
+    }
+
+    void Animation(int animMax, Sprite[] animSprite)
+    {
+        if(frameTimer >= animFrame)
             {
-                if(animIdx < idleAnimMax)
+                if(animIdx < animMax)
                 {
-                    spriteRenderer.sprite = idleAnim[animIdx];
+                    spriteRenderer.sprite = animSprite[animIdx];
                     animIdx++;
                 }
                 else
@@ -133,7 +133,6 @@ public class EneBoss3Anim : MonoBehaviour
                 }
                 frameTimer = 0;
             }
-        }
     }
 
     void CheckChangeState()

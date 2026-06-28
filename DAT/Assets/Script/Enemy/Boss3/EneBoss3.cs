@@ -68,6 +68,7 @@ public class EneBoss3 : MonoBehaviour
     float teleTopPos = 3.4f;
     float teleMiddlePos = 1.1f;
     float teleBottomPos = -0.8f;
+    public bool endTeleport = false;
     // 近接攻撃に使う変数-----------------------------
     enum MeleeState { Walk, Wait, Attack }
     MeleeState meleeState;
@@ -77,9 +78,11 @@ public class EneBoss3 : MonoBehaviour
     GameObject meleeRangeObj;
     int meleeWaitingFrame = 45;
     int meleeFrameTimer = 0;
+    int meleeCdFrame = 20;
     bool isMeleeAttack = false;
     bool isMeleeRange = false;
     public bool isDash = false;
+    public bool isAttackAnim = false;
     float meleeRangeDistance = 2.4f; // 攻撃範囲を表示する際の距離
     float meleePlayerDistance = 1.5f; // 近接攻撃をする際にとるプレイヤーとの距離
     Vector3 attackDir = Vector3.right;
@@ -178,6 +181,7 @@ void Start()
         isAttack = false;
         portalIdx = 0;
         teleFrameTimer = 0;
+        endTeleport = false;
         teleState = TeleState.Leave;
         portalState = PortalState.Run;
         beamState = BeamState.Walk;
@@ -186,6 +190,7 @@ void Start()
         isMeleeAttack = false;
         meleeFrameTimer = 0;
         isDash = false;
+        isAttackAnim = false;
     }
 
     // 近接攻撃
@@ -241,11 +246,12 @@ void Start()
                 else if (meleeFrameTimer >= meleeWaitingFrame)
                 {
                     meleeFrameTimer = 0;
-                        meleeState = MeleeState.Attack;
+                    meleeState = MeleeState.Attack;
                 }
                 break;
             // 攻撃をする状態
             case MeleeState.Attack:
+                meleeFrameTimer++;
                 if (!isMeleeAttack)
                 {
                     meleeObj = Instantiate(meleePrefab);
@@ -253,16 +259,26 @@ void Start()
                     // 左向き
                     if(dir == -1)
                     {
-                        meleeRangeObj.transform.rotation = Quaternion.Euler(0, 0, 90);
+                        meleeRangeObj.transform.rotation = Quaternion.Euler(0, 180, 45);
                     }
                     // 右向き
                     else if(dir == 1)
                     {
-                        meleeRangeObj.transform.rotation = Quaternion.Euler(0, 180, 90);
+                        meleeRangeObj.transform.rotation = Quaternion.Euler(0, 0, 45);
                     }
                     Destroy(meleeRangeObj);
                     isMeleeAttack = true;
+                    isAttackAnim = true; // 攻撃アニメーションの開始
+                    //state = State.Idle;
+                }
+                else if(!isAttackAnim)
+                {
                     state = State.Idle;
+                }
+
+                if(meleeFrameTimer >= 10)
+                {
+                    Destroy(meleeObj);
                 }
                 break;
         }
@@ -296,7 +312,7 @@ void Start()
                 break;
             case TeleState.Spawn:
                 // アニメーションが終わるまで待つ
-                if(teleFrameTimer > spawnCdFrame)
+                if(teleFrameTimer > spawnCdFrame && endTeleport)
                 {
                     state = State.Idle;
                 }
@@ -309,7 +325,6 @@ void Start()
         switch(beamState)
         {
             case BeamState.Walk:
-                Debug.Log("walk");
                 if (!getPos)
                 {
                     state = State.Beam;
@@ -323,12 +338,17 @@ void Start()
                         beamFlipX = 180;
                     }
                     getPos = true;
+                    isWalk = true;
                 }
                 else
                 {
                     Move(beamPos, walkSpeed);
                 }
-                if (endMove) beamState = BeamState.Aim;
+                if (endMove) 
+                {
+                    isWalk = false;
+                    beamState = BeamState.Aim;
+                }
             break;
             case BeamState.Aim:
                 beamFrameTimer++;
@@ -471,14 +491,12 @@ void Portal()
         if (currentPos.x - targetPos.x < 0.5f && currentPos.x - targetPos.x > -0.5f
             && currentPos.y - targetPos.y < 0.5f && currentPos.y - targetPos.y > -0.5f)
         {
-            isWalk = false;
             endMove = true;
             return;
         }
         moveDir = targetPos - currentPos;
         moveDir = moveDir.normalized;
         currentPos += moveDir * moveSpeed;
-        isWalk = true;
     }
 
     // 最後に行った攻撃の種類を保存する

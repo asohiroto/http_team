@@ -15,6 +15,7 @@ public class EneBoss3Anim : MonoBehaviour
     [SerializeField] Sprite[] idleAnim;
     [SerializeField] Sprite[] deathAnim;
     [SerializeField] Sprite[] dashAnim;
+    [SerializeField] Sprite[] meleeAnim;
     enum TeleportState{Leave, Spawn, End};
     TeleportState teleportState;
     // アニメーションの最大数
@@ -24,6 +25,7 @@ public class EneBoss3Anim : MonoBehaviour
     int idleAnimMax;
     int deathAnimMax;
     int dashAnimMax;
+    int meleeAnimMax;
     // 現在のコマ数
     int animIdx = 0;
     // フレームを数える変数
@@ -35,6 +37,8 @@ public class EneBoss3Anim : MonoBehaviour
     GameObject childObj;
     int spawnChildAnim = 2;
     bool isWalkLast = false;
+    bool isDashLast = false;
+    bool isAttackLast = false;
 
     void Start()
     {
@@ -47,13 +51,13 @@ public class EneBoss3Anim : MonoBehaviour
         idleAnimMax = idleAnim.Length;
         deathAnimMax = deathAnim.Length;
         dashAnimMax = dashAnim.Length;
+        meleeAnimMax = meleeAnim.Length;
         // 子オブジェクトの取得
         childObj = transform.GetChild(0).gameObject;
     }
 
     void FixedUpdate()
     {
-        Debug.Log(teleportState);
         frameTimer++;
         CheckChangeState();
 
@@ -98,8 +102,27 @@ public class EneBoss3Anim : MonoBehaviour
                     // アニメーション終了後の処理
                     case TeleportState.End:
                         spriteRenderer.sprite = walkAnim[0];
+                        enemyCtrl.endTeleport = true;
                         Debug.Log("End!!");
                         break;
+                }
+                frameTimer = 0;
+            }
+        }
+        else if(enemyCtrl.isAttackAnim)
+        {
+            if(frameTimer >= animFrame)
+            {
+                if (animIdx < meleeAnimMax)
+                {
+                    spriteRenderer.sprite = meleeAnim[animIdx];
+                    animIdx++;
+                }
+                else
+                {
+                    animIdx = 0;
+                    //状態を変える
+                    enemyCtrl.isAttackAnim = false;
                 }
                 frameTimer = 0;
             }
@@ -142,10 +165,11 @@ public class EneBoss3Anim : MonoBehaviour
             animIdx = 0;
             frameTimer = 0;
             teleportState = TeleportState.Leave;
-            Debug.Log("アニメーション状態を変更");
         }
 
-        if(isWalkLast != enemyCtrl.isWalk)
+        if(isWalkLast != enemyCtrl.isWalk 
+        || isDashLast != enemyCtrl.isDash
+        || isAttackLast != enemyCtrl.isAttackAnim)
         {
             animIdx = 0;
             frameTimer = 0;
@@ -153,5 +177,7 @@ public class EneBoss3Anim : MonoBehaviour
 
         lastState = enemyCtrl.state;
         isWalkLast = enemyCtrl.isWalk;
+        isDashLast = enemyCtrl.isDash;
+        isAttackLast = enemyCtrl.isAttackAnim;
     }
 }

@@ -451,8 +451,11 @@ MonoBehaviour:
   beamPrefab: {fileID: 8662954857429943195, guid: c3a7fb64c5486a646bfaf4701f646d7e, type: 3}
   beamRangePrefab: {fileID: 5574018561758892681, guid: 38fdf94903efdc04b9debdbb42a8b924, type: 3}
   portalPrefab: {fileID: 2050048250176320190, guid: 7cf167a41aa3557449a94b62a0c74ffa, type: 3}
-  meleePrefab: {fileID: 8852684360780332127, guid: ecb3f64ab81f24a45a8b4b8ad8744326, type: 3}
+  endTeleport: 0
+  meleePrefab: {fileID: 1718113552492981584, guid: 67147cb82c2079d4baadebf78ebb2ef8, type: 3}
   meleeRangePrefab: {fileID: 1718113552492981584, guid: e80f374dbc48d234385c80b7bff32ba0, type: 3}
+  isDash: 0
+  isAttackAnim: 0
 --- !u!114 &1766526634
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -528,6 +531,34 @@ MonoBehaviour:
   - {fileID: -391791065217982268, guid: cb498fb4f7691014abed1721753f64ea, type: 3}
   - {fileID: 991369460418844821, guid: 05eb7f8c189f62b41954d7bb8e7721ec, type: 3}
   deathAnim: []
+  dashAnim:
+  - {fileID: -4913982344839117222, guid: 4f19ebe8ddda2904989e5926db4d3df3, type: 3}
+  - {fileID: -575696589628924425, guid: ddf5c707d0b1dd64faec429a78659905, type: 3}
+  - {fileID: -1679085568475732275, guid: 571f592a280457444916c515c67757d1, type: 3}
+  - {fileID: -4960229840327395196, guid: d3c781c6e331cee428dae0ab106a6aec, type: 3}
+  - {fileID: -8398409672689469449, guid: 3e996d89d6fd5af4d91f555c0dd31b14, type: 3}
+  - {fileID: -6658418643737043593, guid: 6a067a943aaeefd4384f10a45cabb0b7, type: 3}
+  - {fileID: 6490354421893865411, guid: ea39527ef438fca418612e0a08bd7c94, type: 3}
+  - {fileID: -3047093270054505527, guid: 431eb9ec1c0f37b41b856453ab78cf9c, type: 3}
+  - {fileID: 417835678940605132, guid: 6f2bee1ede56180479bbe9b3cb2e6a39, type: 3}
+  - {fileID: 6216626595070851197, guid: 23f17401e13de664cb426b6742ce0a1f, type: 3}
+  - {fileID: -609197253124883428, guid: 12ebceedc655cc648b4e50056fe1b017, type: 3}
+  - {fileID: -4109647963036294930, guid: 16fab99e7dd2a8142807e5611c3b2752, type: 3}
+  - {fileID: -3067493327820312267, guid: e81bc32aba9c6944d9a70f8f452a54cd, type: 3}
+  - {fileID: 8051787128312575447, guid: b5d92426f160f8c4c87e26901b1165a2, type: 3}
+  - {fileID: -391791065217982268, guid: 8aa42efed2e83e84baea0fe984e54dec, type: 3}
+  meleeAnim:
+  - {fileID: 21300000, guid: 1c91457ef71d2ba47bbed7ce65ecc1b0, type: 3}
+  - {fileID: 21300000, guid: e6c9a4e178660e04ebed51e27b26b2d1, type: 3}
+  - {fileID: 21300000, guid: 4ecd5b0fedb77564596df2f4acc8e746, type: 3}
+  - {fileID: 21300000, guid: 31504c0fc3fac604ea6c31440bf04d59, type: 3}
+  - {fileID: 21300000, guid: fb5e94bddffac8e43a87d03c31a380bc, type: 3}
+  - {fileID: 21300000, guid: 0dcd81ab8d4ec5f44b7619b6d8dc0cf7, type: 3}
+  - {fileID: 21300000, guid: a845d4ae91742be4aa18e2413c0d9746, type: 3}
+  - {fileID: 21300000, guid: f24c0feb1743a2e4683c4f37abb0283e, type: 3}
+  - {fileID: 21300000, guid: c330acdf6abf11a48b5747e112323f50, type: 3}
+  - {fileID: 21300000, guid: 643661b63e9e4fd4797c7bac24c3608c, type: 3}
+  - {fileID: 21300000, guid: f50e438be9a8bdf43b9cfd11304f48a8, type: 3}
 --- !u!61 &1766526635
 BoxCollider2D:
   m_ObjectHideFlags: 0

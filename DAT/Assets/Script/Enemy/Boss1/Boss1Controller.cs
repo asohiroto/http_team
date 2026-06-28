@@ -1,3 +1,5 @@
+#if false
+
 using UnityEngine;
 
 public class Boss1Controller : MonoBehaviour
@@ -9,7 +11,6 @@ public class Boss1Controller : MonoBehaviour
 
     [Header("Attack")]
     [SerializeField] private float[] attackPower;
-    [SerializeField] private float[] attackRange;
     [SerializeField] private float[] attackStartupDuration;
     [SerializeField] private float[] attackCooldownDuration;
     [SerializeField] private float attackOnColliderDuration;
@@ -308,3 +309,4 @@ public class Boss1Controller : MonoBehaviour
     }
 
 }
+#endif

@@ -18,7 +18,7 @@ public struct BossAnimationData
 }
 
 // スプライトの変更のみに集中する
-public class BossAnimation : MonoBehaviour
+public class Boss1Animation : MonoBehaviour
 {
     [SerializeField] private List<BossAnimationData> bossAnimationDatas = new List<BossAnimationData>();
     // 辞書機能

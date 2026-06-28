@@ -5,8 +5,10 @@ using UnityEngine.InputSystem.LowLevel;
 
 // 列挙型 enum
 // アニメーションの状態
-// 待機、移動、攻撃 横、攻撃 上、攻撃 下
-public enum EnemyAnimState { Idle, Walk, SideAttack, LowerAttack, UpperAttack, Init }
+// 待機、移動、攻撃 横、攻撃 上、攻撃 下     // ボス用→ 待機r、攻撃1、攻撃1r、2、2r、3、3r、ダウン、ダウンr
+
+public enum EnemyAnimState { Idle, Walk, SideAttack, LowerAttack, UpperAttack, Init,
+IdleR, WalkR, Atk1, Atk1R, Atk2, Atk2R, Atk3, Atk3R, Down, DownR}
 
 // 構造体 struct
 [System.Serializable]

@@ -10,7 +10,13 @@ public class DeckRegistrate : MonoBehaviour, IDropHandler
     {
         deck = GameObject.Find("MyDeck").GetComponent<MyDeck>();
         manager = GameObject.Find("DeckManager").GetComponent<DeckManager>();
+
+        for (int i = 0; i < deck.myDeckId.Length; i++)
+        {
+            deck.myDeckId[i] = -1;
+        }
     }
+
 
     // Update is called once per frame
     void Update()
@@ -29,7 +35,7 @@ public class DeckRegistrate : MonoBehaviour, IDropHandler
                 deck.myDeckId[i] = dragged.cardId;
 
                 manager.DeckRegistrate(i, dragged.cardId);
-                
+
                 break;
 
             }
@@ -42,7 +48,7 @@ public class DeckRegistrate : MonoBehaviour, IDropHandler
 
         for (int i = 0; i < 6; i++)
         {
-            if(id == deck.myDeckId[i])
+            if (id == deck.myDeckId[i])
             {
                 check = false;
             }

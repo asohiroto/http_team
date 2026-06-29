@@ -2,13 +2,17 @@ using System.Collections.Generic;
 using System.Threading;
 using UnityEngine;
 using UnityEngine.InputSystem.LowLevel;
+using UnityEngine.UIElements;
 
 // 列挙型 enum
 // アニメーションの状態
 // 待機、移動、攻撃 横、攻撃 上、攻撃 下     // ボス用→ 待機r、攻撃1、攻撃1r、2、2r、3、3r、ダウン、ダウンr
 
-public enum EnemyAnimState { Idle, Walk, SideAttack, LowerAttack, UpperAttack, Init,
-IdleR, WalkR, Atk1, Atk1R, Atk2, Atk2R, Atk3, Atk3R, Down, DownR}
+public enum EnemyAnimState
+{
+    Idle, Walk, SideAttack, LowerAttack, UpperAttack, Init,
+    IdleR, WalkR, Atk1, Atk1R, Atk2, Atk2R, Atk3, Atk3R, Down, DownR
+}
 
 // 構造体 struct
 [System.Serializable]
@@ -38,8 +42,10 @@ public class EnemyAnimation : MonoBehaviour
     [SerializeField] private float blinkInterval = 0.2f;
     [SerializeField] private bool isBlinking = false;
     [SerializeField] private bool isRed = false;
+    private bool isAnimationFinished;
 
     EnemyController enemy;
+    Boss1Controller boss;
     private SpriteRenderer spr;
 
     // 先に済ませないとtimePerFrameがInfinityになる(0で除算してしまう)
@@ -60,6 +66,8 @@ public class EnemyAnimation : MonoBehaviour
     void Start()
     {
         enemy = GetComponent<EnemyController>();
+
+        boss = GetComponent<Boss1Controller>();
 
         spr = GetComponent<SpriteRenderer>();
 
@@ -90,9 +98,25 @@ public class EnemyAnimation : MonoBehaviour
                 }
                 else
                 {
-                    //ChangeState(EnemyAnimState.Idle);
+                    if (!isAnimationFinished)
+                    {
+                        //ChangeState(EnemyAnimState.Idle);
 
-                    enemy.OnAttackAnimationFinished();
+                        if (enemy != null)
+                        {
+                            enemy.OnAttackAnimationFinished();
+                        }
+
+                        if (boss != null)
+                        {
+                            boss.OnAnimationFinished(
+                                currentAnimState);
+                        }
+
+                    }
+
+                    return;
+
                 }
             }
             else
@@ -111,13 +135,14 @@ public class EnemyAnimation : MonoBehaviour
                 spr.color = Color.white;
                 isBlinking = false;
             }
-        }
-    }
 
-    /// <summary>
-    /// アニメーションの変更
-    /// </summary>
-    /// <param name="changedState">変更先のState</param>
+        }
+
+        /// <summary>
+        /// アニメーションの変更
+        /// </summary>
+        /// <param name="changedState">変更先のState</param>
+    }
     public void ChangeState(EnemyAnimState changedState)
     {
         if (currentAnimState == changedState) return;
@@ -129,6 +154,7 @@ public class EnemyAnimation : MonoBehaviour
             currentActiveData = foundData;
             currentFrame = 0;
             Animtimer = 0f;
+            isAnimationFinished = false;
 
             //Debug.Log("statusを変更しました：");
 

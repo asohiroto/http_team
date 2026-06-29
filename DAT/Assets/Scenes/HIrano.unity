@@ -198,7 +198,7 @@ GameObject:
   - component: {fileID: 761409350}
   m_Layer: 0
   m_Name: Boss1
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -223,7 +223,7 @@ MonoBehaviour:
     - {fileID: 103936227, guid: 7a7ff8427a5bff74e8839907c2c50f9c, type: 3}
     - {fileID: -371026050, guid: 7a7ff8427a5bff74e8839907c2c50f9c, type: 3}
     - {fileID: -1960426505, guid: 7a7ff8427a5bff74e8839907c2c50f9c, type: 3}
-    frameRate: 12
+    frameRate: 8
     isLoop: 1
   - state: 6
     sprites:
@@ -232,7 +232,7 @@ MonoBehaviour:
     - {fileID: 1236801802, guid: 7a7ff8427a5bff74e8839907c2c50f9c, type: 3}
     - {fileID: -128451659, guid: 7a7ff8427a5bff74e8839907c2c50f9c, type: 3}
     - {fileID: 1124584249, guid: 7a7ff8427a5bff74e8839907c2c50f9c, type: 3}
-    frameRate: 12
+    frameRate: 8
     isLoop: 1
   - state: 1
     sprites:
@@ -244,12 +244,7 @@ MonoBehaviour:
     - {fileID: -1066721825, guid: 7a7ff8427a5bff74e8839907c2c50f9c, type: 3}
     - {fileID: -1118997916, guid: 7a7ff8427a5bff74e8839907c2c50f9c, type: 3}
     - {fileID: 334296826, guid: 7a7ff8427a5bff74e8839907c2c50f9c, type: 3}
-    - {fileID: 629142915, guid: 7a7ff8427a5bff74e8839907c2c50f9c, type: 3}
-    - {fileID: 1986978975, guid: 7a7ff8427a5bff74e8839907c2c50f9c, type: 3}
-    - {fileID: -200804333, guid: 7a7ff8427a5bff74e8839907c2c50f9c, type: 3}
-    - {fileID: -1558102434, guid: 7a7ff8427a5bff74e8839907c2c50f9c, type: 3}
-    - {fileID: 1853165729, guid: 7a7ff8427a5bff74e8839907c2c50f9c, type: 3}
-    frameRate: 12
+    frameRate: 8
     isLoop: 1
   - state: 7
     sprites:
@@ -261,12 +256,7 @@ MonoBehaviour:
     - {fileID: 1872525080, guid: 7a7ff8427a5bff74e8839907c2c50f9c, type: 3}
     - {fileID: 2145772784, guid: 7a7ff8427a5bff74e8839907c2c50f9c, type: 3}
     - {fileID: -1360050327, guid: 7a7ff8427a5bff74e8839907c2c50f9c, type: 3}
-    - {fileID: -868436842, guid: 7a7ff8427a5bff74e8839907c2c50f9c, type: 3}
-    - {fileID: -1063939740, guid: 7a7ff8427a5bff74e8839907c2c50f9c, type: 3}
-    - {fileID: 1055789593, guid: 7a7ff8427a5bff74e8839907c2c50f9c, type: 3}
-    - {fileID: -1185244015, guid: 7a7ff8427a5bff74e8839907c2c50f9c, type: 3}
-    - {fileID: 1086359397, guid: 7a7ff8427a5bff74e8839907c2c50f9c, type: 3}
-    frameRate: 12
+    frameRate: 8
     isLoop: 1
   - state: 8
     sprites:
@@ -282,7 +272,7 @@ MonoBehaviour:
     - {fileID: 399823424, guid: 7a7ff8427a5bff74e8839907c2c50f9c, type: 3}
     - {fileID: 1992917371, guid: 7a7ff8427a5bff74e8839907c2c50f9c, type: 3}
     - {fileID: -1138989501, guid: 7a7ff8427a5bff74e8839907c2c50f9c, type: 3}
-    frameRate: 12
+    frameRate: 8
     isLoop: 0
   - state: 9
     sprites:
@@ -298,7 +288,7 @@ MonoBehaviour:
     - {fileID: -927676823, guid: 7a7ff8427a5bff74e8839907c2c50f9c, type: 3}
     - {fileID: 463732194, guid: 7a7ff8427a5bff74e8839907c2c50f9c, type: 3}
     - {fileID: 12306751, guid: 7a7ff8427a5bff74e8839907c2c50f9c, type: 3}
-    frameRate: 12
+    frameRate: 8
     isLoop: 0
   - state: 10
     sprites:
@@ -308,8 +298,8 @@ MonoBehaviour:
     - {fileID: 1083342625, guid: 7a7ff8427a5bff74e8839907c2c50f9c, type: 3}
     - {fileID: -263554472, guid: 7a7ff8427a5bff74e8839907c2c50f9c, type: 3}
     - {fileID: 740940020, guid: 7a7ff8427a5bff74e8839907c2c50f9c, type: 3}
-    frameRate: 12
-    isLoop: 1
+    frameRate: 8
+    isLoop: 0
   - state: 11
     sprites:
     - {fileID: -1522600992, guid: 7a7ff8427a5bff74e8839907c2c50f9c, type: 3}
@@ -318,8 +308,8 @@ MonoBehaviour:
     - {fileID: 2112461954, guid: 7a7ff8427a5bff74e8839907c2c50f9c, type: 3}
     - {fileID: -2146065192, guid: 7a7ff8427a5bff74e8839907c2c50f9c, type: 3}
     - {fileID: -1551420175, guid: 7a7ff8427a5bff74e8839907c2c50f9c, type: 3}
-    frameRate: 12
-    isLoop: 1
+    frameRate: 8
+    isLoop: 0
   - state: 12
     sprites:
     - {fileID: -1129761595, guid: 7a7ff8427a5bff74e8839907c2c50f9c, type: 3}
@@ -328,8 +318,8 @@ MonoBehaviour:
     - {fileID: 1049334970, guid: 7a7ff8427a5bff74e8839907c2c50f9c, type: 3}
     - {fileID: -1395868033, guid: 7a7ff8427a5bff74e8839907c2c50f9c, type: 3}
     - {fileID: 410063805, guid: 7a7ff8427a5bff74e8839907c2c50f9c, type: 3}
-    frameRate: 12
-    isLoop: 1
+    frameRate: 8
+    isLoop: 0
   - state: 13
     sprites:
     - {fileID: 1784548580, guid: 7a7ff8427a5bff74e8839907c2c50f9c, type: 3}
@@ -338,8 +328,8 @@ MonoBehaviour:
     - {fileID: -164142858, guid: 7a7ff8427a5bff74e8839907c2c50f9c, type: 3}
     - {fileID: 1183873694, guid: 7a7ff8427a5bff74e8839907c2c50f9c, type: 3}
     - {fileID: 1676460730, guid: 7a7ff8427a5bff74e8839907c2c50f9c, type: 3}
-    frameRate: 12
-    isLoop: 1
+    frameRate: 8
+    isLoop: 0
   - state: 14
     sprites:
     - {fileID: 1276468124, guid: 7a7ff8427a5bff74e8839907c2c50f9c, type: 3}
@@ -354,8 +344,8 @@ MonoBehaviour:
     - {fileID: 1821173219, guid: 7a7ff8427a5bff74e8839907c2c50f9c, type: 3}
     - {fileID: -1404995641, guid: 7a7ff8427a5bff74e8839907c2c50f9c, type: 3}
     - {fileID: 122574428, guid: 7a7ff8427a5bff74e8839907c2c50f9c, type: 3}
-    frameRate: 12
-    isLoop: 1
+    frameRate: 8
+    isLoop: 0
   - state: 15
     sprites:
     - {fileID: -2005866842, guid: 7a7ff8427a5bff74e8839907c2c50f9c, type: 3}
@@ -370,8 +360,8 @@ MonoBehaviour:
     - {fileID: 1738010474, guid: 7a7ff8427a5bff74e8839907c2c50f9c, type: 3}
     - {fileID: -1792369335, guid: 7a7ff8427a5bff74e8839907c2c50f9c, type: 3}
     - {fileID: 737361036, guid: 7a7ff8427a5bff74e8839907c2c50f9c, type: 3}
-    frameRate: 12
-    isLoop: 1
+    frameRate: 8
+    isLoop: 0
   currentAnimState: 5
   currentFrame: 0
   Animtimer: 0
@@ -429,15 +419,15 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Sprite: {fileID: -2991773290986861209, guid: 7a7ff8427a5bff74e8839907c2c50f9c, type: 3}
+  m_Sprite: {fileID: -1662410994, guid: 7a7ff8427a5bff74e8839907c2c50f9c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.54, y: 0.43}
+  m_Size: {x: 0.52, y: 0.41}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
 --- !u!4 &761409349
 Transform:
@@ -449,7 +439,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
@@ -463,24 +453,40 @@ MonoBehaviour:
   m_GameObject: {fileID: 761409346}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bd7792b8e14b1b44599ebfa646985bda, type: 3}
+  m_Script: {fileID: 11500000, guid: 71eb003890dbeaf4d8f6a2ac90fb07a1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Boss1Controller
-  bossHp: 100
-  moveSpeed: 2
-  attackStartDistance: 2
-  attack1Power: 5
-  attack2Power: 15
-  minionPrefab: {fileID: 0}
-  summonCount: 0
-  attack1Hitbox: {fileID: 0}
-  attack2Hitbox: {fileID: 0}
+  bossHp: 150
+  moveSpeed: 0.8
+  attackStartDistance: 0.5
+  attack1Power: 10
+  attack1Timing:
+    startupDuration: 0.5
+    activeDuration: 0.5
+    cooldownDuration: 3
+  attack2Power: 10
+  attack2Timing:
+    startupDuration: 0.2
+    activeDuration: 0.3
+    cooldownDuration: 2
+  summonTiming:
+    startupDuration: 0.1
+    activeDuration: 0.4
+    cooldownDuration: 5
+  minionPrefab: {fileID: 4419746953452864637, guid: f6545e77c56c98841962ce3e926c813d, type: 3}
+  summonCount: 3
+  minionDist: 4
+  attack1HitboxPrefab: {fileID: 2889410440235777195, guid: 1bc31f5b43629f34780f43916ec1bfd2, type: 3}
+  attack2HitboxPrefab: {fileID: 6562382290516941708, guid: fc0e35244182c734f97d95930af4e58d, type: 3}
+  attack1SpawnPoint: {x: 0.5, y: 0.5}
+  attack2SpawnPoint: {x: 0.75, y: 0.5}
   playerObj: {fileID: 0}
   currentAttack: 0
   attackState: 0
   currentAnim: 0
+  activeAttackHitbox: {fileID: 0}
   isFaceRight: 1
-  attackStartTimer: 0
+  attackStateTimer: 0
   bossPos: {x: 0, y: 0}
   playerPos: {x: 0, y: 0}
   distanceSq: 0
@@ -663,6 +669,10 @@ PrefabInstance:
     - target: {fileID: 3036877544477134275, guid: 4e6160ede5aeff34da0c04b14a70f739, type: 3}
       propertyPath: m_Name
       value: EnemySpawner
+      objectReference: {fileID: 0}
+    - target: {fileID: 3036877544477134275, guid: 4e6160ede5aeff34da0c04b14a70f739, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4281320457501794691, guid: 4e6160ede5aeff34da0c04b14a70f739, type: 3}
       propertyPath: m_LocalPosition.x

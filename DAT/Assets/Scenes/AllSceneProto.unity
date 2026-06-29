@@ -2896,7 +2896,6 @@ GameObject:
   - component: {fileID: 493827789}
   - component: {fileID: 493827792}
   - component: {fileID: 493827791}
-  - component: {fileID: 493827790}
   m_Layer: 5
   m_Name: PlayerHp
   m_TagString: Untagged
@@ -2923,20 +2922,6 @@ RectTransform:
   m_AnchoredPosition: {x: -0.000015259, y: -0.000015259}
   m_SizeDelta: {x: 105.463, y: 16.7052}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &493827790
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 493827788}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5ababaf8784537e4d991b815f5523dc8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::HpFollowTarget
-  target: {fileID: 48966633}
-  offset: {x: 0, y: -0.5, z: 0}
 --- !u!114 &493827791
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6269,6 +6254,14 @@ PrefabInstance:
     - target: {fileID: 4688119290979548251, guid: adafc529adc6fb84d8417122a115aaa6, type: 3}
       propertyPath: m_BodyType
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4954390753423726789, guid: adafc529adc6fb84d8417122a115aaa6, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5508458376980616683, guid: adafc529adc6fb84d8417122a115aaa6, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7214316779930646375, guid: adafc529adc6fb84d8417122a115aaa6, type: 3}
       propertyPath: m_Enabled

@@ -467,29 +467,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Boss1Controller
   bossHp: 100
-  moveSpeed: 1
-  dashSpeed: 1.5
-  stopDist: 1
-  attackPower: []
-  attackRange: []
-  attackStartupDuration: []
-  attackCooldownDuration: []
-  attackOnColliderDuration: 0
-  nowAttackNum: 0
-  animStartupDuration: []
+  moveSpeed: 2
+  attackStartDistance: 2
+  attack1Power: 5
+  attack2Power: 15
+  minionPrefab: {fileID: 0}
+  summonCount: 0
+  attack1Hitbox: {fileID: 0}
+  attack2Hitbox: {fileID: 0}
   playerObj: {fileID: 0}
-  col1: {fileID: 0}
-  col2: {fileID: 0}
-  myPos: {x: 0, y: 0}
-  playerPos: {x: 0, y: 0}
-  moveDir: {x: 0, y: 0}
-  dist: 0
-  timer: 0
-  animStartupTimer: 0
-  isAttack: 0
-  isRight: 0
+  currentAttack: 0
   attackState: 0
   currentAnim: 0
+  isFaceRight: 1
+  attackStartTimer: 0
+  bossPos: {x: 0, y: 0}
+  playerPos: {x: 0, y: 0}
+  distanceSq: 0
 --- !u!1 &946833344
 GameObject:
   m_ObjectHideFlags: 0

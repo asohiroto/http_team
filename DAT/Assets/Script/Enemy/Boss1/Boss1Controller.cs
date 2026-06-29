@@ -1,312 +1,376 @@
 #if false
-
 using UnityEngine;
 
 public class Boss1Controller : MonoBehaviour
 {
+    private enum AttackType
+    {
+        None,
+        Attack1,
+        Attack2,
+        Summon
+    }
+
+    private enum AttackState
+    {
+        Idle,
+        Startup,
+        Active,
+        Cooldown
+    }
+
+    private enum CurrentAnim
+    {
+        Idle,
+        Walk,
+        Attack1,
+        Attack2,
+        Attack3,
+        Down
+    }
+
+    // 攻撃ごとに時間を設定
+    private struct AttackTiming
+    {
+        // 予備動作
+        public float startupDuration;
+
+        // 実行時間
+        public float activeDuration;
+
+        // 後隙
+        public float cooldownDuration;
+    }
+
+    // 基本設定
+
+    [Header("Boss Status")]
     [SerializeField] private float bossHp;
+
     [SerializeField] private float moveSpeed;
-    [SerializeField] private float dashSpeed;
-    [SerializeField] private float stopDist;
 
-    [Header("Attack")]
-    [SerializeField] private float[] attackPower;
-    [SerializeField] private float[] attackStartupDuration;
-    [SerializeField] private float[] attackCooldownDuration;
-    [SerializeField] private float attackOnColliderDuration;
-    [SerializeField] private int nowAttackNum;
-    [SerializeField] private float[] animStartupDuration;
+    [Tooltip("プレイヤーとの距離がこの値以下になると攻撃を開始する")]
+    [SerializeField] private float attackStartDistance;
 
-    [Header("config")]
-    [SerializeField] private GameObject playerObj;      // Playerオブジェクト
-    [SerializeField] private GameObject col1;
-    [SerializeField] private GameObject col2;
+    // 攻撃設定
+    [Header("Attack 1")]
+    [SerializeField] private float attack1Power;
+    [SerializeField] private AttackTiming attack1Timing;
+
+    [Header("Attack 2")]
+    [SerializeField] private float attack2Power;
+    [SerializeField] private AttackTiming attack2Timing;
+
+    [Header("Attack 3 : 召喚")]
+    [SerializeField] private AttackTiming summonTiming;
+
+    [Tooltip("召喚するプレハブ")]
+    [SerializeField] private GameObject minionPrefab;
+    [SerializeField] private int summonCount;
+
+    // 攻撃用のコライダー
+    [Header("Attack Hitbox Prefab")]
+    [SerializeField] private GameObject attack1Hitbox;
+    [SerializeField] private GameObject attack2Hitbox;
+
+    [Header("Attack Spawn Points")]
+    [SerializeField] private Transform attack1SpawnPoint;
+    [SerializeField] private Transform attack2SpawnPoint;
+
+
+    [Header("References")]
+    [SerializeField] private GameObject playerObj;
     private EnemyAnimation enemyAnim;
-
-    [Header("Debug")]
-    [SerializeField] private Vector2 myPos = Vector2.zero;
-    [SerializeField] private Vector2 playerPos = Vector2.zero;
-    [SerializeField] private Vector2 moveDir = Vector2.zero;
-    [SerializeField] private float dist;
-    private float stopDistSq;
 
 
     [Header("State")]
-    [SerializeField] private float timer = 0.0f;
-    [SerializeField] private float animStartupTimer = 0.0f;
-    [SerializeField] private bool isAttack = false;
-    [SerializeField] private bool isRight = false;
-    private enum AttackState { Startup, OnCollider, Cooldown, Init }
+    [SerializeField] private AttackType currentAttack = AttackType.None;
+    [SerializeField] private AttackState attackState = AttackState.Idle;
+    [SerializeField] private CurrentAnim currentAnim = CurrentAnim.Idle;
+    [SerializeField] private GameObject activeAttackHitbox;
 
-    [SerializeField] private AttackState attackState;
-    private enum CurrentAnim { Idle, Walk, Atk1, Atk2, Atk3, Down }
+    [SerializeField] private bool isFaceRight = true;
+    [SerializeField] private float attackStateTimer;
 
-    [SerializeField] private CurrentAnim currentAnim;
+    [Header("Debug")]
+    [SerializeField] private Vector2 bossPos;
+    [SerializeField] private Vector2 playerPos;
+    [SerializeField] private float distanceSq;
 
-    private void Start()
+    private float attackStartDistanceSq;
+    private bool currentAnimFacingRigh;
+
+
+
+    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    void Start()
     {
-        if (playerObj == null)
-        {
-            playerObj = GameObject.FindWithTag("Player");
-        }
-
-        stopDistSq = stopDist * stopDist;
-
         enemyAnim = GetComponent<EnemyAnimation>();
-    }
 
-    private void Update()
-    {
-        timer -= Time.deltaTime;
-        animStartupTimer -= Time.deltaTime;
-    }
-
-    private void FixedUpdate()
-    {
-        CheckIsRight();
-        SetInfo();
-        Move();
-    }
-
-    float GetSqrDistance(Vector2 a, Vector2 b)
-    {
-        return (b.x - a.x) * (b.x - a.x) + (b.y - a.y) * (b.y - a.y);
-    }
-
-    private void CheckIsRight()
-    {
-        if (playerPos.x - myPos.x > 0)
-        {
-            isRight = true;
-        }
-        else
-        {
-            isRight = false;
-        }
 
     }
 
-    private void SetInfo()
+    // Update is called once per frame
+    void Update()
     {
+
+    }
+
+    /// <summary>
+    /// プレイヤーオブジェクトを取得
+    /// </summary>
+    private void InitializePlayerReference()
+    {
+        if (playerObj != null) return;
+
+        playerObj = GameObject.FindWithTag("Player");
+    }
+
+    /// <summary>
+    /// ボス、プレイヤーの位置と距離を更新
+    /// </summary>
+    private void UpdateTargetInfo()
+    {
+        bossPos = transform.position;
         playerPos = playerObj.transform.position;
-        myPos = this.transform.position;
 
-        dist = GetSqrDistance(playerPos, myPos);
-        moveDir = (playerPos - myPos).normalized;
-
+        distanceSq = GetSqDistance(bossPos, playerPos);
     }
 
-    private void Move()
+    /// <summary>
+    /// 2点間の距離の二乗を返す。
+    /// </summary>
+    private float GetSqDistance(Vector2 a, Vector2 b)
     {
-        if (stopDist > dist)
+        float x = b.x - a.x;
+        float y = b.y - a.y;
+
+        return x * x + y * y;
+    }
+
+    /// <summary>
+    /// プレイヤーの方向を確認
+    /// </summary>
+    private void UpdateFaceDir()
+    {
+        //if (playerPos.x >= bossPos.x) isFaceRight = true;
+
+        isFaceRight = playerPos.x >= bossPos.x;
+    }
+
+    private void UpdateIdle()
+    {
+        UpdateFaceDir();
+
+        if (CanAttack())
         {
-            AttackSetup();
+            // 攻撃処理
 
             return;
         }
 
-        SetNextAnim(CurrentAnim.Walk);
-        transform.position = Vector2.MoveTowards(transform.position, playerPos, moveSpeed * Time.fixedDeltaTime);
+        // 移動処理
+        MoveToPlayer();
     }
 
-    private void AttackSetup()
+    /// <summary>
+    /// 攻撃可能か
+    /// </summary>
+    /// <returns></returns>
+    private bool CanAttack()
     {
-        if (isAttack) return;
-        isAttack = true;
+        return distanceSq <= attackStartDistanceSq;
+    }
 
-        int len = attackPower.Length - 1;
-        nowAttackNum = Random.Range(0, len);
+    private void MoveToPlayer()
+    {
+        // アニメーションの変更
 
-        float startup = attackStartupDuration[nowAttackNum];
-        float cooldown = attackCooldownDuration[nowAttackNum];
+        // 移動
+        transform.position = Vector2.MoveTowards(
+            transform.position,
+            playerPos,
+            moveSpeed * Time.fixedDeltaTime);
+    }
 
-        timer = startup;
+    /* 攻撃処理 */
 
-        ChangeAttackState(startup, attackOnColliderDuration, cooldown);
+    /// <summary>
+    /// 攻撃をランダムに選択し、行う
+    /// </summary>
+    private void StartAttack()
+    {
+        // 攻撃の種類をランダムに設定
+        currentAttack = SelectRandomAttack();
 
-        // 攻撃処理呼び出し
-        if (nowAttackNum == 0)
+        switch (currentAttack)
         {
-            Attack1();
-        }
-        else if (nowAttackNum == 1)
-        {
-            Attack2();
-        }
-        else
-        {
-            Attack3();
+            case AttackType.Attack1:
+                StartAttack1();
+                break;
+
+            case AttackType.Attack2:
+                StartAttack2();
+                break;
+
+            case AttackType.Summon:
+                StartSummonAttack();
+                break;
         }
     }
 
-
-    private void ChangeAttackState(float startup, float onCol, float cooldown)
+    private AttackType SelectRandomAttack()
     {
+        int randomValue = Random.Range(0, 3);
+
+        switch (randomValue)
+        {
+            case 0:
+
+                return AttackType.Attack1;
+
+            case 1:
+
+                return AttackType.Attack2;
+
+            case 2:
+
+                return AttackType.Summon;
+
+            default:
+
+                return AttackType.Attack1;
+        }
+
+    }
+
+    /* 攻撃のアニメーション、威力の設定 */
+    private void StartAttack1()
+    {
+        // アニメーションの変更
+
+    }
+
+    private void StartAttack2()
+    {
+        // アニメーションの変更
+
+    }
+
+    private void StartSummonAttack()
+    {
+
+    }
+
+    private void UpdateAttackState()
+    {
+        attackStateTimer -= Time.fixedDeltaTime;
+
+        if (attackStateTimer > 0.0f) return;
+
         switch (attackState)
         {
             case AttackState.Startup:
 
-                if (timer < 0)
-                {
-                    timer += onCol;
-
-                    attackState = AttackState.OnCollider;
-                }
-
                 break;
 
-            case AttackState.OnCollider:
-
-                if (timer < 0)
-                {
-                    OnAttackCollider();
-
-                    timer += cooldown;
-
-                    attackState = AttackState.Cooldown;
-                }
+            case AttackState.Active:
 
                 break;
 
             case AttackState.Cooldown:
 
-                if (timer < 0)
-                {
-                    attackState = AttackState.Init;
-
-                    SetNextAnim(CurrentAnim.Idle);
-                }
-
                 break;
         }
     }
 
-
-    private void SetNextAnim(CurrentAnim nextAnim)
+    /// <summary>
+    /// 攻撃状態の変更
+    /// </summary>
+    /// <param name="nextState"></param>
+    /// <param name="duration"></param>
+    private void ChangeAttackState(AttackState nextState, float duration)
     {
-        if (currentAnim == nextAnim) return;
+        attackState = nextState;
+        attackStateTimer = duration;
+    }
 
-        currentAnim = nextAnim;
 
-        switch (nextAnim)
+    private void BeginActiveState()
+    {
+        //
+
+        ChangeAttackState(AttackState.Cooldown, GetCurrentAttackTiming().cooldownDuration);
+    }
+
+    /// <summary>
+    /// 現在の攻撃に対応する時間設定を返す。
+    /// </summary>
+    private AttackTiming GetCurrentAttackTiming()
+    {
+        switch (currentAttack)
         {
-            case CurrentAnim.Idle:
+            case AttackType.Attack1:
+                return attack1Timing;
 
-                if (isRight)
-                {
-                    enemyAnim.ChangeState(EnemyAnimState.Idle);
-                }
-                else
-                {
-                    enemyAnim.ChangeState(EnemyAnimState.IdleR);
-                }
+            case AttackType.Attack2:
+                return attack2Timing;
 
-                break;
+            case AttackType.Summon:
+                return summonTiming;
 
-            case CurrentAnim.Walk:
-
-                if (isRight)
-                {
-                    enemyAnim.ChangeState(EnemyAnimState.Walk);
-                }
-                else
-                {
-                    enemyAnim.ChangeState(EnemyAnimState.WalkR);
-                }
-
-                break;
-
-            case CurrentAnim.Atk1:
-
-                if (isRight)
-                {
-                    enemyAnim.ChangeState(EnemyAnimState.Atk1);
-                }
-                else
-                {
-                    enemyAnim.ChangeState(EnemyAnimState.Atk1R);
-                }
-
-                break;
-
-            case CurrentAnim.Atk2:
-
-                if (isRight)
-                {
-                    enemyAnim.ChangeState(EnemyAnimState.Atk2);
-                }
-                else
-                {
-                    enemyAnim.ChangeState(EnemyAnimState.Atk2R);
-                }
-
-                break;
-
-            case CurrentAnim.Atk3:
-
-                if (isRight)
-                {
-                    enemyAnim.ChangeState(EnemyAnimState.Atk3);
-                }
-                else
-                {
-                    enemyAnim.ChangeState(EnemyAnimState.Atk3R);
-                }
-
-                break;
-
-            case CurrentAnim.Down:
-
-                if (isRight)
-                {
-                    enemyAnim.ChangeState(EnemyAnimState.Down);
-                }
-                else
-                {
-                    enemyAnim.ChangeState(EnemyAnimState.DownR);
-                }
-
-                break;
+            default:
+                return default;
         }
     }
 
-    private void Attack1()
+    /// <summary>
+    /// 攻撃の当たり判定のプレハブを生成
+    /// </summary>
+    private void ActivateCurrentAttackEffect()
     {
-        SetNextAnim(CurrentAnim.Atk1);
-
-        Debug.Log("1");
-    }
-    private void Attack2()
-    {
-        SetNextAnim(CurrentAnim.Atk2);
-
-        Debug.Log("2");
-    }
-    private void Attack3()
-    {
-        SetNextAnim(CurrentAnim.Atk3);
-
-        Debug.Log("3");
-    }
-
-    private void OnAttackCollider()
-    {
-        if (nowAttackNum == 0)
+        switch (currentAttack)
         {
-            // col1呼び出し
-            Debug.Log("col1");
-        }
-        else if (nowAttackNum == 1)
-        {
-            // col2呼び出し
-            Debug.Log("col2");
-        }
-        else
-        {
-            Debug.Log("範囲外");
-            return;
+            case AttackType.Attack1:
+                ActivateAttack1();
+                break;
+
+            case AttackType.Attack2:
+                ActivateAttack2();
+                break;
+
+            case AttackType.Summon:
+                SummonMinions();
+                break;
         }
     }
 
+    /* プレハブ生成 */
+
+    private void ActivateAttack1()
+    {
+
+    }
+
+    private void ActivateAttack2()
+    {
+
+    }
+
+    private void SummonMinions()
+    {
+
+    }
+
+    /// <summary>
+    /// 当たり判定のプレハブを削除
+    /// </summary>
+    private void DeactivateCurrentAttackEffect()
+    {
+        switch (currentAttack)
+        {
+            // プレハブ削除処理
+        }
+    }
 }
 #endif

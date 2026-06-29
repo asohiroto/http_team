@@ -40,6 +40,7 @@ public class EnemyController : MonoBehaviour
     [SerializeField] private GameObject DropItemPrefab; // DropItem のプレハブ
     [SerializeField] private GameObject attackCol;      // 攻撃用のコライダー(プレハブ)
     private EnemyAnimation enemyAnim;
+    private EnemyHpManager hpManager;
     private EnemySpawner enemySpawner;
     [SerializeField] private GameObject attackObj;
 
@@ -88,6 +89,8 @@ public class EnemyController : MonoBehaviour
 
         enemySpawner = parentObj.GetComponent<EnemySpawner>();
 
+        hpManager = GetComponent<EnemyHpManager>();
+
     }
 
     void Start()
@@ -116,6 +119,7 @@ public class EnemyController : MonoBehaviour
 
     void FixedUpdate()
     {
+        UpdateHp();
         UpdatePositionInfo();
         UpdateTargetInfo();
         UpdateAiState();
@@ -143,6 +147,12 @@ public class EnemyController : MonoBehaviour
     {
         enemyAiState = EnemyAiState.KnockBack;
         enemyHp -= dmg;
+    }
+
+
+    private void UpdateHp()
+    {
+        enemyHp = hpManager.GetCurrentHp();
     }
 
     public void OnAttackAnimationFinished()

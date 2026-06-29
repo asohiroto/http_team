@@ -22,11 +22,10 @@ public class EnemyAttack : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
+
         if (other.CompareTag("Player"))
         {
-            //Debug.Log("attack!");
-            GameObject playerObj = other.gameObject;
-            playerCtrl = playerObj.GetComponent<PlayerController>();
+            playerCtrl = other.GetComponent<PlayerController>();
             //playerCtrl.Damaged(40);
             //StartCoroutine(playerCtrl.Damaged(attackPower));
             playerCtrl.Damaged(attackPower);

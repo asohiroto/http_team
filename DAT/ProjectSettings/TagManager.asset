@@ -9,6 +9,8 @@ TagManager:
   - DropItems
   - EnemySpawner
   - UI
+  - AttackReach
+  - PlayerCollision
   layers:
   - Default
   - TransparentFX

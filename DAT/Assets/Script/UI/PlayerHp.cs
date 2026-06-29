@@ -45,16 +45,6 @@ public class PlayerHP : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        // 接触した敵のTagが"Enemy"だったらダメージ
-        if (collision.CompareTag("Enemy"))
-        {
-            DecreaseHP(damage);
-            //lastDamageTime = Time.time; // ダメージの時間を最新に更新
-        }
-    }
-
     private void DecreaseHP(int damage)
    {
         if (player != null)

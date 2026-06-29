@@ -821,7 +821,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3544329007519292955, guid: fa3408dff1ebcb840973ae3fbdc29c97, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4191473579663971972, guid: fa3408dff1ebcb840973ae3fbdc29c97, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1068,7 +1068,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &168101083
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4207,7 +4207,7 @@ SpriteRenderer:
   m_Size: {x: 15.78, y: 8.82}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_SpriteSortPoint: 0
 --- !u!1 &797354678
 GameObject:
@@ -6248,7 +6248,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 678033419400920944, guid: adafc529adc6fb84d8417122a115aaa6, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 678033419400920944, guid: adafc529adc6fb84d8417122a115aaa6, type: 3}
       propertyPath: hpBarImage

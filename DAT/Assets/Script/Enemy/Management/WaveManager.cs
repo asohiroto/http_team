@@ -61,6 +61,11 @@ public class WaveManager : MonoBehaviour
         return waveTimer;
     }
 
+    public WaveState GetCurrentWaveState()
+    {
+        return currentWaveState;
+    }
+
     public void ChangeWaveState(WaveState newState)
     {
         if (currentWaveState == newState) return;

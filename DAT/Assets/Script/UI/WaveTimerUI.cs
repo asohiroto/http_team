@@ -9,10 +9,44 @@ public class WaveTimerUI : MonoBehaviour
     [Header("UIテキスト")]
     [SerializeField] private TextMeshProUGUI timerText;
 
+    [Header("Waveテキスト")]
+    [SerializeField] private TextMeshProUGUI waveText;
+
     void Update()
     {
         // テキストがセットされていないとエラー
-        if (waveManager == null || timerText == null) return;
+        if (waveManager == null || timerText == null || waveText == null) return;
+
+        // ウェーブ表示
+        WaveState currentState = waveManager.GetCurrentWaveState();
+
+
+        switch (currentState)
+        {
+            case WaveState.Wave1:
+                waveText.text = "<WAVE 1>";
+                break;
+
+            case WaveState.Wave2:
+                waveText.text = "<WAVE 2>";
+                break;
+
+            case WaveState.Boss:
+                waveText.text = "<ボスを倒せ!>";
+                break;
+
+            case WaveState.Interval:
+                waveText.text = "<NEXT WAVE>";
+                break;
+
+            case WaveState.Shop:
+                waveText.text = "<SHOP>";
+                break;
+
+            default:
+                waveText.text = currentState.ToString();
+                break;
+        }
 
         float timeLeft = waveManager.GetTimeLeft();
 

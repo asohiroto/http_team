@@ -16,7 +16,7 @@ public class SlideUp : MonoBehaviour
     void Update()
     {
         // 上へ移動 (Vector3.right から Vector3.up に変更)
-        transform.Translate(Vector3.up * speed * Time.deltaTime);
+        transform.Translate(Vector3.up * speed * Time.unscaledDeltaTime);
 
         // もし目標のY座標（stopPositionY）を越えたら
         if (transform.position.y >= stopPositionY)

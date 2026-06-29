@@ -6,7 +6,7 @@ public class EnemyController : MonoBehaviour
     [Header("Enemy Stats")]
     [SerializeField] private float enemyHp;       // 体力
     [SerializeField] private float moveSpeed;   // 移動速度
-    [SerializeField] private float attackPower;   // 攻撃力
+    [SerializeField] private int attackPower;   // 攻撃力
 
     [Header("Enemy Settings")]
     // コード内では2乗した状態で使用する
@@ -393,6 +393,9 @@ public class EnemyController : MonoBehaviour
                 {
                     wasAttack = true;
                     attackObj = Instantiate(attackCol, this.transform);
+
+                    attackObj.GetComponent<EnemyAttack>().SetAttackPower(attackPower);
+
                     attackObj.transform.position = attackRange * 0.5f * targetDirSign + this.enemyPos;     // 攻撃距離に合わせる
                 }
                 break;

@@ -76,7 +76,7 @@ public class EneBoss3 : MonoBehaviour
     [SerializeField] GameObject meleeRangePrefab;
     GameObject meleeObj;
     GameObject meleeRangeObj;
-    int meleeWaitingFrame = 45;
+    int meleeWaitingFrame = 50;
     int meleeFrameTimer = 0;
     int meleeCdFrame = 20;
     bool isMeleeAttack = false;
@@ -87,7 +87,7 @@ public class EneBoss3 : MonoBehaviour
     float meleePlayerDistance = 1.5f; // 近接攻撃をする際にとるプレイヤーとの距離
     Vector3 attackDir = Vector3.right;
     Vector3 meleeTargetPos = Vector3.zero;
-    float speed = 0.3f;
+    float speed = 0.6f;
 
     // 方向の向きを管理する----------------------------
     int dir = 0;
@@ -120,17 +120,20 @@ void Start()
         ActionManager();
         SaveLastAttackState();
         // x方向の向きを管理
-        if (currentPos.x >= playerCtrl.currentPos.x)
+        if(!isAttack) // 攻撃中でないなら方向を変更できる
         {
-            // 左向き
-            transform.rotation = Quaternion.Euler(0, 180, 0);
-            dir = -1;
-        }
-        else
-        {
-            // 右向き
-            transform.rotation = Quaternion.Euler(0, 0, 0);
-            dir = 1;
+            if (currentPos.x >= playerCtrl.currentPos.x)
+            {
+                // 左向き
+                transform.rotation = Quaternion.Euler(0, 180, 0);
+                dir = -1;
+            }
+            else
+            {
+                // 右向き
+                transform.rotation = Quaternion.Euler(0, 0, 0);
+                dir = 1;
+            }
         }
 
         transform.position = currentPos;
@@ -259,12 +262,12 @@ void Start()
                     // 左向き
                     if(dir == -1)
                     {
-                        meleeRangeObj.transform.rotation = Quaternion.Euler(0, 180, 45);
+                        meleeObj.transform.rotation = Quaternion.Euler(0, 0, 45);
                     }
                     // 右向き
                     else if(dir == 1)
                     {
-                        meleeRangeObj.transform.rotation = Quaternion.Euler(0, 0, 45);
+                        meleeObj.transform.rotation = Quaternion.Euler(0, 180, 45);
                     }
                     Destroy(meleeRangeObj);
                     isMeleeAttack = true;
@@ -273,6 +276,7 @@ void Start()
                 }
                 else if(!isAttackAnim)
                 {
+                    isAttack = false;
                     state = State.Idle;
                 }
 

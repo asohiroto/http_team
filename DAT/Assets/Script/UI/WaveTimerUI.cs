@@ -32,11 +32,11 @@ public class WaveTimerUI : MonoBehaviour
                 break;
 
             case WaveState.Boss:
-                waveText.text = "<BOSS WAVE>";
+                waveText.text = "<ボスを倒せ!>";
                 break;
 
             case WaveState.Interval:
-                waveText.text = "<PREPARING>";
+                waveText.text = "<NEXT WAVE>";
                 break;
 
             case WaveState.Shop:

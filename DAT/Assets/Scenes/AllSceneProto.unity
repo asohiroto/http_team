@@ -1095,7 +1095,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3544329007519292955, guid: fa3408dff1ebcb840973ae3fbdc29c97, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4191473579663971972, guid: fa3408dff1ebcb840973ae3fbdc29c97, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1342,7 +1342,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &168101083
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2160,7 +2160,6 @@ GameObject:
   - component: {fileID: 228249010}
   - component: {fileID: 228249013}
   - component: {fileID: 228249012}
-  - component: {fileID: 228249011}
   m_Layer: 5
   m_Name: BossHp
   m_TagString: Untagged
@@ -2187,20 +2186,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 105.463, y: 16.7052}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &228249011
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 228249009}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5ababaf8784537e4d991b815f5523dc8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::HpFollowTarget
-  target: {fileID: 244439631}
-  offset: {x: 0, y: -1.2, z: 0}
 --- !u!114 &228249012
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7593,8 +7578,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: WAVE
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 98b56f733c9056245a8e38df32b53219, type: 2}
+  m_sharedMaterial: {fileID: 7479633546364413261, guid: 98b56f733c9056245a8e38df32b53219, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []

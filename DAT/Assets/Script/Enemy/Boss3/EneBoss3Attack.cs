@@ -45,7 +45,7 @@ public class EneBoss3Attack : MonoBehaviour
         CollisionManager();
     }
 
-    void OnTriggerEnter2D(Collider2D col)
+    void OnTriggerStay2D(Collider2D col)
     {
         if (col.CompareTag("Player"))
         {
@@ -55,6 +55,7 @@ public class EneBoss3Attack : MonoBehaviour
             if(isBreakOnCol) Destroy(gameObject);
         }
     }
+
 
     // BoxColliderのオンオフを管理する
     void CollisionManager()

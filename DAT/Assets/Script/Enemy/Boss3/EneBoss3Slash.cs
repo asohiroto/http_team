@@ -1,36 +1,99 @@
+using System.Collections;
 using UnityEngine;
 
 public class EneBoss3Slash : MonoBehaviour
 {
-    float viewAngle = 90f;
+    EneBoss3 eneCtrl;
+    PlayerController playerCtrl;
+    GameObject enemyObj;
+    GameObject playerObj;
+
+    [SerializeField] Sprite[] attackSprite;
+    SpriteRenderer spriteRenderer;
+    [SerializeField] int attackDamage;
+
+    [SerializeField] int startColFrame;
+    [SerializeField] int endColFrame;
+    PolygonCollider2D polyCol;
+
+    // アニメーション用の変数
+    int frameTimer = 0;
+    int animMax;
+    [SerializeField] int animFrame = 5;
+    int animIdx = 0;
+    [SerializeField] bool isLoop;
+    [SerializeField] bool isBreakOnCol; // オブジェクトがプレイヤーと衝突したとき消去するかどうか
+
+    // アタックエフェクトのアニメーションと当たり判定の管理------------------
+
     void Start()
     {
-        
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        enemyObj = GameObject.Find("EneBoss3");
+        eneCtrl = enemyObj.GetComponent<EneBoss3>();
+        polyCol = GetComponent<PolygonCollider2D>();
+        polyCol.enabled = false;
+        animMax = attackSprite.Length;
+        if(animMax != 0) spriteRenderer.sprite = attackSprite[0];
+        polyCol.enabled = false;
     }
 
-    
-    void Update()
+    void FixedUpdate()
     {
-        
+        frameTimer++;
+        Animation();
+        CollisionManager();
     }
 
-    void OnTriggerEnter2D(Collider2D col)
+    void OnTriggerStay2D(Collider2D col)
     {
-        if(col.CompareTag("Player"))
+        if (col.CompareTag("Player"))
         {
-            Vector3 forwardDirection = (transform.up + transform.right).normalized;
+            playerObj = col.gameObject;
+            playerCtrl = playerObj.GetComponent<PlayerController>();
+            playerCtrl.Damaged(attackDamage);
+            if (isBreakOnCol) Destroy(gameObject);
+        }
+    }
 
-            // 自分からターゲットへの方向ベクトルを計算する
-            Vector3 dirToTarget = (col.transform.position - transform.position);
 
-            // 正面方向とターゲットへの方向のなす角
-            float angle = Vector3.Angle(forwardDirection, dirToTarget);
+    // BoxColliderのオンオフを管理する
+    void CollisionManager()
+    {
+        if (frameTimer < startColFrame && startColFrame != 0)
+        {
+            polyCol.enabled = false;
+        }
+        else if (frameTimer >= startColFrame && frameTimer < endColFrame)
+        {
+            polyCol.enabled = true;
+        }
+        else if (frameTimer >= endColFrame)
+        {
+            polyCol.enabled = false;
+        }
+    }
 
-            // なす角が設定角度の半分以下なら扇形の範囲内にいるとみなす
-            if(angle <= viewAngle / 2f)
+    void Animation()
+    {
+        if (animMax == 0) return;
+        if (frameTimer % animFrame == 0)
+        {
+            if (animIdx < animMax - 1)
             {
-                Debug.Log("扇形内にいる");
+                animIdx++;
             }
+            else
+            {
+                animIdx = 0;
+                if (!isLoop)
+                {
+                    Destroy(gameObject);
+                }
+            }
+            spriteRenderer.sprite = attackSprite[animIdx];
         }
     }
 }
+
+

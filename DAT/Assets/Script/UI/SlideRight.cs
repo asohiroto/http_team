@@ -16,7 +16,7 @@ public class SlideLoop : MonoBehaviour
     void Update()
     {
         // 右へ移動
-        transform.Translate(Vector3.right * speed * Time.deltaTime);
+        transform.Translate(Vector3.right * speed * Time.unscaledDeltaTime);
 
         // もし目標のX座標（stopPositionX）を越えたら
         if (transform.position.x >= stopPositionX)

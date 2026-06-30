@@ -42,7 +42,7 @@ public class GameSceneManager : MonoBehaviour
 
     public void OpenDeckEditMode()
     {
-        SceneManager.LoadScene("InformationScene");
+        SceneManager.LoadScene("LibraryScene");
 
     }
 

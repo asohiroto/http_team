@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System;
 public class EneBoss2 : MonoBehaviour
 {
+    EnemyHpManager eneHp;
     int frameTimer = 0;
 
     enum State { Idle, Melee, Stamp, Missile }
@@ -77,6 +78,7 @@ public class EneBoss2 : MonoBehaviour
     float colDamage; // 敵ボスとプレイヤーが衝突したときに与えるダメージ
     void Start()
     {
+        eneHp = GetComponent<EnemyHpManager>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         currentPos = transform.position;
         playerObj = GameObject.Find("Player");
@@ -111,6 +113,7 @@ public class EneBoss2 : MonoBehaviour
             transform.rotation = Quaternion.Euler(0, 180 * dir, 0);
         }
         transform.position = currentPos;
+        CheckDie();
     }
 
     // 敵ボスそのものの当たり判定
@@ -397,5 +400,13 @@ public class EneBoss2 : MonoBehaviour
             yield return new WaitForSeconds(flashTime);
         }
         spriteRenderer.color = Color.white;
+    }
+
+    void CheckDie()
+    {
+        if (eneHp.GetCurrentHp() <= 0)
+        {
+            Destroy(gameObject);
+        }
     }
 }

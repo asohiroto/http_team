@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 2831862041653962097}
   - component: {fileID: 550435067734918593}
   - component: {fileID: 2705413162644821217}
+  - component: {fileID: 4452113731322434971}
   m_Layer: 0
   m_Name: Boss2
   m_TagString: Enemy
@@ -117,7 +118,6 @@ MonoBehaviour:
   missilePrefab: {fileID: 6190273025951132290, guid: a447eb36d23708446899a47492a5fa0f, type: 3}
   meleePrefab: {fileID: 8852684360780332127, guid: ecb3f64ab81f24a45a8b4b8ad8744326, type: 3}
   meleeRangePrefab: {fileID: 1718113552492981584, guid: de8cc368ef70ed64d8eba2c3ca0a352f, type: 3}
-  meleeFXPrefab: {fileID: 1648080044229311865, guid: 15a85347db8b4b548a786a2c371212b2, type: 3}
 --- !u!61 &2705413162644821217
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -164,3 +164,16 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 0.35952753, y: 0.47968507}
   m_EdgeRadius: 0
+--- !u!114 &4452113731322434971
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3544329007519292955}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f5a02e80f6f8984a8e4d239c12f1abb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyHpManager
+  hp: 100

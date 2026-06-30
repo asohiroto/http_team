@@ -2,6 +2,7 @@ using System;
 using Unity.VisualScripting;
 using UnityEngine;
 
+
 public class EneBoss3 : MonoBehaviour
 {
     public int attackPower = 1;

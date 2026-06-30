@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 public class SkillAttack : MonoBehaviour
 {
-    EnemyController eneController;
+    EnemyHpManager eneController;
     PlayerController playerController;
 
     GameObject enemyObj;
@@ -43,8 +43,8 @@ public class SkillAttack : MonoBehaviour
         if (col.CompareTag("Enemy"))
         {
             enemyObj = col.gameObject;
-            eneController = enemyObj.GetComponent<EnemyController>();
-            eneController.EnemyDamaged(attackDamage);
+            eneController = enemyObj.GetComponent<EnemyHpManager>();
+            eneController.EnemyDamaged((int)attackDamage);
         }
     }
 

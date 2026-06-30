@@ -1,10 +1,12 @@
 using Unity.VisualScripting;
 using UnityEngine;
+using System.Collections;
 
 public class EneBoss3Anim : MonoBehaviour
 {
     // EneBoss3内変数
     EneBoss3 enemyCtrl;
+    EnemyHpManager enemyHp;
     // 1フレーム前の状態を取得する
     EneBoss3.State lastState;
     SpriteRenderer spriteRenderer;
@@ -39,10 +41,12 @@ public class EneBoss3Anim : MonoBehaviour
     bool isWalkLast = false;
     bool isDashLast = false;
     bool isAttackLast = false;
+    float damageFXTime = 0.2f;
 
     void Start()
     {
         enemyCtrl = GetComponent<EneBoss3>();
+        enemyHp = GetComponent<EnemyHpManager>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         // アニメーションの最大数の取得
         walkAnimMax = walkAnim.Length;
@@ -60,6 +64,7 @@ public class EneBoss3Anim : MonoBehaviour
     {
         frameTimer++;
         CheckChangeState();
+        CheckDamage();
 
         if (enemyCtrl.state == EneBoss3.State.Teleport)
         {
@@ -179,5 +184,20 @@ public class EneBoss3Anim : MonoBehaviour
         isWalkLast = enemyCtrl.isWalk;
         isDashLast = enemyCtrl.isDash;
         isAttackLast = enemyCtrl.isAttackAnim;
+    }
+
+    void CheckDamage()
+    {
+        if(enemyHp.TakeDamage())
+        {
+            StartCoroutine(BackDamageColor());
+        }
+    }
+
+    IEnumerator BackDamageColor()
+    {
+        spriteRenderer.color = Color.red;
+        yield return new WaitForSeconds(damageFXTime);
+        spriteRenderer.color = Color.white;
     }
 }

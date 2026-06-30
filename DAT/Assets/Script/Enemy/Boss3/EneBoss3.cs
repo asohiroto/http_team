@@ -2,10 +2,12 @@ using System;
 using Unity.VisualScripting;
 using UnityEngine;
 
+
 public class EneBoss3 : MonoBehaviour
 {
     public int attackPower = 1;
 
+    EnemyHpManager eneHp;
     GameObject playerObj;
     PlayerController playerCtrl;
     bool endMove;
@@ -95,6 +97,7 @@ public class EneBoss3 : MonoBehaviour
 
 void Start()
     {
+        eneHp = gameObject.GetComponent<EnemyHpManager>();
         playerObj = GameObject.Find("Player");
         playerCtrl = playerObj.GetComponent<PlayerController>();
         InitVariable();
@@ -137,6 +140,7 @@ void Start()
         }
 
         transform.position = currentPos;
+        CheckDie();
     }
 
     // 行動を管理する関数（ランダムで攻撃を抽選し、攻撃を行う）
@@ -536,5 +540,13 @@ void Portal()
         else posAdj = Vector3.right * meleePlayerDistance;
         // プレイヤーが左側にいるとき若干右の値を返す
         return playerCtrl.currentPos + posAdj;
+    }
+
+    void CheckDie()
+    {
+        if(eneHp.GetCurrentHp() <= 0)
+        {
+            Destroy(gameObject);
+        }
     }
 }

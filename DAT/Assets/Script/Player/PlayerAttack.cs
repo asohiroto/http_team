@@ -4,7 +4,7 @@ using UnityEngine;
 public class PlayerAttack : MonoBehaviour
 {
     //EnemyController eneController;
-    EnemyController eneController;
+    EnemyHpManager eneController;
     PlayerController playerController;
     GameObject enemyObj;
     GameObject playerObj;
@@ -41,8 +41,8 @@ public class PlayerAttack : MonoBehaviour
         if (col.CompareTag("Enemy"))
         {
             enemyObj = col.gameObject;
-            eneController = enemyObj.GetComponent<EnemyController>();
-            eneController.EnemyDamaged(attackDamage);
+            eneController = enemyObj.GetComponent<EnemyHpManager>();
+            eneController.EnemyDamaged((int)attackDamage);
         }
     }
 

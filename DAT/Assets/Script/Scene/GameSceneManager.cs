@@ -42,13 +42,8 @@ public class GameSceneManager : MonoBehaviour
 
     public void OpenDeckEditMode()
     {
-        SceneManager.LoadScene("DeckScene");
+        SceneManager.LoadScene("LibraryScene");
 
-        for (int i = 0; i < 6; i++)
-        {
-            deck.myDeckId[i] = -1;
-
-        }
     }
 
 }

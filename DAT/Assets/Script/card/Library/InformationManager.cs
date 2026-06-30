@@ -29,7 +29,12 @@ public class InformationManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Keyboard.current.escapeKey.wasPressedThisFrame)
-            SceneManager.UnloadSceneAsync("InformationScene");
+
     }
+
+    public void CloseScene()
+    {
+        SceneManager.UnloadSceneAsync("InformationScene");
+    }
+
 }

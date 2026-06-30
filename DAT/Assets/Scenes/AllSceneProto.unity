@@ -3377,7 +3377,12 @@ MonoBehaviour:
   moltenSpear: {fileID: 2865435146257064286, guid: a734ddf3be8563745a574b93a0f91407, type: 3}
   moltenSpearPrefab: {fileID: 0}
   ssSpeed: 0
-  sword: []
+  sword:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   swordPrefab: []
 --- !u!4 &557050537
 Transform:

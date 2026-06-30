@@ -46,4 +46,9 @@ public class LibraryManager : MonoBehaviour
 
         SceneManager.LoadSceneAsync("InformationScene", LoadSceneMode.Additive);
     }
+
+    public void BackToGame ()
+    {
+        SceneManager.UnloadScene("LibraryScene");
+    }
 }

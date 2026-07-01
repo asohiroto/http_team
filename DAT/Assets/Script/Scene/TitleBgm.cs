@@ -17,8 +17,6 @@ public class TitleBgm : MonoBehaviour
         instance = this;
         DontDestroyOnLoad(gameObject);
 
-        gameObject.name = "BgmSeManager";
-
         audioSource = GetComponent<AudioSource>();
 
         SceneManager.sceneLoaded += OnSceneLoaded;

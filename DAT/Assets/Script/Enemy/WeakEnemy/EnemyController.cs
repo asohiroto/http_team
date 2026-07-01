@@ -7,6 +7,7 @@ public class EnemyController : MonoBehaviour
     [SerializeField] private float enemyHp;       // 体力
     [SerializeField] private float moveSpeed;   // 移動速度
     [SerializeField] private int attackPower;   // 攻撃力
+    [SerializeField] private EnemyType enemyType;   // 敵の種類
 
     [Header("Enemy Settings")]
     // コード内では2乗した状態で使用する
@@ -27,7 +28,8 @@ public class EnemyController : MonoBehaviour
     [SerializeField] private Vector2 targetDirSign = Vector2.zero;  // targetDirを -1, 0, 1 に限定 攻撃時に使用
     float AbsDirX;
     float AbsDirY;
-    [SerializeField] private float sqrDistPlayer;             // 2乗したPlayerとの距離
+    [SerializeField] private float sqrDistPlayer;       // 2乗したPlayerとの距離
+    [SerializeField] private float attackAngle;         // 攻撃の向き
     [SerializeField] private bool wasAttack;
     [SerializeField] private float attackStartupTimer;              // 予備動作用のカウントダウン
     [SerializeField] private float attackCooldownTimer;             // クールダウン用のカウントダウン
@@ -44,6 +46,12 @@ public class EnemyController : MonoBehaviour
     private EnemySpawner enemySpawner;
     [SerializeField] private GameObject attackObj;
 
+    private enum EnemyType  // 敵の種類 インスペクターで設定
+    {
+        Torcher,
+        Archer
+    }
+
     private enum EnemyAiState       // Enemyの状態
     { 
         Idle,
@@ -55,7 +63,7 @@ public class EnemyController : MonoBehaviour
         Init
     }
     [SerializeField] private EnemyAiState enemyAiState = EnemyAiState.Init;
-#if false
+#if true
     // Move拡張用
     private enum EnemyMovePattern
     {
@@ -153,6 +161,12 @@ public class EnemyController : MonoBehaviour
     private void UpdateHp()
     {
         enemyHp = hpManager.GetCurrentHp();
+
+        // ノックバック処理
+        if (hpManager.TakeDamage())
+        {
+            enemyAiState = EnemyAiState.KnockBack;
+        }
     }
 
     public void OnAttackAnimationFinished()
@@ -168,8 +182,8 @@ public class EnemyController : MonoBehaviour
     /// <summary>
     /// Enemyの攻撃力
     /// </summary>
-    /// <returns>攻撃力を返す(float)</returns>
-    public float GetAttackPower()
+    /// <returns>攻撃力を返す</returns>
+    public int GetAttackPower()
     {
         return attackPower;
     }
@@ -392,11 +406,8 @@ public class EnemyController : MonoBehaviour
                 if (attackOnColliderTimer <= 0)
                 {
                     wasAttack = true;
-                    attackObj = Instantiate(attackCol, this.transform);
 
-                    attackObj.GetComponent<EnemyAttack>().SetAttackPower(attackPower);
-
-                    attackObj.transform.position = attackRange * 0.5f * targetDirSign + this.enemyPos;     // 攻撃距離に合わせる
+                    StartAttack();
                 }
                 break;
             
@@ -415,6 +426,47 @@ public class EnemyController : MonoBehaviour
 
                 break;
         }
+    }
+
+    /// <summary>
+    /// 攻撃種類の選択
+    /// </summary>
+    void StartAttack()
+    {
+        switch (enemyType)
+        {
+            case EnemyType.Torcher:
+
+                TorcherAttack();
+
+                break;
+
+            case EnemyType.Archer:
+
+                break;
+        }
+    }
+
+    /// <summary>
+    /// WeackTocher用
+    /// 攻撃処理
+    /// </summary>
+    void TorcherAttack()
+    {
+        attackObj = Instantiate(attackCol, this.transform);
+
+        attackObj.GetComponent<EnemyAttack>().SetAttackPower(attackPower);
+
+        attackObj.transform.position = attackRange * 0.5f * targetDirSign + this.enemyPos;     // 攻撃距離に合わせる
+    }
+
+    /// <summary>
+    /// WeakArcher用
+    /// 攻撃処理
+    /// </summary>
+    void ArcherAttack()
+    {
+
     }
 
     /// <summary>

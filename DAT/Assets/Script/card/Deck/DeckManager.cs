@@ -48,6 +48,7 @@ public class DeckManager : MonoBehaviour
 
         edit.ChangeCardName(change.cardName);
         edit.ChangeCardEffect(change.cardEffect);
+        edit.ChangeCardImage(change.cardImage);
 
         if (dc != null)
         {

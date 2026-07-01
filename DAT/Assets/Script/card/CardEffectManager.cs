@@ -150,18 +150,6 @@ public class CardEffectManager : MonoBehaviour
 
     Vector2 msPos = Vector2.zero;
 
-    // ソードストーム関連--------------------
-    [SerializeField] float ssSpeed;
-
-    [SerializeField] GameObject[] sword;
-
-    public GameObject[] swordPrefab;
-
-    Vector2[] sPos = new Vector2[5];
-    Vector2[] ssPos = new Vector2[5];
-
-    bool[] ssFlag = new bool[5];
-
     // 共通------------------------------------
     PlayerController player;
     CardAttackReach reach;
@@ -197,7 +185,6 @@ public class CardEffectManager : MonoBehaviour
                 () => ThunderBolt(),
                 () => HeavensFury(),
                 () => MoltenSpear(),
-                () => SwordStorm(),
             };
 
         healDefaultAmount = healAmount;
@@ -233,12 +220,6 @@ public class CardEffectManager : MonoBehaviour
 
         // サンダーボール使用後の挙動
         if (tbFlag) skill.BallMove(thunderballPrefab, destPos, tbSpeed, tbPos, ref tbFlag);
-
-        for(int i = 0; i < 5; i++)
-        {
-            if (ssFlag[i]) skill.BallMove(swordPrefab[i], destPos, ssSpeed, ssPos[i], ref ssFlag[i]);
-        }
-
         buffPos.x = player.currentPos.x;
         buffPos.y = player.currentPos.y + 1.0f;
 
@@ -471,24 +452,6 @@ public class CardEffectManager : MonoBehaviour
         player.playerHP -= (curseAmount * 2);
 
         SpikeSkill(msPos, moltenSpear, name, ref moltenSpearPrefab);
-    }
-
-    void SwordStorm()
-    {
-        string name = ("SwordStorm");
-
-        sPos[0] = player.currentPos;
-        sPos[1] = player.currentPos + new Vector3(0.5f, 0.5f);
-        sPos[2] = player.currentPos + new Vector3(1.0f, 1.0f);
-        sPos[3] = player.currentPos - new Vector3(0.5f, 0.5f);
-        sPos[4] = player.currentPos - new Vector3(1.0f, 1.0f);
-
-        for (int i = 0; i < 5; i++)
-        {
-            BallSkill(ref ssFlag[i], ref destPos, ref ssPos[i], sword[i], name, ref swordPrefab[i], sPos[i]);
-        }
-
-
     }
 
     void BallSkill(ref bool flag, ref Vector2 destPos, ref Vector2 objPos, GameObject skill, string name, ref GameObject skillPrefab, Vector2 skillPos)

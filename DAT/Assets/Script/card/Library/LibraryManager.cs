@@ -31,6 +31,7 @@ public class LibraryManager : MonoBehaviour
 
             edit.ChangeCardName(changer.cardName);
             edit.ChangeCardEffect(changer.cardEffect);
+            edit.ChangeCardImage(changer.cardImage);
         }
     }
 
@@ -49,6 +50,7 @@ public class LibraryManager : MonoBehaviour
 
     public void BackToGame ()
     {
-        SceneManager.UnloadScene("LibraryScene");
+        Time.timeScale = 1.0f;
+        SceneManager.UnloadSceneAsync("LibraryScene");
     }
 }

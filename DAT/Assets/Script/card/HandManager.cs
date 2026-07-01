@@ -85,6 +85,7 @@ public class HandManager : MonoBehaviour
 
         edit.ChangeCardName(change.cardName);
         edit.ChangeCardEffect(change.cardEffect);
+        edit.ChangeCardImage(change.cardImage);
 
         cardIdArray[ind] = id;
         //AutoCraft(id);

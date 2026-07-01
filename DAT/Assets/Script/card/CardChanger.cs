@@ -54,6 +54,14 @@ public class CardChanger : MonoBehaviour
 
         return name;
     }
+
+    public Sprite CardImageChange(int id)
+    {
+        CardData data = cardData[id];
+        Sprite image = data.cardImage;
+
+        return image;
+    }
 }
 
 [Serializable]

@@ -49,6 +49,7 @@ public class DataPanelManager : MonoBehaviour
 
             edit.ChangeCardName(changer.cardName);
             edit.ChangeCardEffect(changer.cardEffect);
+            edit.ChangeCardImage(changer.cardImage);
 
             if (dc != null)
             {

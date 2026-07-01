@@ -40,10 +40,4 @@ public class GameSceneManager : MonoBehaviour
         }
     }
 
-    public void OpenDeckEditMode()
-    {
-        SceneManager.LoadScene("LibraryScene");
-
-    }
-
 }

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class SoundTmp : MonoBehaviour
+public class SEManager : MonoBehaviour
 {
     private AudioSource audioSource;
     // 再生するSEをインスペクターから設定する

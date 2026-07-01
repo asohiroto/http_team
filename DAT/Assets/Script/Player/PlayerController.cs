@@ -71,6 +71,10 @@ public class PlayerController : MonoBehaviour
     GameObject destroyObje; // 麻生が追加
     GameObject normalAttack;
 
+    // 音の変数
+    SEManager se;
+    const int slashSE = 0;
+
     void Start()
     {
         currentPos = transform.position;
@@ -85,6 +89,7 @@ public class PlayerController : MonoBehaviour
         anim = GetComponent<Animator>();
         reachObj = transform.Find("AttackReach").gameObject;
         playerAttackReach = reachObj.GetComponent<PlayerAttackReach>();
+        se = GetComponent<SEManager>();
         Application.targetFrameRate = 60;
         
     }
@@ -247,6 +252,7 @@ public class PlayerController : MonoBehaviour
         SlashTypeAndDir(attackObj,ref normalAttack);
 
         onAttack = true;
+        se.PlaySE(slashSE);
 
         yield return new WaitForSeconds(attackTime);
 

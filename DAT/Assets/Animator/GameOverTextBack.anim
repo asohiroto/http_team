@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: GameOverTextAnimation
+  m_Name: GameOverTextBack
   serializedVersion: 7
   m_Legacy: 0
   m_Compressed: 0
@@ -23,7 +23,7 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 1
+        value: 0.50980395
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -31,10 +31,10 @@ AnimationClip:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 0.33333334
-        value: 0.3137255
-        inSlope: -1.2
-        outSlope: -1.2
+        time: 0.5
+        value: 0.15686275
+        inSlope: -0.6117647
+        outSlope: -0.6117647
         tangentMode: 136
         weightedMode: 0
         inWeight: 0.33333334
@@ -50,9 +50,9 @@ AnimationClip:
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 1.3333334
-        value: 1
-        inSlope: 0
-        outSlope: 0
+        value: 0.50980395
+        inSlope: 1.2
+        outSlope: 1.2
         tangentMode: 136
         weightedMode: 0
         inWeight: 0.33333334
@@ -119,7 +119,7 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 1
+        value: 0.50980395
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -127,10 +127,10 @@ AnimationClip:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 0.33333334
-        value: 0.3137255
-        inSlope: -1.2
-        outSlope: -1.2
+        time: 0.5
+        value: 0.15686275
+        inSlope: -0.6117647
+        outSlope: -0.6117647
         tangentMode: 136
         weightedMode: 0
         inWeight: 0.33333334
@@ -146,9 +146,9 @@ AnimationClip:
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 1.3333334
-        value: 1
-        inSlope: 0
-        outSlope: 0
+        value: 0.50980395
+        inSlope: 1.2
+        outSlope: 1.2
         tangentMode: 136
         weightedMode: 0
         inWeight: 0.33333334

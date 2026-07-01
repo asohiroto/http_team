@@ -74,6 +74,7 @@ public class PlayerController : MonoBehaviour
     // 音の変数
     SEManager se;
     const int slashSE = 0;
+    const int dashSE = 1;
 
     void Start()
     {
@@ -185,6 +186,7 @@ public class PlayerController : MonoBehaviour
         onDash = true;
         invisibleFrameTimer = dashInvisibleFrame;
         dashDir = lastDir;
+        se.PlaySE(dashSE);
         GameObject obj;
         // ダッシュで土煙がでるようにする
         if(dashDir.x == 0)

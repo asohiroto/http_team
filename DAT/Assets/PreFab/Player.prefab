@@ -361,7 +361,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SEManager
   audioClip:
-  - {fileID: 0}
+  - {fileID: 8300000, guid: 96b511449d892994d98e4acaa205a323, type: 3}
+  - {fileID: 8300000, guid: 37e687559ed7c6240a8a83a10e609f66, type: 3}
 --- !u!1 &4954390753423726789
 GameObject:
   m_ObjectHideFlags: 0

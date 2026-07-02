@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class CursorUI : MonoBehaviour
@@ -27,6 +27,9 @@ public class CursorUI : MonoBehaviour
         transform.position = mousePosWorld;
 
         Cursor.visible = false;
+
+        // 最前面表示
+        transform.SetAsLastSibling();
         //transform.position = Input.mousePosition;
 
         //Cursor.visible = false;

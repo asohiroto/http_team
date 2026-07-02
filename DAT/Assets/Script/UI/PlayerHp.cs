@@ -1,5 +1,7 @@
-﻿using UnityEngine;
+﻿using System.Runtime.CompilerServices;
+using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.Processors;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -13,6 +15,8 @@ public class PlayerHP : MonoBehaviour
 
     //  [SerializeField] private float invincibilityTime = 1.0f;// 無敵時間
     private float lastDamageTime;   // 最後にダメージを受けた時間
+
+    private bool isDead = true;
 
     void Start()
     {
@@ -35,6 +39,10 @@ public class PlayerHP : MonoBehaviour
         if (player != null)
         {
             Debug.Log($"実際のHP:{player.playerHP} / {player.maxPlayerHP}");
+            if (player.playerHP <= 0 && !isDead)
+            {
+                Die();
+            }
         }
         UpdateHpBar();
     }
@@ -45,4 +53,10 @@ public class PlayerHP : MonoBehaviour
             hpBarImage.fillAmount = player.playerHP / player.maxPlayerHP;
         }
     }
+    private void Die()
+{
+        isDead = true;
+        SceneManager.LoadScene("GameOverScene");
 }
+}
+

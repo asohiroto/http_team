@@ -132,7 +132,7 @@ GameObject:
   - component: {fileID: 9283341}
   - component: {fileID: 9283340}
   m_Layer: 5
-  m_Name: Text (TMP) (1)
+  m_Name: GameOverFront
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -517,7 +517,7 @@ GameObject:
   - component: {fileID: 534424444}
   - component: {fileID: 534424446}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: GameOvetBack
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

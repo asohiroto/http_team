@@ -1,11 +1,10 @@
 fileFormatVersion: 2
-guid: fc9b09bdc27c14c4081b8205a5b6d785
+guid: 16e7300a279eb094e91db9d09c0464db
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 6284802682430442969
-    second: DAT - AllSceneProto - Windows, Mac, Linux - Unity 6.3 LTS (6000.3.12f1)_
-      _DX12_ 2026_06_28 20_39_26_0
+      213: 6993605895853267981
+    second: '{3237F705-7923-4035-80A3-75EE6258A8D2}_0'
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -97,18 +96,30 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: DAT - AllSceneProto - Windows, Mac, Linux - Unity 6.3 LTS (6000.3.12f1)_
-        _DX12_ 2026_06_28 20_39_26_0
+      name: '{3237F705-7923-4035-80A3-75EE6258A8D2}_0'
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 1584
-        height: 866
+        width: 1578
+        height: 884
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -117,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 9dd40b9cdba183750800000000000000
-      internalID: 6284802682430442969
+      spriteID: d0c596132874e0160800000000000000
+      internalID: 6993605895853267981
       vertices: []
       indices: 
       edges: []
@@ -137,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      DAT - AllSceneProto - Windows, Mac, Linux - Unity 6.3 LTS (6000.3.12f1)_ _DX12_ 2026_06_28 20_39_26_0: 6284802682430442969
+      '{3237F705-7923-4035-80A3-75EE6258A8D2}_0': 6993605895853267981
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

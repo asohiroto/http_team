@@ -30,8 +30,5 @@ public class CursorUI : MonoBehaviour
 
         // 最前面表示
         transform.SetAsLastSibling();
-        //transform.position = Input.mousePosition;
-
-        //Cursor.visible = false;
     }
 }

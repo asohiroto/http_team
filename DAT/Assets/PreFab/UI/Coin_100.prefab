@@ -170,3 +170,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Coin2D
   amount: 100
+  coinSE: {fileID: 8300000, guid: 8bf779dab5c58f54aaf08292333dd8a8, type: 3}

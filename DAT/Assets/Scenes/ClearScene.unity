@@ -673,7 +673,7 @@ MonoBehaviour:
         m_MethodName: PlayOneShot
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 8300000, guid: 7e0b3f4c4a39ac449b4f5e0d6d0dac36, type: 3}
+          m_ObjectArgument: {fileID: 8300000, guid: 934a3d19c8ccedd41a1b3d8d8e754ce9, type: 3}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0

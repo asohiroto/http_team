@@ -107,7 +107,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EneBoss2
   speed: 0.1
-  attackPower: 0
+  attackPower: 5
   attackWaitingTime: 0.1
   showAttackRangeTime: 2
   attackTime: 1

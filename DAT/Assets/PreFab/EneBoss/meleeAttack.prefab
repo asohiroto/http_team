@@ -431,7 +431,7 @@ MonoBehaviour:
   - {fileID: -7946860784820991240, guid: f530a3e7d5902324da728cd5e5a9a8b0, type: 3}
   - {fileID: 1381981450520255645, guid: f530a3e7d5902324da728cd5e5a9a8b0, type: 3}
   - {fileID: -9032517183376959738, guid: f530a3e7d5902324da728cd5e5a9a8b0, type: 3}
-  attackDamage: 0
+  attackDamage: 20
   startColFrame: 0
   endColFrame: 3
   animFrame: 3

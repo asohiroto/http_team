@@ -149,7 +149,7 @@ MonoBehaviour:
   - {fileID: 2788568348960109317, guid: 11dce0007b631a047bd17b69529ed5c1, type: 3}
   - {fileID: 226702753830753226, guid: 11dce0007b631a047bd17b69529ed5c1, type: 3}
   - {fileID: -7921052967969465774, guid: 11dce0007b631a047bd17b69529ed5c1, type: 3}
-  attackDamage: 0
+  attackDamage: 20
   startColFrame: 0
   endColFrame: 3
   animFrame: 3

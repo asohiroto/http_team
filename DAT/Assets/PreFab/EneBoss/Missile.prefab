@@ -107,9 +107,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EneBoss3Attack
   attackSprite:
   - {fileID: 844917616624967519, guid: ac3ff9591add57743a61581a070c902a, type: 3}
-  attackDamage: 0
+  attackDamage: 5
   startColFrame: 0
   endColFrame: 5000
+  animFrame: 5
   isLoop: 1
   isBreakOnCol: 0
 --- !u!61 &7892485686449876597

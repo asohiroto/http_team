@@ -117,7 +117,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: fff8e05015d1266429fe6315e4b17668, type: 3}
   - {fileID: 21300000, guid: 526c2ef7f1126af4194c8d6372b5e91c, type: 3}
   - {fileID: 21300000, guid: 38411d77ddf2c214ebd8ce3ecd293229, type: 3}
-  attackDamage: 0
+  attackDamage: 30
   startColFrame: 0
   endColFrame: 3
   animFrame: 3

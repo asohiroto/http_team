@@ -1,4 +1,4 @@
-#if true
+﻿#if true
 using UnityEngine;
 
 public class Boss1Controller : MonoBehaviour
@@ -99,9 +99,13 @@ public class Boss1Controller : MonoBehaviour
     [SerializeField] private Vector2 bossPos;
     [SerializeField] private Vector2 playerPos;
     [SerializeField] private float distanceSq;
+    [SerializeField] private bool isDie = false;
 
     private float attackStartDistanceSq;
     private bool currentAnimFacingRight;
+
+    [SerializeField] private EnemyHpManager hpManager;
+    [SerializeField] private EnemySpawner enemySpawner;
 
 
 
@@ -110,7 +114,17 @@ public class Boss1Controller : MonoBehaviour
     {
         enemyAnim = GetComponent<EnemyAnimation>();
 
-        InitializePlayerReference();
+        
+        // 親オブジェクト(EnemySpawner)を取得
+        GameObject parentObj = transform.parent.gameObject;
+        enemySpawner = parentObj.GetComponent<EnemySpawner>();
+        hpManager = GetComponent<EnemyHpManager>();
+
+        if (playerObj == null)
+        {
+            playerObj = GameObject.FindWithTag("Player");
+        }
+
 
         attackStartDistanceSq = attackStartDistance * attackStartDistance;
 
@@ -126,6 +140,7 @@ public class Boss1Controller : MonoBehaviour
     private void FixedUpdate()
     {
         UpdateTargetInfo();
+        HpManage();
 
         switch (attackState)
         {
@@ -203,6 +218,8 @@ public class Boss1Controller : MonoBehaviour
 
             return;
         }
+
+        if (currentAnim == CurrentAnim.Down) return;
 
         // 移動処理
         MoveToPlayer();
@@ -526,6 +543,8 @@ public class Boss1Controller : MonoBehaviour
     /// <param name="nextAnim"></param>
     private void SetAnimation(CurrentAnim nextAnim)
     {
+        if (isDie) return;
+
         bool isSameAnim = currentAnim == nextAnim;
         bool isSameDir = currentAnimFacingRight == isFaceRight;
 
@@ -606,7 +625,7 @@ public class Boss1Controller : MonoBehaviour
                 }
 
             case CurrentAnim.Down:
-
+                
                 if (facingRight)
                 {
                     return EnemyAnimState.Down;
@@ -631,6 +650,23 @@ public class Boss1Controller : MonoBehaviour
 
     }
 
+    private void HpManage()
+    {
+        if (isDie) return;
+
+        bossHp = hpManager.GetCurrentHp();
+
+        if (hpManager.TakeDamage())
+        {
+            enemyAnim.StartBlink();
+        }
+
+        if (bossHp <= 0)
+        {
+            Down();
+        }
+    }
+
     /// <summary>
     /// すべてをリセットし、ダウン状態に
     /// </summary>
@@ -644,6 +680,8 @@ public class Boss1Controller : MonoBehaviour
         attackStateTimer = 0.0f;
 
         SetAnimation(CurrentAnim.Down);
+
+        isDie = true;
     }
 
     public void OnAnimationFinished(EnemyAnimState finishedState)
@@ -664,7 +702,13 @@ public class Boss1Controller : MonoBehaviour
             case EnemyAnimState.Down:
             case EnemyAnimState.DownR:
 
-                Destroy(gameObject);
+                float tmpTimer = attackStateTimer;
+                attackStateTimer -= Time.fixedDeltaTime;
+
+                if (tmpTimer > attackStateTimer + 1.0f)
+                {
+                    Destroy(gameObject);
+                }
 
                 break;
         }

@@ -112,6 +112,7 @@ MonoBehaviour:
   enemyHp: 10
   moveSpeed: 1
   attackPower: 3
+  enemyType: 0
   alwaysFindPlayer: 1
   findDist: 0
   lostDist: 0
@@ -125,6 +126,7 @@ MonoBehaviour:
   targetDir: {x: 0, y: 0}
   targetDirSign: {x: 0, y: 0}
   sqrDistPlayer: 0
+  attackAngle: 0
   wasAttack: 0
   attackStartupTimer: 0
   attackCooldownTimer: 0
@@ -135,6 +137,7 @@ MonoBehaviour:
   attackCol: {fileID: 1675109570440110942, guid: eba50ab512d771843972f73eaed76870, type: 3}
   attackObj: {fileID: 0}
   enemyAiState: 6
+  enemyMovePattern: 6
 --- !u!114 &3875057953984697843
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -204,7 +207,7 @@ MonoBehaviour:
   Animtimer: 0
   timePerFrame: 0
   blinkTimer: 0
-  blinkInterval: 0.2
+  blinkInterval: 0.15
   isBlinking: 0
   isRed: 0
 --- !u!114 &-236722746166330479

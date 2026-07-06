@@ -282,7 +282,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 8.33}
+  m_AnchoredPosition: {x: 0, y: 8.330002}
   m_SizeDelta: {x: 0, y: -16.67}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &474125340
@@ -673,7 +673,7 @@ MonoBehaviour:
         m_MethodName: PlayOneShot
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 8300000, guid: 7e0b3f4c4a39ac449b4f5e0d6d0dac36, type: 3}
+          m_ObjectArgument: {fileID: 8300000, guid: 934a3d19c8ccedd41a1b3d8d8e754ce9, type: 3}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
@@ -789,7 +789,7 @@ MonoBehaviour:
   m_enableVertexGradient: 1
   m_colorMode: 3
   m_fontColorGradient:
-    topLeft: {r: 0.65882355, g: 0.5495855, b: 0.0352941, a: 1}
+    topLeft: {r: 0.6603774, g: 0.54408455, b: 0, a: 1}
     topRight: {r: 1, g: 0.74509805, b: 0, a: 1}
     bottomLeft: {r: 0.9811321, g: 0.7454417, b: 0, a: 1}
     bottomRight: {r: 0, g: 0, b: 0, a: 1}
@@ -1351,7 +1351,7 @@ GameObject:
   - component: {fileID: 1694772254}
   - component: {fileID: 1694772253}
   m_Layer: 5
-  m_Name: GameClearText (1)
+  m_Name: GameClearTextBack
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1373,7 +1373,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -959.12, y: 806}
+  m_AnchoredPosition: {x: -948, y: 817.99}
   m_SizeDelta: {x: 1712.93, y: 224.47}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1694772253
@@ -1571,13 +1571,13 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2101023374}
-  - {fileID: 1296137291}
   - {fileID: 1694772252}
   - {fileID: 1082723956}
   - {fileID: 819804936}
   - {fileID: 2141771499}
   - {fileID: 1276427137}
   - {fileID: 1637230703}
+  - {fileID: 1296137291}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -1620,7 +1620,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 30, y: -470}
+  m_AnchoredPosition: {x: -0.0000019073, y: -476}
   m_SizeDelta: {x: 929.34, y: 103.77}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2101023375
@@ -1677,8 +1677,8 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 1
-  m_HorizontalAlignment: 1
-  m_VerticalAlignment: 256
+  m_HorizontalAlignment: 2
+  m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_characterHorizontalScale: 1

@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public enum WaveState { Shop, Wave1, Wave2, Boss, Interval,}

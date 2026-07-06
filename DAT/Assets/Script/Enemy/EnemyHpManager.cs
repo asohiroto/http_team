@@ -1,9 +1,10 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 public class EnemyHpManager : MonoBehaviour
 {
     [SerializeField] private int hp;
     private bool takeDamage = false;
+
     public int GetCurrentHp()
     {
         return hp;

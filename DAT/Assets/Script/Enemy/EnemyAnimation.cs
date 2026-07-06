@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading;
 using UnityEngine;
 using UnityEngine.InputSystem.LowLevel;
@@ -39,7 +39,7 @@ public class EnemyAnimation : MonoBehaviour
     [SerializeField] private float Animtimer = 0.0f;
     [SerializeField] private float timePerFrame = 0.0f;
     [SerializeField] private float blinkTimer = 0.0f;   // 被ダメージ時の点滅処理
-    [SerializeField] private float blinkInterval = 0.2f;
+    [SerializeField] private float blinkInterval = 0.15f;
     [SerializeField] private bool isBlinking = false;
     [SerializeField] private bool isRed = false;
     private bool isAnimationFinished;

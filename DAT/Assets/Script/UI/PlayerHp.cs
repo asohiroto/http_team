@@ -16,7 +16,7 @@ public class PlayerHP : MonoBehaviour
     //  [SerializeField] private float invincibilityTime = 1.0f;// 無敵時間
     private float lastDamageTime;   // 最後にダメージを受けた時間
 
-    private bool isDead = true;
+    private bool isDead = false;
 
     void Start()
     {

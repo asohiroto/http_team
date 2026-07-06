@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 340099797374460288}
   - component: {fileID: 185650845903409867}
   m_Layer: 5
-  m_Name: MouseUI
+  m_Name: MouseUI_Base
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

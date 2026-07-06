@@ -6,7 +6,7 @@ public class EneBoss2 : MonoBehaviour
 {
     EnemyHpManager eneHp;
     int frameTimer = 0;
-
+    float damageFXTime = 0.2f;
     enum State { Idle, Melee, Stamp, Missile }
     State state = State.Idle;
     [SerializeField] float speed = 0.1f;
@@ -114,6 +114,7 @@ public class EneBoss2 : MonoBehaviour
         }
         transform.position = currentPos;
         CheckDie();
+        CheckDamage();
     }
 
     // 敵ボスそのものの当たり判定
@@ -408,5 +409,20 @@ public class EneBoss2 : MonoBehaviour
         {
             Destroy(gameObject);
         }
+    }
+
+    void CheckDamage()
+    {
+        if (eneHp.TakeDamage())
+        {
+            StartCoroutine(BackDamageColor());
+        }
+    }
+
+    IEnumerator BackDamageColor()
+    {
+        spriteRenderer.color = Color.red;
+        yield return new WaitForSeconds(damageFXTime);
+        spriteRenderer.color = Color.white;
     }
 }

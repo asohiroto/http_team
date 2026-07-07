@@ -114,7 +114,7 @@ public class Boss1Controller : MonoBehaviour
     {
         enemyAnim = GetComponent<EnemyAnimation>();
 
-        
+
         // 親オブジェクト(EnemySpawner)を取得
         GameObject parentObj = transform.parent.gameObject;
         enemySpawner = parentObj.GetComponent<EnemySpawner>();
@@ -490,22 +490,16 @@ public class Boss1Controller : MonoBehaviour
 
         if (isFaceRight)    // 右
         {
-            spawnPos = new Vector2(10.0f, minionDist);
+            spawnPos = new Vector2(minionDist * 2.5f, minionDist);
         }
         else
         {
-            spawnPos = new Vector2(-10.0f, minionDist);
+            spawnPos = new Vector2(-minionDist * 2.5f, minionDist);
         }
 
         for (int i = 0; i < summonCount; i++)
         {
-            GameObject newObj = Instantiate(minionPrefab, this.transform);
-
-
-            newObj.transform.localScale = Vector3.one;
-
-            newObj.transform.position = spawnPos;
-
+            GameObject newObj = Instantiate(minionPrefab, spawnPos, Quaternion.identity, enemySpawner.transform);
 
             spawnPos.y -= minionDist;
         }
@@ -625,7 +619,7 @@ public class Boss1Controller : MonoBehaviour
                 }
 
             case CurrentAnim.Down:
-                
+
                 if (facingRight)
                 {
                     return EnemyAnimState.Down;

@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
@@ -41,6 +41,8 @@ public class EnemySpawner : MonoBehaviour
     /// <param name="deleteObj">削除したオブジェクト</param>
     public void DestroyEnemy(GameObject deleteObj)
     {
+        if (!field.Contains(deleteObj)) return;
+
         field.Remove(deleteObj);
 
         enemyCount--;
@@ -53,7 +55,9 @@ public class EnemySpawner : MonoBehaviour
     /// </summary>
     public void ClearField()
     {
-        foreach (var data in field)
+        var delete = new List<GameObject>(field);
+
+        foreach (var data in delete)
         {
             data.GetComponent<EnemyController>().Delete();
         }
@@ -114,6 +118,7 @@ public class EnemySpawner : MonoBehaviour
     // スポーン処理
     private void SpawnEnemy()
     {
+        if (enemyVariations <= 0) return;
         if (timer < spawnIntervalSec) return;
 
         // 敵のスポーン上限未満
@@ -128,7 +133,7 @@ public class EnemySpawner : MonoBehaviour
 
             GameObject nextSpawn = enemyList[nextNum];
 
-            GameObject newObj = Instantiate(WeakTorcher, this.transform);
+            GameObject newObj = Instantiate(nextSpawn, this.transform);
 
             newObj.transform.localPosition = spawnPos;
 

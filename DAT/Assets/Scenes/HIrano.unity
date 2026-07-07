@@ -457,6 +457,14 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 1850861697525511079, guid: 4e6160ede5aeff34da0c04b14a70f739, type: 3}
+      propertyPath: waveManagers.Array.data[1].WaveDuration
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1850861697525511079, guid: 4e6160ede5aeff34da0c04b14a70f739, type: 3}
+      propertyPath: waveManagers.Array.data[2].WaveDuration
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1850861697525511079, guid: 4e6160ede5aeff34da0c04b14a70f739, type: 3}
       propertyPath: 'waveManagers.Array.data[3].Enemys.Array.data[0]'
       value: 
       objectReference: {fileID: 5305959905322829476, guid: d92832bfae1b1e942af050f14e2897c3, type: 3}

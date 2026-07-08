@@ -468,7 +468,9 @@ public class EnemyController : MonoBehaviour
     /// </summary>
     void ArcherAttack()
     {
+        attackObj = Instantiate(attackCol, transform);
 
+        attackObj.GetComponent<ArrowController>().SetArrowAttack(targetDir, playerPos);
     }
 
     /// <summary>

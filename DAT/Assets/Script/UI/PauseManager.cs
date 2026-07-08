@@ -9,7 +9,7 @@ public class PauseManager : MonoBehaviour
     {
         // ゲームを停止する
         Time.timeScale = 0f;
-        bgmAudioSource.Pause(); //BGM一時停止
+        bgmAudioSource.Pause();// BGM停止
         Debug.Log("ゲーム停止");
     }
 
@@ -17,7 +17,7 @@ public class PauseManager : MonoBehaviour
     {
         // ゲーム再開
         Time.timeScale = 1f;
-        bgmAudioSource.UnPause();   // BGMを途中から再開
+        bgmAudioSource.UnPause(); // 途中からBGM再開
         Debug.Log("ゲーム再開");
     }
 }

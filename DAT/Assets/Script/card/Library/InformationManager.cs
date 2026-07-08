@@ -34,6 +34,7 @@ public class InformationManager : MonoBehaviour
 
     public void CloseScene()
     {
+        Debug.Log("close");
         SceneManager.UnloadSceneAsync("InformationScene");
     }
 

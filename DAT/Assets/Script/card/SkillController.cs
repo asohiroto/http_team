@@ -17,7 +17,7 @@ public class SkillController : MonoBehaviour
 
         absorb = GameObject.Find("CardEffectManager").GetComponent<Absorb>();
 
-        foreach(GameObject obj in objs)
+        foreach (GameObject obj in objs)
         {
             skill = obj.GetComponent<SkillManager>();
 
@@ -28,7 +28,7 @@ public class SkillController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     public void OnTriggerEnter2D(Collider2D col)
@@ -38,8 +38,6 @@ public class SkillController : MonoBehaviour
             enemyObj = col.gameObject;
             enem = enemyObj.GetComponent<EnemyController>();
             enem.EnemyDamaged(skillDmg);
-
-            absorb.absorbFlag = true;
 
         }
     }

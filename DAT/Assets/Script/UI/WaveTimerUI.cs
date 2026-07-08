@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using TMPro;
 
 public class WaveTimerUI : MonoBehaviour
@@ -20,27 +20,34 @@ public class WaveTimerUI : MonoBehaviour
         // ウェーブ表示
         WaveState currentState = waveManager.GetCurrentWaveState();
 
+        timerText.gameObject.SetActive(true);
+
 
         switch (currentState)
         {
             case WaveState.Wave1:
                 waveText.text = "<WAVE 1>";
+                timerText.gameObject.SetActive(true);
                 break;
 
             case WaveState.Wave2:
                 waveText.text = "<WAVE 2>";
+                timerText.gameObject.SetActive(true);
                 break;
 
             case WaveState.Boss:
                 waveText.text = "<ボスを倒せ!>";
+                timerText.gameObject.SetActive(false); //タイマーテキスト非表示
                 break;
 
             case WaveState.Interval:
                 waveText.text = "<NEXT WAVE>";
+                timerText.gameObject.SetActive(true);
                 break;
 
             case WaveState.Shop:
                 waveText.text = "<SHOP>";
+                timerText.gameObject.SetActive(false);
                 break;
 
             default:

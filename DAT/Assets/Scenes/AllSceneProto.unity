@@ -1063,7 +1063,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3544329007519292955, guid: fa3408dff1ebcb840973ae3fbdc29c97, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4191473579663971972, guid: fa3408dff1ebcb840973ae3fbdc29c97, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1419,7 +1419,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &168101083
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5195,6 +5195,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 116d7af9b8fa43a458a0a1133269cac7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PauseManager
+  bgmAudioSource: {fileID: 81229760}
 --- !u!4 &903797249
 Transform:
   m_ObjectHideFlags: 0

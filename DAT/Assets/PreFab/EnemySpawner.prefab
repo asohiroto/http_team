@@ -54,20 +54,14 @@ MonoBehaviour:
   - Wave: 1
     Enemys:
     - {fileID: 4419746953452864637, guid: f6545e77c56c98841962ce3e926c813d, type: 3}
-    - {fileID: 4419746953452864637, guid: f6545e77c56c98841962ce3e926c813d, type: 3}
-    - {fileID: 4419746953452864637, guid: f6545e77c56c98841962ce3e926c813d, type: 3}
-    - {fileID: 4419746953452864637, guid: f6545e77c56c98841962ce3e926c813d, type: 3}
-    SpawnInterval: 0.5
-    MaxSpawnEnemy: 10
+    SpawnInterval: 1
+    MaxSpawnEnemy: 5
     WaveDuration: 15
   - Wave: 2
     Enemys:
-    - {fileID: 5471602684806819181, guid: 515c8a6ce46db834aad76669e1e46aef, type: 3}
-    - {fileID: 5471602684806819181, guid: 515c8a6ce46db834aad76669e1e46aef, type: 3}
-    - {fileID: 5471602684806819181, guid: 515c8a6ce46db834aad76669e1e46aef, type: 3}
-    - {fileID: 5471602684806819181, guid: 515c8a6ce46db834aad76669e1e46aef, type: 3}
+    - {fileID: 4419746953452864637, guid: f6545e77c56c98841962ce3e926c813d, type: 3}
     SpawnInterval: 0.5
-    MaxSpawnEnemy: 3
+    MaxSpawnEnemy: 5
     WaveDuration: 15
   - Wave: 3
     Enemys:
@@ -79,7 +73,7 @@ MonoBehaviour:
     Enemys: []
     SpawnInterval: 0
     MaxSpawnEnemy: 0
-    WaveDuration: 3
+    WaveDuration: 5
   waveTimer: 0
   currentWaveState: 0
   nextWaveState: 0

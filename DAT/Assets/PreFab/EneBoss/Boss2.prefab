@@ -177,3 +177,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyHpManager
   hp: 100
+  BossObject: 1
+  nextScene: 2
+  TimeTochangeScene: 5

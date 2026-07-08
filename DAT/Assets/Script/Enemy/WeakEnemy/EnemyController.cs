@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using UnityEngine;
 
 public class EnemyController : MonoBehaviour
@@ -442,6 +442,8 @@ public class EnemyController : MonoBehaviour
                 break;
 
             case EnemyType.Archer:
+
+                ArcherAttack();
 
                 break;
         }

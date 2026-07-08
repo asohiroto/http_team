@@ -3,7 +3,7 @@ using TMPro;
 
 public class WaveTimerUI : MonoBehaviour
 {
-    [Header("参照マネージャー")]
+    [Header("参照スクリプト")]
     [SerializeField] private WaveManager waveManager;
 
     [Header("UIテキスト")]
@@ -59,7 +59,7 @@ public class WaveTimerUI : MonoBehaviour
 
         if (timeLeft <= 0f || timeLeft > 3600f)
         {
-            // 0以下にならない
+            // 0秒以下にならない
             timerText.text = "00:00";
             return;
         }

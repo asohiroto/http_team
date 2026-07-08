@@ -278,7 +278,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Archer_Red_0
+      name: Archer_0
       rect:
         serializedVersion: 2
         x: 0
@@ -291,16 +291,16 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 03b3041043d4de2c0800000000000000
-      internalID: -4400776375116481744
+      spriteID: 3317e4e3bd1a7134fb43db1998795194
+      internalID: -1034106226
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Archer_Red_1
+      name: Archer_1
       rect:
         serializedVersion: 2
         x: 192
@@ -313,16 +313,16 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 9a62e77ad2354cf00800000000000000
-      internalID: 1136124461552903849
+      spriteID: 419c229115eb76042a4ca91d4d7a7eb5
+      internalID: 181172355
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Archer_Red_2
+      name: Archer_2
       rect:
         serializedVersion: 2
         x: 384
@@ -335,16 +335,16 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 51c006e3281f2c100800000000000000
-      internalID: 126929281214319637
+      spriteID: a73430442d812cc429cd12d55158babd
+      internalID: -701271201
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Archer_Red_3
+      name: Archer_3
       rect:
         serializedVersion: 2
         x: 576
@@ -357,16 +357,16 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 4e4aab1b52aed57f0800000000000000
-      internalID: -622083725890771740
+      spriteID: b8a07e84743536c4f915b58c975dec43
+      internalID: 1302308274
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Archer_Red_4
+      name: Archer_4
       rect:
         serializedVersion: 2
         x: 768
@@ -379,16 +379,16 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: a80e7cce1164665c0800000000000000
-      internalID: -4222610557812350838
+      spriteID: ea14ab80f28876f4cbdcbe9507348eb4
+      internalID: -1440868043
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Archer_Red_5
+      name: Archer_5
       rect:
         serializedVersion: 2
         x: 960
@@ -401,16 +401,16 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 4b582abf523330980800000000000000
-      internalID: -8573953027354753612
+      spriteID: 0d913453c017cd6408859402e895975e
+      internalID: 325987314
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Archer_Red_6
+      name: Archer_6
       rect:
         serializedVersion: 2
         x: 0
@@ -423,16 +423,16 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 3fcc86f8c71574b60800000000000000
-      internalID: 7730236880828550387
+      spriteID: b752a505bd2aab74ba22567ec05c3ac0
+      internalID: 416547647
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Archer_Red_7
+      name: Archer_7
       rect:
         serializedVersion: 2
         x: 192
@@ -445,16 +445,16 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 7158385d6f8f97660800000000000000
-      internalID: 7384206803078448407
+      spriteID: 0158ee78393561a4fac01be2198c48d8
+      internalID: -709928903
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Archer_Red_8
+      name: Archer_8
       rect:
         serializedVersion: 2
         x: 384
@@ -467,16 +467,16 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 2551f2279a9fd07f0800000000000000
-      internalID: -644584665483635374
+      spriteID: 874b4749829d31b43a08fe2b782ea629
+      internalID: 1751632560
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Archer_Red_9
+      name: Archer_9
       rect:
         serializedVersion: 2
         x: 576
@@ -489,16 +489,16 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 0c6dfa3532782c060800000000000000
-      internalID: 6972283758920586944
+      spriteID: 8ceaa727c1f734942a302b61883e1b32
+      internalID: 1909833414
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Archer_Red_10
+      name: Archer_10
       rect:
         serializedVersion: 2
         x: 768
@@ -511,16 +511,16 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 5e968a137539895d0800000000000000
-      internalID: -3055530344466322971
+      spriteID: 6948dd438853b1a449c60935ea8e8686
+      internalID: 1163402668
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Archer_Red_11
+      name: Archer_11
       rect:
         serializedVersion: 2
         x: 960
@@ -533,16 +533,16 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 789fa119aee2bf1d0800000000000000
-      internalID: -3316005115636549241
+      spriteID: a560fdb0bc0bb9b439ad07d04d6b44cc
+      internalID: 1409392458
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Archer_Red_12
+      name: Archer_12
       rect:
         serializedVersion: 2
         x: 0
@@ -555,16 +555,16 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 5e41e77cf4838b330800000000000000
-      internalID: 3726790606949586149
+      spriteID: ad6380c4bcb28e34fa824b9eb33abf89
+      internalID: 407953177
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Archer_Red_13
+      name: Archer_13
       rect:
         serializedVersion: 2
         x: 192
@@ -577,16 +577,16 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 838a7cb999d9d5dc0800000000000000
-      internalID: -3648586840031123400
+      spriteID: 15cab88b04316b740ab90b93d833a67e
+      internalID: 1505500744
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Archer_Red_14
+      name: Archer_14
       rect:
         serializedVersion: 2
         x: 384
@@ -599,16 +599,16 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: efdb03898dfaeef20800000000000000
-      internalID: 3453891309040877054
+      spriteID: 7945485c6c8c5d14586d80d7fff96e5d
+      internalID: -370901405
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Archer_Red_15
+      name: Archer_15
       rect:
         serializedVersion: 2
         x: 576
@@ -621,16 +621,16 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: b5b7b1feaeedca130800000000000000
-      internalID: 3579480904467970907
+      spriteID: 41b012e6a59c0d34fbb90efdb58596de
+      internalID: -870646018
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Archer_Red_16
+      name: Archer_16
       rect:
         serializedVersion: 2
         x: 768
@@ -643,16 +643,16 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: c7314b816a63fec60800000000000000
-      internalID: 7849552762536989564
+      spriteID: 1c71f3923dc361540b1fc0e2fc2144c1
+      internalID: -1138484495
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Archer_Red_17
+      name: Archer_17
       rect:
         serializedVersion: 2
         x: 960
@@ -665,16 +665,16 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 57907f89b712517a0800000000000000
-      internalID: -6407178080133641867
+      spriteID: b08df1e6b38e5c34292a3be864a47d82
+      internalID: 62041336
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Archer_Red_18
+      name: Archer_18
       rect:
         serializedVersion: 2
         x: 1152
@@ -687,16 +687,16 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: d43a625570069dae0800000000000000
-      internalID: -1524081414278569139
+      spriteID: 1daa6cc6f5d23b844927cf36b01b5397
+      internalID: 1962601341
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Archer_Red_19
+      name: Archer_19
       rect:
         serializedVersion: 2
         x: 1344
@@ -709,16 +709,16 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: ead9f2c3de80d7eb0800000000000000
-      internalID: -4720607019404386898
+      spriteID: 24647ab841f5cea4ab65c84896f9f711
+      internalID: 1963306421
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Archer_Red_20
+      name: Archer_20
       rect:
         serializedVersion: 2
         x: 0
@@ -731,16 +731,16 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 188991e052c9016d0800000000000000
-      internalID: -3021743667001321343
+      spriteID: 0630ce7aca5957b42b25ac6e65ea634b
+      internalID: -1966489152
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Archer_Red_21
+      name: Archer_21
       rect:
         serializedVersion: 2
         x: 192
@@ -753,16 +753,16 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: c8036469ef86666d0800000000000000
-      internalID: -2997593059316322164
+      spriteID: 6b92152da4a7b9047821a6a66d95822a
+      internalID: -846074287
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Archer_Red_22
+      name: Archer_22
       rect:
         serializedVersion: 2
         x: 384
@@ -775,16 +775,16 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: f4a05d5996e410890800000000000000
-      internalID: -7493622089575495089
+      spriteID: 5183d8774d68d504ebeb7b87f79c5986
+      internalID: 804946508
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Archer_Red_23
+      name: Archer_23
       rect:
         serializedVersion: 2
         x: 576
@@ -797,16 +797,16 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 9e2c9f4076e43af90800000000000000
-      internalID: -6943619996103097623
+      spriteID: 597ba8fdfb69b5c4a87f6c843c88c78f
+      internalID: -790027153
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Archer_Red_24
+      name: Archer_24
       rect:
         serializedVersion: 2
         x: 768
@@ -819,16 +819,16 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: deb29565b937679e0800000000000000
-      internalID: -1623983504614675475
+      spriteID: 189a489ceefc3704d96ec1dcdc1aa8dd
+      internalID: -1324676321
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Archer_Red_25
+      name: Archer_25
       rect:
         serializedVersion: 2
         x: 960
@@ -841,16 +841,16 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 2377d78cdb79a31c0800000000000000
-      internalID: -4523136034371963086
+      spriteID: 2362e2b85223fd74993dd9d621461860
+      internalID: 1787267744
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Archer_Red_26
+      name: Archer_26
       rect:
         serializedVersion: 2
         x: 1152
@@ -863,16 +863,16 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 1f4c9f8aba5df5440800000000000000
-      internalID: 4926891450617677041
+      spriteID: 7495d11b88e49a44d9fb35803f36867e
+      internalID: 2125555857
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Archer_Red_27
+      name: Archer_27
       rect:
         serializedVersion: 2
         x: 1344
@@ -885,16 +885,16 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: df9289969c9135440800000000000000
-      internalID: 4923307170496784893
+      spriteID: 61ae0e6efdbc4124d9b8773e1a1ce124
+      internalID: -1159339471
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Archer_Red_28
+      name: Archer_28
       rect:
         serializedVersion: 2
         x: 0
@@ -907,16 +907,16 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 41b25d63ec33a0120800000000000000
-      internalID: 2380772313794947860
+      spriteID: 148fb780dfc60ab44aee1a66b5d7eb1a
+      internalID: -565030497
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Archer_Red_29
+      name: Archer_29
       rect:
         serializedVersion: 2
         x: 192
@@ -929,16 +929,16 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 3e5252116308a1250800000000000000
-      internalID: 5916182030208804323
+      spriteID: 1675ca1b7b15def459bdae26f1558833
+      internalID: -1833409724
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Archer_Red_30
+      name: Archer_30
       rect:
         serializedVersion: 2
         x: 384
@@ -951,16 +951,16 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 4044ab939af1d8320800000000000000
-      internalID: 2561738574722122756
+      spriteID: a67a035776309e5459f44f2a1dc49e80
+      internalID: -1668922731
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Archer_Red_31
+      name: Archer_31
       rect:
         serializedVersion: 2
         x: 576
@@ -973,16 +973,16 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 115cfa74b660449f0800000000000000
-      internalID: -485255802015202031
+      spriteID: f8da75aa9f774464ba46f0c678fe2ba1
+      internalID: -1551754366
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Archer_Red_32
+      name: Archer_32
       rect:
         serializedVersion: 2
         x: 768
@@ -995,16 +995,16 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: c7099a87be97c4f30800000000000000
-      internalID: 4561154574868123772
+      spriteID: 40c38a35a0f0f4c439112f0140c68e32
+      internalID: 1524739253
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Archer_Red_33
+      name: Archer_33
       rect:
         serializedVersion: 2
         x: 960
@@ -1017,16 +1017,16 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 5dbce903acff05200800000000000000
-      internalID: 166914430076898261
+      spriteID: 5005c009d48466c4eafcb4fa66fc2619
+      internalID: -1715678100
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Archer_Red_34
+      name: Archer_34
       rect:
         serializedVersion: 2
         x: 1152
@@ -1039,16 +1039,16 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: c0dcce1c417de2330800000000000000
-      internalID: 3688121629015854348
+      spriteID: 99ae472b923319140bad4da47b652b0e
+      internalID: 2021525483
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Archer_Red_35
+      name: Archer_35
       rect:
         serializedVersion: 2
         x: 1344
@@ -1061,16 +1061,16 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: eacbca3250a35e820800000000000000
-      internalID: 2946825324931628206
+      spriteID: 7d1779171f198174fb7ab9c71998a756
+      internalID: -1084390760
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Archer_Red_36
+      name: Archer_36
       rect:
         serializedVersion: 2
         x: 0
@@ -1083,16 +1083,16 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: df4a1f1a30b8c4110800000000000000
-      internalID: 1246524044592915709
+      spriteID: e2446246bf6249b48884dd1275fc0101
+      internalID: 991812378
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Archer_Red_37
+      name: Archer_37
       rect:
         serializedVersion: 2
         x: 192
@@ -1105,16 +1105,16 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: a988fee8b82c4f620800000000000000
-      internalID: 2807082372412967066
+      spriteID: fd8382be6ebfb284398d943c588a1b4b
+      internalID: 1215463359
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Archer_Red_38
+      name: Archer_38
       rect:
         serializedVersion: 2
         x: 384
@@ -1127,16 +1127,16 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: c521dc38aa1c00b60800000000000000
-      internalID: 7710375500158145116
+      spriteID: 621940878af7a364691f8dc951a4748f
+      internalID: -1051694035
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Archer_Red_39
+      name: Archer_39
       rect:
         serializedVersion: 2
         x: 576
@@ -1149,16 +1149,16 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: fc01c828436645c10800000000000000
-      internalID: 2041368906820227279
+      spriteID: c78d261faa5bda34992f6ca67ce66417
+      internalID: 363734668
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Archer_Red_40
+      name: Archer_40
       rect:
         serializedVersion: 2
         x: 768
@@ -1171,16 +1171,16 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 6384e06ba85958200800000000000000
-      internalID: 181715782970787894
+      spriteID: b2e3b8c43e89c4e419af9526d662e296
+      internalID: -1599869948
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Archer_Red_41
+      name: Archer_41
       rect:
         serializedVersion: 2
         x: 960
@@ -1193,16 +1193,16 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 5a11cab22670bd6c0800000000000000
-      internalID: -4117689316079300187
+      spriteID: aab7bf4f81d6108468f7520fd71f8b08
+      internalID: -1116005607
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Archer_Red_42
+      name: Archer_42
       rect:
         serializedVersion: 2
         x: 1152
@@ -1215,16 +1215,16 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 2b274069a1cdc3d30800000000000000
-      internalID: 4412643741660377778
+      spriteID: 12d018a1b5b654941bddfcc54fc22751
+      internalID: -1572566409
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Archer_Red_43
+      name: Archer_43
       rect:
         serializedVersion: 2
         x: 1344
@@ -1237,16 +1237,16 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 95e84048a9a943870800000000000000
-      internalID: 8661717971770838617
+      spriteID: f80196d086aed794d98c7c0f1082b541
+      internalID: 625424395
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Archer_Red_44
+      name: Archer_44
       rect:
         serializedVersion: 2
         x: 0
@@ -1259,16 +1259,16 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: a92edb51d9f964200800000000000000
-      internalID: 163993933469049498
+      spriteID: 1ddc10fdb5484f4419cb95f10324b82c
+      internalID: 1110608675
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Archer_Red_45
+      name: Archer_45
       rect:
         serializedVersion: 2
         x: 192
@@ -1281,16 +1281,16 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: a7c26a430d8116020800000000000000
-      internalID: 2333173364470197370
+      spriteID: 42312312de7a60c4abc691d4e018f117
+      internalID: -596572195
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Archer_Red_46
+      name: Archer_46
       rect:
         serializedVersion: 2
         x: 384
@@ -1303,16 +1303,16 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 6a6f01f0479abef00800000000000000
-      internalID: 1147196846029993638
+      spriteID: d58a62b9db930424b97a81b3afd5aec0
+      internalID: 148263705
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Archer_Red_47
+      name: Archer_47
       rect:
         serializedVersion: 2
         x: 576
@@ -1325,16 +1325,16 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 57717abd898424f60800000000000000
-      internalID: 8017050108030293877
+      spriteID: 9c757a1d87af0c44eb9422ac6f3b1d59
+      internalID: 2038456605
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Archer_Red_48
+      name: Archer_48
       rect:
         serializedVersion: 2
         x: 768
@@ -1347,16 +1347,16 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 358ddbe8df65857f0800000000000000
-      internalID: -623652901369292717
+      spriteID: e6372296080992c439b74e60e0d1ded8
+      internalID: 2052101031
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Archer_Red_49
+      name: Archer_49
       rect:
         serializedVersion: 2
         x: 960
@@ -1369,16 +1369,16 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: e4317be417b3621e0800000000000000
-      internalID: -2223024008222796978
+      spriteID: 799243dc6cd981644bcf3023f2ac92fc
+      internalID: -1140775498
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Archer_Red_50
+      name: Archer_50
       rect:
         serializedVersion: 2
         x: 1152
@@ -1391,16 +1391,16 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 465ca8c9689e38550800000000000000
-      internalID: 6162025479534200164
+      spriteID: 7a16f098bac515c40b2f57b2e27a866b
+      internalID: 598655502
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Archer_Red_51
+      name: Archer_51
       rect:
         serializedVersion: 2
         x: 1344
@@ -1413,10 +1413,10 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 3261051a6163cc340800000000000000
-      internalID: 4885339166613706275
+      spriteID: effdc86e77524114cb55d05d1366b108
+      internalID: -870170532
       vertices: []
       indices: 
       edges: []
@@ -1437,58 +1437,58 @@ TextureImporter:
       - key: SpriteEditor.SliceSettings
         value: '{"sliceOnImport":false,"gridCellCount":{"x":8.0,"y":7.0},"gridSpriteSize":{"x":192.0,"y":192.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":2,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
-      Archer_Red_0: -4400776375116481744
-      Archer_Red_1: 1136124461552903849
-      Archer_Red_10: -3055530344466322971
-      Archer_Red_11: -3316005115636549241
-      Archer_Red_12: 3726790606949586149
-      Archer_Red_13: -3648586840031123400
-      Archer_Red_14: 3453891309040877054
-      Archer_Red_15: 3579480904467970907
-      Archer_Red_16: 7849552762536989564
-      Archer_Red_17: -6407178080133641867
-      Archer_Red_18: -1524081414278569139
-      Archer_Red_19: -4720607019404386898
-      Archer_Red_2: 126929281214319637
-      Archer_Red_20: -3021743667001321343
-      Archer_Red_21: -2997593059316322164
-      Archer_Red_22: -7493622089575495089
-      Archer_Red_23: -6943619996103097623
-      Archer_Red_24: -1623983504614675475
-      Archer_Red_25: -4523136034371963086
-      Archer_Red_26: 4926891450617677041
-      Archer_Red_27: 4923307170496784893
-      Archer_Red_28: 2380772313794947860
-      Archer_Red_29: 5916182030208804323
-      Archer_Red_3: -622083725890771740
-      Archer_Red_30: 2561738574722122756
-      Archer_Red_31: -485255802015202031
-      Archer_Red_32: 4561154574868123772
-      Archer_Red_33: 166914430076898261
-      Archer_Red_34: 3688121629015854348
-      Archer_Red_35: 2946825324931628206
-      Archer_Red_36: 1246524044592915709
-      Archer_Red_37: 2807082372412967066
-      Archer_Red_38: 7710375500158145116
-      Archer_Red_39: 2041368906820227279
-      Archer_Red_4: -4222610557812350838
-      Archer_Red_40: 181715782970787894
-      Archer_Red_41: -4117689316079300187
-      Archer_Red_42: 4412643741660377778
-      Archer_Red_43: 8661717971770838617
-      Archer_Red_44: 163993933469049498
-      Archer_Red_45: 2333173364470197370
-      Archer_Red_46: 1147196846029993638
-      Archer_Red_47: 8017050108030293877
-      Archer_Red_48: -623652901369292717
-      Archer_Red_49: -2223024008222796978
-      Archer_Red_5: -8573953027354753612
-      Archer_Red_50: 6162025479534200164
-      Archer_Red_51: 4885339166613706275
-      Archer_Red_6: 7730236880828550387
-      Archer_Red_7: 7384206803078448407
-      Archer_Red_8: -644584665483635374
-      Archer_Red_9: 6972283758920586944
+      Archer_0: -1034106226
+      Archer_1: 181172355
+      Archer_10: 1163402668
+      Archer_11: 1409392458
+      Archer_12: 407953177
+      Archer_13: 1505500744
+      Archer_14: -370901405
+      Archer_15: -870646018
+      Archer_16: -1138484495
+      Archer_17: 62041336
+      Archer_18: 1962601341
+      Archer_19: 1963306421
+      Archer_2: -701271201
+      Archer_20: -1966489152
+      Archer_21: -846074287
+      Archer_22: 804946508
+      Archer_23: -790027153
+      Archer_24: -1324676321
+      Archer_25: 1787267744
+      Archer_26: 2125555857
+      Archer_27: -1159339471
+      Archer_28: -565030497
+      Archer_29: -1833409724
+      Archer_3: 1302308274
+      Archer_30: -1668922731
+      Archer_31: -1551754366
+      Archer_32: 1524739253
+      Archer_33: -1715678100
+      Archer_34: 2021525483
+      Archer_35: -1084390760
+      Archer_36: 991812378
+      Archer_37: 1215463359
+      Archer_38: -1051694035
+      Archer_39: 363734668
+      Archer_4: -1440868043
+      Archer_40: -1599869948
+      Archer_41: -1116005607
+      Archer_42: -1572566409
+      Archer_43: 625424395
+      Archer_44: 1110608675
+      Archer_45: -596572195
+      Archer_46: 148263705
+      Archer_47: 2038456605
+      Archer_48: 2052101031
+      Archer_49: -1140775498
+      Archer_5: 325987314
+      Archer_50: 598655502
+      Archer_51: -870170532
+      Archer_6: 416547647
+      Archer_7: -709928903
+      Archer_8: 1751632560
+      Archer_9: 1909833414
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

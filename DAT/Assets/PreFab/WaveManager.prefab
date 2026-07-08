@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1850861697525511079}
   - component: {fileID: 5541676087779452096}
   m_Layer: 0
-  m_Name: EnemySpawner
+  m_Name: WaveManager
   m_TagString: EnemySpawner
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -45,43 +45,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 773dbae7ec77a1f4da342ebef67e89b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WaveManager
-  waveManagers:
-  - Wave: 0
-    Enemys: []
-    SpawnInterval: 0
-    MaxSpawnEnemy: 0
-    WaveDuration: Infinity
-  - Wave: 1
-    Enemys:
-    - {fileID: 4419746953452864637, guid: f6545e77c56c98841962ce3e926c813d, type: 3}
-    SpawnInterval: 1
-    MaxSpawnEnemy: 5
-    WaveDuration: 15
-  - Wave: 2
-    Enemys:
-    - {fileID: 4419746953452864637, guid: f6545e77c56c98841962ce3e926c813d, type: 3}
-    SpawnInterval: 0.5
-    MaxSpawnEnemy: 5
-    WaveDuration: 15
-  - Wave: 3
-    Enemys:
-    - {fileID: 5305959905322829476, guid: d92832bfae1b1e942af050f14e2897c3, type: 3}
-    SpawnInterval: 1
-    MaxSpawnEnemy: 1
-    WaveDuration: Infinity
-  - Wave: 4
-    Enemys: []
-    SpawnInterval: 0
-    MaxSpawnEnemy: 0
-    WaveDuration: 5
+  levelDatas:
+  - {fileID: 11400000, guid: c10e33d74aae3484085282ee6b525be3, type: 2}
+  - {fileID: 11400000, guid: 502a89d77fa309246b17116cf0fb8395, type: 2}
+  - {fileID: 11400000, guid: d06e48c99bae6454aa6bceb9978c6a0b, type: 2}
+  currentLevelIndex: 0
+  nextLevelWaitSec: 3
   waveTimer: 0
   currentWaveState: 0
   nextWaveState: 0
   currentWaveData:
     Wave: 0
-    Enemys: []
+    SpawnOrder: []
     SpawnInterval: 0
-    MaxSpawnEnemy: 0
+    MaxAliveEnemy: 0
     WaveDuration: 0
 --- !u!114 &5541676087779452096
 MonoBehaviour:
@@ -96,11 +73,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemySpawner
   spawnIntervalSec: 0.6
-  maxEnemy: 10
+  maxAliveEnemy: 10
   enemyCount: 0
   enemyVariations: 0
   totalSpawnCount: 0
-  WeakTorcher: {fileID: 4419746953452864637, guid: f6545e77c56c98841962ce3e926c813d, type: 3}
-  enemyList: []
-  field: []
   spawnPos: {x: 0, y: 0}
+  spawnOrder: []
+  field: []

@@ -3,22 +3,21 @@ using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {
+    [Header("Spawn Settings")]
     [SerializeField] private float spawnIntervalSec = 2.0f;
-    [SerializeField] private int maxEnemy = 10;
+    [SerializeField] private int maxAliveEnemy = 10;
+
+    [Header("Debug")]
     [SerializeField] private int enemyCount = 0;
     [SerializeField] private int enemyVariations = 0;
     [SerializeField] private int totalSpawnCount = 0;
+    [SerializeField] private Vector2 spawnPos = Vector2.zero;
 
-    [SerializeField] private GameObject WeakTorcher;
+    [Header("Runtime Lists")]
+    [SerializeField] private List<GameObject> spawnOrder = new List<GameObject>();
+    [SerializeField] private List<GameObject> field = new List<GameObject>();
 
-    [SerializeField] private List<GameObject> enemyList = new List<GameObject>(); 
-    [SerializeField] private List<GameObject> field = new List<GameObject>(); 
-    // ほかの敵も追加していく
-
-
-    float timer = 0;
-
-    [SerializeField] Vector2 spawnPos = Vector2.zero;
+    private float timer = 0;
 
     private void Start()
     {
@@ -30,24 +29,20 @@ public class EnemySpawner : MonoBehaviour
         timer += Time.deltaTime;
     }
 
-    void FixedUpdate()
+    private void FixedUpdate()
     {
         SpawnEnemy();
-
     }
+
     /// <summary>
     /// 敵のスポーンカウントを減らす
     /// </summary>
-    /// <param name="deleteObj">削除したオブジェクト</param>
     public void DestroyEnemy(GameObject deleteObj)
     {
         if (!field.Contains(deleteObj)) return;
 
         field.Remove(deleteObj);
-
         enemyCount--;
-
-        return;
     }
 
     /// <summary>
@@ -55,11 +50,22 @@ public class EnemySpawner : MonoBehaviour
     /// </summary>
     public void ClearField()
     {
-        var delete = new List<GameObject>(field);
+        var deleteList = new List<GameObject>(field);
 
-        foreach (var data in delete)
+        foreach (var enemy in deleteList)
         {
-            data.GetComponent<EnemyController>().Delete();
+            if (enemy == null) continue;
+
+            var enemyController = enemy.GetComponent<EnemyController>();
+
+            if (enemyController != null)
+            {
+                enemyController.Delete();
+            }
+            else
+            {
+                Destroy(enemy);
+            }
         }
 
         enemyCount = 0;
@@ -69,29 +75,40 @@ public class EnemySpawner : MonoBehaviour
     /// <summary>
     /// スポーン条件の変更
     /// </summary>
-    /// <param name="spawnInterval">スポーンの間隔</param>
-    /// <param name="spawnMax">スポーン上限</param>
-    public void UpdataSpawner(float spawnInterval, int spawnMax, GameObject[] enemys)
+    public void UpdateSpawner(float spawnInterval, int maxAlive, GameObject[] newSpawnOrder)
     {
         spawnIntervalSec = spawnInterval;
-        maxEnemy = spawnMax;
-        enemyVariations = enemys.Length;
+        maxAliveEnemy = maxAlive;
 
-        // リストを空にする
-        enemyList.Clear();
+        spawnOrder.Clear();
 
-        // リストに敵の一覧を追加
-        foreach (var data in enemys)
+        if (newSpawnOrder != null)
         {
-            enemyList.Add(data);
+            foreach (var enemyPrefab in newSpawnOrder)
+            {
+                if (enemyPrefab == null) continue;
+
+                spawnOrder.Add(enemyPrefab);
+            }
         }
+
+        enemyVariations = spawnOrder.Count;
+
+        // Waveごとに固定順の先頭から始める
+        totalSpawnCount = 0;
+
+        // Wave切り替え直後にすぐ出したい場合は spawnIntervalSec にする
+        timer = spawnIntervalSec;
     }
-    // スポーン位置の設定
+
+    /// <summary>
+    /// スポーン位置の設定
+    /// </summary>
     private Vector2 SetSpawnPos()
     {
         const int width = 9;
         const int height = 5;
-        const int widthRangw = 13;
+        const int widthRange = 13;
         const int heightRange = 9;
 
         int dirX = Random.Range(0, 2);
@@ -100,48 +117,54 @@ public class EnemySpawner : MonoBehaviour
         int spawnX = 0;
         int spawnY = 0;
 
-        if (dirY == 1)  // 上側にスポーン
+        if (dirY == 1)
         {
-            spawnX = Random.Range(0, widthRangw) * dirX;
+            spawnX = Random.Range(0, widthRange);
+
+            if (dirX == 0)
+            {
+                spawnX *= -1;
+            }
+
             spawnY = Random.Range(height, heightRange);
         }
-        else if (dirY == 0)
+        else
         {
-            spawnX = Random.Range(width, widthRangw);
-            if (dirX == 0) spawnX *= -1;   // 0なら左
-            else spawnX *= 1;   // それ以外は右にスポーン
+            spawnX = Random.Range(width, widthRange);
+
+            if (dirX == 0)
+            {
+                spawnX *= -1;
+            }
 
             spawnY = Random.Range(0, height);
         }
+
         return new Vector2(spawnX, spawnY);
     }
-    // スポーン処理
+
+    /// <summary>
+    /// スポーン処理
+    /// </summary>
     private void SpawnEnemy()
     {
         if (enemyVariations <= 0) return;
         if (timer < spawnIntervalSec) return;
+        if (enemyCount >= maxAliveEnemy) return;
 
-        // 敵のスポーン上限未満
-        if (maxEnemy > enemyCount)
-        {
-            timer = 0;
+        timer = 0;
 
-            spawnPos = SetSpawnPos();
+        spawnPos = SetSpawnPos();
 
-            // リストの長さに制限
-            int nextNum = totalSpawnCount % enemyVariations;
+        int nextNum = totalSpawnCount % enemyVariations;
+        GameObject nextSpawn = spawnOrder[nextNum];
 
-            GameObject nextSpawn = enemyList[nextNum];
+        GameObject newObj = Instantiate(nextSpawn, transform);
+        newObj.transform.localPosition = spawnPos;
 
-            GameObject newObj = Instantiate(nextSpawn, this.transform);
+        field.Add(newObj);
 
-            newObj.transform.localPosition = spawnPos;
-
-            field.Add(newObj);
-
-            enemyCount++;
-            totalSpawnCount++;
-        }
-
+        enemyCount++;
+        totalSpawnCount++;
     }
 }

@@ -16,49 +16,16 @@ public class EnemyHpManager : MonoBehaviour
         Level3Scene,
         ClearScene
     }
-    // アプローチはこれで良さそう
-    // WaveManager側でこれをおこなう
 
-    //[SerializeField] private bool BossObject;
-    //[SerializeField] private NextScene nextScene = NextScene.None;
-    //[SerializeField] private float TimeTochangeScene;   // 次のシーンに行くまでの猶予時間
-    /*
-    private void Update()
+    private void CheckDie()
     {
-        if (!BossObject) return;    // ボスオブジェクトじゃないなら
-        if (!CheckDie()) return;    // 体力が0より多いいなら
-        if (nextScene == NextScene.None) return;    // 次のシーンがNone(初期値)なら
-
-        TimeTochangeScene -= Time.deltaTime;
-        if (TimeTochangeScene < 0)  // 指定時間経過したら
+        if (hp <= 0)
         {
-            ChangeScene();
+            GameObject.FindWithTag("EnemySpawner").
+                GetComponent<WaveManager>().
+                NotifyBossDefeated();
         }
-    }*/
-
-    private bool CheckDie()
-    {
-        if (hp <= 0) { return true; }
-        else { return false; }
     }
-    /*
-    private void ChangeScene()
-    {
-        switch (nextScene)
-        {
-            case NextScene.Level2Scene:
-                SceneManager.LoadScene("Level2Scene");
-                break;
-
-            case NextScene.Level3Scene:
-                SceneManager.LoadScene("Level3Scene");
-                break;
-            
-            case NextScene.ClearScene:
-                SceneManager.LoadScene("ClesrScene");
-                break;
-        }
-    }*/
 
     public int GetCurrentHp()
     {
@@ -69,6 +36,8 @@ public class EnemyHpManager : MonoBehaviour
     {
         takeDamage = true;
         hp -= dmg;
+
+        CheckDie();
     }
 
     public bool TakeDamage()

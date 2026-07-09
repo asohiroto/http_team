@@ -67,6 +67,8 @@ public class WaveManager : MonoBehaviour
         // デバッグ用
         if (Input.GetKey(KeyCode.P) && waveTimer > 0.1f)
         {
+            if (currentWaveState == WaveState.LevelClearWait) return;
+
             waveTimer = 0.1f;
 
             if (currentWaveState == WaveState.Boss)

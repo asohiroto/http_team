@@ -473,6 +473,8 @@ public class CardEffectManager : MonoBehaviour
             skillPrefab = obj;
 
             flag = true; // フラグを立てる
+
+            AudioSource.PlayClipAtPoint(skill.GetComponent<AudioSource>().clip, obj.transform.position);
         }
     }
 
@@ -483,6 +485,8 @@ public class CardEffectManager : MonoBehaviour
         GameObject obj = GameObject.Instantiate(skill);
         obj.transform.position = objPos;
         obj.transform.name = name;
+
+        AudioSource.PlayClipAtPoint(obj.GetComponent<AudioSource>().clip, obj.transform.position);
 
         skillPrefab = obj;
     }

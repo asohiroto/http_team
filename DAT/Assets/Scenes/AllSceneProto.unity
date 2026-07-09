@@ -633,7 +633,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6675a67114a2b56408b375d55ecdd67a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WaveTimerUI
-  waveManager: {fileID: 0}
+  waveManager: {fileID: 1894044398}
   timerText: {fileID: 78481945}
   waveText: {fileID: 1324891765}
 --- !u!1 &81229759
@@ -11919,6 +11919,17 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+--- !u!114 &1894044398 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1850861697525511079, guid: 4e6160ede5aeff34da0c04b14a70f739, type: 3}
+  m_PrefabInstance: {fileID: 692033538}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 773dbae7ec77a1f4da342ebef67e89b2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WaveManager
 --- !u!1 &1894311055
 GameObject:
   m_ObjectHideFlags: 0

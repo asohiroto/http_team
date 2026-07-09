@@ -4028,7 +4028,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\u518D\u958B"
+  m_text: Resume
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 98b56f733c9056245a8e38df32b53219, type: 2}
   m_sharedMaterial: {fileID: 7479633546364413261, guid: 98b56f733c9056245a8e38df32b53219, type: 2}
@@ -5826,7 +5826,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\u30BF\u30A4\u30C8\u30EB"
+  m_text: Title
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 98b56f733c9056245a8e38df32b53219, type: 2}
   m_sharedMaterial: {fileID: 7479633546364413261, guid: 98b56f733c9056245a8e38df32b53219, type: 2}
@@ -5982,7 +5982,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 68, y: 92}
+  m_AnchoredPosition: {x: 27.268, y: 79.515}
   m_SizeDelta: {x: 116.0145, y: 96.5234}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1067387610
@@ -6262,7 +6262,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\u64CD\u4F5C\u65B9\u6CD5"
+  m_text: Manual
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 98b56f733c9056245a8e38df32b53219, type: 2}
   m_sharedMaterial: {fileID: 7479633546364413261, guid: 98b56f733c9056245a8e38df32b53219, type: 2}

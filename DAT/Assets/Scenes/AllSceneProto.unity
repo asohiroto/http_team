@@ -1196,8 +1196,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -1.8, y: 42.9}
-  m_SizeDelta: {x: 924.5078, y: 95.589}
+  m_AnchoredPosition: {x: 0.0000019073, y: 42.4}
+  m_SizeDelta: {x: 438.29883, y: 95.589}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &143673192
 MonoBehaviour:
@@ -5982,7 +5982,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 27.268, y: 79.515}
+  m_AnchoredPosition: {x: 4.4332, y: 102}
   m_SizeDelta: {x: 116.0145, y: 96.5234}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1067387610
@@ -11471,6 +11471,10 @@ PrefabInstance:
     - target: {fileID: 6972847561923571322, guid: 72368c3ace190314781b837ac1350b59, type: 3}
       propertyPath: m_Name
       value: MoneyText
+      objectReference: {fileID: 0}
+    - target: {fileID: 9168832875436751772, guid: 72368c3ace190314781b837ac1350b59, type: 3}
+      propertyPath: m_text
+      value: Coin
       objectReference: {fileID: 0}
     - target: {fileID: 9168832875436751772, guid: 72368c3ace190314781b837ac1350b59, type: 3}
       propertyPath: m_fontAsset

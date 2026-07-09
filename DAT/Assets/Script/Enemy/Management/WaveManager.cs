@@ -65,7 +65,7 @@ public class WaveManager : MonoBehaviour
         waveTimer -= Time.deltaTime;
 
         // デバッグ用
-        if (Input.GetKey(KeyCode.M) && waveTimer > 0.1f)
+        if (Input.GetKey(KeyCode.P) && waveTimer > 0.1f)
         {
             waveTimer = 0.1f;
 

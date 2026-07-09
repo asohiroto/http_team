@@ -21,6 +21,7 @@ public class InformationManager : MonoBehaviour
 
         changer.CardChange(libManager.cardId);
 
+        cardImage.sprite = changer.cardImage;
         cardName.text = changer.cardName;
         cardEffect.text = changer.cardEffect;
 

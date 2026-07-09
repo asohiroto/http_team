@@ -91,7 +91,7 @@ SpriteRenderer:
   m_Size: {x: 0.14, y: 0.14}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_SpriteSortPoint: 0
 --- !u!114 &8567308566709761340
 MonoBehaviour:
@@ -106,16 +106,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SkillAttack
   attackSprite:
-  - {fileID: -4913982344839117222, guid: 51e448752637ebf47b1427915ef4e6b4, type: 3}
-  - {fileID: -575696589628924425, guid: 2dfd2e22df49da74f856fb590651f43d, type: 3}
-  - {fileID: -1679085568475732275, guid: 5dc9bf6e90d323542a56bd2d306d4898, type: 3}
-  - {fileID: -4960229840327395196, guid: 1cc755436b04053459409aa33a146a2f, type: 3}
-  - {fileID: -8398409672689469449, guid: cf9e67dbe34d5cd468b2930e636f68d3, type: 3}
-  - {fileID: -6658418643737043593, guid: eb5bf948b8723a04da4ec1a26d6cc4d3, type: 3}
-  - {fileID: 6490354421893865411, guid: 0e5649cdc6fb11146afd925991136a07, type: 3}
-  - {fileID: -3047093270054505527, guid: a241f9ec318dcc14f8ba847884d319b0, type: 3}
-  - {fileID: 417835678940605132, guid: 9b2e1730e5948784888e3863fc9d08d3, type: 3}
-  - {fileID: 6216626595070851197, guid: 6696f3c2b32a6ad4a9a1bf32f5d6e92e, type: 3}
+  - {fileID: 21300000, guid: 51e448752637ebf47b1427915ef4e6b4, type: 3}
+  - {fileID: 21300000, guid: 2dfd2e22df49da74f856fb590651f43d, type: 3}
+  - {fileID: 21300000, guid: 5dc9bf6e90d323542a56bd2d306d4898, type: 3}
+  - {fileID: 21300000, guid: 1cc755436b04053459409aa33a146a2f, type: 3}
+  - {fileID: 21300000, guid: cf9e67dbe34d5cd468b2930e636f68d3, type: 3}
+  - {fileID: 21300000, guid: eb5bf948b8723a04da4ec1a26d6cc4d3, type: 3}
+  - {fileID: 21300000, guid: 0e5649cdc6fb11146afd925991136a07, type: 3}
+  - {fileID: 21300000, guid: a241f9ec318dcc14f8ba847884d319b0, type: 3}
+  - {fileID: 21300000, guid: 9b2e1730e5948784888e3863fc9d08d3, type: 3}
+  - {fileID: 21300000, guid: 6696f3c2b32a6ad4a9a1bf32f5d6e92e, type: 3}
+  animTime: 0.05
   attackDamage: 5
 --- !u!61 &3663146617268249231
 BoxCollider2D:

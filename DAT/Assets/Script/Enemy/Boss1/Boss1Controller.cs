@@ -55,11 +55,16 @@ public class Boss1Controller : MonoBehaviour
     [SerializeField] private float attackStartDistance;
 
     // 攻撃設定
+    [Header("攻撃前の時間")]
+    [SerializeField] private float attackStartUpDuration;
+    [SerializeField] private float OnAttackColDuration;
+
     [Header("Attack 1")]
     [SerializeField] private int attack1Power;
     [SerializeField] private AttackTiming attack1Timing;
 
     [Header("Attack 2")]
+    [SerializeField] private Vector2 attackStartPos;
     [SerializeField] private int attack2Power;
     [SerializeField] private AttackTiming attack2Timing;
 
@@ -255,6 +260,7 @@ public class Boss1Controller : MonoBehaviour
     {
         // 攻撃の種類をランダムに設定
         currentAttack = SelectRandomAttack();
+        //currentAttack = AttackType.Attack1;
 
         switch (currentAttack)
         {
@@ -266,6 +272,7 @@ public class Boss1Controller : MonoBehaviour
 
             case AttackType.Attack2:
 
+                attackStartPos = this.transform.position;
                 StartAttack2();
 
                 break;
@@ -307,6 +314,28 @@ public class Boss1Controller : MonoBehaviour
                 return AttackType.Attack1;
         }
 
+    }
+
+    /* 攻撃前待機 */
+    private void WaitAttack()
+    {
+        attackStartUpDuration -= Time.fixedDeltaTime;
+        if (attackStartUpDuration > 0.0f) { return; }
+
+        switch (currentAttack)
+        {
+            case AttackType.Attack1:
+
+                StartAttack1();
+
+                break;
+
+            case AttackType.Attack2:
+
+                StartAttack2();
+
+                break;
+        }
     }
 
     /* 攻撃のアニメーション、攻撃力の設定 */
@@ -454,10 +483,13 @@ public class Boss1Controller : MonoBehaviour
             attack1HitboxPrefab,
             bossPos + spawnPos,
             Quaternion.identity);
-
+#if true
         EnemyAttack attack = activeAttackHitbox.GetComponent<EnemyAttack>();
-
         attack.SetAttackPower(attack1Power);
+#else
+        Boss1AttackCol attack = activeAttackHitbox.GetComponent<Boss1AttackCol>();
+        attack.InitAttackCol(attack1Power, attackStartUpDuration, OnAttackColDuration);
+#endif
     }
 
     private void ActivateAttack2()
@@ -478,10 +510,13 @@ public class Boss1Controller : MonoBehaviour
             attack2HitboxPrefab,
             bossPos + spawnPos,
             Quaternion.identity);
-
+#if true
         EnemyAttack attack = activeAttackHitbox.GetComponent<EnemyAttack>();
-
         attack.SetAttackPower(attack2Power);
+#else
+        Boss1AttackCol attack = activeAttackHitbox.GetComponent<Boss1AttackCol>();
+        attack.InitAttackCol(attack2Power, attackStartUpDuration, OnAttackColDuration);
+#endif
     }
 
     private void SummonMinions()

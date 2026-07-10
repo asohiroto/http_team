@@ -15,7 +15,6 @@ GameObject:
   - component: {fileID: 4086781527514485160}
   - component: {fileID: 2272147294719928512}
   - component: {fileID: 5481525606464668104}
-  - component: {fileID: 4913417331424056217}
   m_Layer: 0
   m_Name: Boss1
   m_TagString: Enemy
@@ -387,20 +386,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::BossHpUi
   bossHpManager: {fileID: 1164403578555851883}
   hpImage: {fileID: 8418416263207904084}
---- !u!114 &4913417331424056217
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5305959905322829476}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5ababaf8784537e4d991b815f5523dc8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::HpFollowTarget
-  target: {fileID: 1062505938455611393}
-  offset: {x: -0.8, y: -0.5, z: 0}
 --- !u!1 &8561911216121118242
 GameObject:
   m_ObjectHideFlags: 0
@@ -511,6 +496,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2369882240318598057}
     m_Modifications:
+    - target: {fileID: 1821056836920314549, guid: 2f1c691c3e5063a4b8e0c6e2e2969c47, type: 3}
+      propertyPath: target
+      value: 
+      objectReference: {fileID: 1062505938455611393}
     - target: {fileID: 2029519549268962386, guid: 2f1c691c3e5063a4b8e0c6e2e2969c47, type: 3}
       propertyPath: m_FillAmount
       value: 1

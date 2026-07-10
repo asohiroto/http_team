@@ -6,7 +6,10 @@ public class HpFollowTarget : MonoBehaviour
     private RectTransform rectTransform;
     private Camera mainCamera;
 
-    void Start() { rectTransform = GetComponent<RectTransform>(); mainCamera = Camera.main; }
+    void Start() 
+    { 
+        rectTransform = GetComponent<RectTransform>(); mainCamera = Camera.main;
+    }
     void LateUpdate()
     {
         if (target == null || mainCamera == null) return;

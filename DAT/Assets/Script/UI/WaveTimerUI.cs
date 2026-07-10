@@ -14,6 +14,11 @@ public class WaveTimerUI : MonoBehaviour
 
     void Update()
     {
+        if (waveManager != null)
+        {
+            Debug.Log("UIが読み取っている状態: " + waveManager.GetCurrentWaveState());
+        }
+
         // テキストがセットされていないとエラー
         if (waveManager == null || timerText == null || waveText == null) return;
 
@@ -37,8 +42,9 @@ public class WaveTimerUI : MonoBehaviour
 
             case WaveState.Boss:
                 waveText.text = "<ボスを倒せ!>";
-                timerText.gameObject.SetActive(false); //タイマーテキスト非表示
                 break;
+
+            
 
             case WaveState.Interval:
                 waveText.text = "<NEXT WAVE>";
@@ -47,7 +53,20 @@ public class WaveTimerUI : MonoBehaviour
 
             case WaveState.Shop:
                 waveText.text = "<SHOP>";
-                timerText.gameObject.SetActive(false);
+                break;
+            
+            case WaveState.LevelClearWait:
+                int currentLevel = waveManager.GetCurrentLevelIndex();
+
+                if (currentLevel >= 2)
+                {
+                    waveText.text = "Congratulations!";
+                    timerText.gameObject.SetActive(false);
+                }
+                else
+                {
+                    waveText.text = "<LEVEL CLEAR!>";
+                }
                 break;
 
             default:
@@ -61,13 +80,17 @@ public class WaveTimerUI : MonoBehaviour
         {
             // 0秒以下にならない
             timerText.text = "00:00";
-            return;
+            // return;
+        }
+        else
+        {
+            // 時間をテキストに変換表示
+            int minutes = Mathf.FloorToInt(timeLeft / 60f);
+            int seconds = Mathf.FloorToInt(timeLeft % 60f);
+
+            timerText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
         }
 
-        // 時間をテキストに変換表示
-        int minutes = Mathf.FloorToInt(timeLeft / 60f);
-        int seconds = Mathf.FloorToInt(timeLeft % 60f);
 
-        timerText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
     }
 }

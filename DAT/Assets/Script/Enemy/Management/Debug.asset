@@ -20,9 +20,9 @@ MonoBehaviour:
     WaveDuration: 5
   - Wave: 1
     SpawnOrder:
-    - {fileID: 8115487165350933218, guid: da56931d73dcc3f46b09e5ce3cb615fa, type: 3}
-    - {fileID: 8115487165350933218, guid: da56931d73dcc3f46b09e5ce3cb615fa, type: 3}
-    - {fileID: 8115487165350933218, guid: da56931d73dcc3f46b09e5ce3cb615fa, type: 3}
+    - {fileID: 2783928273017862963, guid: 52ba7e743cc138c46ae4f23df4495d3b, type: 3}
+    - {fileID: 2783928273017862963, guid: 52ba7e743cc138c46ae4f23df4495d3b, type: 3}
+    - {fileID: 2783928273017862963, guid: 52ba7e743cc138c46ae4f23df4495d3b, type: 3}
     SpawnInterval: 2.5
     MaxAliveEnemy: 5
     WaveDuration: Infinity

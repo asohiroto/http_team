@@ -75,6 +75,11 @@ public class EneBoss2 : MonoBehaviour
 
     // 衝突時の変数-----------------------------------
     BoxCollider2D boxCol;
+
+    // SEの変数--------------------------------------
+    [SerializeField] GameObject sePrefab;
+    GameObject seObj;
+    SEManager se;
     float colDamage; // 敵ボスとプレイヤーが衝突したときに与えるダメージ
     void Start()
     {
@@ -83,6 +88,8 @@ public class EneBoss2 : MonoBehaviour
         currentPos = transform.position;
         playerObj = GameObject.Find("Player");
         playerCtrl = playerObj.GetComponent<PlayerController>();
+        seObj = Instantiate(sePrefab);
+        se = seObj.GetComponent<SEManager>();
         followPlayer = true; // 仮
     }
 
@@ -261,6 +268,7 @@ public class EneBoss2 : MonoBehaviour
                     if (dir < 0) meleeObj.transform.rotation = Quaternion.Euler(0, 180, 90);
                     Destroy(meleeRangeObj);
                     isMeleeAttack = true;
+                    se.PlaySE(0);
                     state = State.Idle;
                 }
                 break;
@@ -281,6 +289,7 @@ public class EneBoss2 : MonoBehaviour
             Instantiate(missilePrefab, transform);
             missileIdx++;
             missileFrameTimer = 0;
+            se.PlaySE(1);
         }
     }
 
@@ -294,11 +303,17 @@ public class EneBoss2 : MonoBehaviour
             case StampState.Jump:
                 if (currentPos.y <= jumpHeight)
                 {
+                    if(!isAttackReach)
+                    {
+                        se.PlaySE(4);
+                        isAttackReach = true;
+                    }
                     // ジャンプの高さまで飛び上がる
                     currentPos += Vector3.up * jumpSpeed;
                 }
                 else
                 {
+                    isAttackReach = false;
                     // ジャンプ終了後、エイム状態へ遷移
                     stampState = StampState.Aim;
                 }
@@ -374,6 +389,8 @@ public class EneBoss2 : MonoBehaviour
                     // 攻撃範囲と警告マークを消す
                     Destroy(stampAttackReachObj);
                     Destroy(cautionObj);
+                    // 着磁後にSEを再生
+                    se.PlaySE(3);
                     state = State.Idle;
                 }
                 break;

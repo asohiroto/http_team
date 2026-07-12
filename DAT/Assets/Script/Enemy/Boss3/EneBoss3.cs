@@ -94,6 +94,10 @@ public class EneBoss3 : MonoBehaviour
     // 方向の向きを管理する----------------------------
     int dir = 0;
     bool isAttack = false;
+    // SE用の変数
+    SEManager se;
+    [SerializeField] GameObject sePrefab;
+    GameObject seObj;
 
 void Start()
     {
@@ -115,6 +119,8 @@ void Start()
         };
         stateCount = Enum.GetNames(typeof(State)).Length;
         lastAttack = state;
+        seObj = Instantiate(sePrefab);
+        se = seObj.GetComponent<SEManager>();
     }
 
     // Update is called once per frame

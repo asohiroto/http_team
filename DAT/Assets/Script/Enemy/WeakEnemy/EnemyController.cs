@@ -45,6 +45,7 @@ public class EnemyController : MonoBehaviour
     private EnemyHpManager hpManager;
     private EnemySpawner enemySpawner;
     [SerializeField] private GameObject attackObj;
+    [SerializeField] private GameObject arrowObj;
 
     private enum EnemyType  // 敵の種類 インスペクターで設定
     {
@@ -433,6 +434,7 @@ public class EnemyController : MonoBehaviour
     /// </summary>
     void StartAttack()
     {
+        //Debug.Log("StartAttack");
         switch (enemyType)
         {
             case EnemyType.Torcher:
@@ -455,6 +457,8 @@ public class EnemyController : MonoBehaviour
     /// </summary>
     void TorcherAttack()
     {
+        Debug.Log("TorcherAttack");
+
         attackObj = Instantiate(attackCol, this.transform);
 
         attackObj.GetComponent<EnemyAttack>().SetAttackPower(attackPower);
@@ -468,9 +472,11 @@ public class EnemyController : MonoBehaviour
     /// </summary>
     void ArcherAttack()
     {
-        attackObj = Instantiate(attackCol, transform);
+        Debug.Log("ArcherAttack");
 
-        attackObj.GetComponent<ArrowController>().SetArrowAttack(targetDir, playerPos);
+        arrowObj = Instantiate(attackCol, transform.position, Quaternion.identity);
+
+        arrowObj.GetComponent<ArrowController>().SetArrowAttack(targetDir, playerPos, attackPower);
     }
 
     /// <summary>

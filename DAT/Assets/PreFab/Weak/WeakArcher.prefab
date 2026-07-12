@@ -130,10 +130,10 @@ MonoBehaviour:
   findDist: 0
   lostDist: 0
   stopDist: 3
-  attackRange: 0
+  attackRange: 5
   attackStartupDuration: 0.3
-  attackCooldownDuration: 1.2
-  attackOnColliderDuration: 0.5
+  attackCooldownDuration: 1
+  attackOnColliderDuration: 0.3
   enemyPos: {x: 0, y: 0}
   playerPos: {x: 0, y: 0}
   targetDir: {x: 0, y: 0}
@@ -147,8 +147,9 @@ MonoBehaviour:
   playerObj: {fileID: 0}
   DropParentObj: {fileID: 0}
   DropItemPrefab: {fileID: 4876145872219913294, guid: 40446f423e254a642a122f7e36b0e8fa, type: 3}
-  attackCol: {fileID: 0}
+  attackCol: {fileID: 2034667142315627324, guid: c07e0d1ac79122d4e9c90986df12962a, type: 3}
   attackObj: {fileID: 0}
+  arrowObj: {fileID: 0}
   enemyAiState: 6
   enemyMovePattern: 6
 --- !u!114 &6341241144745145490

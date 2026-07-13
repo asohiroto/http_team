@@ -18,8 +18,6 @@ public class EneBoss2 : MonoBehaviour
     GameObject playerObj;
     PlayerController playerCtrl;
     [SerializeField] public int attackPower = 0;
-    [SerializeField] float attackWaitingTime = 0.1f;
-    [SerializeField] float showAttackRangeTime = 3.0f;
     bool isAttackWaiting = false;
     bool isGetPosition = false;
     float idleFrame = 30;
@@ -27,7 +25,6 @@ public class EneBoss2 : MonoBehaviour
     // 範囲攻撃の変数---------------------------------
     enum StampState { Jump, Aim, Stamp } // スタンプ攻撃の状態を管理する
     StampState stampState;
-    [SerializeField] float attackTime = 1.0f;
     [SerializeField] GameObject rangeAttackObj;
     [SerializeField] GameObject stampAttackReach;
     [SerializeField] GameObject cautionEffectPrefab;

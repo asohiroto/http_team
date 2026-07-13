@@ -32,7 +32,6 @@ public class EneBoss3 : MonoBehaviour
     GameObject beamObj;
     GameObject beamRangeObj;
     Vector3 beamPos = Vector3.zero;
-    float beamFlipX = 0;
     float beamRotAdjZ = -90;
     int beamFrameTimer = 0;
     int beamRangeFrame = 40;
@@ -51,7 +50,6 @@ public class EneBoss3 : MonoBehaviour
     Vector3 portalPos;
     Vector3[] portalPosAll;
     bool genePortal = false;
-    float runSpeed = 0.4f;
     float geneDistance = 2.0f;
     float portalSize = 1.0f;
     int screenBottom = -2;
@@ -80,7 +78,6 @@ public class EneBoss3 : MonoBehaviour
     GameObject meleeRangeObj;
     int meleeWaitingFrame = 50;
     int meleeFrameTimer = 0;
-    int meleeCdFrame = 20;
     bool isMeleeAttack = false;
     bool isMeleeRange = false;
     public bool isDash = false;
@@ -343,14 +340,14 @@ void Start()
                 {
                     state = State.Beam;
                     beamPos = new Vector3(currentPos.x, playerObj.transform.position.y);
-                    if(currentPos.x > playerCtrl.currentPos.x)
+                    /*if(currentPos.x > playerCtrl.currentPos.x)
                     {
                         beamFlipX = 0;
                     }
                     else if(currentPos.x <= playerCtrl.currentPos.x)
                     {
                         beamFlipX = 180;
-                    }
+                    }*/
                     getPos = true;
                     isWalk = true;
                 }

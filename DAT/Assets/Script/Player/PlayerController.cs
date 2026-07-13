@@ -64,7 +64,6 @@ public class PlayerController : MonoBehaviour
 
     // アニメーションに使う変数------------------------------------------------------------
     enum State{idle, walk, dash, attack};
-    private State state;
     private SpriteRenderer spriteRenderer;
     private Animator anim;
 
@@ -86,7 +85,6 @@ public class PlayerController : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
         playerHP = maxPlayerHP;
         attackDamage = defaultAttackDamage;
-        state = State.idle;
         anim = GetComponent<Animator>();
         reachObj = transform.Find("AttackReach").gameObject;
         playerAttackReach = reachObj.GetComponent<PlayerAttackReach>();

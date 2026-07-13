@@ -27,7 +27,7 @@ public class PortalControll : MonoBehaviour
 
     void Start()
     {
-        enemyObj = GameObject.Find("EneBoss3");
+        enemyObj = GameObject.Find("EneBoss3(Clone)");
         //transform.position = enemyObj.transform.position;
         spriteRenderer = GetComponent<SpriteRenderer>();
         animMax = animSprite.Length;

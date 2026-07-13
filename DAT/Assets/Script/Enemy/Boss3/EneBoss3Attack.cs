@@ -29,7 +29,7 @@ public class EneBoss3Attack : MonoBehaviour
     void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
-        enemyObj = GameObject.Find("EneBoss3");
+        enemyObj = GameObject.Find("EneBoss3(Clone)");
         eneCtrl = enemyObj.GetComponent<EneBoss3>();
         boxCol = GetComponent<BoxCollider2D>();
         boxCol.enabled = false;

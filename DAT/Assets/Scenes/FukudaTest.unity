@@ -341,7 +341,7 @@ MonoBehaviour:
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
   m_Version: 2
---- !u!1001 &1888023183
+--- !u!1001 &1389433150
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -353,21 +353,13 @@ PrefabInstance:
       propertyPath: m_Name
       value: Boss2
       objectReference: {fileID: 0}
-    - target: {fileID: 3544329007519292955, guid: fa3408dff1ebcb840973ae3fbdc29c97, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3810122510407779714, guid: fa3408dff1ebcb840973ae3fbdc29c97, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 4191473579663971972, guid: fa3408dff1ebcb840973ae3fbdc29c97, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2.25
+      value: 1.21118
       objectReference: {fileID: 0}
     - target: {fileID: 4191473579663971972, guid: fa3408dff1ebcb840973ae3fbdc29c97, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.23
+      value: -0.4077
       objectReference: {fileID: 0}
     - target: {fileID: 4191473579663971972, guid: fa3408dff1ebcb840973ae3fbdc29c97, type: 3}
       propertyPath: m_LocalPosition.z
@@ -401,8 +393,7 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 0}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -475,4 +466,4 @@ SceneRoots:
   - {fileID: 1342023663}
   - {fileID: 334246418}
   - {fileID: 1780073814536660771}
-  - {fileID: 1888023183}
+  - {fileID: 1389433150}

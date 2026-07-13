@@ -27,14 +27,14 @@ public class EneBossAttack : MonoBehaviour
     // オブジェクトごとに設定できる項目は、アタックのダメージ、ループするかどうか、衝突したとき消去するかどうか
     // 当たり判定を出すタイミング、消すタイミング
 
-    void Start()
+    void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
-        enemyObj = GameObject.Find("Boss2");
+        enemyObj = GameObject.Find("Boss2(Clone)");
         eneCtrl = enemyObj.GetComponent<EneBoss2>();
         circleCol = GetComponent<CircleCollider2D>();
         circleCol.enabled = false;
-        animMax = attackSprite.Length;    
+        animMax = attackSprite.Length;
     }
 
     void FixedUpdate()

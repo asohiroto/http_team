@@ -99,6 +99,7 @@ public class Boss1Controller : MonoBehaviour
 
     [SerializeField] private bool isFaceRight = true;
     [SerializeField] private float attackStateTimer;
+    [SerializeField] private float downTimer;
 
     [Header("Debug")]
     [SerializeField] private Vector2 bossPos;
@@ -119,13 +120,11 @@ public class Boss1Controller : MonoBehaviour
     {
         enemyAnim = GetComponent<EnemyAnimation>();
 
+        enemySpawner = GameObject.FindWithTag("EnemySpawner").GetComponent<EnemySpawner>();
 
-        // 親オブジェクト(EnemySpawner)を取得
-        GameObject parentObj = transform.parent.gameObject;
-        enemySpawner = parentObj.GetComponent<EnemySpawner>();
         hpManager = GetComponent<EnemyHpManager>();
 
-        if (playerObj == null)
+        //if (playerObj == null)
         {
             playerObj = GameObject.FindWithTag("Player");
         }
@@ -535,6 +534,7 @@ public class Boss1Controller : MonoBehaviour
         for (int i = 0; i < summonCount; i++)
         {
             GameObject newObj = Instantiate(minionPrefab, spawnPos, Quaternion.identity, enemySpawner.transform);
+            enemySpawner.AddField(newObj);
 
             spawnPos.y -= minionDist;
         }
@@ -731,11 +731,14 @@ public class Boss1Controller : MonoBehaviour
             case EnemyAnimState.Down:
             case EnemyAnimState.DownR:
 
-                float tmpTimer = attackStateTimer;
-                attackStateTimer -= Time.fixedDeltaTime;
+                downTimer -= Time.fixedDeltaTime;
 
-                if (tmpTimer > attackStateTimer + 1.0f)
+                if (downTimer < 0.0f)
                 {
+                    GameObject.FindWithTag("EnemySpawner").
+                    GetComponent<WaveManager>().
+                    NotifyBossDefeated();
+                    
                     Destroy(gameObject);
                 }
 

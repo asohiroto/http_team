@@ -316,7 +316,7 @@ MonoBehaviour:
   attack2HitboxPrefab: {fileID: 6562382290516941708, guid: fc0e35244182c734f97d95930af4e58d, type: 3}
   attack1SpawnPoint: {x: 0.5, y: 0.5}
   attack2SpawnPoint: {x: 0.75, y: 0.5}
-  playerObj: {fileID: 0}
+  playerObj: {fileID: 816414104260156504, guid: adafc529adc6fb84d8417122a115aaa6, type: 3}
   currentAttack: 0
   attackState: 0
   currentAnim: 0

@@ -18,13 +18,13 @@ public class EnemyHpManager : MonoBehaviour
     }
 
     private void CheckDie()
-    {
+    {/*
         if (hp <= 0)
         {
             GameObject.FindWithTag("EnemySpawner").
                 GetComponent<WaveManager>().
                 NotifyBossDefeated();
-        }
+        }*/
     }
 
     public int GetCurrentHp()

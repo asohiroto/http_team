@@ -12,15 +12,19 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] private int enemyVariations = 0;
     [SerializeField] private int totalSpawnCount = 0;
     [SerializeField] private Vector2 spawnPos = Vector2.zero;
+    [SerializeField] private bool wasBossSpawned = false;
 
     [Header("Runtime Lists")]
     [SerializeField] private List<GameObject> spawnOrder = new List<GameObject>();
     [SerializeField] private List<GameObject> field = new List<GameObject>();
 
+    private WaveManager waveManager;
+
     private float timer = 0;
 
     private void Start()
     {
+        waveManager = GetComponent<WaveManager>();
         timer = spawnIntervalSec;
     }
 
@@ -32,6 +36,11 @@ public class EnemySpawner : MonoBehaviour
     private void FixedUpdate()
     {
         SpawnEnemy();
+    }
+
+    public void AddField(GameObject newObj)
+    {
+        field.Add(newObj);
     }
 
     /// <summary>
@@ -106,6 +115,11 @@ public class EnemySpawner : MonoBehaviour
     /// </summary>
     private Vector2 SetSpawnPos()
     {
+        if (waveManager.GetCurrentWaveState() == WaveState.Boss)
+        {
+            return new Vector2(6.0f, 0.0f);
+        }
+
         const int width = 9;
         const int height = 5;
         const int widthRange = 13;
@@ -159,8 +173,21 @@ public class EnemySpawner : MonoBehaviour
         int nextNum = totalSpawnCount % enemyVariations;
         GameObject nextSpawn = spawnOrder[nextNum];
 
-        GameObject newObj = Instantiate(nextSpawn, transform);
-        newObj.transform.localPosition = spawnPos;
+        // ボスが召喚済みだったら
+        if (wasBossSpawned) return;
+
+        GameObject newObj;
+        if (waveManager.GetCurrentWaveState() == WaveState.Boss)
+        {
+            newObj = Instantiate(nextSpawn, spawnPos, Quaternion.identity);
+            wasBossSpawned = true;
+        }
+        else
+        {
+            newObj = Instantiate(nextSpawn, transform);
+            newObj.transform.localPosition = spawnPos;
+            wasBossSpawned = false;
+        }
 
         field.Add(newObj);
 

@@ -18,17 +18,17 @@ public class DeckSceneManager : MonoBehaviour
         
     }
 
-    public void DeckSceneChange()
-    {
-        if (regis.CheckMyDeck(-1))
-        {
-            SceneManager.LoadScene("AllSceneProto");
-        }
-        else
-        {
-            Debug.Log("できぬ");
-        }
-    }
+    //public void DeckSceneChange()
+    //{
+    //    if (regis.CheckMyDeck(-1))
+    //    {
+    //        SceneManager.LoadScene("AllSceneProto");
+    //    }
+    //    else
+    //    {
+    //        Debug.Log("できぬ");
+    //    }
+    //}
 
 
 }

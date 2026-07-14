@@ -4037,7 +4037,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 46d699f8244e52e4391644868e73e7ea, type: 3}
   - {fileID: 21300000, guid: 556903f5a7dc4b841acc023889e98a85, type: 3}
   - {fileID: 21300000, guid: 2874fa6f29356d54e844c9c71bd67426, type: 3}
-  frameInterval: 15
+  frameInterval: 60
 --- !u!224 &1834064105 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2029186527705465810, guid: c16406927657f8c42b2035b6cee66d1b, type: 3}

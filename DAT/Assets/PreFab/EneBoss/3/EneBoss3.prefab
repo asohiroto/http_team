@@ -223,6 +223,7 @@ MonoBehaviour:
   meleeRangePrefab: {fileID: 1718113552492981584, guid: e80f374dbc48d234385c80b7bff32ba0, type: 3}
   isDash: 0
   isAttackAnim: 0
+  sePrefab: {fileID: 0}
 --- !u!114 &3848508003900885581
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -385,6 +386,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyHpManager
   hp: 100
+  boss: 1
 --- !u!1 &7317433541400187159
 GameObject:
   m_ObjectHideFlags: 0

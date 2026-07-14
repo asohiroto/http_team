@@ -109,9 +109,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EneBoss2
   speed: 0.1
   attackPower: 5
-  attackWaitingTime: 0.1
-  showAttackRangeTime: 2
-  attackTime: 1
   rangeAttackObj: {fileID: 8394997815050280804, guid: b5e6d98e70044bb4eb372a0d1d34eb92, type: 3}
   stampAttackReach: {fileID: 1648080044229311865, guid: 15a85347db8b4b548a786a2c371212b2, type: 3}
   cautionEffectPrefab: {fileID: 4697020134824317878, guid: bc418ef7af663a74b9c131b35e211996, type: 3}
@@ -179,6 +176,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyHpManager
   hp: 100
+  boss: 1
 --- !u!1 &3810122510407779714
 GameObject:
   m_ObjectHideFlags: 0

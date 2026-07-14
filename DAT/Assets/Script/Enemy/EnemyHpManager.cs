@@ -6,6 +6,8 @@ public class EnemyHpManager : MonoBehaviour
 {
     [SerializeField] private int hp;
     private bool takeDamage = false;
+    [Header("このオブジェクトがボスならtrue")]
+    [SerializeField] private bool boss;
 
     // このオブジェクトがボスだった場合、
     // 体力が０以下になると次のレベルのシーンに遷移します
@@ -18,13 +20,14 @@ public class EnemyHpManager : MonoBehaviour
     }
 
     private void CheckDie()
-    {/*
+    {
+        if (!boss) return;
         if (hp <= 0)
         {
             GameObject.FindWithTag("EnemySpawner").
                 GetComponent<WaveManager>().
                 NotifyBossDefeated();
-        }*/
+        }
     }
 
     public int GetCurrentHp()

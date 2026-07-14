@@ -98,6 +98,5 @@ public class MissileManager : MonoBehaviour
     {
         Destroy(missileObj);
         Destroy(RangeObj);
-        Destroy(gameObject);
     }
 }

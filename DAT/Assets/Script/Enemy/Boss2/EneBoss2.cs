@@ -146,8 +146,8 @@ public class EneBoss2 : MonoBehaviour
                     frameTimer = 0;
 
                     // ランダムな状態を取得する
-                    state = (State)Enum.ToObject(typeof(State), UnityEngine.Random.Range(0, Enum.GetNames(typeof(State)).Length));
-                    //state = State.Melee;
+                    //state = (State)Enum.ToObject(typeof(State), UnityEngine.Random.Range(0, Enum.GetNames(typeof(State)).Length));
+                    state = State.Missile;
                 }
                 break;
             case State.Melee:
@@ -433,6 +433,7 @@ public class EneBoss2 : MonoBehaviour
             {
                 if (missileObj[i] == null) continue;
                 missile[i].DestroyMissile();
+                Destroy(missileObj[i]);
             }
             
             Destroy(gameObject);

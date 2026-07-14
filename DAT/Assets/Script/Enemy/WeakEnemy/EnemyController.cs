@@ -43,6 +43,7 @@ public class EnemyController : MonoBehaviour
     [SerializeField] private GameObject attackCol;      // 攻撃用のコライダー(プレハブ)
     private EnemyAnimation enemyAnim;
     private EnemyHpManager hpManager;
+    private SEManager se;
     private EnemySpawner enemySpawner;
     [SerializeField] private GameObject attackObj;
     [SerializeField] private GameObject arrowObj;
@@ -99,6 +100,8 @@ public class EnemyController : MonoBehaviour
         enemySpawner = parentObj.GetComponent<EnemySpawner>();
 
         hpManager = GetComponent<EnemyHpManager>();
+
+        se = GetComponent<SEManager>();
 
     }
 
@@ -473,6 +476,8 @@ public class EnemyController : MonoBehaviour
     void ArcherAttack()
     {
         Debug.Log("ArcherAttack");
+
+        se.PlaySE(0);
 
         arrowObj = Instantiate(attackCol, transform.position, Quaternion.identity);
 

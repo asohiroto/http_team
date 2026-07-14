@@ -46,7 +46,9 @@ public class EneBoss2 : MonoBehaviour
     Vector3 cautionDir = Vector3.zero; // 警告のポジションを設定するための変数 
     // ミサイル攻撃の変数-------------------------------
     [SerializeField] GameObject missilePrefab;
-    int missileMax = 10; // 0~missileMaxまでミサイルを生成する
+    const int missileMax = 10; // 0~missileMax-1までミサイルを生成する
+    GameObject[] missileObj = new GameObject[10];
+    MissileManager[] missile = new MissileManager[10];
     int missileIdx = 0;
     int missileSpanFrame = 20;
     int missileFrameTimer = 0;
@@ -283,7 +285,8 @@ public class EneBoss2 : MonoBehaviour
         }
         else if (missileFrameTimer >= missileSpanFrame)
         {
-            Instantiate(missilePrefab, transform);
+            missileObj[missileIdx] = Instantiate(missilePrefab, transform);
+            missile[missileIdx] = missileObj[missileIdx].GetComponent<MissileManager>();
             missileIdx++;
             missileFrameTimer = 0;
             se.PlaySE(1);
@@ -421,6 +424,17 @@ public class EneBoss2 : MonoBehaviour
     {
         if (eneHp.GetCurrentHp() <= 0)
         {
+            if (stampAttackReachObj != null) Destroy(stampAttackReachObj);
+            if (cautionObj != null) Destroy(cautionObj);
+            if (meleeObj != null) Destroy(meleeObj);
+            if (meleeRangeObj != null) Destroy(meleeRangeObj);
+            if (cautionObj != null) Destroy(cautionObj);
+            for(int i = 0; i < missileMax; i++)
+            {
+                if (missileObj[i] == null) continue;
+                missile[i].DestroyMissile();
+            }
+            
             Destroy(gameObject);
         }
     }

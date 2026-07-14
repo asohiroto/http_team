@@ -93,4 +93,11 @@ public class MissileManager : MonoBehaviour
                 break;
         }
     }
+
+    public void DestroyMissile()
+    {
+        Destroy(missileObj);
+        Destroy(RangeObj);
+        Destroy(gameObject);
+    }
 }

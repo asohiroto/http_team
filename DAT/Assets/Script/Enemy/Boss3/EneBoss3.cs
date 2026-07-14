@@ -549,6 +549,11 @@ void Portal()
     {
         if(eneHp.GetCurrentHp() <= 0)
         {
+            if(beamObj != null) Destroy(beamObj);
+            if (beamRangeObj != null) Destroy(beamRangeObj);
+            if (meleeRangeObj != null) Destroy(meleeRangeObj);
+            if (meleeRangeObj != null) Destroy(meleeRangeObj);
+            Destroy(seObj);
             Destroy(gameObject);
         }
     }

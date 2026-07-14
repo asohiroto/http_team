@@ -108,6 +108,9 @@ public class EnemySpawner : MonoBehaviour
 
         // Wave切り替え直後にすぐ出したい場合は spawnIntervalSec にする
         timer = spawnIntervalSec;
+
+        wasBossSpawned = false;
+
     }
 
     /// <summary>

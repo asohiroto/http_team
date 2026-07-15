@@ -14,10 +14,6 @@ public class WaveTimerUI : MonoBehaviour
 
     void Update()
     {
-        if (waveManager != null)
-        {
-            Debug.Log("UIが読み取っている状態: " + waveManager.GetCurrentWaveState());
-        }
 
         // テキストがセットされていないとエラー
         if (waveManager == null || timerText == null || waveText == null) return;

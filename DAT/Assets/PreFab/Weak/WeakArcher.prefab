@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1944983632661122459}
   - component: {fileID: 2605110105884159618}
+  - component: {fileID: -6706934621213312683}
   - component: {fileID: 5461677285864030650}
   - component: {fileID: 8658963436537562535}
   - component: {fileID: 6341241144745145490}
@@ -97,6 +98,20 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+--- !u!114 &-6706934621213312683
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2783928273017862963}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aebd05f26e1b9a64a85138f8145701ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SEManager
+  audioClip:
+  - {fileID: 8300000, guid: 3f12d06a45aa1e94897dea65f4cbccfb, type: 3}
 --- !u!114 &5461677285864030650
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -110,6 +125,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyHpManager
   hp: 5
+  boss: 0
 --- !u!114 &8658963436537562535
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -134,6 +150,7 @@ MonoBehaviour:
   attackStartupDuration: 0.3
   attackCooldownDuration: 1
   attackOnColliderDuration: 0.3
+  knockbackCooldownDuration: 1
   enemyPos: {x: 0, y: 0}
   playerPos: {x: 0, y: 0}
   targetDir: {x: 0, y: 0}
@@ -144,6 +161,7 @@ MonoBehaviour:
   attackStartupTimer: 0
   attackCooldownTimer: 0
   attackOnColliderTimer: 0
+  knockbackTimer: 0
   playerObj: {fileID: 0}
   DropParentObj: {fileID: 0}
   DropItemPrefab: {fileID: 4876145872219913294, guid: 40446f423e254a642a122f7e36b0e8fa, type: 3}

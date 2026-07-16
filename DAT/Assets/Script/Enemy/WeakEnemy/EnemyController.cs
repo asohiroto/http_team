@@ -13,12 +13,13 @@ public class EnemyController : MonoBehaviour
     // コード内では2乗した状態で使用する
     [SerializeField] private bool alwaysFindPlayer = false;     // どの距離でもPlayerを発見する
     [SerializeField] private float findDist;                    // Playerを発見する距離
-    [SerializeField] private float lostDist;                   // Playerを見失う距離
-    [SerializeField] private float stopDist;                   // この距離で立ち止まる
+    [SerializeField] private float lostDist;                    // Playerを見失う距離
+    [SerializeField] private float stopDist;                    // この距離で立ち止まる
     [SerializeField] private float attackRange;                 // 攻撃のレンジ
     [SerializeField] private float attackStartupDuration;       // 攻撃の予備動作の時間
     [SerializeField] private float attackCooldownDuration;      // 攻撃のクールダウンの時間
-    [SerializeField] private float attackOnColliderDuration;      // 攻撃呼び出しのタイミング (現在のフレームを確認するのがめんどくさいのでゴリ押し。規模的に問題ないと思う)
+    [SerializeField] private float attackOnColliderDuration;    // 攻撃呼び出しのタイミング (現在のフレームを確認するのがめんどくさいのでゴリ押し。規模的に問題ないと思う)
+    [SerializeField] private float knockbackCooldownDuration;   // ノックバックの間隔
 
 
     [Header("Debug")]
@@ -31,9 +32,10 @@ public class EnemyController : MonoBehaviour
     [SerializeField] private float sqrDistPlayer;       // 2乗したPlayerとの距離
     [SerializeField] private float attackAngle;         // 攻撃の向き
     [SerializeField] private bool wasAttack;
-    [SerializeField] private float attackStartupTimer;              // 予備動作用のカウントダウン
-    [SerializeField] private float attackCooldownTimer;             // クールダウン用のカウントダウン
-    [SerializeField] private float attackOnColliderTimer;           // 攻撃呼び出し用のカウントダウン
+    [SerializeField] private float attackStartupTimer;      // 予備動作用のカウントダウン
+    [SerializeField] private float attackCooldownTimer;     // クールダウン用のカウントダウン
+    [SerializeField] private float attackOnColliderTimer;   // 攻撃呼び出し用のカウントダウン
+    [SerializeField] private float knockbackTimer;          // ノックバック用のカウントダウン
     
      
     [Header("Object References")]
@@ -42,6 +44,7 @@ public class EnemyController : MonoBehaviour
     [SerializeField] private GameObject DropItemPrefab; // DropItem のプレハブ
     [SerializeField] private GameObject attackCol;      // 攻撃用のコライダー(プレハブ)
     private EnemyAnimation enemyAnim;
+    private SEManager sE;
     private EnemyHpManager hpManager;
     private EnemySpawner enemySpawner;
     [SerializeField] private GameObject attackObj;
@@ -100,6 +103,7 @@ public class EnemyController : MonoBehaviour
 
         hpManager = GetComponent<EnemyHpManager>();
 
+        sE = GetComponent<SEManager>();
     }
 
     void Start()
@@ -154,8 +158,10 @@ public class EnemyController : MonoBehaviour
     /// <param name="dmg"></param>
     public void EnemyDamaged(float dmg)
     {
-        enemyAiState = EnemyAiState.KnockBack;
         enemyHp -= dmg;
+
+        if (knockbackTimer > 0.0f) return;
+        enemyAiState = EnemyAiState.KnockBack;
     }
 
 
@@ -166,6 +172,7 @@ public class EnemyController : MonoBehaviour
         // ノックバック処理
         if (hpManager.TakeDamage())
         {
+            if (knockbackTimer > 0.0f) return;
             enemyAiState = EnemyAiState.KnockBack;
         }
     }
@@ -212,6 +219,7 @@ public class EnemyController : MonoBehaviour
         attackStartupTimer -= Time.deltaTime;
         attackCooldownTimer -= Time.deltaTime;
         attackOnColliderTimer -= Time.deltaTime;
+        knockbackTimer -= Time.deltaTime;
     }
 
     /// <summary>
@@ -348,12 +356,12 @@ public class EnemyController : MonoBehaviour
                 break;
 
             case EnemyAiState.KnockBack:
-                
                 enemyAnim.StartBlink();
                 
                 Vector3 force = new Vector3 (targetDir.x, targetDir.y, 0) * -1 * 0.75f + this.transform.position;
                 this.transform.position = force;
                 // 2重で飛ばされるのを防止したい
+                knockbackTimer = knockbackCooldownDuration;
 
                 enemyAiState = EnemyAiState.Idle;
                 break;
@@ -459,6 +467,8 @@ public class EnemyController : MonoBehaviour
     {
         Debug.Log("TorcherAttack");
 
+        sE.PlaySE(0);
+
         attackObj = Instantiate(attackCol, this.transform);
 
         attackObj.GetComponent<EnemyAttack>().SetAttackPower(attackPower);
@@ -473,6 +483,8 @@ public class EnemyController : MonoBehaviour
     void ArcherAttack()
     {
         Debug.Log("ArcherAttack");
+
+        sE.PlaySE(0);
 
         arrowObj = Instantiate(attackCol, transform.position, Quaternion.identity);
 

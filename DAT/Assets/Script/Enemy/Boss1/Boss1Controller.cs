@@ -112,6 +112,7 @@ public class Boss1Controller : MonoBehaviour
 
     [SerializeField] private EnemyHpManager hpManager;
     [SerializeField] private EnemySpawner enemySpawner;
+    SEManager SEManager;
 
 
 
@@ -123,6 +124,8 @@ public class Boss1Controller : MonoBehaviour
         enemySpawner = GameObject.FindWithTag("EnemySpawner").GetComponent<EnemySpawner>();
 
         hpManager = GetComponent<EnemyHpManager>();
+
+        SEManager = GetComponent<SEManager>();
 
         //if (playerObj == null)
         {
@@ -477,6 +480,8 @@ public class Boss1Controller : MonoBehaviour
             spawnPos = attack1SpawnPoint;
         }
 
+        SEManager.PlaySE(0);
+
         // プレハブ生成
         activeAttackHitbox = Instantiate(
             attack1HitboxPrefab,
@@ -503,6 +508,8 @@ public class Boss1Controller : MonoBehaviour
         {
             spawnPos = attack2SpawnPoint;
         }
+
+        SEManager .PlaySE(1);
 
         // プレハブ生成
         activeAttackHitbox = Instantiate(

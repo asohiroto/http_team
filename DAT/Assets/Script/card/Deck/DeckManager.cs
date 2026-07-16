@@ -7,7 +7,7 @@ public class DeckManager : MonoBehaviour
     [SerializeField] public GameObject[] possessionCards;
 
     [SerializeField] public Transform[] deckTrans;
-    [SerializeField] public GameObject deckCard;
+    [SerializeField] public GameObject[] deckCard;
 
     [SerializeField] public TMP_Text deckCounter;
 
@@ -59,7 +59,9 @@ public class DeckManager : MonoBehaviour
 
     public void DeckRegistrate(int i, int cardId)
     {
-        GameObject obj = Instantiate(deckCard, deckTrans[i]);
+        int id = change.CardChange(cardId);
+
+        GameObject obj = Instantiate(deckCard[id], deckTrans[i]);
 
         changer = obj.GetComponent<DeckCardChanger>();
         changer.DeckCardChange(cardId);

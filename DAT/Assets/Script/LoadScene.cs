@@ -9,13 +9,20 @@ public class LoadScene : MonoBehaviour
     public Image animImage;          // 右下に配置するアニメーション用Image
 
     public Sprite[] animationFrames;    // アニメーションのコマ画像(複数枚)
-    public int frameInterval = 3;       // 何フレームごとに切り替えるか
 
     private int currentFrameIndex = 0;
-    private int frameCounter = 0;
 
     float minDisplayTime = 1.0f;
     float timer = 0f;
+
+    public float updatesPerSecond = 60f; // 1秒間に何回更新するか
+    private float animInterval;          // 1回あたりの間隔(秒)
+    private float animTimer = 0f;
+
+    void Awake()
+    {
+        animInterval = 1f / updatesPerSecond;
+    }
 
     public void LoadingScene(string sceneName)
     {
@@ -26,7 +33,6 @@ public class LoadScene : MonoBehaviour
     {
         loadingScreenUI.SetActive(true);
         currentFrameIndex = 0;
-        frameCounter = 0;
 
         AsyncOperation operation = SceneManager.LoadSceneAsync(sceneName);
         operation.allowSceneActivation = false; // 読み込み完了後すぐに切り替えない
@@ -41,7 +47,7 @@ public class LoadScene : MonoBehaviour
 
             // progressは0.0〜0.9までしか上がらない仕様
             float progress = Mathf.Clamp01(operation.progress / 0.9f);
-            
+
             if (operation.progress >= 0.9f && timer >= minDisplayTime)
             {
                 operation.allowSceneActivation = true;
@@ -57,12 +63,13 @@ public class LoadScene : MonoBehaviour
     {
         if (animationFrames == null || animationFrames.Length == 0) return;
 
-        frameCounter++;
+        animTimer += Time.deltaTime;
 
-        if (frameCounter >= frameInterval)
+        // フレームレートが低くて複数回分溜まった場合もwhileで消化する
+        while (animTimer >= animInterval)
         {
-            frameCounter = 0; // カウンターをリセット
-            currentFrameIndex = (currentFrameIndex + 1) % animationFrames.Length; // %でループ
+            animTimer -= animInterval;
+            currentFrameIndex = (currentFrameIndex + 1) % animationFrames.Length;
             animImage.sprite = animationFrames[currentFrameIndex];
         }
     }

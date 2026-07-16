@@ -2928,7 +2928,13 @@ MonoBehaviour:
   - {fileID: 1745768248}
   - {fileID: 1712087963}
   - {fileID: 2079308981}
-  deckCard: {fileID: 4737596715520258968, guid: 2b968d7188f249b4898f27543378d1b6, type: 3}
+  deckCard:
+  - {fileID: 4737596715520258968, guid: a2fc7881794c1f24cbb7bbe2aa525792, type: 3}
+  - {fileID: 4737596715520258968, guid: 8c6ba3197a152f042bb5296ab4a3d327, type: 3}
+  - {fileID: 4737596715520258968, guid: e9cd2cec3ce1f5647b27f61d61afc9a0, type: 3}
+  - {fileID: 4737596715520258968, guid: 776b50c44e633eb47821a7481c57bf86, type: 3}
+  - {fileID: 4737596715520258968, guid: 4bbf71c8e35b66d41b4929ec31aaffb0, type: 3}
+  - {fileID: 4737596715520258968, guid: d036a6786559b404ca83cec3e6281368, type: 3}
   deckCounter: {fileID: 1623788053}
   deckCount: 0
 --- !u!4 &1443594203
@@ -4037,7 +4043,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 46d699f8244e52e4391644868e73e7ea, type: 3}
   - {fileID: 21300000, guid: 556903f5a7dc4b841acc023889e98a85, type: 3}
   - {fileID: 21300000, guid: 2874fa6f29356d54e844c9c71bd67426, type: 3}
-  frameInterval: 60
+  updatesPerSecond: 10
 --- !u!224 &1834064105 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2029186527705465810, guid: c16406927657f8c42b2035b6cee66d1b, type: 3}

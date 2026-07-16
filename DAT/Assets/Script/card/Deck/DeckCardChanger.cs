@@ -27,16 +27,5 @@ public class DeckCardChanger : MonoBehaviour
 
         cardName.text = change.CardNameChange(cardId);
 
-        int colorCode = change.CardIdChange(cardId);
-
-        switch (colorCode)
-        {
-            case 0: cardBase.color = Color.red; break;
-            case 1: cardBase.color = Color.blue; break;
-            case 2: cardBase.color = Color.brown; break;
-            case 3: cardBase.color = Color.yellow; break;
-            case 4: cardBase.color = Color.softYellow; break;
-            case 5: cardBase.color = Color.black; break;
-        }
     }
 }

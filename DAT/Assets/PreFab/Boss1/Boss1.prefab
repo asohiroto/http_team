@@ -10,11 +10,14 @@ GameObject:
   m_Component:
   - component: {fileID: 1062505938455611393}
   - component: {fileID: 6084326333759388703}
+  - component: {fileID: 6753134347613296450}
   - component: {fileID: 410424448735706539}
   - component: {fileID: 1164403578555851883}
   - component: {fileID: 4086781527514485160}
   - component: {fileID: 2272147294719928512}
   - component: {fileID: 5481525606464668104}
+  - component: {fileID: 5282507126478196650}
+  - component: {fileID: -3666327971517025600}
   m_Layer: 0
   m_Name: Boss1
   m_TagString: Enemy
@@ -97,6 +100,21 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+--- !u!114 &6753134347613296450
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5305959905322829476}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aebd05f26e1b9a64a85138f8145701ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SEManager
+  audioClip:
+  - {fileID: 8300000, guid: 5bdb2db2858c19645a1523b4dc3ad5cb, type: 3}
+  - {fileID: 8300000, guid: 5550ef90ccf893944967a19f07136de2, type: 3}
 --- !u!114 &410424448735706539
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -276,7 +294,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f5a02e80f6f8984a8e4d239c12f1abb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyHpManager
-  hp: 60
+  hp: 150
+  boss: 0
 --- !u!114 &4086781527514485160
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -290,17 +309,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Boss1Controller
   bossHp: 150
-  moveSpeed: 0.8
-  attackStartDistance: 0.5
+  moveSpeed: 1.2
+  attackStartDistance: 1.2
   attackStartUpDuration: 0
   OnAttackColDuration: 0
-  attack1Power: 10
+  attack1Power: 20
   attack1Timing:
     startupDuration: 0.5
     activeDuration: 0.5
     cooldownDuration: 3
   attackStartPos: {x: 0, y: 0}
-  attack2Power: 10
+  attack2Power: 15
   attack2Timing:
     startupDuration: 0.2
     activeDuration: 0.3
@@ -316,13 +335,14 @@ MonoBehaviour:
   attack2HitboxPrefab: {fileID: 6562382290516941708, guid: fc0e35244182c734f97d95930af4e58d, type: 3}
   attack1SpawnPoint: {x: 0.5, y: 0.5}
   attack2SpawnPoint: {x: 0.75, y: 0.5}
-  playerObj: {fileID: 816414104260156504, guid: adafc529adc6fb84d8417122a115aaa6, type: 3}
+  playerObj: {fileID: 0}
   currentAttack: 0
   attackState: 0
   currentAnim: 0
   activeAttackHitbox: {fileID: 0}
   isFaceRight: 1
   attackStateTimer: 0
+  downTimer: 2
   bossPos: {x: 0, y: 0}
   playerPos: {x: 0, y: 0}
   distanceSq: 0
@@ -359,7 +379,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
@@ -389,6 +409,69 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::BossHpUi
   bossHpManager: {fileID: 1164403578555851883}
   hpImage: {fileID: 8418416263207904084}
+--- !u!58 &5282507126478196650
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5305959905322829476}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0.5}
+  m_Radius: 0.5
+--- !u!50 &-3666327971517025600
+Rigidbody2D:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5305959905322829476}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 4
 --- !u!1 &8561911216121118242
 GameObject:
   m_ObjectHideFlags: 0
@@ -499,10 +582,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2369882240318598057}
     m_Modifications:
-    - target: {fileID: -3319338964506711154, guid: 2f1c691c3e5063a4b8e0c6e2e2969c47, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
+    - target: {fileID: 1821056836920314549, guid: 2f1c691c3e5063a4b8e0c6e2e2969c47, type: 3}
+      propertyPath: target
+      value: 
+      objectReference: {fileID: 1062505938455611393}
     - target: {fileID: 2029519549268962386, guid: 2f1c691c3e5063a4b8e0c6e2e2969c47, type: 3}
       propertyPath: m_FillAmount
       value: 1

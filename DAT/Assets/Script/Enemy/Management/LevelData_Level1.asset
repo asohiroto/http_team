@@ -32,7 +32,7 @@ MonoBehaviour:
     WaveDuration: 30
   - Wave: 3
     SpawnOrder:
-    - {fileID: 5305959905322829476, guid: 69b7c82eaafb01c42aaae5c6e54f4c71, type: 3}
+    - {fileID: 5305959905322829476, guid: d92832bfae1b1e942af050f14e2897c3, type: 3}
     SpawnInterval: 5
     MaxAliveEnemy: 1
     WaveDuration: Infinity

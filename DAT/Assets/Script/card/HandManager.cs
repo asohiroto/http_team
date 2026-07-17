@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class HandManager : MonoBehaviour
@@ -60,11 +60,6 @@ public class HandManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // デバッグ用　Mキーでお金を増やす
-        if (Keyboard.current.mKey.wasPressedThisFrame)
-        {
-            coinManager.currentMoney += 100;
-        }
 
         // 右クリックでカードを引く
         if (Mouse.current.rightButton.wasPressedThisFrame)

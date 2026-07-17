@@ -19,9 +19,12 @@ public class LoadScene : MonoBehaviour
     private float animInterval;          // 1回あたりの間隔(秒)
     private float animTimer = 0f;
 
+    DeckRegistrate regis;
+
     void Awake()
     {
         animInterval = 1f / updatesPerSecond;
+        regis = GameObject.Find("Panel").GetComponentInChildren<DeckRegistrate>();
     }
 
     public void LoadingScene(string sceneName)
@@ -31,32 +34,35 @@ public class LoadScene : MonoBehaviour
 
     private IEnumerator LoadSceneAsync(string sceneName)
     {
-        loadingScreenUI.SetActive(true);
-        currentFrameIndex = 0;
-
-        AsyncOperation operation = SceneManager.LoadSceneAsync(sceneName);
-        operation.allowSceneActivation = false; // 読み込み完了後すぐに切り替えない
-
-        while (!operation.isDone)
+        if (regis.CheckMyDeck(-1))
         {
-            timer += Time.deltaTime;
+            loadingScreenUI.SetActive(true);
+            currentFrameIndex = 0;
 
-            // 右下アイコンのコマ送りアニメーションを更新
-            UpdateAnimation();
+            AsyncOperation operation = SceneManager.LoadSceneAsync(sceneName);
+            operation.allowSceneActivation = false; // 読み込み完了後すぐに切り替えない
 
-
-            // progressは0.0〜0.9までしか上がらない仕様
-            float progress = Mathf.Clamp01(operation.progress / 0.9f);
-
-            if (operation.progress >= 0.9f && timer >= minDisplayTime)
+            while (!operation.isDone)
             {
-                operation.allowSceneActivation = true;
+                timer += Time.deltaTime;
+
+                // 右下アイコンのコマ送りアニメーションを更新
+                UpdateAnimation();
+
+
+                // progressは0.0〜0.9までしか上がらない仕様
+                float progress = Mathf.Clamp01(operation.progress / 0.9f);
+
+                if (operation.progress >= 0.9f && timer >= minDisplayTime)
+                {
+                    operation.allowSceneActivation = true;
+                }
+
+                yield return null;
             }
 
-            yield return null;
+            loadingScreenUI.SetActive(false);
         }
-
-        loadingScreenUI.SetActive(false);
     }
 
     private void UpdateAnimation()

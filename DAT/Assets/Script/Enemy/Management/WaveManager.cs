@@ -63,7 +63,7 @@ public class WaveManager : MonoBehaviour
     private void Update()
     {
         waveTimer -= Time.deltaTime;
-
+#if false
         // デバッグ用
         if (Input.GetKey(KeyCode.P) && waveTimer > 0.1f)
         {
@@ -76,6 +76,7 @@ public class WaveManager : MonoBehaviour
                 ChangeWaveState(WaveState.LevelClearWait);
             }
         }
+#endif
     }
 
     private void FixedUpdate()

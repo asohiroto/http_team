@@ -165,7 +165,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 713757eff9a3bf249b826ba876bf8966, type: 3}
   - {fileID: 21300000, guid: 3dde220453b5ada4f8749de28a22d4bf, type: 3}
   animTime: 0.05
-  attackDamage: 5
+  attackDamage: 10
 --- !u!82 &-891665578236599657
 AudioSource:
   m_ObjectHideFlags: 0

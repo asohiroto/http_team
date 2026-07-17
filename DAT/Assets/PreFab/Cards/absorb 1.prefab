@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 5388344716737765618}
   - component: {fileID: 2569633958656532111}
-  - component: {fileID: -1466241430393557686}
   - component: {fileID: -3410448070413850128}
   - component: {fileID: -2055508572729787572}
   - component: {fileID: 2659101146775001970}
@@ -83,19 +82,6 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &-1466241430393557686
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5860723255738655983}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0567ae61fe93722498c4abede7834fed, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::SkillController
-  skillDmg: 0
 --- !u!212 &-3410448070413850128
 SpriteRenderer:
   serializedVersion: 2
@@ -178,7 +164,7 @@ MonoBehaviour:
   - {fileID: 194267116164964566, guid: 463aeb6123bec9945b0be67d130a643b, type: 3}
   - {fileID: 4307378007268850688, guid: 17a9f2777cb359640bc51fd3caae11ef, type: 3}
   animTime: 0.05
-  attackDamage: 10
+  attackDamage: 25
 --- !u!82 &2659101146775001970
 AudioSource:
   m_ObjectHideFlags: 0

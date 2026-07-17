@@ -114,7 +114,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 0d33af60895135c44bdc1b25e970e924, type: 3}
   - {fileID: 21300000, guid: 9cd7ef2ac724f6c4691b2bc655862711, type: 3}
   animTime: 0.05
-  attackDamage: 10
+  attackDamage: 15
 --- !u!61 &7367113992955132075
 BoxCollider2D:
   m_ObjectHideFlags: 0

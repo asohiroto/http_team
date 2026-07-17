@@ -260,13 +260,16 @@ public class CardEffectManager : MonoBehaviour
     {
         defPrefab = Effect(defObj, buffPos);
 
+        player.playerDefence *= 1.01f;
+        player.defaultDefence *= 1.01f;
+
         Debug.Log("地属性のカードの効果"); // ここに地属性のカードの効果を実装
     }
 
     void ThunderEnhance()
     {
         player.speed *= 1.01f;
-        player.defaultSpeed = player.speed;
+        player.defaultSpeed *= 1.01f;
 
         spdPrefab = Effect(spdObj, buffPos);
 
@@ -326,6 +329,8 @@ public class CardEffectManager : MonoBehaviour
     {
         Debug.Log("ブースト中");
         Debug.Log("一時的に防御力上昇！");
+
+        player.playerDefence *= 0.7f;
 
         defPrefab = Effect(defObj, buffPos);
     }
@@ -504,6 +509,8 @@ public class CardEffectManager : MonoBehaviour
         player.attackDamage = player.defaultAttackDamage;
         player.attackCd = player.defaultAttackCd;
         player.attackTime = player.defaultAttackTime;
+        player.speed = player.defaultSpeed;
+        player.playerDefence = player.defaultDefence;
         Debug.Log("防御力が元に戻った");
         healAmount = healDefaultAmount;
         curseAmount = curseDefaultAmount;

@@ -9,6 +9,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] public float speed = 0.05f; // プレイヤーのスピード
     [SerializeField] public float defaultSpeed = 0.05f; // プレイヤーのデフォルトスピード
     [SerializeField] private float dashSpeed = 0.3f; // プレイヤーのダッシュスピード
+    [SerializeField] public float defaultDefence = 1.0f; // プレイヤーの防御力
+    public float playerDefence = 1.0f;
     private bool onDash; // ダッシュ中かどうか
     private bool onInvisible = false;
     private int invisibleFrame = 5; // ダメージを受けた後の無敵時間
@@ -266,7 +268,7 @@ public class PlayerController : MonoBehaviour
     public void Damaged(float enemyAttack)
     {
         if (onInvisible) return;
-        playerHP -= enemyAttack;
+        playerHP -=  (enemyAttack - playerDefence);
         invisibleFrameTimer = invisibleFrame;
         StartCoroutine(BackDamageColor());
 

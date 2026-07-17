@@ -316,18 +316,18 @@ MonoBehaviour:
   attack1Power: 20
   attack1Timing:
     startupDuration: 0.5
-    activeDuration: 0.5
-    cooldownDuration: 3
+    activeDuration: 0.1
+    cooldownDuration: 1.2
   attackStartPos: {x: 0, y: 0}
   attack2Power: 15
   attack2Timing:
     startupDuration: 0.2
-    activeDuration: 0.3
-    cooldownDuration: 2
+    activeDuration: 0.1
+    cooldownDuration: 1
   summonTiming:
     startupDuration: 0.1
     activeDuration: 0.4
-    cooldownDuration: 5
+    cooldownDuration: 1.5
   minionPrefab: {fileID: 4419746953452864637, guid: f6545e77c56c98841962ce3e926c813d, type: 3}
   summonCount: 3
   minionDist: 4
@@ -343,6 +343,7 @@ MonoBehaviour:
   isFaceRight: 1
   attackStateTimer: 0
   downTimer: 2
+  isDown: 0
   bossPos: {x: 0, y: 0}
   playerPos: {x: 0, y: 0}
   distanceSq: 0

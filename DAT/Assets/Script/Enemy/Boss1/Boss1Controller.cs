@@ -100,6 +100,7 @@ public class Boss1Controller : MonoBehaviour
     [SerializeField] private bool isFaceRight = true;
     [SerializeField] private float attackStateTimer;
     [SerializeField] private float downTimer;
+    [SerializeField] private bool isDown = false;
 
     [Header("Debug")]
     [SerializeField] private Vector2 bossPos;
@@ -148,6 +149,7 @@ public class Boss1Controller : MonoBehaviour
     {
         UpdateTargetInfo();
         HpManage();
+        Downed();
 
         switch (attackState)
         {
@@ -720,6 +722,22 @@ public class Boss1Controller : MonoBehaviour
         isDie = true;
     }
 
+    private void Downed()
+    {
+        if (!isDown) return;
+
+        downTimer -= Time.fixedDeltaTime;
+
+        if (downTimer < 0.0f)
+        {
+            GameObject.FindWithTag("EnemySpawner").
+            GetComponent<WaveManager>().
+            NotifyBossDefeated();
+
+            Destroy(gameObject);
+        }
+    }
+
     public void OnAnimationFinished(EnemyAnimState finishedState)
     {
         switch (finishedState)
@@ -738,16 +756,7 @@ public class Boss1Controller : MonoBehaviour
             case EnemyAnimState.Down:
             case EnemyAnimState.DownR:
 
-                downTimer -= Time.fixedDeltaTime;
-
-                if (downTimer < 0.0f)
-                {
-                    GameObject.FindWithTag("EnemySpawner").
-                    GetComponent<WaveManager>().
-                    NotifyBossDefeated();
-                    
-                    Destroy(gameObject);
-                }
+                isDown = true;
 
                 break;
         }

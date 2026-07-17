@@ -434,7 +434,11 @@ public class EneBoss2 : MonoBehaviour
                 if (missileObj[i] == null) continue;
                 missile[i].DestroyMissile();
             }
-            
+
+            GameObject.FindWithTag("EnemySpawner").
+            GetComponent<WaveManager>().
+            NotifyBossDefeated();
+
             Destroy(gameObject);
         }
     }

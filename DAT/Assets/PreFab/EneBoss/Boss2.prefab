@@ -176,7 +176,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyHpManager
   hp: 100
-  boss: 1
+  boss: 0
 --- !u!1 &3810122510407779714
 GameObject:
   m_ObjectHideFlags: 0

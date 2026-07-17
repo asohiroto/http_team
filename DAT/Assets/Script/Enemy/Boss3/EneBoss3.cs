@@ -553,6 +553,10 @@ void Portal()
             if (beamRangeObj != null) Destroy(beamRangeObj);
             if (meleeRangeObj != null) Destroy(meleeRangeObj);
             if (meleeRangeObj != null) Destroy(meleeRangeObj);
+
+            GameObject.FindWithTag("EnemySpawner").
+                GetComponent<WaveManager>().
+                NotifyBossDefeated();
             Destroy(seObj);
             Destroy(gameObject);
         }

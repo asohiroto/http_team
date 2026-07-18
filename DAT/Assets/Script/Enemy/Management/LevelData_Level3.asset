@@ -22,17 +22,18 @@ MonoBehaviour:
     SpawnOrder:
     - {fileID: 4419746953452864637, guid: f6545e77c56c98841962ce3e926c813d, type: 3}
     - {fileID: 4419746953452864637, guid: f6545e77c56c98841962ce3e926c813d, type: 3}
+    - {fileID: 2783928273017862963, guid: 52ba7e743cc138c46ae4f23df4495d3b, type: 3}
     - {fileID: 4419746953452864637, guid: f6545e77c56c98841962ce3e926c813d, type: 3}
     SpawnInterval: 2.5
-    MaxAliveEnemy: 5
+    MaxAliveEnemy: 7
     WaveDuration: 30
   - Wave: 2
     SpawnOrder:
     - {fileID: 4419746953452864637, guid: f6545e77c56c98841962ce3e926c813d, type: 3}
     - {fileID: 4419746953452864637, guid: f6545e77c56c98841962ce3e926c813d, type: 3}
-    - {fileID: 4419746953452864637, guid: f6545e77c56c98841962ce3e926c813d, type: 3}
+    - {fileID: 2783928273017862963, guid: 52ba7e743cc138c46ae4f23df4495d3b, type: 3}
     SpawnInterval: 1.5
-    MaxAliveEnemy: 7
+    MaxAliveEnemy: 8
     WaveDuration: 30
   - Wave: 3
     SpawnOrder:

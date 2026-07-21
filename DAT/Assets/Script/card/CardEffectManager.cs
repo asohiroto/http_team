@@ -291,10 +291,13 @@ public class CardEffectManager : MonoBehaviour
 
     void Curse()
     {
-        player.playerHP -= curseAmount;
         if (player.playerHP < curseAmount + 1)
         {
             player.playerHP = 1;
+        }
+        else
+        {
+            player.playerHP -= curseAmount;
         }
 
         dishealprefab = Effect(dishealobj, buffPos);
@@ -379,9 +382,16 @@ public class CardEffectManager : MonoBehaviour
     {
         string name = ("CursedFlame");
 
-        BallSkill(ref cfFlag, ref destPos, ref cfPos, cursedFlame, name, ref cursedFlamePrefab, player.currentPos);
+        if (player.playerHP < (curseAmount * 2) + 1)
+        {
+            player.playerHP = 1;
+        }
+        else
+        {
+            player.playerHP -= (curseAmount * 2);
+        }
 
-        player.playerHP -= (curseAmount * 2);
+        BallSkill(ref cfFlag, ref destPos, ref cfPos, cursedFlame, name, ref cursedFlamePrefab, player.currentPos);
     }
 
     void OverHeal()
@@ -454,7 +464,14 @@ public class CardEffectManager : MonoBehaviour
     {
         string name = ("MoltenSpear");
 
-        player.playerHP -= (curseAmount * 2);
+        if (player.playerHP < (curseAmount * 2) + 1)
+        {
+            player.playerHP = 1;
+        }
+        else
+        {
+            player.playerHP -= (curseAmount * 2);
+        }
 
         SpikeSkill(msPos, moltenSpear, name, ref moltenSpearPrefab);
     }
